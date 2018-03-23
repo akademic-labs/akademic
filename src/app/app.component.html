@@ -1,0 +1,11 @@
+<div class="wrapper">
+    <app-sidebar *ngIf="isLoggedIn"></app-sidebar>
+
+    <div class="{{ isLoggedIn ? 'main-panel' : '' }}">
+        <app-navbar *ngIf="isLoggedIn"></app-navbar>
+        <router-outlet></router-outlet>
+        <div *ngIf="isMap('maps')">
+            <app-footer *ngIf="isLoggedIn"></app-footer>
+        </div>
+    </div>
+</div>
