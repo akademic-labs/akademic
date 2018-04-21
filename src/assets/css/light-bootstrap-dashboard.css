@@ -383,30 +383,6 @@ input:focus {
   margin-right: 10px;
 }
 
-.sidebar .logo-img img,
-.bootstrap-navbar .logo-img img {
-  width: 38px;
-  top: 12px;
-  position: absolute;
-}
-
-.sidebar .logo-tim,
-.bootstrap-navbar .logo-tim {
-  border-radius: 50%;
-  border: 1px solid #333;
-  display: block;
-  height: 61px;
-  width: 61px;
-  float: left;
-  overflow: hidden;
-}
-
-.sidebar .logo-tim img,
-.bootstrap-navbar .logo-tim img {
-  width: 60px;
-  height: 60px;
-}
-
 .sidebar .nav,
 .bootstrap-navbar .nav {
   margin-top: 20px;
@@ -461,6 +437,7 @@ input:focus {
   text-transform: uppercase;
   margin-left: 45px;
   color: #FFFFFF;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .3);
 }
 
 .sidebar .nav i,
@@ -472,6 +449,7 @@ input:focus {
   width: 30px;
   text-align: center;
   color: #FFFFFF;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .3);
 }
 
 .sidebar .nav .caret,
@@ -483,7 +461,7 @@ input:focus {
 
 .sidebar .logo,
 .bootstrap-navbar .logo {
-  padding: 10px 15px;
+  padding: 8px 40px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -500,30 +478,12 @@ input:focus {
 .sidebar .logo .simple-text,
 .bootstrap-navbar .logo .simple-text {
   text-transform: uppercase;
-  padding: 5px 0px 5px 15px;
   display: block;
   font-size: 18px;
   color: #FFFFFF;
   text-align: left;
   font-weight: 400;
   line-height: 30px;
-}
-
-.sidebar .logo-tim,
-.bootstrap-navbar .logo-tim {
-  border-radius: 50%;
-  border: 1px solid #333;
-  display: block;
-  height: 61px;
-  width: 61px;
-  float: left;
-  overflow: hidden;
-}
-
-.sidebar .logo-tim img,
-.bootstrap-navbar .logo-tim img {
-  width: 60px;
-  height: 60px;
 }
 
 .sidebar:after,
@@ -593,10 +553,10 @@ input:focus {
 
 .sidebar[data-color="green"]:after,
 .bootstrap-navbar[data-color="green"]:after {
-  background: -webkit-linear-gradient(to bottom, #06beb6, #48b1bf);
-  background: -o-linear-gradient(to bottom, #06beb6, #48b1bf);
-  background: -moz-linear-gradient(to bottom, #06beb6, #48b1bf);
-  background: linear-gradient(to bottom, #06beb6, #48b1bf);
+  background: -webkit-linear-gradient(to bottom, #36d1dc, #5b86e5);
+  background: -o-linear-gradient(to bottom, #36d1dc, #5b86e5);
+  background: -moz-linear-gradient(to bottom, #36d1dc, #5b86e5);
+  background: linear-gradient(to bottom, #36d1dc, #5b86e5);
   background-size: 150% 150%;
 }
 
@@ -1781,7 +1741,7 @@ fieldset[disabled] .form-control {
   user-select: none;
   /*   this code is for fixing safari bug with hidden overflow for border-radius   */
   -webkit-mask: url("../img/mask.png") 0 0 no-repeat;
-  -webkit-mask-size: 60px 24px;
+  mask-size: 60px 24px;
 }
 
 .has-switch.deactivate {
@@ -1902,6 +1862,8 @@ fieldset[disabled] .form-control {
   margin: 1px -13px;
   width: 26px;
 }
+
+/* has switch ended*/
 
 .nav>li>a:hover,
 .nav>li>a:focus {
@@ -2104,7 +2066,6 @@ fieldset[disabled] .form-control {
 
 .navbar-default {
   background-color: rgba(255, 255, 255, 0.96);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .navbar-default .navbar-nav>li>a:not(.btn) {
@@ -2487,7 +2448,6 @@ fieldset[disabled] .form-control {
 }
 
 .card {
-  border-radius: 4px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(63, 63, 68, 0.1);
   background-color: #FFFFFF;
   margin-bottom: 30px;
