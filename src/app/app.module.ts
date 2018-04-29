@@ -12,7 +12,6 @@ import { SidebarModule } from './shared/sidebar/sidebar.module';
 import { LbdModule } from './lbd/lbd.module';
 
 import { AppComponent } from './app.component';
-import { AuthService } from 'app/services/auth.service';
 
 import { HomeComponent } from './pages/home/home.component';
 import { UserComponent } from 'app/pages/user/user.component';
@@ -24,6 +23,9 @@ import { InputActivityComponent } from './pages/user/input-activity/input-activi
 import { environment } from './../environments/environment';
 import { LoginModule } from './pages/login/login.module';
 import { AuthGuard } from './guards/auth.guard';
+import { ServicesModule } from './services/services.module';
+import { AngularFireModule } from 'angularfire2';
+export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
   declarations: [
@@ -47,9 +49,11 @@ import { AuthGuard } from './guards/auth.guard';
     AppRoutingModule,
     LbdModule,
     LoginModule,
+    ServicesModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,19 +1,19 @@
 <div class="limiter">
   <div class="container-login" style="background-image: url('../assets/img/login.jpg');">
     <div class="wrap-login">
-      <form class="login-form validate-form" (submit)="doLogin()">
+      <form class="login-form validate-form" [formGroup]="userForm" (submit)="login()">
 
         <span class="login-form-title">
           <img src="../assets/img/akademic-name-white.png" alt="Logo image" width="250px">
         </span>
 
-        <div class="wrap-input validate-input" data-validate="Entre com o usuário">
-          <input class="input" type="text" name="username" placeholder="Usuário">
+        <div class="wrap-input validate-input" data-validate="Entre com o e-mail">
+          <input class="input" type="email" id="email" placeholder="Email" formControlName="email" required>
           <span class="focus-input" data-placeholder="&#xf2c0;"></span>
         </div>
 
         <div class="wrap-input validate-input" data-validate="Entre com a senha">
-          <input class="input" type="password" name="pass" placeholder="Senha">
+          <input class="input" type="password" id="pass" placeholder="Senha" formControlName="password">
           <span class="focus-input" data-placeholder="&#xf13e;"></span>
         </div>
 
@@ -27,6 +27,14 @@
           <a class="txt" href="#">
             Esqueceu a senha?
           </a>
+        </div>
+
+        <div *ngIf="formErrors.email" class="notification is-danger">
+          {{ formErrors.email }}
+        </div>
+
+        <div *ngIf="formErrors.password" class="notification is-danger">
+          {{ formErrors.password }}
         </div>
       </form>
     </div>

@@ -3,23 +3,24 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../services/auth.service';
 
-import { take, map } from 'rxjs/operators'
+import { take, map, tap } from 'rxjs/operators'
+import { NotifyService } from 'app/services/notify.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+  constructor(private auth: AuthService, private router: Router, private notify: NotifyService) { }
 
-  constructor(private _authService: AuthService, private _route: Router) {
-  }
-
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this._authService.isLoggedIn.pipe(
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
+    return this.auth.user.pipe(
       take(1),
-      map((isLogged: boolean) => {
-        if (!isLogged) {
-          this._route.navigate(['/dashboard']);
-          return false;
+      map((user) => !!user),
+      tap((loggedIn) => {
+        if (!loggedIn) {
+          console.log('acesso negado');
+          this.notify.update('Você precisa estar logado!', 'error');
+          this.router.navigate(['/']);
         }
-        return true;
-      }));
+      }),
+    );
   }
 }

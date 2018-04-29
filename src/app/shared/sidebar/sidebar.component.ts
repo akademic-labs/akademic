@@ -14,6 +14,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'user', title: 'Perfil do Usuário', icon: 'pe-7s-user', class: '' },
     { path: 'table', title: 'Listas / Relatórios', icon: 'pe-7s-note2', class: '' },
     { path: 'input-activity', title: 'Entrada de Atividade', icon: 'pe-7s-bell', class: '' },
+    { path: 'admin', title: 'Administrador', icon: 'pe-7s-config', class: '' }
 ];
 
 @Component({
