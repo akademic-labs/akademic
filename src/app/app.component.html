@@ -1,11 +1,9 @@
 <div class="wrapper">
-    <app-sidebar *ngIf="isLoggedIn"></app-sidebar>
+    <app-sidebar *ngIf="_auth.user | async"></app-sidebar>
 
-    <div class="{{ isLoggedIn ? 'main-panel' : '' }}">
-        <app-navbar *ngIf="isLoggedIn"></app-navbar>
+    <div class="{{ (_auth.user | async) ? 'main-panel' : '' }}">
+        <app-navbar *ngIf="_auth.user | async"></app-navbar>
         <router-outlet></router-outlet>
-        <div *ngIf="isMap('maps')">
-            <app-footer *ngIf="isLoggedIn"></app-footer>
-        </div>
+        <app-footer *ngIf="_auth.user | async"></app-footer>
     </div>
 </div>

@@ -10,12 +10,10 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
   isLoggedIn: boolean;
-  constructor(public location: Location, private _authService: AuthService) { }
+  constructor(public location: Location, public _auth: AuthService) { }
 
   ngOnInit() {
-    this._authService.isLoggedIn.subscribe(result => {
-      this.isLoggedIn = result;
-    });
+
   }
 
   isMap(path) {

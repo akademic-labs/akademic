@@ -25,7 +25,6 @@ export class NavbarComponent implements OnInit {
         this.listTitles = ROUTES.filter(listTitle => listTitle);
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
-        this.isLoggedIn$ = this._authService.isLoggedIn;
     }
     sidebarOpen() {
         const toggleButton = this.toggleButton;
@@ -62,5 +61,9 @@ export class NavbarComponent implements OnInit {
             }
         }
         return 'Dashboard';
+    }
+
+    logOut() {
+        this._authService.logOut();
     }
 }

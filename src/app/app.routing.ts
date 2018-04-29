@@ -14,13 +14,13 @@ import { LoginComponent } from 'app/pages/login/login.component';
 import { AuthGuard } from 'app/guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'dashboard', component: HomeComponent},
-  { path: 'user', component: UserComponent },
-  { path: 'table', component: TablesComponent },
-  { path: 'typography', component: TypographyComponent },
-  { path: 'icons', component: IconsComponent },
-  { path: 'notifications', component: NotificationsComponent },
-  { path: 'input-activity', component: InputActivityComponent },
+  { path: 'dashboard', component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'table', component: TablesComponent, canActivate: [AuthGuard] },
+  { path: 'typography', component: TypographyComponent, canActivate: [AuthGuard] },
+  { path: 'icons', component: IconsComponent, canActivate: [AuthGuard] },
+  { path: 'notifications', component: NotificationsComponent, canActivate: [AuthGuard] },
+  { path: 'input-activity', component: InputActivityComponent, canActivate: [AuthGuard] },
   { path: '', component: LoginComponent }
 ];
 

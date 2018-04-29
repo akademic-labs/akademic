@@ -17,7 +17,6 @@ interface User {
 
 @Injectable()
 export class AuthService {
-  private loggedIn = new BehaviorSubject<boolean>(false);
   user: Observable<User | null>;
 
   constructor(private _router: Router,
@@ -36,27 +35,22 @@ export class AuthService {
   }
 
   logOut() {
-    this.loggedIn.next(false);
-    this._router.navigate(['./']);
+    this.afAuth.auth.signOut().then(() => {
+      this._router.navigate(['./']);
+    });
   }
 
   emailSignUp(email: string, senha: string) {
-    this.loggedIn.next(false);
     this._router.navigate(['./']);
   }
 
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
-        this.loggedIn.next(true);
         this._router.navigate(['/dashboard']);
         return this.updateUserData(user); // if using firestore
       })
       .catch((error) => this.handleError(error));
-  }
-
-  get isLoggedIn() {
-    return this.loggedIn.asObservable();
   }
 
   // Sends email allowing user to reset password

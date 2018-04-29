@@ -29,7 +29,6 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
-        this.isLoggedIn$ = this._authService.isLoggedIn;
     }
 
     isMobileMenu() {
