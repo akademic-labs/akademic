@@ -19,11 +19,7 @@ interface User {
 export class AuthService {
   user: Observable<User | null>;
 
-  constructor(private _router: Router,
-    private _notify: NotifyService,
-    private afAuth: AngularFireAuth,
-    private afs: AngularFirestore) {
-
+  constructor(private _router: Router, private _notify: NotifyService, private afAuth: AngularFireAuth, private afs: AngularFirestore) {
     this.user = this.afAuth.authState
       .switchMap((user) => {
         if (user) {
@@ -32,16 +28,6 @@ export class AuthService {
           return Observable.of(null);
         }
       });
-  }
-
-  logOut() {
-    this.afAuth.auth.signOut().then(() => {
-      this._router.navigate(['./']);
-    });
-  }
-
-  emailSignUp(email: string, senha: string) {
-    this._router.navigate(['./']);
   }
 
   emailLogin(email: string, password: string) {
@@ -53,20 +39,28 @@ export class AuthService {
       .catch((error) => this.handleError(error));
   }
 
+  emailSignUp(email: string, senha: string) {
+    this._router.navigate(['./']);
+  }
+
+  logOut() {
+    this.afAuth.auth.signOut().then(() => {
+      this._router.navigate(['./']);
+    });
+  }
+
   // Sends email allowing user to reset password
   resetPassword(email: string) {
     const fbAuth = firebase.auth();
 
     return fbAuth.sendPasswordResetEmail(email)
-      .then(() => this._notify.update('Atuaização de senha enviada por e-mail', 'info'))
+      .then(() => this._notify.update('info', 'Atualização de senha enviada por e-mail'))
       .catch((error) => this.handleError(error));
   }
 
   // Sets user data to firestore after succesful login
   private updateUserData(user: User) {
-
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-
     const data: User = {
       uid: user.uid,
       email: user.email || null,
@@ -79,6 +73,6 @@ export class AuthService {
   // If error, console log and notify user
   private handleError(error: Error) {
     console.error(error);
-    this._notify.update(error.message, 'error');
+    this._notify.update('danger', error.message);
   }
 }

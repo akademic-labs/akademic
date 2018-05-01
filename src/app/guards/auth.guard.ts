@@ -16,8 +16,7 @@ export class AuthGuard implements CanActivate {
       map((user) => !!user),
       tap((loggedIn) => {
         if (!loggedIn) {
-          console.log('acesso negado');
-          this.notify.update('Você precisa estar logado!', 'error');
+          this.notify.update('warning', 'Você precisa estar logado!');
           this.router.navigate(['/']);
         }
       }),

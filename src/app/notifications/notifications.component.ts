@@ -13,16 +13,18 @@ export class NotificationsComponent implements OnInit {
 
     ngOnInit() {
     }
+
     showNotification(from, align) {
         const type = ['', 'info', 'success', 'warning', 'danger'];
 
         const color = Math.floor((Math.random() * 4) + 1);
         $.notify({
             icon: 'pe-7s-gift',
-            message: 'Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer.'
+            message: 'Bem-vindo ao <b>Akademic</b>.'
         }, {
                 type: type[color],
-                timer: 1000,
+                timer: 500,
+                allow_dismiss: false,
                 placement: {
                     from: from,
                     align: align

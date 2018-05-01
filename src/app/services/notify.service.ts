@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Subject } from 'rxjs/Subject';
 
+declare let $: any;
+
 /// Notify users about errors and other helpful stuff
 export interface Msg {
   content: string;
@@ -15,12 +17,25 @@ export class NotifyService {
 
   msg = this._msgSource.asObservable();
 
-  update(content: string, style: 'error' | 'info' | 'success') {
-    const msg: Msg = { content, style };
-    this._msgSource.next(msg);
-  }
-
   clear() {
     this._msgSource.next(null);
+  }
+
+  update(type: 'danger' | 'info' | 'success' | 'warning', message: string) {
+    $.notify({
+      icon: 'pe-7s-gift',
+      message: message
+    },
+      {
+        type: type,
+        timer: 500,
+        allow_dismiss: false,
+        placement: {
+          from: 'top',
+          align: 'right'
+        }
+      });
+      // const msg: Msg = { type, type };
+      // this._msgSource.next(msg);
   }
 }
