@@ -186,6 +186,10 @@ h1 .subtitle {
   color: #FB404B !important
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 body,
 .wrapper {
   min-height: 100vh;

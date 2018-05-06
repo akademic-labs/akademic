@@ -2,7 +2,6 @@
   <div class="container-login" style="background-image: url('../assets/img/login.jpg');">
     <div class="wrap-login">
       <form class="login-form validate-form" [formGroup]="userForm" (submit)="login()">
-
         <span class="login-form-title">
           <img src="../assets/img/akademic-name-white.png" alt="Logo image" width="250px">
         </span>
@@ -24,16 +23,16 @@
         </div>
 
         <div class="text-center">
-          <a class="txt" href="#">
+          <a class="txt pointer" (click)="resetPassword()">
             Esqueceu a senha?
           </a>
         </div>
 
-        <div *ngIf="formErrors.email" class="notification is-danger">
+        <div class="text-center danger" *ngIf="formErrors.email">
           {{ formErrors.email }}
         </div>
 
-        <div *ngIf="formErrors.password" class="notification is-danger">
+        <div class="text-center danger" *ngIf="formErrors.password">
           {{ formErrors.password }}
         </div>
       </form>

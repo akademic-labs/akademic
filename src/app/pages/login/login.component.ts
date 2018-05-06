@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'app/services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NotifyService } from 'app/services/notify.service';
 
 type UserFields = 'email' | 'password';
 type FormErrors = { [u in UserFields]: string };
@@ -13,7 +14,6 @@ type FormErrors = { [u in UserFields]: string };
 export class LoginComponent implements OnInit {
 
   userForm: FormGroup;
-  passReset = false; // set to true when password reset is triggered
   formErrors: FormErrors = {
     'email': '',
     'password': '',
@@ -26,19 +26,15 @@ export class LoginComponent implements OnInit {
     'password': {
       'required': 'Senha é obrigatória.',
       'pattern': 'Senha deve incluir uma letra e um número.',
-      'minlength': 'Senha deve conter ao menos 6 caracteres.',
+      'minlength': 'Senha deve conter ao menos 8 caracteres.',
       'maxlength': 'Senha não pode ser maior que 25 caracteres.',
     },
   };
 
-  constructor(private fb: FormBuilder, private _auth: AuthService) { }
+  constructor(private fb: FormBuilder, private _auth: AuthService, private _notify: NotifyService) { }
 
   ngOnInit() {
     this.buildForm();
-  }
-
-  signup() {
-    this._auth.emailSignUp(this.userForm.value['email'], this.userForm.value['password']);
   }
 
   login() {
@@ -46,8 +42,11 @@ export class LoginComponent implements OnInit {
   }
 
   resetPassword() {
-    this._auth.resetPassword(this.userForm.value['email'])
-      .then(() => this.passReset = true);
+    if (this.userForm.value['email']) {
+      this._auth.resetPassword(this.userForm.value['email']);
+    } else {
+      this._notify.update('warning', 'Digite um e-mail para resetar');
+    }
   }
 
   buildForm() {
@@ -58,7 +57,7 @@ export class LoginComponent implements OnInit {
       ]],
       'password': ['', [
         Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
-        Validators.minLength(6),
+        Validators.minLength(8),
         Validators.maxLength(25)
       ]],
     });
@@ -80,8 +79,8 @@ export class LoginComponent implements OnInit {
           const messages = this.validationMessages[field];
           if (control.errors) {
             for (const key in control.errors) {
-              if (Object.prototype.hasOwnProperty.call(control.errors, key) ) {
-                this.formErrors[field] += `${(messages as {[key: string]: string})[key]} `;
+              if (Object.prototype.hasOwnProperty.call(control.errors, key)) {
+                this.formErrors[field] += `${(messages as { [key: string]: string })[key]} `;
               }
             }
           }
