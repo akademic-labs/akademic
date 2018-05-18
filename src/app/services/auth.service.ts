@@ -1,12 +1,14 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import * as firebase from 'firebase/app';
 import { NotifyService } from './notify.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+import { ErrorService } from './error.service';
+
+import { of, Observable, BehaviorSubject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 interface User {
   uid: string;
@@ -15,32 +17,34 @@ interface User {
   displayName?: string;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   user: Observable<User | null>;
 
-  constructor(private _router: Router, private _notify: NotifyService, private afAuth: AngularFireAuth, private afs: AngularFirestore) {
-    this.user = this.afAuth.authState
-      .switchMap((user) => {
+  constructor(
+    private _router: Router, private _notify: NotifyService,
+    private afAuth: AngularFireAuth, private afs: AngularFirestore,
+    private _error: ErrorService) {
+
+    this.user = this.afAuth.authState.pipe(
+      switchMap((user) => {
         if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
-          return Observable.of(null);
+          return of(null);
         }
-      });
+      }));
   }
 
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
         this._router.navigate(['/dashboard']);
-        return this.updateUserData(user); // if using firestore
+        // return this.updateUserData(user); // if using firestore
       })
       .catch((error) => this.handleError(error));
-  }
-
-  emailSignUp(email: string, senha: string) {
-    this._router.navigate(['./']);
   }
 
   logOut() {
@@ -70,9 +74,13 @@ export class AuthService {
     return userRef.set(data);
   }
 
-  // If error, console log and notify user
-  private handleError(error: Error) {
-    console.error(error);
-    this._notify.update('danger', error.message);
+  emailSignUp(email: string, senha: string) {
+    this._router.navigate(['./']);
+  }
+
+  // If error, notify user
+  private handleError(error) {
+    console.log(error);
+    this._notify.update('danger', this._error.printErrorByCode(error.code));
   }
 }

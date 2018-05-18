@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-footer',
@@ -7,7 +6,6 @@ import { Observable } from 'rxjs/Observable';
 })
 
 export class FooterComponent implements OnInit {
-    isLoggedIn$: Observable<boolean>
     test: Date = new Date();
 
     constructor() { }

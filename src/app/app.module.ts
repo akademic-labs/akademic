@@ -11,7 +11,6 @@ import { SidebarModule } from './shared/sidebar/sidebar.module';
 import { LbdModule } from './lbd/lbd.module';
 
 import { AppComponent } from './app.component';
-
 import { HomeComponent } from './pages/home/home.component';
 import { UserComponent } from 'app/pages/user/user.component';
 import { TablesComponent } from './tables/tables.component';
@@ -19,11 +18,14 @@ import { TypographyComponent } from './typography/typography.component';
 import { IconsComponent } from './icons/icons.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { InputActivityComponent } from './pages/user/input-activity/input-activity.component';
-import { environment } from './../environments/environment';
 import { LoginModule } from './pages/login/login.module';
 import { AuthGuard } from './guards/auth.guard';
-import { ServicesModule } from './services/services.module';
+
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
+import { environment } from './../environments/environment';
 export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
@@ -47,7 +49,8 @@ export const firebaseConfig = environment.firebaseConfig;
     AppRoutingModule,
     LbdModule,
     LoginModule,
-    ServicesModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule,
     AngularFireModule.initializeApp(firebaseConfig),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],

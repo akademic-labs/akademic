@@ -1,5 +1,5 @@
-import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
+
 import { AuthService } from 'app/services/auth.service';
 
 declare const $: any;
@@ -24,7 +24,6 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
     menuItems: any[];
-    isLoggedIn$: Observable<boolean>
 
     constructor(private _authService: AuthService) { }
 

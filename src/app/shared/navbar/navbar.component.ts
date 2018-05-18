@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { Observable } from 'rxjs/Observable';
+
+import { ROUTES } from '../sidebar/sidebar.component';
 import { AuthService } from 'app/services/auth.service';
 
 @Component({
@@ -10,7 +10,6 @@ import { AuthService } from 'app/services/auth.service';
 })
 
 export class NavbarComponent implements OnInit {
-    isLoggedIn$: Observable<boolean>
     private listTitles: any[];
     location: Location;
     private toggleButton: any;

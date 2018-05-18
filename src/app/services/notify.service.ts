@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 
 declare let $: any;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class NotifyService {
 
   update(type: 'danger' | 'info' | 'success' | 'warning', message: string) {

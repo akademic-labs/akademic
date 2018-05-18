@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder, private _auth: AuthService, private _notify: NotifyService) { }
+  constructor(private fb: FormBuilder, private _auth: AuthService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -42,10 +42,11 @@ export class LoginComponent implements OnInit {
   }
 
   resetPassword() {
-    if (this.userForm.value['email']) {
+    if (this.userForm.get('email').valid) {
       this._auth.resetPassword(this.userForm.value['email']);
     } else {
-      this._notify.update('warning', 'Digite um e-mail para resetar');
+      const message = 'Digite um e-mail válido para resetar';
+      this.formErrors['email'] += `${message}`;
     }
   }
 
