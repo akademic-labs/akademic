@@ -2,23 +2,23 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <app-lbd-chart [title]="'Atividades'" [subtitle]="'Atividades complementares por categoria'" [chartType]="emailChartType"
+                <app-chart-card [title]="'Atividades'" [subtitle]="'Atividades complementares por categoria'" [chartType]="emailChartType"
                     [chartData]="emailChartData" [withHr]="true" [footerIconClass]="'fa fa-clock-o'" [footerText]="'Atualizado a 2 minutos atrás'"
                     [chartOptions]="emailChartOptions" [canvasClass]="'pie-chart-size'">
-                </app-lbd-chart>
+                </app-chart-card>
             </div>
             <div class="col-md-8">
-                <app-lbd-chart [title]="'Atividades último semestre'" [subtitle]="'Número de atividades dos últimos 6 meses'" [chartType]="hoursChartType"
+                <app-chart-card [title]="'Atividades último semestre'" [subtitle]="'Número de atividades dos últimos 6 meses'" [chartType]="hoursChartType"
                     [chartData]="hoursChartData" [withHr]="true" [footerIconClass]="'fa fa-history'" [footerText]="'Atualizado 4 minutos atrás'"
                     [chartOptions]="emailChartOptions" [canvasClass]="'pie-chart-size'">
-                </app-lbd-chart>
+                </app-chart-card>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <app-lbd-chart [title]="'Atividades'" [subtitle]="'Atividades por mês'" [chartType]="activityChartType" [chartData]="activityChartData"
+                <app-chart-card [title]="'Atividades'" [subtitle]="'Atividades por mês'" [chartType]="activityChartType" [chartData]="activityChartData"
                     [chartOptions]="activityChartOptions" [withHr]="true" [footerIconClass]="'fa fa-check'" [footerText]="'Dados atualizados'">
-                </app-lbd-chart>
+                </app-chart-card>
             </div>
             <div class="col-md-6">
                 <div class="card">

@@ -9,11 +9,11 @@ export enum ChartType {
 }
 
 @Component({
-  selector: 'app-lbd-chart',
-  templateUrl: './lbd-chart.component.html',
+  selector: 'app-chart-card',
+  templateUrl: './chart-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LbdChartComponent implements OnInit, AfterViewInit {
+export class ChartCardComponent implements OnInit, AfterViewInit {
   static currentId = 1;
 
   @Input()
@@ -51,7 +51,7 @@ export class LbdChartComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit(): void {
-    this.chartId = `canvas-${LbdChartComponent.currentId++}`;
+    this.chartId = `canvas-${ChartCardComponent.currentId++}`;
   }
 
   public ngAfterViewInit(): void {

@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app.routing';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { SidebarModule } from './shared/sidebar/sidebar.module';
-import { LbdModule } from './lbd/lbd.module';
+import { ChartCardModule } from './shared/chart-card/chart-card.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -47,7 +47,7 @@ export const firebaseConfig = environment.firebaseConfig;
     SidebarModule,
     RouterModule,
     AppRoutingModule,
-    LbdModule,
+    ChartCardModule,
     LoginModule,
     AngularFireAuthModule,
     AngularFirestoreModule,

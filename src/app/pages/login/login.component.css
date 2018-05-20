@@ -238,6 +238,9 @@ button {
 
 .danger {
   color: #ffbbbf;
+  margin-bottom: 20px;
+  font-size: 13px;
+  display: block;
 }
 
 @media (max-width: 576px) {

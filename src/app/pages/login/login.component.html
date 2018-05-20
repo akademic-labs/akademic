@@ -11,9 +11,17 @@
           <span class="focus-input" data-placeholder="&#xf2c0;"></span>
         </div>
 
+        <div class="danger" *ngIf="formErrors.email">
+          {{ formErrors.email }}
+        </div>
+
         <div class="wrap-input validate-input" data-validate="Entre com a senha">
           <input class="input" type="password" id="pass" placeholder="Senha" formControlName="password">
           <span class="focus-input" data-placeholder="&#xf13e;"></span>
+        </div>
+
+        <div class="danger" *ngIf="formErrors.password">
+          {{ formErrors.password }}
         </div>
 
         <div class="container-login-form-btn">
@@ -28,13 +36,10 @@
           </a>
         </div>
 
-        <p class="text-center danger" *ngIf="formErrors.email">
-          {{ formErrors.email }}
-        </p>
+        <div class="text-center" *ngIf="loading">
+          <img src="../../../assets/img/eclipse-loading.svg" alt="Login loading">
+        </div>
 
-        <p class="text-center danger" *ngIf="formErrors.password">
-          {{ formErrors.password }}
-        </p>
       </form>
     </div>
   </div>

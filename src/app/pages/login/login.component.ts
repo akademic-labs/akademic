@@ -13,6 +13,7 @@ type FormErrors = { [u in UserFields]: string };
 })
 export class LoginComponent implements OnInit {
 
+  loading = false;
   userForm: FormGroup;
   formErrors: FormErrors = {
     'email': '',
@@ -38,7 +39,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this._auth.emailLogin(this.userForm.value['email'], this.userForm.value['password']);
+    this.loading = true;
+    this._auth.emailLogin(this.userForm.value['email'], this.userForm.value['password'])
+      .then((ignore) => this.loading = false);
   }
 
   resetPassword() {

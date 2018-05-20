@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
-import { ChartType } from 'app/lbd/lbd-chart/lbd-chart.component';
+import { ChartType } from 'app/shared/chart-card/chart-card/chart-card.component';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // calc of the last 6 month
+    // calc of the last 6 months
     for (let i = 6; i > 0; i -= 1) {
       const d = new Date(new Date().getFullYear(), new Date().getMonth() - i, 1);
       this.lastSemester.push(this.monthNames[d.getMonth()]);

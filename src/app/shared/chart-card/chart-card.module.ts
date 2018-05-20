@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { LbdChartComponent } from './lbd-chart/lbd-chart.component';
+import { ChartCardComponent } from './chart-card/chart-card.component';
 
 @NgModule({
   imports: [
@@ -12,11 +12,11 @@ import { LbdChartComponent } from './lbd-chart/lbd-chart.component';
   ],
   declarations: [
 
-    LbdChartComponent
+    ChartCardComponent
 
   ],
   exports: [
-    LbdChartComponent
+    ChartCardComponent
   ]
 })
-export class LbdModule { }
+export class ChartCardModule { }
