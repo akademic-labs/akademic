@@ -2,24 +2,23 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <lbd-chart [title]="'Atividades'" [subtitle]="'Atividades complementares por categoria'" [chartClass]="'ct-perfect-fourth'"
-                    [chartType]="emailChartType" [chartData]="emailChartData" [legendItems]="emailChartLegendItems" [withHr]="true"
-                    [footerIconClass]="'fa fa-clock-o'" [footerText]="'Atualizado a 2 minutos atrás'">
-                </lbd-chart>
+                <app-lbd-chart [title]="'Atividades'" [subtitle]="'Atividades complementares por categoria'" [chartType]="emailChartType"
+                    [chartData]="emailChartData" [withHr]="true" [footerIconClass]="'fa fa-clock-o'" [footerText]="'Atualizado a 2 minutos atrás'"
+                    [chartOptions]="emailChartOptions" [canvasClass]="'pie-chart-size'">
+                </app-lbd-chart>
             </div>
             <div class="col-md-8">
-                <lbd-chart [title]="'Atividades com o tempo'" [subtitle]="'Número de atividades com o tempo'" [chartType]="hoursChartType"
-                    [chartData]="hoursChartData" [chartOptions]="hoursChartOptions" [chartResponsive]="hoursChartResponsive"
-                    [legendItems]="hoursChartLegendItems" [withHr]="true" [footerIconClass]="'fa fa-history'" [footerText]="'Atualizado 4 minutos atrás'">
-                </lbd-chart>
+                <app-lbd-chart [title]="'Atividades último semestre'" [subtitle]="'Número de atividades dos últimos 6 meses'" [chartType]="hoursChartType"
+                    [chartData]="hoursChartData" [withHr]="true" [footerIconClass]="'fa fa-history'" [footerText]="'Atualizado 4 minutos atrás'"
+                    [chartOptions]="emailChartOptions" [canvasClass]="'pie-chart-size'">
+                </app-lbd-chart>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <lbd-chart [title]="'Atividades'" [subtitle]="'Atividades por mês'" [chartType]="activityChartType" [chartData]="activityChartData"
-                    [chartOptions]="activityChartOptions" [chartResponsive]="activityChartResponsive" [legendItems]="activityChartLegendItems"
-                    [withHr]="true" [footerIconClass]="'fa fa-check'" [footerText]="'Dados atualizados'">
-                </lbd-chart>
+                <app-lbd-chart [title]="'Atividades'" [subtitle]="'Atividades por mês'" [chartType]="activityChartType" [chartData]="activityChartData"
+                    [chartOptions]="activityChartOptions" [withHr]="true" [footerIconClass]="'fa fa-check'" [footerText]="'Dados atualizados'">
+                </app-lbd-chart>
             </div>
             <div class="col-md-6">
                 <div class="card">
@@ -117,25 +116,6 @@
                                             </div>
                                         </td>
                                         <td>Atividade 5</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox">
-                                                <input id="checkbox6" type="checkbox">
-                                                <label for="checkbox6">
-
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>Atividade 6</td>
                                         <td class="td-actions text-right">
                                             <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
                                                 <i class="fa fa-edit"></i>

@@ -71,6 +71,7 @@ export class AuthService {
       displayName: user.displayName || 'nameless user',
       photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ',
     };
+    // study set of firestore !URGENT
     return userRef.set(data);
   }
 

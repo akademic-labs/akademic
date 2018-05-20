@@ -1,10 +1,6 @@
 import { Component, Input, OnInit, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
-import * as Chartist from 'chartist';
 
-export interface LegendItem {
-  title: string;
-  imageClass: string;
-}
+import { Chart } from 'chart.js';
 
 export enum ChartType {
   Pie,
@@ -13,7 +9,7 @@ export enum ChartType {
 }
 
 @Component({
-  selector: 'lbd-chart',
+  selector: 'app-lbd-chart',
   templateUrl: './lbd-chart.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -27,7 +23,7 @@ export class LbdChartComponent implements OnInit, AfterViewInit {
   public subtitle: string;
 
   @Input()
-  public chartClass: string;
+  public canvasClass: string;
 
   @Input()
   public chartType: ChartType;
@@ -39,40 +35,47 @@ export class LbdChartComponent implements OnInit, AfterViewInit {
   public chartOptions: any;
 
   @Input()
-  public chartResponsive: any[];
-
-  @Input()
   public footerIconClass: string;
 
   @Input()
   public footerText: string;
 
   @Input()
-  public legendItems: LegendItem[];
-
-  @Input()
   public withHr: boolean;
 
   public chartId: string;
+
+  public chart: Chart;
 
   constructor() {
   }
 
   public ngOnInit(): void {
-    this.chartId = `lbd-chart-${LbdChartComponent.currentId++}`;
+    this.chartId = `canvas-${LbdChartComponent.currentId++}`;
   }
 
   public ngAfterViewInit(): void {
-
     switch (this.chartType) {
       case ChartType.Pie:
-        new Chartist.Pie(`#${this.chartId}`, this.chartData, this.chartOptions, this.chartResponsive);
+        this.chart = new Chart(this.chartId, {
+          type: 'pie',
+          data: this.chartData,
+          options: this.chartOptions
+        });
         break;
       case ChartType.Line:
-        new Chartist.Line(`#${this.chartId}`, this.chartData, this.chartOptions, this.chartResponsive);
+        this.chart = new Chart(this.chartId, {
+          type: 'line',
+          data: this.chartData,
+          options: this.chartOptions
+        });
         break;
       case ChartType.Bar:
-        new Chartist.Bar(`#${this.chartId}`, this.chartData, this.chartOptions, this.chartResponsive);
+        this.chart = new Chart(this.chartId, {
+          type: 'bar',
+          data: this.chartData,
+          options: this.chartOptions
+        });
         break;
     }
   }

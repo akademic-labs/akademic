@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from 'app/services/auth.service';
 
-declare const $: any;
 declare interface RouteInfo {
     path: string;
     title: string;
@@ -32,7 +31,7 @@ export class SidebarComponent implements OnInit {
     }
 
     isMobileMenu() {
-        if ($(window).width() > 991) {
+        if (jQuery(window).width() > 991) {
             return false;
         }
         return true;
