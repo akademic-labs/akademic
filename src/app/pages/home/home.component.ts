@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
 import { ChartType } from 'app/shared/chart-card/chart-card/chart-card.component';
 
 @Component({

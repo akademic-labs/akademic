@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { NotifyService } from 'app/services/notify.service';
 
 import { Observable } from 'rxjs';
-import { take, map, tap } from 'rxjs/operators'
+import { take, map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
           this.notify.update('warning', 'Você precisa estar logado!');
           this.router.navigate(['/']);
         }
-      }),
+      })
     );
   }
 }

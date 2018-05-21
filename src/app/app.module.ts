@@ -16,7 +16,6 @@ import { UserComponent } from 'app/pages/user/user.component';
 import { TablesComponent } from './tables/tables.component';
 import { TypographyComponent } from './typography/typography.component';
 import { IconsComponent } from './icons/icons.component';
-import { NotificationsComponent } from './notifications/notifications.component';
 import { InputActivityComponent } from './pages/user/input-activity/input-activity.component';
 import { LoginModule } from './pages/login/login.module';
 import { AuthGuard } from './guards/auth.guard';
@@ -36,7 +35,6 @@ export const firebaseConfig = environment.firebaseConfig;
     TablesComponent,
     TypographyComponent,
     IconsComponent,
-    NotificationsComponent,
     InputActivityComponent
   ],
   imports: [

@@ -1,8 +1,8 @@
 {
   "name": "Sistema de Atividades Complementares",
   "short_name": "Akademic",
-  "theme_color": "#616464",
-  "background_color": "#616464",
+  "theme_color": "#36d1dc",
+  "background_color": "#fff",
   "orientation": "portrait",
   "display": "standalone",
   "Scope": "/",

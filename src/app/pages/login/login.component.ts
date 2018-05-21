@@ -39,9 +39,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loading = true;
-    this._auth.emailLogin(this.userForm.value['email'], this.userForm.value['password'])
-      .then((ignore) => this.loading = false);
+    if (this.userForm.valid) {
+      this.loading = true;
+      this._auth.emailLogin(this.userForm.value['email'], this.userForm.value['password'])
+        .then((ignore) => this.loading = false);
+    }
   }
 
   resetPassword() {
