@@ -9,14 +9,8 @@ export class UserService {
 
   constructor(private afs: AngularFirestore) { }
 
-  public updateUserData(user: User) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-    const data: User = {
-      uid: user.uid,
-      email: user.email || null,
-      displayName: user.displayName || 'nameless user',
-      photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ',
-    };
+  public updateUserData(data: User) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${data.uid}`);
     // study set of firestore !URGENT
     return userRef.set(data);
   }

@@ -1,6 +1,27 @@
 export class User {
   uid: string;
-  email?: string | null;
-  photoURL?: string;
-  displayName?: string;
+  firstName: string;
+  lastName: string;
+  cpf: string;
+  dateOfBirth: Date;
+  registrationDate: Date;
+  email: string;
+  phone: string;
+
+  type: {
+    id: number;
+    description: string;
+  };
+
+  course: {
+    id: number;
+    description: string;
+  };
+
+  photo: string;
+
+  status: {
+    id: number;
+    description: string;
+  }
 }
