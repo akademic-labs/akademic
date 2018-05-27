@@ -5,7 +5,7 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { AuthService } from 'app/services/auth.service';
 
 @Component({
-    selector: 'app-navbar',
+    selector: 'aka-navbar',
     templateUrl: 'navbar.component.html'
 })
 

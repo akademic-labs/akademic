@@ -1,9 +1,9 @@
 <div class="wrapper">
-    <app-sidebar *ngIf="_auth.user | async"></app-sidebar>
+    <aka-sidebar *ngIf="_auth.user | async"></aka-sidebar>
 
     <div class="{{ (_auth.user | async) ? 'main-panel' : '' }}">
-        <app-navbar *ngIf="_auth.user | async"></app-navbar>
+        <aka-navbar *ngIf="_auth.user | async"></aka-navbar>
         <router-outlet></router-outlet>
-        <app-footer *ngIf="_auth.user | async"></app-footer>
+        <aka-footer *ngIf="_auth.user | async"></aka-footer>
     </div>
 </div>

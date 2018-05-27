@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-footer',
+    selector: 'aka-footer',
     templateUrl: 'footer.component.html'
 })
 

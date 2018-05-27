@@ -9,7 +9,7 @@ export enum ChartType {
 }
 
 @Component({
-  selector: 'app-chart-card',
+  selector: 'aka-chart-card',
   templateUrl: './chart-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

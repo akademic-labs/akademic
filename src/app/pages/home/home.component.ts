@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartType } from 'app/shared/chart-card/chart-card/chart-card.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'aka-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

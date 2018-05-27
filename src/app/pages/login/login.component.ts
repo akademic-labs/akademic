@@ -7,7 +7,7 @@ type UserFields = 'email' | 'password';
 type FormErrors = { [u in UserFields]: string };
 
 @Component({
-  selector: 'app-login',
+  selector: 'aka-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })

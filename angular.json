@@ -123,11 +123,11 @@
   "defaultProject": "atividades-complementares-angular",
   "schematics": {
     "@schematics/angular:component": {
-      "prefix": "app",
+      "prefix": "aka",
       "styleext": "css"
     },
     "@schematics/angular:directive": {
-      "prefix": "app"
+      "prefix": "aka"
     }
   }
 }
