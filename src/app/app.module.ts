@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AppRoutingModule } from './app.routing';
+import { LoginModule } from './pages/login/login.module';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { SidebarModule } from './shared/sidebar/sidebar.module';
@@ -13,11 +14,8 @@ import { ChartCardModule } from './shared/chart-card/chart-card.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UserComponent } from 'app/pages/user/user.component';
-import { TablesComponent } from './tables/tables.component';
-import { TypographyComponent } from './typography/typography.component';
-import { IconsComponent } from './icons/icons.component';
 import { InputActivityComponent } from './pages/user/input-activity/input-activity.component';
-import { LoginModule } from './pages/login/login.module';
+
 import { AuthGuard } from './guards/auth.guard';
 
 import { AngularFireModule } from 'angularfire2';
@@ -32,9 +30,6 @@ export const firebaseConfig = environment.firebaseConfig;
     AppComponent,
     HomeComponent,
     UserComponent,
-    TablesComponent,
-    TypographyComponent,
-    IconsComponent,
     InputActivityComponent
   ],
   imports: [

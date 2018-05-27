@@ -9,12 +9,7 @@ import { ErrorService } from './error.service';
 import { of, Observable, BehaviorSubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-interface User {
-  uid: string;
-  email?: string | null;
-  photoURL?: string;
-  displayName?: string;
-}
+import { User } from 'app/models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -57,19 +52,6 @@ export class AuthService {
     return this.afAuth.auth.sendPasswordResetEmail(email)
       .then(() => this._notify.update('info', 'Atualização de senha enviada por e-mail'))
       .catch((error) => this.handleError(error));
-  }
-
-  // Sets user data to firestore after succesful login
-  private updateUserData(user: User) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-    const data: User = {
-      uid: user.uid,
-      email: user.email || null,
-      displayName: user.displayName || 'nameless user',
-      photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ',
-    };
-    // study set of firestore !URGENT
-    return userRef.set(data);
   }
 
   emailSignUp(email: string, senha: string) {
