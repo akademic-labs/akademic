@@ -1,4 +1,4 @@
-<div class="limiter">
+<div class="limiter" *ngIf="!(_auth.user | async); else alreadyLoggedIn">
   <div class="container-login" style="background-image: url('../assets/img/login.png');">
     <div class="wrap-login">
       <form class="login-form validate-form" [formGroup]="userForm" (submit)="login()">
@@ -47,3 +47,13 @@
     </div>
   </div>
 </div>
+
+<ng-template #alreadyLoggedIn>
+  <p class="text-success">
+    Você já está logado!
+
+    <a [routerLink]="['/dashboard']">
+      Ir para o dashboard
+    </a> ->
+  </p>
+</ng-template>

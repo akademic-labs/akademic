@@ -54,6 +54,7 @@ export class AuthService {
       .catch((error) => this.handleError(error));
   }
 
+  // should maybe be implemented
   emailSignUp(email: string, senha: string) {
     this._router.navigate(['./']);
   }

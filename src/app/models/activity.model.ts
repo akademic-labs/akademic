@@ -11,13 +11,13 @@ export class Activity {
   validatedHours: number;
 
   type: {
-    uid: number;
+    uid: string;
     description: string;
   };
 
   messages:
     {
-      uid: 1;
+      uid: string;
       description: string;
       date: Date;
       user: User;
@@ -25,15 +25,19 @@ export class Activity {
 
   attachment:
     {
-      uid: 1;
+      uid: string;
       user: User;
 
       file:
       {
-        id: 1;
+        id: string;
         name: string;
         url: string;
         type: string;
       }
     }
+  situation: {
+    uid: string;
+    description: string;
+  }
 }
