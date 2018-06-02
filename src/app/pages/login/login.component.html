@@ -11,8 +11,6 @@
           <span class="focus-input" data-placeholder="&#xf2c0;"></span>
         </div>
 
-
-
         <div class="wrap-input validate-input" data-validate="Entre com a senha">
           <input class="input" type="password" id="pass" placeholder="Senha" formControlName="password">
           <span class="focus-input" data-placeholder="&#xf13e;"></span>
@@ -49,11 +47,25 @@
 </div>
 
 <ng-template #alreadyLoggedIn>
-  <p class="text-success">
-    Você já está logado!
-
-    <a [routerLink]="['/dashboard']">
-      Ir para o dashboard
-    </a> ->
-  </p>
+  <div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="header">
+              <h4 class="title">
+                <i class="pe-7s-check"></i> Você já está logado!</h4>
+            </div>
+            <div class="content">
+              <p>
+                <a [routerLink]="['/dashboard']">
+                  <i class="pe-7s-back-2"></i> Retornar ao dashboard
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ng-template>

@@ -1,99 +1,95 @@
-<div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4">
-                <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades complementares por categoria'" [chartType]="emailChartType"
-                    [chartData]="emailChartData" [withHr]="true" [footerIconClass]="'fa fa-clock-o'" [footerText]="'Atualizado a 2 minutos atrás'"
-                    [chartOptions]="emailChartOptions" [canvasClass]="'chart-size'">
-                </aka-chart-card>
+<div class="row">
+    <div class="col-md-4">
+        <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades complementares por categoria'" [chartType]="emailChartType"
+            [chartData]="emailChartData" [withHr]="true" [footerIconClass]="'fa fa-clock-o'" [footerText]="'Atualizado a 2 minutos atrás'"
+            [chartOptions]="emailChartOptions" [canvasClass]="'chart-size'">
+        </aka-chart-card>
+    </div>
+    <div class="col-md-8">
+        <aka-chart-card [title]="'Atividades último semestre'" [subtitle]="'Número de atividades dos últimos 6 meses'" [chartType]="hoursChartType"
+            [chartData]="hoursChartData" [withHr]="true" [footerIconClass]="'fa fa-history'" [footerText]="'Atualizado 4 minutos atrás'"
+            [chartOptions]="emailChartOptions" [canvasClass]="'chart-size'">
+        </aka-chart-card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por mês'" [chartType]="activityChartType" [chartData]="activityChartData"
+            [chartOptions]="activityChartOptions" [withHr]="true" [footerIconClass]="'fa fa-check'" [footerText]="'Dados atualizados'">
+        </aka-chart-card>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Tarefas</h4>
+                <p class="category">Atividades a serem analisadas</p>
             </div>
-            <div class="col-md-8">
-                <aka-chart-card [title]="'Atividades último semestre'" [subtitle]="'Número de atividades dos últimos 6 meses'" [chartType]="hoursChartType"
-                    [chartData]="hoursChartData" [withHr]="true" [footerIconClass]="'fa fa-history'" [footerText]="'Atualizado 4 minutos atrás'"
-                    [chartOptions]="emailChartOptions" [canvasClass]="'chart-size'">
-                </aka-chart-card>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por mês'" [chartType]="activityChartType" [chartData]="activityChartData"
-                    [chartOptions]="activityChartOptions" [withHr]="true" [footerIconClass]="'fa fa-check'" [footerText]="'Dados atualizados'">
-                </aka-chart-card>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title">Tarefas</h4>
-                        <p class="category">Atividades a serem analisadas</p>
-                    </div>
-                    <div class="content">
-                        <div class="table-full-width">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>Atividade 1 |  Monitoria</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Atividade 2 | Pesquisa</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Atividade 3 | Iniciação</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Atividade 4</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Atividade 5</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="footer">
-                            <hr>
-                            <div class="stats">
-                                <i class="fa fa-history"></i> Atualizado 3 minutos atrás
-                            </div>
-                        </div>
+            <div class="content">
+                <div class="table-full-width">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Atividade 1 | Monitoria</td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Atividade 2 | Pesquisa</td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Atividade 3 | Iniciação</td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Atividade 4</td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Atividade 5</td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="footer">
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-history"></i> Atualizado 3 minutos atrás
                     </div>
                 </div>
             </div>
