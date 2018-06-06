@@ -12,6 +12,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'dashboard', title: 'Dashboard', icon: 'pe-7s-graph', class: '' },
     { path: 'user', title: 'Perfil do Usuário', icon: 'pe-7s-user', class: '' },
     { path: 'input-activity', title: 'Entrada de Atividade', icon: 'pe-7s-bell', class: '' },
+    { path: 'validate-activity', title: 'Validação de Atividade', icon: 'pe-7s-bell', class: '' },
     { path: 'admin', title: 'Administrador', icon: 'pe-7s-config', class: '' }
 ];
 
