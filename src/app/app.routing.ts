@@ -1,3 +1,4 @@
+import { ValidateActivityComponent } from './pages/cordinator/validate-activity/validate-activity.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'dashboard', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'input-activity', component: InputActivityComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent }
+  { path: 'validate-activity', component: ValidateActivityComponent, canActivate: [AuthGuard] },
+  { path: '', component: LoginComponent }
 ];
 
 @NgModule({

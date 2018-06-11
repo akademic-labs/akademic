@@ -6,53 +6,156 @@
             </div>
             <div class="content">
                 <form>
+                    <!-- <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <h4 for="exampleInputEmail1">Aluno</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Matricula</label>
+                                        <input type="text" class="form-control" disabled email value="2015000076">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Nome</label>
+                                        <input type="email" class="form-control" disabled email value="Luiz Correia">
+                                    </div>
+                                </div>
+                            </div> -->
+                    <!-- <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <h4 for="exampleInputEmail1">Atividade</h4>
+                                    </div>
+                                </div>
+                            </div> -->
+
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <div class="form-group">
                                 <label>Id</label>
-                                <input type="text" class="form-control" disabled placeholder="Company" value="1">
+                                <input type="text" class="form-control" disabled value="1">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label>Carga Horária</label>
-                                <input type="text" class="form-control" placeholder="Carga Horária">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">E-mail para envio</label>
-                                <input type="email" class="form-control" email placeholder="Email">
+                                <label>Data de Cadastro</label>
+                                <input type="text" class="form-control" disabled value="31/05/2018">
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
+                            <label for="sel1">Período Letivo</label>
+                            <select class="form-control" id="sel1">
+                                <option>2018</option>
+                                <option>2017</option>
+                                <option>2016</option>
+                                <option>2015</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="sel1">Semestre</label>
+                            <select class="form-control" id="sel1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label>Data Início</label>
-                                <input type="text" class="form-control" placeholder="__/__/____" value="__/__/____">
+                                <label>Data Inicial</label>
+                                <input type="date" class="form-control" placeholder="31/05/2018">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label>Data Fim</label>
-                                <input type="text" class="form-control" placeholder="__/__/____" value="__/__/____">
+                                <label>Data Final</label>
+                                <input type="date" class="form-control" placeholder="31/05/2018">
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="sel1">Tipo Atividade</label>
+                            <select class="form-control" id="sel1">
+                                <option>Curso de Extensão</option>
+                                <option>Palestra</option>
+                                <option>Monitoria</option>
+                            </select>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label>Descrição</label>
+                                <input type="text" class="form-control" value="Curso de Inglês">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Carga Horária Devida</label>
+                                <input type="number" class="form-control" value="30">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label>Local</label>
+                                <input type="text" class="form-control" value="Wizard">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="sel1">Estado</label>
+                            <select class="form-control" id="sel1">
+                                <option>PR</option>
+                                <option>SP</option>
+                                <option>SC</option>
+                                <option>MG</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="sel1">Cidade</label>
+                            <select class="form-control" id="sel1">
+                                <option>Araucária</option>
+                                <option>Curitiba</option>
+                                <option>São José dos Pinhais</option>
+                                <option>Contenda</option>
+                                <option>Lapa</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Anexos</label>
+                            <input type="file" class="form-control" multiple>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Descrição da Atividade</label>
-                                <textarea rows="5" class="form-control" placeholder="Aqui você pode colocar sua descrição"></textarea>
+                                <label>Observação</label>
+                                <textarea rows="4" class="form-control" placeholder="Aqui você pode colocar sua observação"></textarea>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-info btn-fill pull-right">Inserir Atividade</button>
+                    <button type="submit" class="btn btn-info btn-fill pull-right">Inserir</button>
                     <div class="clearfix"></div>
                 </form>
             </div>
+            <button type="submit" class="btn btn-info btn-fill pull-right">Inserir Atividade</button>
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>

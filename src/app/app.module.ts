@@ -23,6 +23,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { environment } from './../environments/environment';
+import { CordinatorComponent } from './pages/cordinator/cordinator.component';
+import { ValidateActivityComponent } from './pages/cordinator/validate-activity/validate-activity.component';
 export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
@@ -30,7 +32,9 @@ export const firebaseConfig = environment.firebaseConfig;
     AppComponent,
     HomeComponent,
     UserComponent,
-    InputActivityComponent
+    InputActivityComponent,
+    CordinatorComponent,
+    ValidateActivityComponent
   ],
   imports: [
     BrowserModule,
