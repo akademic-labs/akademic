@@ -1,43 +1,29 @@
-import { User } from './user.model';
+import { Attachment } from './attachment.model';
+import { ActMessages } from './act-messages.model';
 
 export class Activity {
   uid: string;
   description: string;
-  registrationDate: Date;
-  executionDate: Date;
-  organ: string;
+  createdAt: Date;
+  executedAt: Date;
+  local: string;
+  semester: number;
+  link: string;
   hoursDuration: number;
   observation: string;
   validatedHours: number;
+  status: string;
+  userId: string;
+  controllerId: string;
 
   type: {
     uid: string;
     description: string;
   };
 
-  messages:
-    {
-      uid: string;
-      description: string;
-      date: Date;
-      user: User;
-    }
+  // subcollection
+  messages: ActMessages;
 
-  attachment:
-    {
-      uid: string;
-      user: User;
-
-      file:
-      {
-        id: string;
-        name: string;
-        url: string;
-        type: string;
-      }
-    }
-  situation: {
-    uid: string;
-    description: string;
-  }
+  // subcollection
+  attachment: Attachment;
 }

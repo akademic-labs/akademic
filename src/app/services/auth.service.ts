@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { UserService } from './user.service';
+import { ErrorService } from './error.service';
 import { NotifyService } from './notify.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { ErrorService } from './error.service';
 
 import { of, Observable, BehaviorSubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -20,23 +21,24 @@ export class AuthService {
   constructor(
     private _router: Router, private _notify: NotifyService,
     private afAuth: AngularFireAuth, private afs: AngularFirestore,
-    private _error: ErrorService) {
+    private _error: ErrorService, private _userService: UserService) {
 
     this.user = this.afAuth.authState.pipe(
-      switchMap((user) => {
+      switchMap(user => {
         if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }
-      }));
+      })
+    );
   }
 
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((user) => {
+      .then(credential => {
         this._router.navigate(['/dashboard']);
-        // return this.updateUserData(user); // if using firestore
+        return this._userService.updateUserData(credential.user); // if using firestore
       })
       .catch((error) => this.handleError(error));
   }

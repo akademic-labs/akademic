@@ -2,26 +2,23 @@ export class User {
   uid: string;
   firstName: string;
   lastName: string;
-  cpf: string;
-  dateOfBirth: Date;
-  registrationDate: Date;
+  registration: string;
+  birthday: Date;
+  createdAt: Date;
   email: string;
   phone: string;
+  photo: string;
+  status: string;
 
+  // user enters activity, controller validates and adm is the superuser
   type: {
-    id: number;
-    description: string;
+    user?: boolean;
+    controller?: boolean;
+    administrator?: boolean;
   };
 
   course: {
-    id: number;
-    description: string;
+    uid: number;
+    name: string;
   };
-
-  photo: string;
-
-  status: {
-    id: number;
-    description: string;
-  }
 }

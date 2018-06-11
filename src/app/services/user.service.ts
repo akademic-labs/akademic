@@ -39,9 +39,28 @@ export class UserService {
     return this.getUser(id).update(data);
   }
 
-  public updateUserData(data: User) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${data.uid}`);
-    // study set of firestore !URGENT
+  public updateUserData(authUser: User) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${authUser.uid}`);
+
+    const data: User = {
+      uid: authUser.uid,
+      email: authUser.email,
+      firstName: authUser.firstName || 'nameless',
+      lastName: authUser.lastName || 'user',
+      photo: 'https://goo.gl/Fz9nrQ',
+      registration: '2015000595',
+      birthday: new Date('05/06/1996'),
+      course: {
+        uid: 1,
+        name: 'Sistemas de Informação'
+      },
+      status: 'A',
+      type: {
+        user: true
+      },
+      createdAt: new Date(),
+      phone: '(41) 997315752'
+    };
     return userRef.set(data);
   }
 
