@@ -4,9 +4,7 @@
     <div class="{{ (_auth.user | async) ? 'main-panel' : '' }}">
         <aka-navbar *ngIf="_auth.user | async"></aka-navbar>
         <div class="main-content">
-            <div class="container-fluid">
-                <router-outlet></router-outlet>
-            </div>
+            <router-outlet></router-outlet>
         </div>
         <aka-footer *ngIf="_auth.user | async"></aka-footer>
     </div>

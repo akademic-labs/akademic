@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'app/services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NotifyService } from 'app/services/notify.service';
 
 type UserFields = 'email' | 'password';
 type FormErrors = { [u in UserFields]: string };
@@ -22,7 +21,7 @@ export class LoginComponent implements OnInit {
   validationMessages = {
     'email': {
       'required': 'E-mail é obrigatório.',
-      'email': 'E-mail deve conter um e-mail válido',
+      'email': 'E-mail deve ser válido',
     },
     'password': {
       'required': 'Senha é obrigatória.',
