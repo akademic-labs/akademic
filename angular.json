@@ -20,10 +20,12 @@
               "src/assets",
               "src/favicon.ico"
             ],
-            "styles": [],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/css/light-bootstrap-dashboard.css"
+            ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/bootstrap-notify/bootstrap-notify.min.js"
             ]
@@ -74,13 +76,15 @@
             "polyfills": "src/polyfills.ts",
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/bootstrap-notify/bootstrap-notify.min.js"
             ],
-            "styles": [],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/css/light-bootstrap-dashboard.css"
+            ],
             "assets": [
-              "src/assets",
+              "src/assets",              
               "src/favicon.ico"
             ]
           }

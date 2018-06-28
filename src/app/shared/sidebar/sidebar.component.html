@@ -2,81 +2,15 @@
     <div class="sidebar-background"></div>
     <div class="sidebar-wrapper">
         <div class="logo">
-            <a class="simple-text" [routerLink]="['/dashboard']">
-                <div class="logo-img">
-                    <img src="../../../assets/img/akademic-name-white.png" width="180px">
-                </div>
+            <a [routerLink]="['/dashboard']">
+                <img src="../../../assets/img/akademic-name-white.png" width="180px">
             </a>
         </div>
         <ul class="nav responsive-nav">
-            <li class="dropdown" *ngIf="isMobileMenu()">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-globe"></i>
-                    <b class="caret hidden-sm hidden-xs"></b>
-                    <span class="notification hidden-sm hidden-xs">5</span>
-                    <p class="hidden-lg hidden-md">
-                        5 Notificações
-                        <b class="caret"></b>
-                    </p>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="#">Notification 1</a>
-                    </li>
-                    <li>
-                        <a href="#">Notification 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Notification 3</a>
-                    </li>
-                    <li>
-                        <a href="#">Notification 4</a>
-                    </li>
-                    <li>
-                        <a href="#">Another notification</a>
-                    </li>
-                </ul>
-            </li>
-            <li *ngIf="isMobileMenu()">
-                <a>
-                    <i class="fa fa-search"></i>
-                    <p class="hidden-lg hidden-md">Buscar</p>
-                </a>
-            </li>
             <li *ngIf="isMobileMenu()">
                 <a href="">
                     <p>Conta</p>
                 </a>
-            </li>
-            <li class="dropdown" *ngIf="isMobileMenu()">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                    <p>
-                        Dropdown
-                        <b class="caret"></b>
-                    </p>
-
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="#">Action</a>
-                    </li>
-                    <li>
-                        <a href="#">Another action</a>
-                    </li>
-                    <li>
-                        <a href="#">Something</a>
-                    </li>
-                    <li>
-                        <a href="#">Another action</a>
-                    </li>
-                    <li>
-                        <a href="#">Something</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">Separated link</a>
-                    </li>
-                </ul>
             </li>
             <li *ngIf="isMobileMenu()">
                 <a (click)="logOut()">
@@ -85,7 +19,7 @@
             </li>
             <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li>
             <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
-                <a [routerLink]="[menuItem.path]">
+                <a [routerLink]="[menuItem.path]" (click)="sidebarClose()">
                     <i class="{{menuItem.icon}}"></i>
                     <p>{{menuItem.title}}</p>
                 </a>

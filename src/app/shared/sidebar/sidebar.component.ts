@@ -30,11 +30,16 @@ export class SidebarComponent implements OnInit {
     }
 
     isMobileMenu() {
-        if (jQuery(window).width() > 991) {
+        if ($(window).width() > 991) {
             return false;
         }
         return true;
     };
+
+    sidebarClose() {
+        document.body.classList.remove('nav-open');
+        document.getElementById('toggle-button').classList.remove('toggled');
+    }
 
     logOut() {
         this._authService.logOut();
