@@ -10,7 +10,7 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 import { of, Observable, BehaviorSubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { User } from 'app/models/user.model';
+import { User } from 'app/models/user.interface';
 
 @Injectable({
   providedIn: 'root'

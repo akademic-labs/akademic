@@ -1,4 +1,4 @@
-export class Attachment {
+export interface Attachment {
   uid: string;
   name: string;
   url: string;

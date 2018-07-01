@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -38,6 +38,7 @@ export const firebaseConfig = environment.firebaseConfig;
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     FormsModule,
     NavbarModule,
     FooterModule,

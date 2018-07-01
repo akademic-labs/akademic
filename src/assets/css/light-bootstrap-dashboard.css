@@ -2476,10 +2476,6 @@ fieldset[disabled] .form-control {
   line-height: 24px
 }
 
-.card-user .content {
-  min-height: 240px
-}
-
 .card-user .footer,
 .card-price .footer {
   padding: 5px 15px 10px

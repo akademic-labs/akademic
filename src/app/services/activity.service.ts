@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
-import { Activity } from '../models/activity.model';
+import { Activity } from '../models/activity.interface';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -15,10 +15,10 @@ export class ActivityService {
   activityCollection: AngularFirestoreCollection<any>;
 
   constructor(private afs: AngularFirestore) {
-    this.activityCollection = this.afs.collection('activities', (ref) => ref.orderBy('time', 'desc').limit(5));
+    this.activityCollection = this.afs.collection('activities');
   }
 
-  getData(): Observable<any[]> {
+  getActivities(): Observable<any[]> {
     // ['added', 'modified', 'removed']
     return this.activityCollection.snapshotChanges().pipe(
       map((actions) => {
@@ -30,7 +30,7 @@ export class ActivityService {
     );
   }
 
-  getActivity(id: string) {
+  getActivityById(id: string) {
     return this.afs.doc<any>(`activities/${id}`);
   }
 
@@ -39,10 +39,10 @@ export class ActivityService {
   }
 
   updateActivity(id: string, data: any) {
-    return this.getActivity(id).update(data);
+    return this.getActivityById(id).update(data);
   }
 
   deleteActivity(id: string) {
-    return this.getActivity(id).delete();
+    return this.getActivityById(id).delete();
   }
 }
