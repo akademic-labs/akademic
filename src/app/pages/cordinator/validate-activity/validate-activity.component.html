@@ -1,137 +1,55 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-            <div class="header">
-                <h4 class="title">Validar Atividade</h4>
-            </div>
-            <div class="content">
+            <div class="content" style="border-top:5px solid #b224ef">
                 <form>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <h4 for="exampleInputEmail1">Aluno</h4>
-                            </div>
-                        </div>
+                    <div style="text-transform: uppercase;color: #9A9A9A;text-align: center;font-size: 16px;">
+                        {{activity.activityType.description}}
                     </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>Matricula</label>
-                                <input type="text" class="form-control" disabled email value="2015000076">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nome</label>
-                                <input type="email" class="form-control" disabled email value="Luiz Correia">
-                            </div>
-                        </div>
+                    <div style="font-size: 50px;text-align: center;">{{activity.hoursDuration}}
+                        <span style="font-size: 25px;text-align: center;">horas</span>
                     </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <h4 for="exampleInputEmail1">Atividade</h4>
-                            </div>
-                        </div>
+                    <div style="text-transform: uppercase;color: #9A9A9A;text-align: center;">{{activity.local}}</div>
+                    <hr>
+                    <span>
+                        <i class="fa fa-clock-o"></i>{{ activity.initialDate | date: 'dd/MM/yyyy'}} - </span>
+                    <span>
+                        <i class="fa fa-clock-o"></i>{{ activity.finalDate | date: 'dd/MM/yyyy' }}
+                    </span>
+
+                    <hr>
+
+                    <span>
+                        <i class="fa fa-calendar"></i>Semestre: {{ activity.semester }} | </span>
+                    <span>
+                        Ano: {{ activity.schoolYear }}
+                    </span>
+
+                    <hr>
+                    <div>
+                        <i class="fa fa-home"></i>{{ activity.city }}/{{ activity.state }}</div>
+                    <hr>
+                    <div>Descrição: {{ activity.description }}</div>
+                    <hr>
+                    <div>Observação: {{ activity.observation }}
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label>Id</label>
-                                <input type="text" class="form-control" disabled value="1">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Data de Cadastro</label>
-                                <input type="text" class="form-control" disabled value="31/05/2018">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Período Letivo</label>
-                                <input type="email" class="form-control" disabled email value="2018">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Semestre</label>
-                                <input type="email" class="form-control" disabled email value="6">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Data Inicial</label>
-                                <input type="text" class="form-control" disabled value="20/05/2018">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Data Final</label>
-                                <input type="text" class="form-control" disabled value="21/05/2018">
-                            </div>
+                    <hr>
+
+                    <div class="author">
+                        <div>Solicitante</div>
+                        <div style="padding:20px 0px">
+                            <img src="assets/img/default-avatar.png" alt="Foto do Usuário" width="80" height="80" style="border-radius: 50%; margin-right: 10px"
+                            />
+
+                            <h5 style="display: inline-grid;">{{activity.userId}}
+                                <br />
+                                <small style="text-transform: lowercase">{{activity.userId}}</small>
+                            </h5>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Tipo Atividade</label>
-                                <input type="text" class="form-control" disabled value="Curso de Extensão">
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <label>Descrição</label>
-                                <input type="text" class="form-control" disabled value="Curso de Inglês">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>Carga Horária Devida</label>
-                                <input type="number" class="form-control" disabled value="30">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <label>Local</label>
-                                <input type="text" class="form-control" value="Wizard">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>Estado</label>
-                                <input type="text" class="form-control" disabled value="PR">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Cidade</label>
-                                <input type="text" class="form-control" disabled value="Araucária">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Anexos</label>
-                            <br>
-                            <button type="button" class="btn btn-primary btn-sm">Documento.pdf</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Observação</label>
-                                <textarea rows="4" class="form-control" disabled value="Observação tal"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-danger btn-fill pull-right">Aprovar</button>
-                    <button type="submit" class="btn btn-warning btn-fill pull-right">Reprovar</button>
+                    <button type="button" (click)="toApprove()" class="btn btn-info btn-fill pull-right" style="margin-left: 10px;">Aprovar</button>
+                    <button type="button" (click)="toReprove()" class="btn btn-link pull-right" style="border:none;">Reprovar</button>
                     <div class="clearfix"></div>
                 </form>
             </div>

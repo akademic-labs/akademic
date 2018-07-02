@@ -28,55 +28,11 @@
                 <div class="table-full-width">
                     <table class="table">
                         <tbody>
-                            <tr>
-                                <td>Atividade 1 | Monitoria</td>
+                            <tr *ngFor="let activity of $actsToApprove | async">
+                                <td>Atividade | {{activity.uid}}</td>
                                 <td class="td-actions text-right">
                                     <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                                        <i class="fa fa-edit"></i>
-                                    </button>
-                                    <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Atividade 2 | Pesquisa</td>
-                                <td class="td-actions text-right">
-                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                                        <i class="fa fa-edit"></i>
-                                    </button>
-                                    <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Atividade 3 | Iniciação</td>
-                                <td class="td-actions text-right">
-                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                                        <i class="fa fa-edit"></i>
-                                    </button>
-                                    <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Atividade 4</td>
-                                <td class="td-actions text-right">
-                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                                        <i class="fa fa-edit"></i>
-                                    </button>
-                                    <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Atividade 5</td>
-                                <td class="td-actions text-right">
-                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-edit" (click)="toEdit(activity.uid)"></i>
                                     </button>
                                     <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
                                         <i class="fa fa-times"></i>

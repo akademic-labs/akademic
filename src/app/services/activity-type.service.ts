@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ActivityTypeService {
-  actTypeCollection: AngularFirestoreCollection<any>;
+  actTypeCollection: AngularFirestoreCollection<ActivityType>;
 
   constructor(private afs: AngularFirestore) {
     this.actTypeCollection = this.afs.collection('activityTypes');

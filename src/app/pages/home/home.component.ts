@@ -1,5 +1,11 @@
+import { Activity } from './../../models/activity.interface';
+import { ActivityService } from 'app/services/activity.service';
 import { Component, OnInit } from '@angular/core';
 import { ChartType } from 'app/shared/chart-card/chart-card/chart-card.component';
+
+import { AuthService } from 'app/services/auth.service';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'aka-home',
@@ -21,9 +27,15 @@ export class HomeComponent implements OnInit {
   public activityChartData: any;
   public activityChartOptions: any;
 
-  constructor() { }
+  $actsToApprove: Observable<Activity[]>
+
+  constructor(private _auth: AuthService, private _actService: ActivityService, private _router: Router) { }
 
   ngOnInit() {
+    this._auth.user.subscribe(res => {
+      this.$actsToApprove = this._actService.getActivitiesToApprove(res.uid);
+    });
+
     // calc of the last 6 months
     for (let i = 6; i > 0; i -= 1) {
       const d = new Date(new Date().getFullYear(), new Date().getMonth() - i, 1);
@@ -100,5 +112,10 @@ export class HomeComponent implements OnInit {
         }]
       }
     };
+  }
+
+  toEdit(uid) {
+    console.log(uid);
+    this._router.navigate(['validate-activity', { id: uid }]);
   }
 }
