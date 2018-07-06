@@ -1,3 +1,5 @@
+import { States } from './states.interface';
+import { User } from './user.interface';
 import { ActivityType } from './activity-type.interface';
 import { Attachment } from './attachment.interface';
 import { ActMessages } from './act-messages.interface';
@@ -15,12 +17,12 @@ export interface Activity {
   hoursDuration: number;
 
   city: string;
-  state: string;
+  state: States;
 
   observation: string;
   validatedHours: number;
   status: string;
-  userId: string;
+  user: Partial<User>;
   controllerId: string;
 
   // subcollection

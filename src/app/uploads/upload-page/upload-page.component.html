@@ -1,0 +1,30 @@
+<hr>
+<div class="dropzone" akaDropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)" [class.hovering]="isHovering">
+  <p>Arraste</p>
+  <div class="file">
+    <label class="file-label">
+      <input class="file-input" type="file" (change)="startUpload($event.target.files)">
+      <span class="file-cta">
+        <span class="file-icon">
+          <i class="fa fa-upload"></i>
+        </span>
+        <span class="file-label">
+          ou escolha um arquivo...
+        </span>
+      </span>
+    </label>
+  </div>
+</div>
+
+<div *ngIf="percentage | async as pct">
+  <progress class="progress is-info" [value]="pct" max="100" style="height: 10px;margin-bottom: 0px;width: 95%;"></progress>
+  {{ pct | number }}%
+</div>
+
+<!--div *ngIf="(snapshot | async) as snap">
+  {{ snap.bytesTransferred | fileSize }} de {{ snap.totalBytes | fileSize }}
+
+  <button (click)="task.pause()" class="btn btn-warning" [disabled]="!isActive(snap)">Pausar</button>
+  <button (click)="task.cancel()" class="btn btn-danger" [disabled]="!isActive(snap)">Cancelar</button>
+  <button (click)="task.resume()" class="btn btn-success" [disabled]="!(snap?.state === 'paused')">Recomeçar</button>
+</div-->

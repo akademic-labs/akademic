@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Activity } from 'app/models/activity.interface';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'aka-validate-activity',
@@ -12,13 +12,15 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class ValidateActivityComponent implements OnInit, OnDestroy {
   activity: Activity;
+  uidActivity: string;
   inscricao: Subscription;
 
   constructor(private _route: ActivatedRoute, private _actService: ActivityService) { }
 
   ngOnInit() {
     this.inscricao = this._route.paramMap.subscribe(params => {
-      this._actService.getActivityById(params.get('id'))
+      this.uidActivity = params.get('id');
+      this._actService.getActivityById(this.uidActivity)
         .subscribe(response => this.activity = response);
     });
   }
@@ -28,11 +30,13 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
   }
 
   toApprove() {
-
+    this.activity.status = 'F';
+    this._actService.updateActivity(this.uidActivity, this.activity);
   }
 
   toReprove() {
-
+    this.activity.status = 'R';
+    this._actService.updateActivity(this.uidActivity, this.activity);
   }
 
 }

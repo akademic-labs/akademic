@@ -10,9 +10,9 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
     { path: 'dashboard', title: 'Dashboard', icon: 'pe-7s-graph', class: '' },
-    { path: 'user', title: 'Perfil do Usuário', icon: 'pe-7s-user', class: '' },
-    { path: 'input-activity', title: 'Entrada de Atividade', icon: 'pe-7s-bell', class: '' },
-    { path: 'validate-activity', title: 'Validação de Atividade', icon: 'pe-7s-bell', class: '' },
+    { path: 'user', title: 'Meu perfil', icon: 'pe-7s-user', class: '' },
+    { path: 'input-activity', title: 'Entrada de Atividade', icon: 'pe-7s-display2', class: '' },
+    { path: 'validate-activity', title: 'Validação de Atividade', icon: 'pe-7s-check', class: '' },
     { path: 'admin', title: 'Administrador', icon: 'pe-7s-config', class: '' }
 ];
 
@@ -23,7 +23,7 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
     menuItems: any[];
 
-    constructor(private _authService: AuthService) { }
+    constructor(public _auth: AuthService) { }
 
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
@@ -43,6 +43,6 @@ export class SidebarComponent implements OnInit {
 
     logOut() {
         this.sidebarClose();
-        this._authService.logOut();
+        this._auth.logOut();
     }
 }

@@ -1,5 +1,5 @@
 <div class="sidebar" data-color="purple" data-image="">
-    <div class="sidebar-background"></div>
+    <div class="sidebar-background" style="background-image: url(../../../assets/img/sidebar.jpg)"></div>
     <div class="sidebar-wrapper">
         <div class="logo">
             <a [routerLink]="['/dashboard']">
@@ -7,16 +7,27 @@
             </a>
         </div>
         <ul class="nav responsive-nav">
-            <li *ngIf="isMobileMenu()">
-                <a (click)="logOut()">
-                    <p>Sair</p>
+            <li class="user" *ngIf="_auth.user | async as user">
+                <div class="photo">
+                    <img src="./assets/img/default-avatar.png" width="34px">
+                </div>
+                <a style="cursor:none">
+                    <span>
+                        {{user.firstName + ' ' + user.lastName}}
+                    </span>
                 </a>
             </li>
-            <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li>
             <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
                 <a [routerLink]="[menuItem.path]" (click)="sidebarClose()">
                     <i class="{{menuItem.icon}}"></i>
                     <p>{{menuItem.title}}</p>
+                </a>
+            </li>
+
+            <li class="active-pro">
+                <a (click)="logOut()">
+                    <i class="pe-7s-unlock"></i>
+                    <p>Log Out</p>
                 </a>
             </li>
         </ul>

@@ -9,6 +9,7 @@ import { LoginModule } from './pages/login/login.module';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { SidebarModule } from './shared/sidebar/sidebar.module';
+import { UploadsModule } from './uploads/uploads.module';
 import { ChartCardModule } from './shared/chart-card/chart-card.module';
 
 import { AppComponent } from './app.component';
@@ -25,6 +26,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from './../environments/environment';
 import { CordinatorComponent } from './pages/cordinator/cordinator.component';
 import { ValidateActivityComponent } from './pages/cordinator/validate-activity/validate-activity.component';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { HttpClientModule } from '@angular/common/http';
 export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
@@ -40,6 +43,7 @@ export const firebaseConfig = environment.firebaseConfig;
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     NavbarModule,
     FooterModule,
     SidebarModule,
@@ -49,6 +53,8 @@ export const firebaseConfig = environment.firebaseConfig;
     LoginModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
+    UploadsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],

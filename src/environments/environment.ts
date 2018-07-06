@@ -10,7 +10,7 @@ export const environment = {
     authDomain: 'akademic-dev.firebaseapp.com',
     databaseURL: 'https://akademic-dev.firebaseio.com',
     projectId: 'akademic-dev',
-    storageBucket: '',
+    storageBucket: 'akademic-dev.appspot.com',
     messagingSenderId: '468465698043'
   },
 };

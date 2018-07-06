@@ -5,7 +5,7 @@ export const environment = {
     authDomain: 'akademic-labs.firebaseapp.com',
     databaseURL: 'https://akademic-labs.firebaseio.com',
     projectId: 'akademic-labs',
-    storageBucket: '',
+    storageBucket: 'akademic-labs.appspot.com',
     messagingSenderId: '227080039490'
   },
 };

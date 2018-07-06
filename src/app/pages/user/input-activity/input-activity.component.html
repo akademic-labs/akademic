@@ -50,14 +50,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div formGroupName="activityType">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="activityType">Tipo de Atividade</label>
-                                    <select class="form-control" formControlName="id">
-                                        <option *ngFor="let type of $activityTypes | async" [ngValue]="type.id">{{type.description}}</option>
-                                    </select>
-                                </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="activityType">Tipo de Atividade</label>
+                                <select class="form-control" formControlName="activityType">
+                                    <option *ngFor="let type of $activityTypes | async" [ngValue]="type">{{type.description}}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -83,11 +81,8 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="state">Estado</label>
-                                <select class="form-control" formControlName="state">
-                                    <option value="PR">PR</option>
-                                    <option value="SP">SP</option>
-                                    <option value="SC">SC</option>
-                                    <option value="MG">MG</option>
+                                <select class="form-control" formControlName="state" (change)="getCities()">
+                                    <option *ngFor="let state of $states | async" [ngValue]="state">{{state.nome}}</option>
                                 </select>
                             </div>
                         </div>
@@ -95,20 +90,15 @@
                             <div class="form-group">
                                 <label for="city">Cidade</label>
                                 <select class="form-control" formControlName="city">
-                                    <option value="Araucária">Araucária</option>
-                                    <option value="Curitiba">Curitiba</option>
-                                    <option value="São José dos Pinhais">São José dos Pinhais</option>
-                                    <option value="Contenda">Contenda</option>
-                                    <option value="Lapa">Lapa</option>
+                                    <option *ngFor="let city of $cities | async" [ngValue]="city.nome">{{city.nome}}</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group">
-                            <div class="col-md-4">
-                                <label>Anexos</label>
-                                <input type="file" class="form-control" multiple>
+                            <div class="col-md-12">
+                                <aka-upload-page></aka-upload-page>
                             </div>
                         </div>
                     </div>

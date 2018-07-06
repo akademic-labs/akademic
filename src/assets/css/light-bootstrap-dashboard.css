@@ -324,6 +324,20 @@ input:focus {
   z-index: 4;
 }
 
+.sidebar .user {
+  border-bottom: 1px solid hsla(0,0%,100%,.2);
+  padding-bottom: 15px;
+}
+.sidebar .user .photo {
+  overflow: hidden;
+  border-radius: 50%;
+  float: left;
+  margin-right: 11px;
+  margin-left: 30px;
+  z-index: 5;
+  border: 2px solid hsla(0,0%,100%,.3);
+}
+
 .sidebar .nav {
   margin-top: 20px;
   float: none
@@ -483,6 +497,17 @@ input:focus {
   background: -ms-linear-gradient(top, #b224ef 0%, #7579ff 100%);
   background: linear-gradient(to bottom, #b224ef 0%, #7579ff 100%);
   background-size: 150% 150%
+}
+
+.sidebar .nav > li.active-pro{
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
+}
+.sidebar .nav > li.active-pro a{
+  background: rgba(255, 255, 255, 0.14);
+  opacity: 1;
+  color: #FFFFFF;
 }
 
 .main-panel {
