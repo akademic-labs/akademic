@@ -9,6 +9,7 @@ import { ActivityType } from 'app/models/activity-type.interface';
 
 import { ActivityService } from 'app/services/activity.service';
 import { ActivityTypeService } from 'app/services/activity-type.service';
+
 import { Observable } from 'rxjs';
 
 import { UploadPageComponent } from 'app/uploads/upload-page/upload-page.component';
@@ -23,27 +24,27 @@ export class InputActivityComponent implements OnInit {
 
   activity: Activity;
   activityForm: FormGroup;
-  $activityTypes: Observable<ActivityType[]>;
-  $states: Observable<States[]>;
-  $cities: Observable<Cities[]>;
+  activityTypes$: Observable<ActivityType[]>;
+  states$: Observable<States[]>;
+  cities$: Observable<Cities[]>;
 
   constructor(private fb: FormBuilder, public _actService: ActivityService,
     private _actTypesService: ActivityTypeService, private _http: HttpClient) { }
 
   ngOnInit() {
     this.buildForm();
-    this.$activityTypes = this._actTypesService.getTypes();
+    this.activityTypes$ = this._actTypesService.getTypes();
 
     this.getStates();
   }
 
   getStates() {
-    this.$states = this._http.get<States[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
+    this.states$ = this._http.get<States[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
   }
 
   getCities() {
     const state = this.activityForm.get('state').value;
-    this.$cities = this._http.get<Cities[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${state.id}/municipios`);
+    this.cities$ = this._http.get<Cities[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${state.id}/municipios`);
   }
 
   buildForm() {

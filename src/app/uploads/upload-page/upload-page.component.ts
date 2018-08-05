@@ -1,11 +1,10 @@
-import { Attachment } from './../../models/attachment.interface';
 import { Component } from '@angular/core';
 
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Attachment } from 'app/models/attachment.interface';
 
 import { NotifyService } from 'app/services/notify.service';
 
@@ -28,7 +27,7 @@ export class UploadPageComponent {
 
   attach: Attachment;
 
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore, private _notify: NotifyService) { }
+  constructor(private storage: AngularFireStorage, private _notify: NotifyService) { }
 
   toggleHover(event: boolean) {
     this.isHovering = event;

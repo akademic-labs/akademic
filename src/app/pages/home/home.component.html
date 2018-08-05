@@ -28,7 +28,7 @@
                 <div class="table-full-width">
                     <table class="table">
                         <tbody>
-                            <tr *ngFor="let activity of $actsToApprove | async">
+                            <tr *ngFor="let activity of actsToApprove$ | async">
                                 <td>Atividade | {{activity.uid}}</td>
                                 <td class="td-actions text-right">
                                     <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">

@@ -54,7 +54,7 @@
                             <div class="form-group">
                                 <label for="activityType">Tipo de Atividade</label>
                                 <select class="form-control" formControlName="activityType">
-                                    <option *ngFor="let type of $activityTypes | async" [ngValue]="type">{{type.description}}</option>
+                                    <option *ngFor="let type of activityTypes$ | async" [ngValue]="type">{{type.description}}</option>
                                 </select>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                             <div class="form-group">
                                 <label for="state">Estado</label>
                                 <select class="form-control" formControlName="state" (change)="getCities()">
-                                    <option *ngFor="let state of $states | async" [ngValue]="state">{{state.nome}}</option>
+                                    <option *ngFor="let state of states$ | async" [ngValue]="state">{{state.nome}}</option>
                                 </select>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                             <div class="form-group">
                                 <label for="city">Cidade</label>
                                 <select class="form-control" formControlName="city">
-                                    <option *ngFor="let city of $cities | async" [ngValue]="city.nome">{{city.nome}}</option>
+                                    <option *ngFor="let city of cities$ | async" [ngValue]="city.nome">{{city.nome}}</option>
                                 </select>
                             </div>
                         </div>
