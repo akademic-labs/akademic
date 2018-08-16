@@ -1,48 +1,58 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
-            <div class="content" style="border-top:5px solid #b224ef">
+        <div class="card border-top">
+            <div class="header">
+                <i class="pe-7s-check"></i>
+                <div class="title">
+                    {{ title }}
+                </div>
+                <hr>
+            </div>
+            <!-- {{ activity | json }} -->
+            <div class="content">
                 <form>
-                    <div style="text-transform: uppercase;color: #9A9A9A;text-align: center;font-size: 16px;">
-                        {{activity.activityType.description}}
+                    <div class="uppercase" style="color: #9A9A9A;text-align: center;font-size: 16px;">
+                        {{activity?.activityType.description}}
                     </div>
-                    <div style="font-size: 50px;text-align: center;">{{activity.hoursDuration}}
+                    <div style="font-size: 50px;text-align: center;">
+                        {{activity?.hoursDuration}}
                         <span style="font-size: 25px;text-align: center;">horas</span>
                     </div>
-                    <div style="text-transform: uppercase;color: #9A9A9A;text-align: center;">{{activity.local}}</div>
-                    <hr>
-                    <span>
-                        <i class="fa fa-clock-o"></i>{{ activity.initialDate | date: 'dd/MM/yyyy'}} - </span>
-                    <span>
-                        <i class="fa fa-clock-o"></i>{{ activity.finalDate | date: 'dd/MM/yyyy' }}
-                    </span>
-
-                    <hr>
-
-                    <span>
-                        <i class="fa fa-calendar"></i>Semestre: {{ activity.semester }} | </span>
-                    <span>
-                        Ano: {{ activity.schoolYear }}
-                    </span>
-
-                    <hr>
-                    <div>
-                        <i class="fa fa-home"></i>{{ activity.city }}/{{ activity.state.sigla }}</div>
-                    <hr>
-                    <div>Descrição: {{ activity.description }}</div>
-                    <hr>
-                    <div>Observação: {{ activity.observation }}
+                    <div class="uppercase" style="color: #9A9A9A;text-align: center;">
+                        {{activity?.local}}
                     </div>
-
                     <hr>
-
+                    <span class="icon-report">
+                        <i class="fa fa-clock-o"></i>{{ activity?.initialDate | date: 'dd/MM/yyyy'}} - {{ activity?.finalDate | date: 'dd/MM/yyyy'
+                        }}
+                    </span>
+                    <hr>
+                    <span class="icon-report">
+                        <i class="fa fa-calendar"></i>Semestre: {{ activity?.semester }} | </span>
+                    <span>
+                        Ano: {{ activity?.schoolYear }}
+                    </span>
+                    <hr>
+                    <span class="icon-report">
+                        <i class="fa fa-home"></i>{{ activity?.city }} / {{ activity?.state.sigla }}
+                    </span>
+                    <hr>
+                    <div>Descrição: {{ activity?.description }}</div>
+                    <hr>
+                    <div>Observação: {{ activity?.observation }}</div>
+                    <hr>
+                    <!-- <div class="card inline-block">
+                        <img class="img-attach" src="https://firebasestorage.googleapis.com/v0/b/akademic-dev.appspot.com/o/activities-attach%2FLuiz.jpg?alt=media&token=0c51b566-d1cd-4694-a00e-c39faeef3218"/>
+                    </div>
+                    <hr> -->
                     <div class="author">
                         <div>Solicitante</div>
                         <div style="padding:20px 0px">
-                            <img src="assets/img/default-avatar.png" alt="Foto do Usuário" width="80" height="80" style="border-radius: 50%; margin-right: 10px"/>
-                            <h5 style="display: inline-grid;">{{activity.user.firstName + ' ' +  activity.user.lastName}}
+                            <img src="assets/img/default-avatar.png" alt="Foto do Usuário" width="80" height="80" style="border-radius: 50%; margin-right: 10px"
+                            />
+                            <h5 style="display: inline-grid;">{{activity?.user.firstName + ' ' + activity?.user.lastName}}
                                 <br/>
-                                <small style="text-transform: lowercase">{{activity.user.email}}</small>
+                                <small style="text-transform: lowercase">{{activity?.user.email}}</small>
                             </h5>
                         </div>
                     </div>

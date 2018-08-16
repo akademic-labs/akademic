@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <i class="fa fa-exclamation-triangle"></i>
+        <div class="title">
+          {{ title }}
+        </div>
+        <hr>
+      </div>
+      <!-- {{ $rules | async | json }}
+      <pre>
+          {{ ruleForm.value | json }}
+      </pre> -->
+      <div class="content">
+        <form [formGroup]="ruleForm" (ngSubmit)="save()">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">
+              <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" class="form-control" formControlName="name" #inputFocus>
+              </div>
+              <aka-message-control-error [control]="ruleForm.get('name')" error="required" msg="Nome é obrigatório."></aka-message-control-error>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
+              <div class="form-group">
+                <label for="course">Curso</label>
+                <select class="form-control" placeholder="asdasdasd" formControlName="course" [compareWith]="compare">
+                  <option value="null" disabled="true" [selected]="true">Selecione..</option>
+                  <option *ngFor="let course of $courses | async" [ngValue]="course">{{course.description}}</option>
+                </select>
+              </div>
+              <aka-message-control-error [control]="ruleForm.get('course')" error="required" msg="Curso é obrigatório."></aka-message-control-error>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
+              <div class="form-group">
+                <label for="hoursDuration">Carga Horária</label>
+                <input type="number" class="form-control" formControlName="hours">
+              </div>
+              <aka-message-control-error [control]="ruleForm.get('hours')" error="required" msg="Carga horária é obrigatório."></aka-message-control-error>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
+              <div class="form-group">
+                <label for="activityType">Tipo de Atividade</label>
+                <select class="form-control" placeholder="asdasdasd" formControlName="activityType" [compareWith]="compare">
+                  <option value="null" disabled="true" [selected]="true">Selecione..</option>
+                  <option *ngFor="let activityType of $activityTypes | async" [ngValue]="activityType">{{activityType.description}}</option>
+                </select>
+              </div>
+              <aka-message-control-error [control]="ruleForm.get('activityType')" error="required" msg="Tipo de atividade é obrigatório."></aka-message-control-error>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 label-block">
+              <label></label>
+              <button [disabled]="ruleForm.invalid" type="submit" class="btn btn-info btn-fill right">{{ button }}</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="content">
+        <div class="table-full-width">
+          <table class="table">
+            <tbody>
+              <tr *ngFor="let rule of $rules | async">
+                <td>{{ rule.name }} | {{ rule.course.description }} | {{ rule.hours }} | {{ rule.activityType.description }}</td>
+                <td class="td-actions text-right">
+                  <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
+                    <i class="fa fa-edit" (click)="edit(rule)"></i>
+                  </button>
+                  <button type="button" rel="tooltip" (click)="remove(rule.uid)" title="Remover" class="btn btn-danger btn-simple btn-xs">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="footer">
+          <hr> {{ ($rules | async)?.length }} registros
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
