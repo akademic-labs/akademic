@@ -1,4 +1,3 @@
-import { ValidateActivityComponent } from './pages/cordinator/validate-activity/validate-activity.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,6 +7,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { UserComponent } from 'app/pages/user/user.component';
 import { LoginComponent } from 'app/pages/login/login.component';
 import { InputActivityComponent } from 'app/pages/user/input-activity/input-activity.component';
+import { ValidateActivityComponent } from './pages/cordinator/validate-activity/validate-activity.component';
 
 import { AuthGuard } from 'app/guards/auth.guard';
 

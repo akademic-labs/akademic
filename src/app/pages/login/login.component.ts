@@ -41,8 +41,20 @@ export class LoginComponent implements OnInit {
     if (this.userForm.valid) {
       this.loading = true;
       this._auth.emailLogin(this.userForm.value['email'], this.userForm.value['password'])
-        .then((ignore) => this.loading = false);
+        .then(() => this.loading = false);
     }
+  }
+
+  async signInWithGoogle() {
+    await this._auth.googleLogin();
+  }
+
+  async signInWithFacebook() {
+    await this._auth.facebookLogin();
+  }
+
+  async signInWithTwitter() {
+    await this._auth.twitterLogin();
   }
 
   resetPassword() {
@@ -52,6 +64,10 @@ export class LoginComponent implements OnInit {
       const message = 'Digite um e-mail válido para resetar';
       this.formErrors['email'] += `${message}`;
     }
+  }
+
+  signUpNow() {
+
   }
 
   buildForm() {
@@ -67,12 +83,12 @@ export class LoginComponent implements OnInit {
       ]],
     });
 
-    this.userForm.valueChanges.subscribe((data) => this.onValueChanged(data));
+    this.userForm.valueChanges.subscribe(() => this.onValueChanged());
     this.onValueChanged(); // reset validation messages
   }
 
   // Updates validation state on form changes.
-  onValueChanged(data?: any) {
+  onValueChanged() {
     if (!this.userForm) { return; }
     const form = this.userForm;
     for (const field in this.formErrors) {

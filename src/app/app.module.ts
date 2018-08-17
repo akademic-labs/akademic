@@ -23,11 +23,12 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
+import { HttpClientModule } from '@angular/common/http';
 import { environment } from './../environments/environment';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 import { CordinatorComponent } from './pages/cordinator/cordinator.component';
 import { ValidateActivityComponent } from './pages/cordinator/validate-activity/validate-activity.component';
-import { AngularFireStorageModule } from 'angularfire2/storage';
-import { HttpClientModule } from '@angular/common/http';
+
 export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({

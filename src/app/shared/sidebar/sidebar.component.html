@@ -9,11 +9,11 @@
         <ul class="nav responsive-nav">
             <li class="user" *ngIf="_auth.user | async as user">
                 <div class="photo">
-                    <img src="./assets/img/default-avatar.png" width="34px">
+                    <img [src]="user.photoURL" width="34px">
                 </div>
                 <a style="cursor:none">
                     <span>
-                        {{user.firstName + ' ' + user.lastName}}
+                        {{user.displayName + ' ' + user.lastName}}
                     </span>
                 </a>
             </li>

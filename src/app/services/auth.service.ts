@@ -5,10 +5,12 @@ import { UserService } from './user.service';
 import { ErrorService } from './error.service';
 import { NotifyService } from './notify.service';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore } from 'angularfire2/firestore';
 
-import { of, Observable, BehaviorSubject } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+
+import * as firebase from 'firebase/app';
 
 import { User } from 'app/models/user.interface';
 
@@ -43,6 +45,35 @@ export class AuthService {
       .catch((error) => this.handleError(error));
   }
 
+  // OAuth Methods
+
+  googleLogin() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    return this.oAuthLogin(provider);
+  }
+
+  facebookLogin() {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    return this.oAuthLogin(provider);
+  }
+
+  twitterLogin() {
+    const provider = new firebase.auth.TwitterAuthProvider();
+    return this.oAuthLogin(provider);
+  }
+
+  private oAuthLogin(provider: any) {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then(credential => {
+        console.log(credential);
+        this._router.navigate(['/dashboard']);
+        this._notify.update('success', 'Bem vindo!');
+        return this._userService.updateUserData(credential.user); // if using firestore
+      })
+      .catch(error => this.handleError(error));
+  }
+
+
   logOut() {
     this.afAuth.auth.signOut().then(() => {
       this._router.navigate(['/']);
@@ -63,7 +94,6 @@ export class AuthService {
 
   // If error, notify user
   private handleError(error) {
-    console.log(error);
     this._notify.update('danger', this._error.printErrorByCode(error.code));
   }
 }
