@@ -1,6 +1,5 @@
 <div class="wrapper">
     <aka-sidebar *ngIf="_auth.user | async"></aka-sidebar>
-
     <div class="{{ (_auth.user | async) ? 'main-panel' : '' }}">
         <aka-navbar *ngIf="_auth.user | async"></aka-navbar>
         <div class="main-content">

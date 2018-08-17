@@ -13,12 +13,12 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por mês'" [chartType]="activityChartType" [chartData]="activityChartData"
             [chartOptions]="activityChartOptions" [withHr]="true" [footerIconClass]="'fa fa-check'" [footerText]="'Dados atualizados'">
         </aka-chart-card>
     </div>
-    <div class="col-md-6">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <div class="card">
             <div class="header">
                 <h4 class="title">Tarefas</h4>
@@ -29,7 +29,7 @@
                     <table class="table">
                         <tbody>
                             <tr *ngFor="let activity of actsToApprove$ | async">
-                                <td>Atividade | {{activity.uid}}</td>
+                                <td>Atividade: {{activity.description}} | {{activity.hoursDuration}} horas | {{activity.activityType.description}} | {{activity.user.displayName}}</td>
                                 <td class="td-actions text-right">
                                     <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
                                         <i class="fa fa-edit" (click)="toEdit(activity.uid)"></i>
