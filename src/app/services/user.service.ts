@@ -5,6 +5,7 @@ import { User } from 'app/models/user.interface';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UserInfo } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -41,15 +42,15 @@ export class UserService {
     return this.getUser(id).update(data);
   }
 
-  public updateUserData(authUser: User) {
+  public updateUserData(authUser: UserInfo) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${authUser.uid}`);
 
     const data: User = {
       uid: authUser.uid,
       email: authUser.email,
-      firstName: authUser.firstName || 'nameless',
-      lastName: authUser.lastName || 'user',
-      photo: 'https://goo.gl/Fz9nrQ',
+      displayName: authUser.displayName || 'nameless',
+      lastName: 'user',
+      photoURL: authUser.photoURL,
       registration: '2015000595',
       birthday: new Date('05/06/1996'),
       course: {

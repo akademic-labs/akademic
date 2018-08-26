@@ -49,7 +49,7 @@ export class ActivityService {
     content.status = 'P';
     content.attachment = attach;
     this._auth.user.subscribe(user => {
-      content.user = { uid: user.uid, firstName: user.firstName, lastName: user.lastName, email: user.email }
+      content.user = { uid: user.uid, displayName: user.displayName, lastName: user.lastName, email: user.email }
       return this.activityCollection.add(content)
         .then(() => this._notify.update('success', 'Atividade criada com sucesso!'))
         .catch(() => this._notify.update('danger', 'Houve um erro na requisição!'));

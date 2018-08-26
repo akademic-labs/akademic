@@ -18,7 +18,9 @@ export class ErrorService {
     'weak-password': 'A senha é fraca',
     'email-already-in-use': 'E-mail já está cadastrado no sistema',
     'invalid-email': 'O e-mail fornecido é invalido',
-    'network-request-failed': 'Ocorreu um erro de conexão à internet'
+    'network-request-failed': 'Ocorreu um erro de conexão à internet',
+    'user-cancelled': 'Você não permitiu acesso à aplicação',
+    'popup-closed-by-user': 'Você não finalizou o acesso'
     /* ADD HERE THE OTHERs IDs AND THE CORRESPONDING MESSAGEs */
   } as MessagesIndex;
 

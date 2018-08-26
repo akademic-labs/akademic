@@ -1,14 +1,18 @@
 export interface User {
   uid: string;
-  firstName: string;
+  displayName: string;
   lastName: string;
   registration: string;
   birthday: Date;
   createdAt: Date;
   email: string;
   phone: string;
-  photo: string;
+  photoURL: string;
   status: string;
+
+  // firebase user
+  phoneNumber?: string | null;
+  providerId?: string;
 
   // user enters activity, controller validates and adm is the superuser
   type: {

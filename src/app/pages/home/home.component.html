@@ -30,7 +30,7 @@
                         <tbody>
                             <tr *ngFor="let activity of $actsToApprove | async">
                                 <td>Atividade: {{activity.description}} | {{activity.hoursDuration}} horas | {{activity.activityType.description}}
-                                    | {{activity.user.firstName}}</td>
+                                    | {{activity.user.displayName}}</td>
                                 <td class="td-actions text-right">
                                     <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
                                         <i class="fa fa-edit" (click)="toEdit(activity.uid)"></i>

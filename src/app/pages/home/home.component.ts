@@ -27,13 +27,13 @@ export class HomeComponent implements OnInit {
   public activityChartData: any;
   public activityChartOptions: any;
 
-  $actsToApprove: Observable<Activity[]>
+  actsToApprove$: Observable<Activity[]>
 
   constructor(private _auth: AuthService, private _actService: ActivityService, private _router: Router) { }
 
   ngOnInit() {
     this._auth.user.subscribe(res => {
-      this.$actsToApprove = this._actService.getActivitiesToApprove(res.uid);
+      this.actsToApprove$ = this._actService.getActivitiesToApprove(res.uid);
     });
 
     // calc of the last 6 months
