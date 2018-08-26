@@ -1,11 +1,11 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { Component, OnInit, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: "aka-message-control-error",
+  selector: 'aka-message-control-error',
   template: `
-    <div *ngIf="checkOut()">
-      <div class="message-error">
+    <div *ngIf='checkOut()'>
+      <div class='message-error'>
         {{ msg }}
       </div>
     </div>
@@ -26,8 +26,11 @@ export class MessageControlErrorComponent implements OnInit {
 
   ngOnInit() {}
 
+  // tslint:disable-next-line:member-ordering
   @Input() error: string;
+  // tslint:disable-next-line:member-ordering
   @Input() msg: string;
+  // tslint:disable-next-line:member-ordering
   @Input() control: FormControl;
 
   checkOut(): boolean {
