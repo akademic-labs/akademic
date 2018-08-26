@@ -268,7 +268,8 @@ input:focus {
 }
 
 .loader {
-  width: 90px !important;
+  width: 90px;
+  height: auto;
   position: absolute;
   margin: auto;
   top: 0;
@@ -3286,10 +3287,37 @@ fieldset[disabled] .form-control {
 }
 
 .img-attach {
-  max-height: 500px;
-  padding: 15px 15px 15px 15px;
+  height: 250px;
+  width: 200px;
+  padding: 4px 4px 0px 4px;
+  display: block;
+
+  -webkit-animation: swing 1s ease;
+  animation: swing 1s ease;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
 }
 
-.inline-block {
+.card-attachment {
   display: inline-block;
+  margin: 5px;
+}
+
+.card-attachment:hover {
+  -webkit-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  transform: scale(1.3);
+}
+
+.btn-card-remove {
+  border: none;
+  background: none;
+  width: 100%;
+  outline: 0;
+  font-size: 20px;
+}
+
+.show-attachs {
+  text-align: center;
+  margin-bottom: 5px;
 }

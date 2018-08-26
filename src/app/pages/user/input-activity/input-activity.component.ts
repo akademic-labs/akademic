@@ -15,7 +15,10 @@ import { Observable } from "rxjs";
 // import { UploadPageComponent } from "app/uploads/upload-page/upload-page.component";
 import { NotifyService } from "../../../services/notify.service";
 import { Attachment } from "../../../models/attachment.interface";
-import { AngularFireUploadTask, AngularFireStorage } from "angularfire2/storage";
+import {
+  AngularFireUploadTask,
+  AngularFireStorage
+} from "angularfire2/storage";
 
 @Component({
   selector: "aka-input-activity",
@@ -32,18 +35,19 @@ export class InputActivityComponent implements OnInit {
   $states: Observable<States[]>;
   $cities: Observable<Cities[]>;
   disabledSave: boolean;
-  @ViewChild("inputFocus") focusIn: ElementRef;
+  @ViewChild("inputFocus")
+  focusIn: ElementRef;
 
-  // UPLOAD ATTACH
-  // Main task
   task: AngularFireUploadTask;
   // Progress monitoring
   percentage: Observable<number>;
   snapshot: Observable<any>;
   // State for dropzone CSS toggling
   isHovering: boolean;
-  attach: Attachment;
-  imageUrl = null;
+  // attach: Attachment;
+  attach = [];
+  attachmentsRender = [];
+  attachments = [];
 
   constructor(
     private fb: FormBuilder,
@@ -95,70 +99,70 @@ export class InputActivityComponent implements OnInit {
     });
   }
 
-  onSubmit(upload) {
-    if (this.activityForm.valid) {
-      this.task = this.storage.upload(this.path, this.file);
-      this._actService
-        .createActivity(this.activityForm.value, this.attach)
-        .then(result => {
-          console.log(result);
-          this.activityForm.reset();
-          this.imageUrl = null;
-          this.focusIn.nativeElement.focus();
-        });
-    } else {
-      this.validatorService.checkOut(this.activityForm);
-      this.disabledSave = true;
-      this._notify.update("danger", "Campos obrigatórios não preenchidos!");
+  onSubmit() {
+    // if (this.activityForm.valid) {
+    //   this._actService
+    //     .createActivity(this.activityForm.value, this.attach)
+    //     .then(result => {
+    //       console.log(result);
+    //       this.activityForm.reset();
+    //       this.attachmentsRender = null;
+    //       this.focusIn.nativeElement.focus();
+    //     });
+      // Upload Attachments
+      for (let i = 0; i < this.attachments.length; i++) {
+                                        // path,                file,                   customMetadata
+        this.task = this.storage.upload(this.attachments[i][0], this.attachments[i][1], this.attachments[i][2]);
+        // Progress monitoring
+        this.percentage = this.task.percentageChanges();
+      }
+    // } else {
+    //   this.validatorService.checkOut(this.activityForm);
+    //   this.disabledSave = true;
+    //   this._notify.update("danger", "Campos obrigatórios não preenchidos!");
+    // }
+  }
+
+  renderAttach(event) {
+    for (let index = 0; index < event.length; index++) {
+      let reader = new FileReader();
+      let file = event[index][1];
+      reader.onloadend = () => {
+        this.attachmentsRender[index] = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
-  }
-
-  //method definition in your class
-  renderAttach(event: FileList) {
-    let reader = new FileReader();
-    //get the selected file from event
-    // let file = e.target.files[0];
-    const file = event.item(0);
-    reader.onloadend = () => {
-      //Assign the result to variable for setting the src of image element
-      this.imageUrl = reader.result;
-    };
-    reader.readAsDataURL(file);
-  }
-
-  path;
-  customMetadata;
-  file;
-
-  removeAttach(){
-    this.imageUrl = null;
   }
 
   startAttach(event: FileList) {
-    this.renderAttach(event);
-    // The File object
-    this.file = event.item(0);
+    for (let i = 0; i < event.length; i++) {
+      let path = `test/${new Date().toISOString().split("T")[0]}-${event.item(i).name}`;
+      // this.path = `activities-attach/${new Date().getTime()}-${this.file[index].name}`;
+      const customMetadata = { app: "atividade-complementar!" };
 
-    // Client-side validation example
-    if (this.file.type.split("/")[0] !== "image") {
-      this._notify.update("warning", "Arquivo não suportado.");
-      return;
+      let file = [];
+      file.push(path, event.item(i), { customMetadata });
+      this.attachments.push(file);
+      this.attach.push({
+        name: event.item(i).name,
+        type: event.item(i).type,
+        url: path
+      });
+
+      // Render attachments on screen
+      this.renderAttach(this.attachments);
     }
 
-    // The storage path
-    this.path = `activities-attach/${new Date().getTime()}-${this.file.name}`;
+    // Client-side validation example
+    // if (this.file.type.split("/")[0] !== "image") {
+    //   this._notify.update("warning", "Arquivo não suportado.");
+    //   return;
+    // }
+  }
 
-    // Totally optional metadata
-    const customMetadata = { app: "atividade-complementar!" };
-
-    // The main task
-    // this.task = this.storage.upload(path, file, { customMetadata });
-    // this.task = this.storage.upload(this.path, this.file);
-
-    this.attach = { name: this.file.name, type: this.file.type, url: this.path };
-
-    // Progress monitoring
-    // this.percentage = this.task.percentageChanges();
+  removeAttach(event) {
+    this.attachmentsRender = [];
+    console.log("event: " + event);
   }
 
   toggleHover(event: boolean) {
@@ -168,7 +172,8 @@ export class InputActivityComponent implements OnInit {
   // Determines if the upload task is active
   isActive(snapshot) {
     return (
-      snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes
+      snapshot.state === "running" &&
+      snapshot.bytesTransferred < snapshot.totalBytes
     );
   }
 }

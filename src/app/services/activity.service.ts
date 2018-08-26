@@ -43,7 +43,8 @@ export class ActivityService {
     return this.afs.doc<Activity>(`activities/${uid}`).valueChanges()
   }
 
-  async createActivity(content: Activity, attach: Attachment) {
+  // async createActivity(content: Activity, attach: Attachment) {
+  async createActivity(content: Activity, attach) {
     content.status = 'A';
     content.attachment = attach;
     this._auth.user.subscribe(user => {
