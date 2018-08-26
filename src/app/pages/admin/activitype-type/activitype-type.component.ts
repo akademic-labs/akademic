@@ -11,14 +11,15 @@ import { ActivityTypeService } from 'app/services/activity-type.service';
 })
 export class ActivitypeTypeComponent implements OnInit {
 
-  title = "Tipos de Atividade";
-  button = "Adicionar";
+  title = 'Tipos de Atividade';
+  button = 'Adicionar';
   activityTypeForm: FormGroup;
   activityType: ActivityType;
   $activityTypes: Observable<ActivityType[]>;
-  @ViewChild("inputFocus") focusIn: ElementRef;
+  @ViewChild('inputFocus') focusIn: ElementRef;
+  disabledSave: boolean;
 
-  constructor(private _activityTypeFormBuilder: FormBuilder, private _activityTypeService: ActivityTypeService) {}
+  constructor(private _activityTypeFormBuilder: FormBuilder, private _activityTypeService: ActivityTypeService) { }
 
   ngOnInit() {
     this.$activityTypes = this._activityTypeService.get();
@@ -26,7 +27,7 @@ export class ActivitypeTypeComponent implements OnInit {
     this.focusIn.nativeElement.focus();
   }
 
-  buildForm(){
+  buildForm() {
     this.activityTypeForm = this._activityTypeFormBuilder.group({
       uid: new FormControl({ value: null, disabled: true }),
       description: [null, Validators.required]
@@ -34,27 +35,35 @@ export class ActivitypeTypeComponent implements OnInit {
   }
 
   save() {
-    if (!this.activityTypeForm.get("uid").value) {
-      this._activityTypeService.post(this.activityTypeForm.value);
-    } else {
-      this._activityTypeService.put(this.activityType.uid, this.activityTypeForm.value);
+
+    // if (this.activityTypeForm.valid) {
+      if (!this.activityTypeForm.get('uid').value) {
+        this._activityTypeService.post(this.activityTypeForm.value);
+      } else {
+        this._activityTypeService.put(this.activityType.uid, this.activityTypeForm.value);
+      }
+      this.activityTypeForm.reset();
+      this.button = 'Adicionar';
+      this.focusIn.nativeElement.focus();
     }
-    this.activityTypeForm.reset();
-    this.button = "Adicionar";
-    this.focusIn.nativeElement.focus();
-  }
+    // else {
+    //   this.validatorService.checkOut(this.activityForm);
+    //   this.disabledSave = true;
+    //   this._notify.update('danger', 'Campos obrigatórios não preenchidos!');
+    // }
+  // }
 
   edit(obj) {
     this.activityTypeForm.patchValue({ uid: obj.uid, description: obj.description });
     this.activityType = obj;
-    this.button = "Atualizar";
+    this.button = 'Atualizar';
     this.focusIn.nativeElement.focus();
   }
 
   remove(uid) {
     this._activityTypeService.delete(uid);
     this.activityTypeForm.reset();
-    this.button = "Adicionar";
+    this.button = 'Adicionar';
     this.focusIn.nativeElement.focus();
   }
 

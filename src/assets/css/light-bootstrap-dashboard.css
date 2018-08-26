@@ -3248,6 +3248,10 @@ fieldset[disabled] .form-control {
   float: right;
 }
 
+.left {
+  float: left;
+}
+
 .border-none {
   border: none;
 }
@@ -3284,12 +3288,13 @@ fieldset[disabled] .form-control {
 .label-block label, .label-block label::before {
   display:block;
   content: "\00a0";
+  margin-top: 2.3px;
 }
 
 .img-attach {
   height: 250px;
   width: 200px;
-  padding: 4px 4px 0px 4px;
+  padding: 4px;
   display: block;
 
   -webkit-animation: swing 1s ease;

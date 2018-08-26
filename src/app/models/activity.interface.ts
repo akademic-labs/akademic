@@ -29,7 +29,8 @@ export interface Activity {
   messages: ActMessages;
 
   // subcollection
-  attachment: Attachment;
+  // attachment: Attachment;
+  attachment: any;
 
   // root collection
   activityType: ActivityType;

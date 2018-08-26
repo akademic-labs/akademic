@@ -1,12 +1,12 @@
 import { NotifyService } from './notify.service';
-import { AngularFirestoreCollection, AngularFirestore } from "angularfire2/firestore";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Controller } from '../models/controller.interace';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class ControllerService {
 
@@ -24,19 +24,19 @@ export class ControllerService {
     );
   }
 
-  post(content: Controller){
+  post(content: Controller) {
     this._afs.collection('controllers').add(content)
       .then (() => this._notify.update('success', 'Controlador adicionado com sucesso!'))
       .catch (() => this._notify.update('danger', 'Houve um erro na requisição!'));
   }
 
-  put(uid: string, content: Controller){
+  put(uid: string, content: Controller) {
     this._afs.collection('controllers').doc(uid).set(content)
       .then (() => this._notify.update('success', 'Controlador atualizado com sucesso!'))
       .catch (() => this._notify.update('danger', 'Houve um erro na requisição!'));
   }
 
-  delete(uid: string){
+  delete(uid: string) {
     this._afs.collection('controllers').doc(uid).delete()
       .then (() => this._notify.update('success', 'Controlador removido com sucesso!'))
       .catch (() => this._notify.update('danger', 'Houve um erro na requisição!'));

@@ -8,7 +8,8 @@
                 </div>
                 <hr>
             </div>
-            <!-- {{ activity | json }} -->
+            <!-- <pre>{{ activity | json }}</pre>
+            <pre>{{ attachments | json }}</pre> -->
             <div class="content">
                 <form>
                     <div class="uppercase" style="color: #9A9A9A;text-align: center;font-size: 16px;">
@@ -23,8 +24,8 @@
                     </div>
                     <hr>
                     <span class="icon-report">
-                        <i class="fa fa-clock-o"></i>{{ activity?.initialDate | date: 'dd/MM/yyyy'}} - {{ activity?.finalDate | date: 'dd/MM/yyyy'
-                        }}
+                        <i class="fa fa-clock-o"></i>{{ activity?.initialDate | date: 'dd/MM/yyyy'}} - {{ activity?.finalDate
+                        | date: 'dd/MM/yyyy' }}
                     </span>
                     <hr>
                     <span class="icon-report">
@@ -41,10 +42,13 @@
                     <hr>
                     <div>Observação: {{ activity?.observation }}</div>
                     <hr>
-                    <!-- <div class="card inline-block">
-                        <img class="img-attach" src="https://firebasestorage.googleapis.com/v0/b/akademic-dev.appspot.com/o/activities-attach%2FLuiz.jpg?alt=media&token=0c51b566-d1cd-4694-a00e-c39faeef3218"/>
+                    <div>Anexos:</div>
+                    <div class="show-attachs">
+                        <div *ngFor="let attach of attachments" class="card card-attachment">
+                            <img class="img-attach" [src]="attach" />
+                        </div>
                     </div>
-                    <hr> -->
+                    <hr>
                     <div class="author">
                         <div>Solicitante</div>
                         <div style="padding:20px 0px">

@@ -1,12 +1,12 @@
 import { NotifyService } from './notify.service';
-import { AngularFirestoreCollection, AngularFirestore } from "angularfire2/firestore";
-import { Injectable } from "@angular/core";
-import { Course } from "../models/course.interface";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { Injectable } from '@angular/core';
+import { Course } from '../models/course.interface';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class CourseService {
 
@@ -24,19 +24,19 @@ export class CourseService {
     );
   }
 
-  post(content: Course){
+  post(content: Course) {
     this._afs.collection('courses').add(content)
       .then (() => this._notify.update('success', 'Curso adicionado com sucesso!'))
       .catch (() => this._notify.update('danger', 'Houve um erro na requisição!'));
   }
 
-  put(uid: string, content: Course){
+  put(uid: string, content: Course) {
     this._afs.collection('courses').doc(uid).set(content)
       .then (() => this._notify.update('success', 'Curso atualizado com sucesso!'))
       .catch (() => this._notify.update('danger', 'Houve um erro na requisição!'));
   }
 
-  delete(uid: string){
+  delete(uid: string) {
     this._afs.collection('courses').doc(uid).delete()
       .then (() => this._notify.update('success', 'Curso removido com sucesso!'))
       .catch (() => this._notify.update('danger', 'Houve um erro na requisição!'));

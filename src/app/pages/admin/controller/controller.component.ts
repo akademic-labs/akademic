@@ -13,13 +13,13 @@ import { Observable } from 'rxjs';
 })
 export class ControllerComponent implements OnInit {
 
-  title = "Controladores";
-  button = "Adicionar";
+  title = 'Controladores';
+  button = 'Adicionar';
   controllerForm: FormGroup;
   controller: Controller;
   $controllers: Observable<Controller[]>;
   $courses: Observable<Course[]>;
-  @ViewChild("inputFocus") focusIn: ElementRef;
+  @ViewChild('inputFocus') focusIn: ElementRef;
 
   constructor(
     private _controllerFormBuilder: FormBuilder,
@@ -34,13 +34,14 @@ export class ControllerComponent implements OnInit {
     this.focusIn.nativeElement.focus();
   }
 
+  // tslint:disable-next-line:member-ordering
   validatorsName = [
     Validators.required,
-    Validators.pattern("[a-zA-ZÀ-ú ]*"),
+    Validators.pattern('[a-zA-ZÀ-ú ]*'),
     Validators.maxLength(20)
-  ];  
+  ];
 
-  buildForm(){
+  buildForm() {
     this.controllerForm = this._controllerFormBuilder.group({
       uid: new FormControl({ value: null, disabled: true }),
       name: [null, Validators.compose(this.validatorsName)],
@@ -49,32 +50,32 @@ export class ControllerComponent implements OnInit {
   }
 
   save() {
-    if (!this.controllerForm.get("uid").value) {
+    if (!this.controllerForm.get('uid').value) {
       this._controllerService.post(this.controllerForm.value);
     } else {
       this._controllerService.put(this.controller.uid, this.controllerForm.value);
     }
     this.controllerForm.reset();
-    this.button = "Adicionar";
+    this.button = 'Adicionar';
     this.focusIn.nativeElement.focus();
   }
 
   edit(obj) {
     this.controllerForm.patchValue({ uid: obj.uid, name: obj.name, course: obj.course });
     this.controller = obj;
-    this.button = "Atualizar";
+    this.button = 'Atualizar';
     this.focusIn.nativeElement.focus();
   }
 
   remove(uid) {
     this._controllerService.delete(uid);
     this.controllerForm.reset();
-    this.button = "Adicionar";
+    this.button = 'Adicionar';
     this.focusIn.nativeElement.focus();
   }
 
-  compareCourse(obj1, obj2){
-    return obj1 && obj2 ? (obj1.uid === obj2.uid && obj1.description === obj2.description): obj1 === obj2;
+  compareCourse(obj1, obj2) {
+    return obj1 && obj2 ? (obj1.uid === obj2.uid) : obj1 === obj2;
   }
 
 }

@@ -1,8 +1,7 @@
-import { ActivityService } from 'app/services/activity.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { Activity } from 'app/models/activity.interface';
+import { ActivityService } from 'app/services/activity.service';
 import { Subscription } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
 
@@ -13,25 +12,33 @@ import { AngularFireStorage } from 'angularfire2/storage';
 })
 export class ValidateActivityComponent implements OnInit, OnDestroy {
 
-  title = "Validação de Atividade";
+  title = 'Validação de Atividade';
   activity: Activity;
   uidActivity: string;
   inscricao: Subscription;
+  attachments = [];
 
   constructor(
     private _route: ActivatedRoute,
     private _actService: ActivityService,
-    private storage: AngularFireStorage
+    private _storage: AngularFireStorage,
+    private _router: Router
   ) { }
 
   ngOnInit() {
     this.inscricao = this._route.paramMap.subscribe(params => {
       this.uidActivity = params.get('id');
-      // var storage = storage.storage();
-      // var storageRef = storage.ref();
-      // var starsRef = storageRef.child('images/1534400632292-Screenshot_10.png');
       this._actService.getActivityById(this.uidActivity)
-        .subscribe(response => this.activity = response);
+        .subscribe(response => {
+          this.activity = response;
+          response.attachment.forEach(element => {
+            this._storage.ref(element.url).getDownloadURL().
+              subscribe(res => {
+                this.attachments.push(res)
+                // , console.log(res)
+              });
+          });
+        });
     });
   }
 
@@ -40,13 +47,17 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
   }
 
   toApprove() {
-    this.activity.status = 'F';
-    this._actService.updateActivity(this.uidActivity, this.activity);
+    // status 'A' (Aproved)
+    this.activity.status = 'A';
+    this._actService.updateActivity(this.uidActivity, this.activity, 'aprovada');
+    this._router.navigate(['/dashboard']);
   }
 
   toReprove() {
+    // status 'R' (Reproved)
     this.activity.status = 'R';
-    this._actService.updateActivity(this.uidActivity, this.activity);
+    this._actService.updateActivity(this.uidActivity, this.activity, 'reprovada');
+    this._router.navigate(['/dashboard']);
   }
 
 }

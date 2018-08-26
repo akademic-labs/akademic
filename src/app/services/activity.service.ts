@@ -23,7 +23,7 @@ export class ActivityService {
 
   getActivitiesToApprove(id: string) {
     const actReference = this.afs.collection<Activity>('activities',
-      ref => ref.where('status', '==', 'A').where('user.uid', '==', id));
+      ref => ref.where('status', '==', 'P').where('user.uid', '==', id));
 
     return actReference.snapshotChanges().pipe(
       map((actions) => {
@@ -45,7 +45,8 @@ export class ActivityService {
 
   // async createActivity(content: Activity, attach: Attachment) {
   async createActivity(content: Activity, attach) {
-    content.status = 'A';
+    // input defaut status = 'P' (Pending)
+    content.status = 'P';
     content.attachment = attach;
     this._auth.user.subscribe(user => {
       content.user = { uid: user.uid, firstName: user.firstName, lastName: user.lastName, email: user.email }
@@ -55,13 +56,13 @@ export class ActivityService {
     });
   }
 
-  updateActivity(id: string, data: any) {
-    return this.getActivityDocument(id).update(data).then(() => this._notify.update('success', 'Atividade atualizada com sucesso!'))
+  updateActivity(id: string, data: any, msg: string) {
+    return this.getActivityDocument(id).update(data).then(() => this._notify.update('success', `Atividade ${msg} com sucesso!`))
       .catch(() => this._notify.update('danger', 'Houve um erro na requisição!'));
   }
 
   deleteActivity(id: string) {
-    return this.getActivityDocument(id).delete().then(() => this._notify.update('success', 'Atividade atualizada com sucesso!'))
+    return this.getActivityDocument(id).delete().then(() => this._notify.update('success', 'Atividade deletada com sucesso!'))
       .catch(() => this._notify.update('danger', 'Houve um erro na requisição!'));
   }
 }

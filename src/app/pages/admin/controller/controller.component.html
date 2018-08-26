@@ -8,6 +8,15 @@
         </div>
         <hr>
       </div>
+      <!-- <pre>
+          {{ $courses | async | json }}
+      </pre>
+      <pre>
+          {{ $controllers | async | json }}
+      </pre>
+      <pre>
+          {{ controllerForm.value | json }}
+      </pre> -->
       <div class="content">
         <form [formGroup]="controllerForm" (ngSubmit)="save()">
           <div class="row">
@@ -31,7 +40,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 label-block">
               <label></label>
-              <button [disabled]="controllerForm.invalid" type="submit" class="btn btn-info btn-fill right">{{ button }}</button>
+              <button [disabled]="controllerForm.invalid" type="submit" class="btn btn-info btn-fill left">{{ button }}</button>
             </div>
           </div>
         </form>

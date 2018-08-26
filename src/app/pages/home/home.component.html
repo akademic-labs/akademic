@@ -15,7 +15,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por mês'" [chartType]="activityChartType" [chartData]="activityChartData"
-            [chartOptions]="activityChartOptions" [withHr]="true" [footerIconClass]="'fa fa-check'" [footerText]="'Dados atualizados'">
+            [chartOptions]="activityChartOptions" [withHr]="true" [footerIconClass]="'fa fa-check'" [footerText]="'Atualizado 3 minutos atrás'">
         </aka-chart-card>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -29,7 +29,8 @@
                     <table class="table">
                         <tbody>
                             <tr *ngFor="let activity of $actsToApprove | async">
-                                <td>Atividade: {{activity.description}} | {{activity.hoursDuration}} horas | {{activity.activityType.description}} | {{activity.user.firstName}}</td>
+                                <td>Atividade: {{activity.description}} | {{activity.hoursDuration}} horas | {{activity.activityType.description}}
+                                    | {{activity.user.firstName}}</td>
                                 <td class="td-actions text-right">
                                     <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
                                         <i class="fa fa-edit" (click)="toEdit(activity.uid)"></i>
@@ -41,14 +42,22 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="footer">
-                    <hr>
-                    <div class="stats">
-                        <i class="fa fa-history"></i> Atualizado 3 minutos atrás
+                    <div class="footer">
+                        <hr> {{ ($actsToApprove | async)?.length }} registros
+                    </div>
+                    <!-- <div *ngIf="($actsToApprove | async)?.length > 0; else nothing">
+                        <hr> {{ ($actsToApprove | async)?.length }} registros
+                    </div>
+                    <ng-template #nothing>
+                        <hr> Nenhuma atividade para analisar
+                    </ng-template> -->
+                    <div class="footer">
+                        <hr>
+                        <div class="stats">
+                            <i class="fa fa-history"></i> Dados atualizados
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

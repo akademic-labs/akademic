@@ -1,31 +1,31 @@
 import { ActivityTypeService } from './../../../services/activity-type.service';
 import { ActivityType } from 'app/models/activity-type.interface';
-import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
-import { Observable } from "rxjs";
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
 import { FormGroup,  FormBuilder,
   Validators,
   FormControl
-} from "@angular/forms";
-import { Rules } from "../../../models/rules.interface";
+} from '@angular/forms';
+import { Rules } from '../../../models/rules.interface';
 import { Ruleservice } from '../../../services/rules.service';
 import { CourseService } from '../../../services/course.service';
 import { Course } from '../../../models/course.interface';
 
 @Component({
-  selector: "aka-rules",
-  templateUrl: "./rules.component.html",
-  styleUrls: ["./rules.component.css"]
+  selector: 'aka-rules',
+  templateUrl: './rules.component.html',
+  styleUrls: ['./rules.component.css']
 })
 export class RulesComponent implements OnInit {
 
-  title = "Regras";
-  button = "Adicionar";
+  title = 'Regras';
+  button = 'Adicionar';
   ruleForm: FormGroup;
   rule: Rules;
   $rules: Observable<Rules[]>;
   $courses: Observable<Course[]>;
   $activityTypes: Observable<ActivityType[]>;
-  @ViewChild("inputFocus")
+  @ViewChild('inputFocus')
   focusIn: ElementRef;
 
   constructor(
@@ -55,13 +55,13 @@ export class RulesComponent implements OnInit {
 
   save() {
     console.log(this.ruleForm.value);
-    if (!this.ruleForm.get("uid").value) {
+    if (!this.ruleForm.get('uid').value) {
       this._rulesService.post(this.ruleForm.value);
     } else {
       this._rulesService.put(this.rule.uid, this.ruleForm.value);
     }
     this.ruleForm.reset();
-    this.button = "Adicionar";
+    this.button = 'Adicionar';
     this.focusIn.nativeElement.focus();
   }
 
@@ -76,7 +76,7 @@ export class RulesComponent implements OnInit {
         activityType: obj.activityType
       });
     this.rule = obj;
-    this.button = "Atualizar";
+    this.button = 'Atualizar';
     this.focusIn.nativeElement.focus();
   }
 
@@ -84,12 +84,12 @@ export class RulesComponent implements OnInit {
     console.log(uid);
     this._rulesService.delete(uid);
     this.ruleForm.reset();
-    this.button = "Adicionar";
+    this.button = 'Adicionar';
     this.focusIn.nativeElement.focus();
   }
 
-  compare(obj1, obj2){
-    return obj1 && obj2 ? (obj1.uid === obj2.uid && obj1.description === obj2.description): obj1 === obj2;
+  compare(obj1, obj2) {
+    return obj1 && obj2 ? (obj1.uid === obj2.uid && obj1.description === obj2.description) : obj1 === obj2;
   }
-  
+
 }
