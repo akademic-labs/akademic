@@ -559,7 +559,8 @@ input:focus {
 }
 
 .main-panel .main-content {
-  padding: 30px 15px;
+  /* padding: 30px 15px; */
+  padding: 20px;
   min-height: calc(100% - 123px)
 }
 
@@ -2215,7 +2216,10 @@ fieldset[disabled] .form-control {
 }
 
 .card {
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .05), 0 0 0 1px rgba(63, 63, 68, .1);
+  /* box-shadow: 0 1px 2px rgba(0, 0, 0, .05), 0 0 0 1px rgba(63, 63, 68, .1); */
+  /* box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12); */
+  /* box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06); */
+  box-shadow: 0 5px 10px -3px rgba(0,0,0,.2), 0 0px 0px 0px rgba(0,0,0,.14), 0 0px 7px 1px rgba(0,0,0,.12);
   background-color: #FFF;
   margin-bottom: 30px
 }
@@ -2272,11 +2276,13 @@ fieldset[disabled] .form-control {
 }
 
 .card .content {
-  padding: 15px 15px 10px 15px
+  /* padding: 15px 15px 10px 15px */
+  padding: 15px 20px 15px 20px;
 }
 
 .card .header {
-  padding: 15px 15px 0
+  /* padding: 15px 15px 0 */
+  padding: 20px 20px 0;
 }
 
 .card .category,
@@ -2301,7 +2307,9 @@ fieldset[disabled] .form-control {
 .card .title {
   margin: 0;
   color: #333;
-  font-weight: 300
+  font-weight: 300;
+  font-size: 28px;
+  display: inline;
 }
 
 .card .avatar {
@@ -2320,7 +2328,8 @@ fieldset[disabled] .form-control {
 .card .footer {
   padding: 0;
   background-color: transparent;
-  line-height: 30px
+  line-height: 30px;
+  padding-left: 10px;
 }
 
 .card .footer .legend {
@@ -2329,7 +2338,7 @@ fieldset[disabled] .form-control {
 
 .card .footer hr {
   margin-top: 5px;
-  margin-bottom: 5px
+  margin-bottom: 5px;
 }
 
 .card .stats {
@@ -2365,7 +2374,7 @@ fieldset[disabled] .form-control {
   position: absolute
 }
 
-.card .table tbody td:first-child,
+/* .card .table tbody td:first-child,
 .card .table thead th:first-child {
   padding-left: 15px
 }
@@ -2373,7 +2382,7 @@ fieldset[disabled] .form-control {
 .card .table tbody td:last-child,
 .card .table thead th:last-child {
   padding-right: 15px
-}
+} */
 
 .card .alert {
   border-radius: 4px;
@@ -3084,8 +3093,10 @@ fieldset[disabled] .form-control {
 
 @media (min-width:992px) {
   .table-full-width {
-    margin-left: -15px;
-    margin-right: -15px
+    /* margin-left: -15px;
+    margin-right: -15px */
+    margin-left: 0px;
+    margin-right: 0px;
   }
   .table-responsive {
     overflow: visible
@@ -3106,4 +3117,124 @@ fieldset[disabled] .form-control {
     -ms-overflow-style: -ms-autohiding-scrollbar;
     -webkit-overflow-scrolling: touch
   }
+}
+
+
+/* CHANGES, BY: LUIZ */
+
+/* VALIDATIONS */
+:root {
+  /* COLORS PATTERNS - VALIDATIONS COMPONENTS */
+  --color-valid: #28a745;
+  --color-invalid: #dc3545;
+  /* COLOR BORDER - VALIDATION */
+  --border-valid: 1px solid var(--color-valid);
+  --border-invalid: 1px solid var(--color-invalid);
+}
+/* BORDER VALID */
+.form-control.ng-valid.ng-touched,
+.form-control.ng-valid.ng-pristine {
+  border: var(--border-valid);
+}
+/* BORDER INVALID */
+.form-control.ng-invalid.ng-touched,
+.form-control.ng-invalid.ng-dirty {
+  border: var(--border-invalid);
+}
+/* FOCUSED - BORDER VALID */
+.form-control:focus {
+  border: var(--border-valid);
+  box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.25);
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.25);
+  -moz-box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.25);
+}
+/* FOCUSED - BORDER INVALID */
+.form-control.ng-invalid.ng-touched:focus {
+  border: var(--border-invalid);
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
+  -moz-box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.border-none {
+  border: none;
+}
+
+.sidebar .nav i {
+  font-size: 16px;
+}
+
+.header i {
+  font-size: 25px;
+  margin: 0px 15px 0px 0px;
+}
+
+.border-top {
+  border-top: 5px solid #b224ef
+}
+
+.table {
+  margin-bottom: 0px;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.icon-report i {
+  margin-right: 5px;
+}
+
+.label-block label, .label-block label::before {
+  display:block;
+  content: "\00a0";
+  margin-top: 2.3px;
+}
+
+.img-attach {
+  height: 250px;
+  width: 200px;
+  padding: 4px;
+  display: block;
+
+  -webkit-animation: swing 1s ease;
+  animation: swing 1s ease;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
+
+.card-attachment {
+  display: inline-block;
+  margin: 5px;
+}
+
+.card-attachment:hover {
+  -webkit-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  transform: scale(1.3);
+}
+
+.btn-card-remove {
+  border: none;
+  background: none;
+  width: 100%;
+  outline: 0;
+  font-size: 20px;
+}
+
+.show-attachs {
+  text-align: center;
+  margin-bottom: 5px;
 }

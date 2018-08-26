@@ -96,7 +96,7 @@
                             <div class="form-group">
                                 <label for="state">Estado</label>
                                 <select class="form-control" formControlName="state" (change)="getCities()">
-                                    <option *ngFor="let state of states$ | async" [ngValue]="state">{{state.nome}}</option>
+                                    <option *ngFor="let state of $states | async" [ngValue]="state">{{state.nome}}</option>
                                 </select>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('state')" error="required" msg="Estado é obrigatório."></aka-message-control-error>
@@ -105,7 +105,7 @@
                             <div class="form-group">
                                 <label for="city">Cidade</label>
                                 <select class="form-control" formControlName="city">
-                                    <option *ngFor="let city of cities$ | async" [ngValue]="city.nome">{{city.nome}}</option>
+                                    <option *ngFor="let city of $cities | async" [ngValue]="city.nome">{{city.nome}}</option>
                                 </select>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('city')" error="required" msg="Cidade é obrigatório."></aka-message-control-error>
