@@ -32,10 +32,12 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
         .subscribe(response => {
           this.activity = response;
           response.attachment.forEach(element => {
+            console.log('element:' + element)
             this._storage.ref(element.url).getDownloadURL().
               subscribe(res => {
-                this.attachments.push(res)
-                // , console.log(res)
+                const data = { name: element.name, url: res };
+                this.attachments.push(data)
+                // , console.log(data)
               });
           });
         });
