@@ -37,6 +37,11 @@ import { environment } from './../environments/environment';
 
 export const firebaseConfig = environment.firebaseConfig;
 
+// PrimeNG
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +75,11 @@ export const firebaseConfig = environment.firebaseConfig;
     AngularFireModule.initializeApp(firebaseConfig),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
 
-    MessageControlErrorModule
+    MessageControlErrorModule,
+
+    BrowserAnimationsModule,
+    DropdownModule,
+    CalendarModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

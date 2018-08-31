@@ -37,7 +37,7 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
               subscribe(res => {
                 const data = { name: element.name, url: res };
                 this.attachments.push(data)
-                // , console.log(data)
+                  , console.log(data)
               });
           });
         });
