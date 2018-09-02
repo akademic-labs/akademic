@@ -1,0 +1,122 @@
+/* VALIDATIONS */
+
+/* BORDER VALID */
+/* Inputtext */
+.ui-inputtext.ng-touched:valid,
+/* Dropdown */
+p-dropdown.ng-dirty.ng-touched.ng-valid .ui-dropdown,
+/* Spinner */
+p-spinner.ng-touched.ng-valid .ui-spinner-input {
+    border: var(--border-valid);
+}
+
+/* BORDER INVALID */
+/* Inputtext */
+.ui-inputtext.ng-touched.ng-invalid,
+.ui-inputtext.ng-dirty.ng-invalid,
+/* Dropdown */
+p-dropdown.ng-touched.ng-invalid .ui-dropdown,
+p-dropdown.ng-dirty.ng-invalid .ui-dropdown,
+/* Spinner */
+p-spinner.ng-touched.ng-invalid .ui-spinner-input,
+p-spinner.ng-dirty.ng-invalid .ui-spinner-input {
+    border: var(--border-invalid);
+}
+
+/* FOCUSED - BORDER VALID */
+/* Inputtext */
+.ui-inputtext:focus,
+/* Dropdown */
+.ui-dropdown:not(.ui-state-disabled).ui-state-focus,
+/* Spinner */
+p-spinner .ui-spinner-input:enabled:focus:not(.ui-state-error) {
+    outline: 0;
+    border: var(--border-valid);
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.25);
+    -moz-box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.637);
+    box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.25);
+}
+
+/* FOCUSED - BORDER INVALID */
+/* Inputtext */
+.ui-inputtext.ng-touched.ng-invalid:focus,
+.ui-inputtext.ng-dirty.ng-invalid:hover,
+.ui-inputtext.ng-dirty.ng-invalid:active,
+/* Dropdown */
+p-dropdown.ng-touched.ng-invalid .ui-dropdown:not(.ui-state-disabled).ui-state-focus,
+p-dropdown.ng-touched.ng-dirty .ui-dropdown:not(.ui-state-disabled).ui-state-hover,
+p-dropdown.ng-touched.ng-dirty .ui-dropdown:not(.ui-state-disabled).ui-state-active,
+/* Spinner */
+p-spinner.ng-touched.ng-invalid .ui-spinner-input:enabled:focus:not(.ui-state-error),
+p-spinner.ng-dirty.ng-invalid .ui-spinner-input:enabled:focus:not(.ui-state-error) {
+    outline: 0;
+    border: var(--border-invalid);
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
+    -moz-box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
+}
+
+/* ICON VALID */
+/* Dropdown - Icon Arrow */
+p-dropdown.ng-touched.ng-valid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
+p-dropdown.ng-dirty.ng-valid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
+/* Dropdown - Icon Clear */
+p-dropdown.ng-touched.ng-valid .ui-dropdown .ui-dropdown-clear-icon,
+p-dropdown.ng-dirty.ng-valid .ui-dropdown .ui-dropdown-clear-icon,
+/* Spinner - Icon Arrow */
+p-spinner.ng-touched.ng-valid .ui-spinner-button.ui-button,
+p-spinner.ng-dirty.ng-valid .ui-spinner-button.ui-button {
+    color: var(--color-valid);
+}
+
+/* ICON INVALID */
+/* Dropdown - Icon Arrow */
+p-dropdown.ng-touched.ng-invalid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
+p-dropdown.ng-dirty.ng-invalid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
+/* Spinner - Icon Arrow */
+p-spinner.ng-touched.ng-invalid .ui-spinner-button.ui-button,
+p-spinner.ng-dirty.ng-invalid .ui-spinner-button.ui-button {
+    color: var(--color-invalid);
+}
+
+
+/* OTHERS */
+
+form .ui-dropdown {
+    width: 100% !important;
+}
+
+.ui-calendar {
+    width: 100%;
+}
+
+.ui-datepicker-month, .ui-datepicker-year {
+    border-radius: 3px;
+}
+
+.ui-inputtext {
+    width: 100%;
+    height: 39px;
+}
+
+.ui-dropdown .ui-dropdown-label {
+    text-transform: capitalize;
+    margin-top: 4px;
+    height: 29px;
+}
+
+.ui-dialog-mask {
+    z-index: 1 !important;
+}
+
+.ui-toast .ui-toast-message.ui-toast-message-warn {
+    /* background-color: white; */
+}
+
+.ui-table .ui-table-tbody > tr {
+    border: solid 1px #c8c8c8;
+}
+
+.ui-paginator .ui-dropdown .ui-dropdown-trigger, body .ui-paginator .ui-dropdown .ui-dropdown-label {
+    margin-top: 0px;
+}

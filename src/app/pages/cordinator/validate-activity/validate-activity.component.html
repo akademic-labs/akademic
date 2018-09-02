@@ -8,8 +8,8 @@
                 </div>
                 <hr>
             </div>
-            <!-- <pre>{{ activity | json }}</pre>-->
-            <pre>{{ attachments | json }}</pre>
+            <!-- <pre>{{ activity | json }}</pre> -->
+            <!-- <pre>{{ attachments | json }}</pre> -->
             <div class="content">
                 <form>
                     <div class="uppercase" style="color: #9A9A9A;text-align: center;font-size: 16px;">
@@ -25,8 +25,9 @@
                     <hr>
                     
                     <span class="icon-report">
-                        <i class="fa fa-clock-o"></i>{{ activity?.initialDate | date: 'dd/MM/yyyy'}} - {{ activity?.finalDate
-                        | date: 'dd/MM/yyyy' }}
+                        <i class="fa fa-clock-o"></i>{{ activity?.initialDate | date: 'dd/MM/yyyy'}} - 
+                        {{ activity?.finalDate | date: 'dd/MM/yyyy' }}  
+                        <!-- {{ activity?.finalDate.toDate() | date: 'dd/MM/yyyy' }} -->
                     </span>
                     <hr>
                     <span class="icon-report">
@@ -36,7 +37,7 @@
                     </span>
                     <hr>
                     <span class="icon-report">
-                        <i class="fa fa-home"></i>{{ activity?.city }} / {{ activity?.state.sigla }}
+                        <i class="fa fa-home"></i>{{ activity?.city.nome }} / {{ activity?.state.sigla }}
                     </span>
                     <hr>
                     <div>Descrição: {{ activity?.description }}</div>

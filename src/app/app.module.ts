@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/components/common/messageservice';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -41,6 +42,9 @@ export const firebaseConfig = environment.firebaseConfig;
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
+import { ToastModule } from 'primeng/toast';
+import { TableModule } from 'primeng/table';
+import { GalleriaModule } from 'primeng/galleria';
 
 @NgModule({
   declarations: [
@@ -77,11 +81,15 @@ import { CalendarModule } from 'primeng/calendar';
 
     MessageControlErrorModule,
 
+    // PrimeNG
     BrowserAnimationsModule,
     DropdownModule,
-    CalendarModule
+    CalendarModule,
+    ToastModule,
+    TableModule,
+    GalleriaModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

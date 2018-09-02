@@ -29,11 +29,16 @@ export class HomeComponent implements OnInit {
 
   $actsToApprove: Observable<Activity[]>
 
+  actsToApprove = [];
+
   constructor(private _auth: AuthService, private _actService: ActivityService, private _router: Router) { }
 
   ngOnInit() {
     this._auth.user.subscribe(res => {
       this.$actsToApprove = this._actService.getActivitiesToApprove(res.uid);
+
+      this._actService.getActivitiesToApprove(res.uid)
+        .subscribe(data => this.actsToApprove = data);
     });
 
     // calc of the last 6 months
@@ -115,7 +120,7 @@ export class HomeComponent implements OnInit {
   }
 
   toEdit(uid) {
-    console.log(uid);
+    // console.log(uid);
     this._router.navigate(['validate-activity', { id: uid }]);
   }
 }

@@ -13,8 +13,8 @@
       </pre>
       <pre>
           {{ $controllers | async | json }}
-      </pre>
-      <pre>
+      </pre> -->
+      <!-- <pre>
           {{ controllerForm.value | json }}
       </pre> -->
       <div class="content">
@@ -32,11 +32,15 @@
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
               <div class="form-group">
                 <label for="course">Curso</label>
-                <select class="form-control" placeholder="asdasdasd" formControlName="course" [compareWith]="compareCourse">
+                <!-- {{ courses | json }} -->
+                <p-dropdown formControlName="course" dataKey="uid" placeholder="Selecione" emptyFilterMessage="Nenhum resultado." [options]="courses"
+                  optionLabel="description" [showClear]="true" filter="true"></p-dropdown>
+                <!-- <select class="form-control" placeholder="asdasdasd" formControlName="course" [compareWith]="compareCourse">
                   <option value="null" disabled="true" [selected]="true">Selecione..</option>
                   <option *ngFor="let course of $courses | async" [ngValue]="course">{{course.description}}</option>
-                </select>
+                </select> -->
               </div>
+              <aka-message-control-error [control]="controllerForm.get('course')" error="required" msg="Curso é obrigatório."></aka-message-control-error>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 label-block">
               <label></label>
@@ -55,9 +59,12 @@
                   <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
                     <i class="fa fa-edit" (click)="edit(controller)"></i>
                   </button>
-                  <button type="button" rel="tooltip" (click)="remove(controller.uid)" title="Remover" class="btn btn-danger btn-simple btn-xs">
+                  <!-- <button type="button" rel="tooltip" (click)="remove(controller.uid)" title="Remover" class="btn btn-danger btn-simple btn-xs">
                     <i class="fa fa-times"></i>
-                  </button>
+                  </button> -->
+                  <button type="button" rel="tooltip" (click)="confirmRemove(controller)" title="Remover" class="btn btn-danger btn-simple btn-xs">
+                      <i class="fa fa-times"></i>
+                    </button>
                 </td>
               </tr>
             </tbody>
@@ -70,3 +77,23 @@
     </div>
   </div>
 </div>
+
+<p-toast position="top-right"></p-toast>
+
+<p-toast position="center" key="remove" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div style="text-align: center">
+            <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+            <h3>{{message.summary}}</h3>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="remove()" label="Yes" class="ui-button-success"></button>
+            </div>
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="onReject()" label="No" class="ui-button-secondary"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

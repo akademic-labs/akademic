@@ -10,7 +10,7 @@
             </div>
             <div class="content">
                 <form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
-                    <pre>Forms: {{ activityForm.value | json }}</pre>
+                    <!-- <pre>Forms: {{ activityForm.value | json }}</pre> -->
                     <!-- <pre>Attachments Render: {{ attachmentsRender | json }}</pre> -->
                     <!-- <pre>Attachments: {{ attachments | json }}</pre> -->
                     <div class="row">
@@ -79,7 +79,8 @@
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
                             <div class="form-group">
                                 <label for="finalDate">Data Final</label>
-                                <input type="date" class="form-control" formControlName="finalDate">
+                                <p-calendar formControlName="finalDate" dateFormat="dd/mm/yy" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"></p-calendar>
+                                <!-- <input type="date" class="form-control" formControlName="finalDate"> -->
                             </div>
                             <aka-message-control-error [control]="activityForm.get('finalDate')" error="required" msg="Data Final é obrigatório."></aka-message-control-error>
                         </div>
@@ -95,20 +96,20 @@
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
                             <div class="form-group">
                                 <label for="state">Estado</label>
-                                <p-dropdown formControlName="state" placeholder="Selecione" [options]="testes" optionLabel="nome" [showClear]="true" filter="true"></p-dropdown>
+                                <p-dropdown formControlName="state" (onChange)="getCities()" placeholder="Selecione" emptyFilterMessage="Nenhum resultado." [options]="testes" optionLabel="nome" [showClear]="true" filter="true"></p-dropdown>
                                 <!-- <select class="form-control" formControlName="state" (change)="getCities()">
                                     <option *ngFor="let state of $states | async" [ngValue]="state">{{state.nome}}</option>
                                 </select> -->
                             </div>
-                            
                             <aka-message-control-error [control]="activityForm.get('state')" error="required" msg="Estado é obrigatório."></aka-message-control-error>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
                             <div class="form-group">
                                 <label for="city">Cidade</label>
-                                <select class="form-control" formControlName="city">
+                                <p-dropdown formControlName="city" placeholder="Selecione" emptyFilterMessage="Nenhum resultado." [options]="testes2" optionLabel="nome" [showClear]="true" filter="true"></p-dropdown>
+                                <!-- <select class="form-control" formControlName="city">
                                     <option *ngFor="let city of $cities | async" [ngValue]="city.nome">{{city.nome}}</option>
-                                </select>
+                                </select> -->
                             </div>
                             <aka-message-control-error [control]="activityForm.get('city')" error="required" msg="Cidade é obrigatório."></aka-message-control-error>
                         </div>

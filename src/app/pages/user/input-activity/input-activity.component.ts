@@ -59,6 +59,7 @@ export class InputActivityComponent implements OnInit {
   ];
 
   testes = [];
+  testes2: any = [];
 
   constructor(
     private fb: FormBuilder,
@@ -70,7 +71,7 @@ export class InputActivityComponent implements OnInit {
     private storage: AngularFireStorage,
     private _cityStateService: CityStateService,
     private _router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.buildForm();
@@ -80,14 +81,20 @@ export class InputActivityComponent implements OnInit {
 
     this._cityStateService.getStates()
       .subscribe(res => {
-        this.testes = res,
-        console.log(res)
+        this.testes = res
+        // , console.log(res)
       });
   }
 
   getCities() {
     const state = this.activityForm.get('state').value;
     this.$cities = this._cityStateService.getCities(state.id);
+
+    this._cityStateService.getCities(state.id)
+      .subscribe(res => {
+        this.testes2 = res
+        // , console.log(res)
+      });
   }
 
   buildForm() {
@@ -120,7 +127,7 @@ export class InputActivityComponent implements OnInit {
         });
       // Upload Attachments
       for (let i = 0; i < this.attachments.length; i++) {
-                                        // path,                file,                   customMetadata
+        // path,                file,                   customMetadata
         this.task = this.storage.upload(this.attachments[i][0], this.attachments[i][1], this.attachments[i][2]);
         // Progress monitoring
         this.percentage = this.task.percentageChanges();
