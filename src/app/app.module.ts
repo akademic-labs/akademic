@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/components/common/messageservice';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -37,6 +38,14 @@ import { environment } from './../environments/environment';
 
 export const firebaseConfig = environment.firebaseConfig;
 
+// PrimeNG
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
+import { ToastModule } from 'primeng/toast';
+import { TableModule } from 'primeng/table';
+import { GalleriaModule } from 'primeng/galleria';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,9 +79,17 @@ export const firebaseConfig = environment.firebaseConfig;
     AngularFireModule.initializeApp(firebaseConfig),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
 
-    MessageControlErrorModule
+    MessageControlErrorModule,
+
+    // PrimeNG
+    BrowserAnimationsModule,
+    DropdownModule,
+    CalendarModule,
+    ToastModule,
+    TableModule,
+    GalleriaModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

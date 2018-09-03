@@ -2329,7 +2329,7 @@ fieldset[disabled] .form-control {
   padding: 0;
   background-color: transparent;
   line-height: 30px;
-  padding-left: 10px;
+  /* padding-left: 10px; */
 }
 
 .card .footer .legend {
