@@ -10,13 +10,8 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
     { path: 'dashboard', title: 'Dashboard', icon: 'fa fa-pie-chart', class: '' },
-    // { path: 'dashboard', title: 'Dashboard', icon: 'pe-7s-graph', class: '' },
     { path: 'user', title: 'Meu perfil', icon: 'fa fa-user-circle-o', class: '' },
-    // { path: 'user', title: 'Meu perfil', icon: 'pe-7s-user', class: '' },
-    // { path: 'input-activity', title: 'Entrada de Atividade', icon: 'pe-7s-display2', class: '' },
     { path: 'input-activity', title: 'Entrada de Atividade', icon: 'fa fa-paperclip', class: '' },
-    // { path: 'validate-activity', title: 'Validação de Atividade', icon: 'pe-7s-check', class: '' },
-    // { path: 'admin', title: 'Administrador', icon: 'pe-7s-config', class: '' },
     { path: 'institution', title: 'Instituições', icon: 'fa fa-university nav-icon', class: '' },
     { path: 'controller', title: 'Controladores', icon: 'fa fa-users nav-icon', class: '' },
     { path: 'course', title: 'Cursos', icon: 'fa fa-graduation-cap nav-icon', class: '' },

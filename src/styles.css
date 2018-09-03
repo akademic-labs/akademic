@@ -2197,11 +2197,6 @@ fieldset[disabled] .form-control {
   float: left
 }
 
-.dropdown-with-icons i[class^="pe-"] {
-  font-size: 24px;
-  width: 46px
-}
-
 .dropdown-with-icons i[class^="fa"] {
   font-size: 14px;
   width: 38px
@@ -3062,11 +3057,6 @@ fieldset[disabled] .form-control {
   }
   .navbar-collapse .nav p {
     margin: 0
-  }
-  .navbar-collapse [class^="pe-7s-"] {
-    float: left;
-    font-size: 20px;
-    margin-right: 10px
   }
   .close-layer {
     height: 100%;
