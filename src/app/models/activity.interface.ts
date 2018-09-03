@@ -1,3 +1,4 @@
+import { Cities } from 'app/models/cities.interface';
 import { States } from './states.interface';
 import { User } from './user.interface';
 import { ActivityType } from './activity-type.interface';
@@ -16,7 +17,7 @@ export interface Activity {
   link: string;
   hoursDuration: number;
 
-  city: string;
+  city: Cities;
   state: States;
 
   observation: string;

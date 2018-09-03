@@ -50,6 +50,17 @@ export class InputActivityComponent implements OnInit {
   attachmentsRender = [];
   attachments = [];
 
+  cities = [
+    { label: 'New York', value: { id: 1, name: 'New York', code: 'NY' } },
+    { label: 'Rome', value: { id: 2, name: 'Rome', code: 'RM' } },
+    { label: 'London', value: { id: 3, name: 'London', code: 'LDN' } },
+    { label: 'Istanbul', value: { id: 4, name: 'Istanbul', code: 'IST' } },
+    { label: 'Paris', value: { id: 5, name: 'Paris', code: 'PRS' } }
+  ];
+
+  testes = [];
+  testes2: any = [];
+
   constructor(
     private fb: FormBuilder,
     public _actService: ActivityService,
@@ -60,18 +71,30 @@ export class InputActivityComponent implements OnInit {
     private storage: AngularFireStorage,
     private _cityStateService: CityStateService,
     private _router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.buildForm();
     this.$activityTypes = this._actTypesService.get();
     this.$states = this._cityStateService.getStates();
     this.focusIn.nativeElement.focus();
+
+    this._cityStateService.getStates()
+      .subscribe(res => {
+        this.testes = res
+        // , console.log(res)
+      });
   }
 
   getCities() {
     const state = this.activityForm.get('state').value;
     this.$cities = this._cityStateService.getCities(state.id);
+
+    this._cityStateService.getCities(state.id)
+      .subscribe(res => {
+        this.testes2 = res
+        // , console.log(res)
+      });
   }
 
   buildForm() {
@@ -104,7 +127,7 @@ export class InputActivityComponent implements OnInit {
         });
       // Upload Attachments
       for (let i = 0; i < this.attachments.length; i++) {
-                                        // path,                file,                   customMetadata
+        // path,                file,                   customMetadata
         this.task = this.storage.upload(this.attachments[i][0], this.attachments[i][1], this.attachments[i][2]);
         // Progress monitoring
         this.percentage = this.task.percentageChanges();

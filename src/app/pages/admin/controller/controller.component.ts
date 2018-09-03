@@ -1,10 +1,12 @@
+import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Controller } from '../../../models/controller.interace';
 import { Course } from './../../../models/course.interface';
 import { ControllerService } from './../../../services/controller.service';
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
-import { Controller } from '../../../models/controller.interace';
 import { CourseService } from '../../../services/course.service';
-import { Observable } from 'rxjs';
+import { MessageServicePrimeNG } from './../../../services/message.service';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @Component({
   selector: 'aka-controller',
@@ -21,17 +23,35 @@ export class ControllerComponent implements OnInit {
   $courses: Observable<Course[]>;
   @ViewChild('inputFocus') focusIn: ElementRef;
 
+  courses = [];
+
   constructor(
     private _controllerFormBuilder: FormBuilder,
     private _controllerService: ControllerService,
-    private _courseService: CourseService
-  ) {}
+    private _courseService: CourseService,
+    private _messageService: MessageServicePrimeNG
+  ) { }
+
+  confirmRemove(obj) {
+    this.controller = obj;
+    this._messageService.messageConfirm('remove', true, 'warn', '', `Deseja realmente excluir '${obj.name}' ?`);
+  }
+
+  onReject() {
+    this._messageService.closeMessageConfirm('remove');
+  }
 
   ngOnInit() {
     this.$courses = this._courseService.get();
     this.$controllers = this._controllerService.get();
     this.buildForm();
     this.focusIn.nativeElement.focus();
+
+    this._courseService.get()
+      .subscribe(res => {
+        this.courses = res
+        // , console.log(res)
+      });
   }
 
   // tslint:disable-next-line:member-ordering
@@ -67,11 +87,12 @@ export class ControllerComponent implements OnInit {
     this.focusIn.nativeElement.focus();
   }
 
-  remove(uid) {
-    this._controllerService.delete(uid);
+  remove() {
+    this._controllerService.delete(this.controller.uid);
     this.controllerForm.reset();
     this.button = 'Adicionar';
     this.focusIn.nativeElement.focus();
+    this.onReject();
   }
 
   compareCourse(obj1, obj2) {

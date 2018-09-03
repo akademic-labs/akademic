@@ -17,6 +17,7 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
   uidActivity: string;
   inscricao: Subscription;
   attachments = [];
+  images = [];
 
   constructor(
     private _route: ActivatedRoute,
@@ -32,14 +33,21 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
         .subscribe(response => {
           this.activity = response;
           response.attachment.forEach(element => {
+            // console.log('element:' + element)
             this._storage.ref(element.url).getDownloadURL().
               subscribe(res => {
-                this.attachments.push(res)
-                // , console.log(res)
+                const data = { name: element.name, url: res };
+                this.attachments.push(data)
+                // , console.log(data)
               });
           });
         });
     });
+
+    this.images.push({ source: 'assets/img/akademic-name-black.png', alt: 'Description for Image 1', title: 'Title 1' });
+    this.images.push({ source: 'assets/img/default-avatar.png', alt: 'Description for Image 2', title: 'Title 2' });
+    this.images.push({ source: 'assets/img/login.png', alt: 'Description for Image 3', title: 'Title 3' });
+    this.images.push({ source: 'assets/img/sidebar.jpg', alt: 'Description for Image 4', title: 'Title 4' });
   }
 
   ngOnDestroy() {

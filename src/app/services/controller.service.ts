@@ -1,9 +1,10 @@
-import { NotifyService } from './notify.service';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Controller } from '../models/controller.interace';
+import { NotifyService } from './notify.service';
+import { MessageServicePrimeNG } from './message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class ControllerService {
 
   ControllerCollection: AngularFirestoreCollection<Controller>;
 
-  constructor(private _afs: AngularFirestore, private _notify: NotifyService) {
+  constructor(private _afs: AngularFirestore, private _notify: NotifyService,
+  private _message: MessageServicePrimeNG) {
     this.ControllerCollection = _afs.collection('controllers');
   }
 
@@ -26,7 +28,7 @@ export class ControllerService {
 
   post(content: Controller) {
     this._afs.collection('controllers').add(content)
-      .then (() => this._notify.update('success', 'Controlador adicionado com sucesso!'))
+      .then (() => this._message.messageGrowl('success', 'Confirmação', `Controlador '${content.name}' adicionado com sucesso!`))
       .catch (() => this._notify.update('danger', 'Houve um erro na requisição!'));
   }
 
