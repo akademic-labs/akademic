@@ -12,11 +12,11 @@ export class ValidatorService {
   ) {}
 
   checkOut(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach(campo => {
-      const controle = formGroup.get(campo);
-      controle.markAsDirty();
-      if (controle instanceof FormGroup) {
-        this.checkOut(controle);
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      control.markAsDirty();
+      if (control instanceof FormGroup) {
+        this.checkOut(control);
       }
     });
     this._notify.update('danger', 'Campos obrigatórios não preenchidos!');

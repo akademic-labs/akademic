@@ -73,16 +73,62 @@ export class InputActivityComponent implements OnInit {
     private _router: Router
   ) { }
 
+  massa = [];
+
+  testeRemove(a) {
+    console.log(a);
+  }
+
+  uploadedFiles: any[] = [];
+
+  onUpload(event) {
+    for (let file of event.files) {
+      this.uploadedFiles.push(file);
+      console.log(file);
+      console.log(this.uploadedFiles);
+
+      const path = `test/${new Date().toISOString().split('T')[0]}-${file.name}`;
+      const customMetadata = { app: 'atividade-complementar!' };
+
+      // this.task = this.storage.upload(path, file, { customMetadata });
+
+      let fileAux = [];
+      fileAux.push(path, file, { customMetadata });
+      this.attachments.push(fileAux);
+      this.attach.push({
+        name: file.name,
+        type: file.type,
+        url: path
+      });
+
+    }
+    this._notify.update('success', 'File Uploaded!')
+  }
+
   ngOnInit() {
     this.buildForm();
     this.$activityTypes = this._actTypesService.get();
     this.$states = this._cityStateService.getStates();
+
     this.focusIn.nativeElement.focus();
 
     this._cityStateService.getStates()
       .subscribe(res => {
         this.testes = res
         // , console.log(res)
+        this.massa = this.testes.sort();
+        // this.massa = this.testes.sort((n1, n2) => {
+        //   if (n1 > n2) {
+        //     return 1;
+        //   }
+
+        //   if (n1 < n2) {
+        //     return -1;
+        //   }
+
+        //   return 0;
+        // });
+
       });
   }
 
@@ -111,32 +157,32 @@ export class InputActivityComponent implements OnInit {
       semester: ['', Validators.required],
       observation: [''],
       activityType: ['', Validators.required],
-      attach: ['', Validators.required]
+      attach: ['']
     });
   }
 
   onSubmit() {
-    if (this.activityForm.valid) {
-      this._actService
-        .createActivity(this.activityForm.value, this.attach)
-        .then(result => {
-          console.log(result);
-          this.activityForm.reset();
-          this.attachmentsRender = null;
-          this.focusIn.nativeElement.focus();
-        });
-      // Upload Attachments
-      for (let i = 0; i < this.attachments.length; i++) {
-        // path,                file,                   customMetadata
-        this.task = this.storage.upload(this.attachments[i][0], this.attachments[i][1], this.attachments[i][2]);
-        // Progress monitoring
-        this.percentage = this.task.percentageChanges();
-      }
-      // this._router.navigate(['/dashboard']);
-    } else {
-      this.validatorService.checkOut(this.activityForm);
-      this.disabledSave = true;
+    // if (this.activityForm.valid) {
+    //   this._actService
+    //     .createActivity(this.activityForm.value, this.attach)
+    //     .then(result => {
+    //       console.log(result);
+    //       this.activityForm.reset();
+    //       this.attachmentsRender = null;
+    //       this.focusIn.nativeElement.focus();
+    //     });
+    // Upload Attachments
+    for (let i = 0; i < this.attachments.length; i++) {
+      // path,                file,                   customMetadata
+      this.task = this.storage.upload(this.attachments[i][0], this.attachments[i][1], this.attachments[i][2]);
+      // Progress monitoring
+      this.percentage = this.task.percentageChanges();
     }
+    // this._router.navigate(['/dashboard']);
+    // } else {
+    //   this.validatorService.checkOut(this.activityForm);
+    //   this.disabledSave = true;
+    // }
   }
 
   renderAttach(event) {

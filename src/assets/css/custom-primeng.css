@@ -106,7 +106,7 @@ form .ui-dropdown {
 }
 
 .ui-dialog-mask {
-    z-index: 1 !important;
+    /* z-index: 1 !important; */
 }
 
 .ui-toast .ui-toast-message.ui-toast-message-warn {
@@ -119,4 +119,24 @@ form .ui-dropdown {
 
 .ui-paginator .ui-dropdown .ui-dropdown-trigger, body .ui-paginator .ui-dropdown .ui-dropdown-label {
     margin-top: 0px;
+}
+
+p-lightbox img {
+    width: 200px;
+    height: 300px;
+    margin-right: 20px;
+    /* border-radius: 8px; */
+}
+
+.ui-lightbox .ui-lightbox-caption {
+    width: 200px;
+}
+
+p-lightbox span {
+    width: 150px;
+    word-wrap: break-word;
+}
+
+iframe {
+    margin-top: 20px;
 }
