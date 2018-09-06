@@ -1,9 +1,9 @@
-import { NotifyService } from './notify.service';
-import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Injectable } from '@angular/core';
-import { Course } from '../models/course.interface';
+import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Course } from '../models/course.interface';
+import { NotifyService } from './notify.service';
 
 @Injectable({
   providedIn: 'root'

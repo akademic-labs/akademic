@@ -140,3 +140,38 @@ p-lightbox span {
 iframe {
     margin-top: 20px;
 }
+
+.ui-fileupload .ui-fileupload-buttonbar {
+    background-color: white;
+    border: none;
+}
+
+body .ui-button {
+    margin: 0;
+    color: #ffffff;
+    background-color: #23CCEF;
+    border: 1px solid #23CCEF;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+body .ui-fileupload .ui-fileupload-buttonbar {
+    background-color: white;
+    padding: 0.571em 1em;
+    border: none;
+    color: #333333;
+    border-bottom: 0 none;
+    text-align: center;
+}
+
+body .ui-fileupload .ui-fileupload-content {
+    background-color: #ffffff;
+    padding: 0.571em 1em;
+    border: 1px solid #c8c8c8;
+    color: #333333;
+    margin-bottom: 7px;
+}
+
+.ui-fileupload-row>div {
+    display: inline-block;
+}

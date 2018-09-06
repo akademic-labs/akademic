@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'app/services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'app/services/auth.service';
 
 type UserFields = 'email' | 'password';
 type FormErrors = { [u in UserFields]: string };

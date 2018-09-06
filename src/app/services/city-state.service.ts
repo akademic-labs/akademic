@@ -24,4 +24,10 @@ export class CityStateService {
     );
   }
 
+  getLocation() {
+    return this._http.get<any[]>(
+      `https://ip-api.io/api/json`
+    );
+  }
+
 }

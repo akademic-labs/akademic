@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Activity } from 'app/models/activity.interface';
-import { ActivityService } from 'app/services/activity.service';
 import { Subscription } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
+import { Activity } from 'app/models/activity.interface';
+import { ActivityService } from 'app/services/activity.service';
 
 @Component({
   selector: 'aka-validate-activity',
@@ -36,10 +36,12 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
             // console.log('element:' + element)
             this._storage.ref(element.url).getDownloadURL().
               subscribe(res => {
+                // using my card
                 // const data = { name: element.name, url: res };
+                // using lightbox
                 const data = { source: res, thumbnail: res, title: element.name };
                 this.attachments.push(data)
-                // , console.log(data)
+                , console.log(data)
               });
           });
         });

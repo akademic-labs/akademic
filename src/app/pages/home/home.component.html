@@ -28,7 +28,7 @@
                 <div class="table-full-width">
                     <!-- <table class="table">
                         <tbody>
-                            <tr *ngFor="let activity of $actsToApprove | async">
+                            <tr *ngFor="let activity of actsToApprove$ | async">
                                 <td>Atividade: {{activity.description}} | {{activity.hoursDuration}} horas | {{activity.activityType.description}}
                                     | {{activity.user.displayName}}</td>
                                 <td class="td-actions text-right">
@@ -43,7 +43,7 @@
                         </tbody>
                     </table>
                     {{ actsToApprove | json }} -->
-                    <p-table [value]="actsToApprove" [paginator]="true" [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]">
+                    <p-table [value]="actsToApprove$ | async" [paginator]="true" [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th>Atividade</th>
