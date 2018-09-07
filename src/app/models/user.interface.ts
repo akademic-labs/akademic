@@ -2,11 +2,11 @@ export interface User {
   uid: string;
   displayName: string;
   lastName: string;
-  registration: string;
-  birthday: Date;
+  registration?: string;
+  birthday?: Date;
   createdAt: Date;
   email: string;
-  phone: string;
+  phone?: string;
   photoURL: string;
   status: string;
 
@@ -15,13 +15,13 @@ export interface User {
   providerId?: string;
 
   // user enters activity, controller validates and adm is the superuser
-  type: {
-    user?: boolean;
+  roles: {
+    student?: boolean;
     controller?: boolean;
     administrator?: boolean;
   };
 
-  course: {
+  course?: {
     uid: number;
     name: string;
   };

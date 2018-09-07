@@ -40,7 +40,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(credential => {
         this._router.navigate(['/dashboard']);
-        return this._userService.updateUserData(credential.user); // if using firestore
+        this._userService.createUserData(credential.user); // if using firestore
       })
       .catch((error) => this.handleError(error));
   }
@@ -65,10 +65,8 @@ export class AuthService {
   private oAuthLogin(provider: any) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then(credential => {
-        console.log(credential);
-        this._router.navigate(['/dashboard']);
-        this._notify.update('success', 'Bem vindo!');
-        return this._userService.updateUserData(credential.user); // if using firestore
+        this._userService.createUserData(credential.user); // if using firestore
+        // this._notify.update('success', 'Bem vindo!');
       })
       .catch(error => this.handleError(error));
   }
