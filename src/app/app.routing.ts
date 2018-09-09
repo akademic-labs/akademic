@@ -16,6 +16,7 @@ import { ActivitypeTypeComponent } from './pages/admin/activitype-type/activityp
 import { ValidateActivityComponent } from './pages/cordinator/validate-activity/validate-activity.component';
 
 import { AuthGuard } from 'app/guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   { path: 'dashboard', component: HomeComponent, canActivate: [AuthGuard] },
@@ -28,7 +29,7 @@ const routes: Routes = [
   { path: 'controller', component: ControllerComponent, canActivate: [AuthGuard] },
   { path: 'rules', component: RulesComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
-  { path: '', component: LoginComponent }
+  { path: '', component: LoginComponent, canActivate: [LoginGuard] }
 ];
 
 @NgModule({
