@@ -7,7 +7,7 @@
             </a>
         </div>
         <ul class="nav responsive-nav">
-            <li class="user" *ngIf="_auth.user | async as user">
+            <li class="user" *ngIf="_auth.user$ | async as user">
                 <div class="photo">
                     <img [src]="user.photoURL" width="34px">
                 </div>

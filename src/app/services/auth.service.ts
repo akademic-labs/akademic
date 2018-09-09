@@ -18,14 +18,14 @@ import { User } from 'app/models/user.interface';
   providedIn: 'root'
 })
 export class AuthService {
-  user: Observable<User | null>;
+  user$: Observable<User | null>;
 
   constructor(
     private _router: Router, private _notify: NotifyService,
     private afAuth: AngularFireAuth, private afs: AngularFirestore,
     private _error: ErrorService, private _userService: UserService) {
 
-    this.user = this.afAuth.authState.pipe(
+    this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();

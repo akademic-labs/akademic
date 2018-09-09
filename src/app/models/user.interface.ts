@@ -1,3 +1,9 @@
+export interface Roles {
+  student?: boolean;
+  controller?: boolean;
+  administrator?: boolean;
+};
+
 export interface User {
   uid: string;
   displayName: string;
@@ -15,11 +21,7 @@ export interface User {
   providerId?: string;
 
   // user enters activity, controller validates and adm is the superuser
-  roles: {
-    student?: boolean;
-    controller?: boolean;
-    administrator?: boolean;
-  };
+  roles: Roles;
 
   course?: {
     uid: number;

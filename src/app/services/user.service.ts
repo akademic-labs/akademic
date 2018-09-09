@@ -4,7 +4,7 @@ import { AngularFirestoreDocument, AngularFirestore, AngularFirestoreCollection 
 import { User } from 'app/models/user.interface';
 
 import { Observable } from 'rxjs';
-import { map, take, tap } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { UserInfo } from 'firebase';
 import { Router } from '@angular/router';
 

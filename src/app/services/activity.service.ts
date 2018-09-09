@@ -48,7 +48,7 @@ export class ActivityService {
     // input defaut status = 'P' (Pending)
     content.status = 'P';
     content.attachment = attach;
-    this._auth.user.subscribe(user => {
+    this._auth.user$.subscribe(user => {
       content.user = { uid: user.uid, displayName: user.displayName, lastName: user.lastName, email: user.email }
       return this.activityCollection.add(content)
         .then(() => this._notify.update('success', 'Atividade criada com sucesso!'))
