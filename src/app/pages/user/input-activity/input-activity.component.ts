@@ -29,7 +29,7 @@ export class InputActivityComponent implements OnInit {
   cities$: Observable<Cities[]>;
   disabledSave: boolean;
   @ViewChild('inputFocus') focusIn: ElementRef;
-  @ViewChild(UploadPageComponent) uploadComponent: UploadPageComponent;
+  @ViewChild(UploadPageComponent) fileUpload: UploadPageComponent;
   task: AngularFireUploadTask;
   percentage: Observable<number>;
 
@@ -104,13 +104,14 @@ export class InputActivityComponent implements OnInit {
   onSubmit() {
     if (this.activityForm.valid) {
       this._activityService
-        .createActivity(this.activityForm.value, this.uploadComponent.attachmentsActivity, this.uploadComponent.attachmentsUpload)
+        .createActivity(this.activityForm.value, this.fileUpload.attach, this.fileUpload.uploads)
         .then(result => {
           // console.log(result);
           // Upload Attachments
-          for (let i = 0; i < this.uploadComponent.attachmentsUpload.length; i++) {
+          for (let i = 0; i < this.fileUpload.uploads.length; i++) {
+            // The main task
             // tslint:disable-next-line:max-line-length
-            this.task = this._storage.upload(this.uploadComponent.attachmentsUpload[i].path, this.uploadComponent.attachmentsUpload[i].file, this.uploadComponent.attachmentsUpload[i].metadata);
+            this.task = this._storage.upload(this.fileUpload.uploads[i].path, this.fileUpload.uploads[i].file, this.fileUpload.uploads[i].metadata);
             // Progress monitoring
             this.percentage = this.task.percentageChanges();
           }

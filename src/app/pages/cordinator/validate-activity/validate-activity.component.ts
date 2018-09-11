@@ -37,11 +37,11 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
             this._storage.ref(element.url).getDownloadURL().
               subscribe(res => {
                 // using my card
-                // const data = { name: element.name, url: res };
+                const data = { name: element.name, type: element.type, url: res };
                 // using lightbox
-                const data = { source: res, thumbnail: res, title: element.name };
+                // const data = { source: res, thumbnail: res, title: element.name };
                 this.attachments.push(data)
-                , console.log(data)
+                // , console.log(data)
               });
           });
         });

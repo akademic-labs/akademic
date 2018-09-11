@@ -1,28 +1,49 @@
-<p-fileUpload chooseLabel="Anexar Arquivos" multiple="multiple"
-  (onSelect)="uploadAttach($event)" (onRemove)="removeAttach($event)" (onClear)="clearAttachments()">
-</p-fileUpload>
-
-<!-- <hr>
+<!-- <pre>{{ attach | json }}</pre> -->
+<!-- <pre>{{ uploads | json }}</pre> -->
+<!-- <pre>{{ attachsImage | json }}</pre> -->
+<hr>
 <div class="dropzone" akaDropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)" [class.hovering]="isHovering">
-  <p>Arraste</p>
-  <div class="file">
-    <label class="file-label">
-      <input class="file-input" type="file" (change)="startUpload($event.target.files)">
-      <span class="file-cta">
-        <span class="file-icon">
-          <i class="fa fa-upload"></i>
-        </span>
-        <span class="file-label">
-          ou escolha um arquivo...
-        </span>
-      </span>
-    </label>
-  </div>
+    <p>Arraste</p>
+    <div class="file">
+        <label class="file-label">
+            <input class="file-input" #inputUpload multiple type="file" (change)="startUpload($event.target.files)" [accept]="fileAccept"
+            />
+            <span class="file-cta">
+                <span class="file-icon">
+                    <i class="fa fa-upload"></i>
+                </span>
+                <span class="file-label">
+                    ou escolha um arquivo...
+                </span>
+            </span>
+        </label>
+    </div>
+    <div class="show-attachs">
+        <div *ngFor="let attachImg of attachsImage; index as i" class="card card-attachment">
+            <div *ngIf="uploads[i].file.type !== 'application/pdf'; else pdf">
+                <img class="img-attach" [src]="attachImg" />
+            </div>
+            <ng-template #pdf>
+                <img class="img-attach" src="assets/img/pdf3.png" />
+            </ng-template>
+            <div class="text-center" style="margin: 5px 10px 0px 0px;">
+                <label>{{ uploads[i].file.name }}</label>
+                <br>
+                <label>({{ uploads[i].file.size | fileSize }})</label>
+                <div style="width: 100%;">
+                    <button type="button" class="btn-card-attach" rel="tooltip" title="Descartar" (click)="removeAttach(i)"><i
+                            class="fa fa-trash"></i></button>
+                    <a [download]="uploads[i].file.name" [href]="attachImg" type="button" class="btn-card-attach" rel="tooltip" title="Download"><i
+                            class="fa fa-download"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div *ngIf="percentage | async as pct">
-  <progress class="progress progress-custom is-info" [value]="pct" max="100"></progress>
-  {{ pct | number }}%
+<!-- <div *ngIf="percentage | async as pct">
+    <progress class="progress progress-custom is-info" [value]="pct" max="100"></progress>
+    {{ pct | number }}%
 </div> -->
 
 <!--div *ngIf="(snapshot | async) as snap">
@@ -33,39 +54,6 @@
   <button (click)="task.resume()" class="btn btn-success" [disabled]="!(snap?.state === 'paused')">Recomeçar</button>
 </div-->
 
-
-<!-- UPLOAD OLD - LUIZ -->
-<!-- <hr>
-<label for="city">Anexos</label>
-<div class="dropzone" akaDropZone (hovered)="toggleHover($event)" (dropped)="startAttach($event)" [class.hovering]="isHovering"> -->
-    <!-- <p>Arraste</p> -->
-    <!-- <div class="file">
-        <label class="file-label">
-            <input multiple class="file-input" type="file" formControlName="attach" (change)="startAttach($event.target.files)">
-            <span class="file-cta">
-                <span class="file-icon">
-                    <i class="fa fa-upload"></i>
-                </span>
-                <span class="file-label">
-                    ou selecione seu(s) anexos(s)...
-                </span>
-            </span>
-        </label>
-    </div>
-    <div class="show-attachs">
-        <div *ngFor="let attach of attachmentsRender" class="card card-attachment">
-            <img class="img-attach" [src]="attach" #teste />
-            <button type="button" rel="tooltip" title="Descartar" (click)="removeAttach(attach)" class="btn-card-remove"><i
-                    class="fa fa-trash"></i></button>
-        </div>
-    </div> -->
-    <!-- <div *ngIf="percentage | async as pct">
-        <progress class="progress progress-custom is-info" [value]="pct" max="100"></progress>
-        {{ pct | number }}%
-    </div>
-
-    <!-- <pre>{{  uploadedFiles | json }}</pre>
-    <p-fileUpload chooseLabel="Anexar Arquivos" (onSelect)="uploadAttach($event)" (onRemove)="removeAttach($event)" (onClear)="clearAttachs()"
-        multiple="multiple">
-    </p-fileUpload> -->
-<!-- </div> -->
+<!-- <p-fileUpload chooseLabel="Anexar Arquivos" multiple="multiple"
+  (onSelect)="uploadAttach($event)" (onRemove)="removeAttach($event)" (onClear)="clearAttachments()">
+</p-fileUpload> -->
