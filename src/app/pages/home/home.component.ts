@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
   constructor(private _auth: AuthService, private _actService: ActivityService, private _router: Router) { }
 
   ngOnInit() {
-    this._auth.user.subscribe(res => {
+    this._auth.user$.subscribe(res => {
       this.actsToApprove$ = this._actService.getActivitiesToApprove(res.uid);
     });
 
