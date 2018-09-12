@@ -8,7 +8,7 @@ declare let $: any;
 export class NotifyService {
 
   update(type: 'danger' | 'info' | 'success' | 'warning', message: string) {
-    $.notify({ icon: 'pe-7s-bell', message: message },
+    $.notify({ icon: 'fa fa-bell-o', message: message },
       {
         type: type,
         timer: 500,

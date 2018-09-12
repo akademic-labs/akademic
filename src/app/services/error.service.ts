@@ -20,7 +20,8 @@ export class ErrorService {
     'invalid-email': 'O e-mail fornecido é invalido',
     'network-request-failed': 'Ocorreu um erro de conexão à internet',
     'user-cancelled': 'Você não permitiu acesso à aplicação',
-    'popup-closed-by-user': 'Você não finalizou o acesso'
+    'popup-closed-by-user': 'Você não finalizou o acesso',
+    'internal-error': 'Erro interno no servidor'
     /* ADD HERE THE OTHERs IDs AND THE CORRESPONDING MESSAGEs */
   } as MessagesIndex;
 

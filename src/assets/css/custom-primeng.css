@@ -1,5 +1,4 @@
 /* VALIDATIONS */
-
 /* BORDER VALID */
 /* Inputtext */
 .ui-inputtext.ng-touched:valid,
@@ -13,7 +12,7 @@ p-spinner.ng-touched.ng-valid .ui-spinner-input {
 /* BORDER INVALID */
 /* Inputtext */
 .ui-inputtext.ng-touched.ng-invalid,
-.ui-inputtext.ng-dirty.ng-invalid,
+z .ui-inputtext.ng-dirty.ng-invalid,
 /* Dropdown */
 p-dropdown.ng-touched.ng-invalid .ui-dropdown,
 p-dropdown.ng-dirty.ng-invalid .ui-dropdown,
@@ -79,9 +78,7 @@ p-spinner.ng-dirty.ng-invalid .ui-spinner-button.ui-button {
     color: var(--color-invalid);
 }
 
-
 /* OTHERS */
-
 form .ui-dropdown {
     width: 100% !important;
 }
@@ -90,7 +87,8 @@ form .ui-dropdown {
     width: 100%;
 }
 
-.ui-datepicker-month, .ui-datepicker-year {
+.ui-datepicker-month,
+.ui-datepicker-year {
     border-radius: 3px;
 }
 
@@ -113,11 +111,12 @@ form .ui-dropdown {
     /* background-color: white; */
 }
 
-.ui-table .ui-table-tbody > tr {
+.ui-table .ui-table-tbody>tr {
     border: solid 1px #c8c8c8;
 }
 
-.ui-paginator .ui-dropdown .ui-dropdown-trigger, body .ui-paginator .ui-dropdown .ui-dropdown-label {
+.ui-paginator .ui-dropdown .ui-dropdown-trigger,
+body .ui-paginator .ui-dropdown .ui-dropdown-label {
     margin-top: 0px;
 }
 

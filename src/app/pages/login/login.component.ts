@@ -66,10 +66,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  signUpNow() {
-
-  }
-
   buildForm() {
     this.userForm = this.fb.group({
       'email': ['', [

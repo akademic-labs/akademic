@@ -1,11 +1,14 @@
+import { Attachment } from './../models/attachment.interface';
 import { Injectable } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
-import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+
 import { Activity } from '../models/activity.interface';
+
 import { AuthService } from './auth.service';
 import { NotifyService } from './notify.service';
+
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +16,8 @@ import { NotifyService } from './notify.service';
 export class ActivityService {
 
   activityCollection: AngularFirestoreCollection<Activity>;
-  task: AngularFireUploadTask;
 
-  constructor(
-    private afs: AngularFirestore,
-    private _auth: AuthService,
-    private _notify: NotifyService,
-    private _storage: AngularFireStorage,
-    private _router: Router
-  ) {
+  constructor(private afs: AngularFirestore, private _auth: AuthService, private _notify: NotifyService) {
     this.activityCollection = this.afs.collection('activities');
   }
 
@@ -48,26 +44,16 @@ export class ActivityService {
   }
 
   // async createActivity(content: Activity, attach: Attachment) {
-  async createActivity(content: Activity, attachs, uploads) {
+  async createActivity(content: Activity, attach) {
     // input defaut status = 'P' (Pending)
     content.status = 'P';
-    content.attachment = attachs;
-    this._auth.user.subscribe(user => {
+    content.attachment = attach;
+    this._auth.user$.subscribe(user => {
       content.user = { uid: user.uid, displayName: user.displayName, lastName: user.lastName, email: user.email }
       return this.activityCollection.add(content)
-        .then(() => {
-          // Upload Attachments
-          // for (let i = 0; i < uploads.length; i++) {
-          // tslint:disable-next-line:max-line-length
-          // this.task = this._storage.upload(uploads[i].path, uploads[i].file, uploads[i].metadata);
-          // }
-          this._notify.update('success', 'Atividade criada com sucesso!');
-          // this._router.navigate(['/dashboard']);
-          // Progress monitoring
-        })
+        .then(() => this._notify.update('success', 'Atividade criada com sucesso!'))
         .catch(() => this._notify.update('danger', 'Houve um erro na requisição!'));
     });
-    // return this.task.percentageChanges();
   }
 
   updateActivity(id: string, data: any, msg: string) {
