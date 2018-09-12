@@ -24,7 +24,7 @@
                 <img class="img-attach" [src]="attachImg" />
             </div>
             <ng-template #pdf>
-                <img class="img-attach" src="assets/img/pdf3.png" />
+                <img class="img-attach" src="assets/img/pdf.png" />
             </ng-template>
             <div class="text-center" style="margin: 5px 10px 0px 0px;">
                 <label>{{ uploads[i].file.name }}</label>
@@ -33,8 +33,10 @@
                 <div style="width: 100%;">
                     <button type="button" class="btn-card-attach" rel="tooltip" title="Descartar" (click)="removeAttach(i)"><i
                             class="fa fa-trash"></i></button>
-                    <a [download]="uploads[i].file.name" [href]="attachImg" type="button" class="btn-card-attach" rel="tooltip" title="Download"><i
-                            class="fa fa-download"></i></a>
+                    <a [download]="uploads[i].file.name" [href]="attachImg" target="_blank" type="button" class="btn-card-attach" rel="tooltip"
+                        title="Download"><i class="fa fa-download"></i></a>
+                    <!-- <iframe src="https://firebasestorage.googleapis.com/v0/b/akademic-dev.appspot.com/o/test%2FCalend%C3%A1rio-2018.pdf?alt=media&token=1cd89cbb-8634-415c-b6c7-4e0d3fdb35ff"
+                        style="width:600px; height:500px;" frameborder="0"></iframe> -->
                 </div>
             </div>
         </div>

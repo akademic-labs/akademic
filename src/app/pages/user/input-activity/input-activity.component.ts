@@ -13,6 +13,7 @@ import { ActivityType } from 'app/models/activity-type.interface';
 import { States } from 'app/models/states.interface';
 import { Cities } from 'app/models/cities.interface';
 import { UploadPageComponent } from 'app/uploads/upload-page/upload-page.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'aka-input-activity',
@@ -43,7 +44,8 @@ export class InputActivityComponent implements OnInit {
     private _actTypesService: ActivityTypeService,
     private _validatorService: ValidatorService,
     private _storage: AngularFireStorage,
-    private _cityStateService: CityStateService
+    private _cityStateService: CityStateService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -56,7 +58,15 @@ export class InputActivityComponent implements OnInit {
       .subscribe(res => {
         this.testes = res
         // , console.log(res)
-        this.massa = this.testes.sort();
+        // this.massa = this.testes.sort((a, b) => a.toLocaleUpperCase() < b.toLocaleUpperCase() ? -1 : 1);
+
+        // function sortByKey(array, key) {
+        //   return array.sort(function(a, b) {
+        //       const x = a[key];
+        //       const y = b[key];
+        //       return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        //   });
+      // }
         // this.massa = this.testes.sort((n1, n2) => {
         //   if (n1 > n2) {
         //     return 1;
@@ -117,6 +127,7 @@ export class InputActivityComponent implements OnInit {
           }
           this.activityForm.reset();
           this.focusIn.nativeElement.focus();
+          this._router.navigate(['/dashboard']);
         });
     } else {
       this._validatorService.checkOut(this.activityForm);

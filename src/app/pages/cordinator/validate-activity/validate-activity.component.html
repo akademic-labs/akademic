@@ -9,7 +9,7 @@
                 <hr>
             </div>
             <!-- <pre>{{ activity | json }}</pre>-->
-            <pre>{{ attachments | json }}</pre> 
+            <!-- <pre>{{ attachments | json }}</pre>  -->
             <!-- <p-galleria [images]="images" panelWidth="500" panelHeight="313" [showCaption]="true"></p-galleria> -->
             <div class="content">
                 <form>
@@ -60,14 +60,15 @@
                                 <img class="img-attach" [src]="attachImg.url" />
                             </div>
                             <ng-template #pdf>
-                                <img class="img-attach" src="assets/img/pdf3.png" />
+                                <img class="img-attach" src="assets/img/pdf.png" />
                             </ng-template>
-                            <div class="text-center" style="margin: 5px 10px 0px 0px;">
+                            <div class="text-center" style="margin: 20px 15px 0px 5px;">
                                 <label>{{ attachImg.name }}</label>
                                 <br>
+                                <!-- access file size to make inner join storage -->
                                 <!-- <label>({{ attachImg[i].file.size | fileSize }})</label> -->
                                 <div style="width: 100%;">
-                                    <a [download]="attachImg.name" [href]="attachImg.url" type="button" class="btn-card-attach" rel="tooltip" title="Download"><i
+                                    <a [download]="attachImg.name" [href]="attachImg.url" target="_blank" type="button" class="btn-card-attach" rel="tooltip" title="Download"><i
                                             class="fa fa-download"></i></a>
                                 </div>
                             </div>
