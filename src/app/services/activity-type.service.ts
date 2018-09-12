@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NotifyService } from './notify.service';
 import { ActivityType } from './../models/activity-type.interface';
+import { NotifyService } from './notify.service';
 
 @Injectable({
   providedIn: 'root'

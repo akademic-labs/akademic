@@ -9,8 +9,10 @@
                 <hr>
             </div>
             <div class="content">
+                <!-- {{ testes | json }} -->
+                <!-- {{ massa | json }} -->
                 <form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
-                    <!-- <pre>Forms: {{ activityForm.value | json }}</pre> -->
+                    <!-- <pre>Forms: {{ activityForm.value | json }}</pre> {{ activityForm.valid }} {{ activityForm.invalid }} -->
                     <!-- <pre>Attachments Render: {{ attachmentsRender | json }}</pre> -->
                     <!-- <pre>Attachments: {{ attachments | json }}</pre> -->
                     <div class="row">
@@ -25,7 +27,7 @@
                             <div class="form-group">
                                 <label for="activityType">Tipo de Atividade</label>
                                 <select class="form-control" formControlName="activityType">
-                                    <option *ngFor="let type of $activityTypes | async" [ngValue]="type">{{type.description}}</option>
+                                    <option *ngFor="let type of activityTypes$ | async" [ngValue]="type">{{type.description}}</option>
                                 </select>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('activityType')" error="required" msg="Tipo de Atividade é obrigatório."></aka-message-control-error>
@@ -96,7 +98,8 @@
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
                             <div class="form-group">
                                 <label for="state">Estado</label>
-                                <p-dropdown formControlName="state" (onChange)="getCities()" placeholder="Selecione" emptyFilterMessage="Nenhum resultado." [options]="testes" optionLabel="nome" [showClear]="true" filter="true"></p-dropdown>
+                                <p-dropdown formControlName="state" (onChange)="getCities()" placeholder="Selecione" emptyFilterMessage="Nenhum resultado."
+                                    [options]="states$ | async" optionLabel="nome" [showClear]="true" filter="true"></p-dropdown>
                                 <!-- <select class="form-control" formControlName="state" (change)="getCities()">
                                     <option *ngFor="let state of $states | async" [ngValue]="state">{{state.nome}}</option>
                                 </select> -->
@@ -106,7 +109,8 @@
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
                             <div class="form-group">
                                 <label for="city">Cidade</label>
-                                <p-dropdown formControlName="city" placeholder="Selecione" emptyFilterMessage="Nenhum resultado." [options]="testes2" optionLabel="nome" [showClear]="true" filter="true"></p-dropdown>
+                                <p-dropdown formControlName="city" placeholder="Selecione" emptyFilterMessage="Nenhum resultado." [options]="cities$ | async"
+                                    optionLabel="nome" [showClear]="true" filter="true"></p-dropdown>
                                 <!-- <select class="form-control" formControlName="city">
                                     <option *ngFor="let city of $cities | async" [ngValue]="city.nome">{{city.nome}}</option>
                                 </select> -->
@@ -117,42 +121,11 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                             <div class="form-group">
-                                <!-- <aka-upload-page></aka-upload-page> -->
-                                <hr>
-                                <label for="city">Anexos</label>
-                                <div class="dropzone" akaDropZone (hovered)="toggleHover($event)" (dropped)="startAttach($event)" [class.hovering]="isHovering">
-                                    <p>Arraste</p>
-                                    <div class="file">
-                                        <label class="file-label">
-                                            <input multiple class="file-input" type="file" formControlName="attach" (change)="startAttach($event.target.files)">
-                                            <span class="file-cta">
-                                                <span class="file-icon">
-                                                    <i class="fa fa-upload"></i>
-                                                </span>
-                                                <span class="file-label">
-                                                    ou selecione seu(s) anexos(s)...
-                                                </span>
-                                            </span>
-                                        </label>
-                                    </div>
-                                    <div class="show-attachs">
-                                        <div *ngFor="let attach of attachmentsRender" class="card card-attachment">
-                                            <img class="img-attach" [src]="attach" #teste />
-                                            <!-- <embed src="http://www.facear.edu.br/wp-content/uploads/Calend%C3%A1rio-2018.pdf" width="200" height="300" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html"> -->
-                                            <!-- <video width="400" controls>
-                                                <source [src]="attach" type="video/mp4">
-                                                <source [src]="attach" type="video/ogg"> Your browser does not support HTML5 video.
-                                            </video> -->
-                                            <button type="button" rel="tooltip" title="Descartar" (click)="removeAttach(attach)" class="btn-card-remove"><i
-                                                    class="fa fa-trash"></i></button>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="percentage | async as pct">
-                                        <progress class="progress progress-custom is-info" [value]="pct" max="100"></progress>
-                                        {{ pct | number }}%
-                                    </div>
+                                <div *ngIf="percentage | async as pct" class="text-center">
+                                    <progress class="progress progress-custom is-info" [value]="pct" max="100"></progress>
+                                    {{ pct | number : '1.2-2'}}%
                                 </div>
-                                <aka-message-control-error [control]="activityForm.get('attach')" error="required" msg="Upload de anexo(s) é obrigatório."></aka-message-control-error>
+                                <aka-upload-page></aka-upload-page>
                             </div>
                         </div>
                     </div>

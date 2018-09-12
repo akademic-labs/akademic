@@ -15,14 +15,14 @@ export class ActivitypeTypeComponent implements OnInit {
   button = 'Adicionar';
   activityTypeForm: FormGroup;
   activityType: ActivityType;
-  $activityTypes: Observable<ActivityType[]>;
+  activityTypes$: Observable<ActivityType[]>;
   @ViewChild('inputFocus') focusIn: ElementRef;
   disabledSave: boolean;
 
   constructor(private _activityTypeFormBuilder: FormBuilder, private _activityTypeService: ActivityTypeService) { }
 
   ngOnInit() {
-    this.$activityTypes = this._activityTypeService.get();
+    this.activityTypes$ = this._activityTypeService.get();
     this.buildForm();
     this.focusIn.nativeElement.focus();
   }
@@ -35,7 +35,6 @@ export class ActivitypeTypeComponent implements OnInit {
   }
 
   save() {
-
     // if (this.activityTypeForm.valid) {
       if (!this.activityTypeForm.get('uid').value) {
         this._activityTypeService.post(this.activityTypeForm.value);

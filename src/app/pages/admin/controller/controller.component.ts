@@ -6,7 +6,6 @@ import { Course } from './../../../models/course.interface';
 import { ControllerService } from './../../../services/controller.service';
 import { CourseService } from '../../../services/course.service';
 import { MessageServicePrimeNG } from './../../../services/message.service';
-import { MessageService } from 'primeng/components/common/messageservice';
 
 @Component({
   selector: 'aka-controller',
@@ -19,11 +18,9 @@ export class ControllerComponent implements OnInit {
   button = 'Adicionar';
   controllerForm: FormGroup;
   controller: Controller;
-  $controllers: Observable<Controller[]>;
-  $courses: Observable<Course[]>;
+  controllers$: Observable<Controller[]>;
+  courses$: Observable<Course[]>;
   @ViewChild('inputFocus') focusIn: ElementRef;
-
-  courses = [];
 
   constructor(
     private _controllerFormBuilder: FormBuilder,
@@ -32,26 +29,11 @@ export class ControllerComponent implements OnInit {
     private _messageService: MessageServicePrimeNG
   ) { }
 
-  confirmRemove(obj) {
-    this.controller = obj;
-    this._messageService.messageConfirm('remove', true, 'warn', '', `Deseja realmente excluir '${obj.name}' ?`);
-  }
-
-  onReject() {
-    this._messageService.closeMessageConfirm('remove');
-  }
-
   ngOnInit() {
-    this.$courses = this._courseService.get();
-    this.$controllers = this._controllerService.get();
+    this.courses$ = this._courseService.get();
+    this.controllers$ = this._controllerService.get();
     this.buildForm();
     this.focusIn.nativeElement.focus();
-
-    this._courseService.get()
-      .subscribe(res => {
-        this.courses = res
-        // , console.log(res)
-      });
   }
 
   // tslint:disable-next-line:member-ordering
@@ -97,6 +79,15 @@ export class ControllerComponent implements OnInit {
 
   compareCourse(obj1, obj2) {
     return obj1 && obj2 ? (obj1.uid === obj2.uid) : obj1 === obj2;
+  }
+
+  confirmRemove(obj) {
+    this.controller = obj;
+    this._messageService.messageConfirm('remove', true, 'warn', '', `Deseja realmente excluir '${obj.name}' ?`);
+  }
+
+  onReject() {
+    this._messageService.closeMessageConfirm('remove');
   }
 
 }

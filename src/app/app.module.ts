@@ -44,7 +44,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
+import { FileUploadModule } from 'primeng/fileupload';
 import { GalleriaModule } from 'primeng/galleria';
+import { LightboxModule } from 'primeng/lightbox';
 
 @NgModule({
   declarations: [
@@ -87,7 +89,9 @@ import { GalleriaModule } from 'primeng/galleria';
     CalendarModule,
     ToastModule,
     TableModule,
-    GalleriaModule
+    GalleriaModule,
+    LightboxModule,
+    FileUploadModule
   ],
   providers: [AuthGuard, MessageService],
   bootstrap: [AppComponent]

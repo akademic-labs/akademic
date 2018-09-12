@@ -8,8 +8,9 @@
                 </div>
                 <hr>
             </div>
-            <!-- <pre>{{ activity | json }}</pre> -->
-            <!-- <pre>{{ attachments | json }}</pre> -->
+            <!-- <pre>{{ activity | json }}</pre>-->
+            <!-- <pre>{{ attachments | json }}</pre>  -->
+            <!-- <p-galleria [images]="images" panelWidth="500" panelHeight="313" [showCaption]="true"></p-galleria> -->
             <div class="content">
                 <form>
                     <div class="uppercase" style="color: #9A9A9A;text-align: center;font-size: 16px;">
@@ -23,10 +24,9 @@
                         {{activity?.local}}
                     </div>
                     <hr>
-                    
                     <span class="icon-report">
-                        <i class="fa fa-clock-o"></i>{{ activity?.initialDate | date: 'dd/MM/yyyy'}} - 
-                        {{ activity?.finalDate | date: 'dd/MM/yyyy' }}  
+                        <i class="fa fa-clock-o"></i>{{ activity?.initialDate | date: 'dd/MM/yyyy'}} - {{ activity?.finalDate
+                        | date: 'dd/MM/yyyy' }}
                         <!-- {{ activity?.finalDate.toDate() | date: 'dd/MM/yyyy' }} -->
                     </span>
                     <hr>
@@ -45,15 +45,58 @@
                     <div>Observação: {{ activity?.observation }}</div>
                     <hr>
                     <div>Anexos:</div>
-                    <div class="show-attachs">
+                    <!-- <div class="show-attachs">
                         <div *ngFor="let attach of attachments" class="card card-attachment">
                             <a [href]="attach.url" target="_blank">
                                 {{ attach.name }}
                             </a>
-                            <!-- <img class="img-attach" [src]="attach.url" />
-                                <label>{{ attach.name }}</label> -->
+                            <img class="img-attach" [src]="attach.url" />
+                                <label>{{ attach.name }}</label>
+                        </div>
+                    </div> -->
+                    <div class="show-attachs">
+                        <div *ngFor="let attachImg of attachments; index as i" class="card card-attachment">
+                            <div *ngIf="attachImg.type !== 'application/pdf'; else pdf">
+                                <img class="img-attach" [src]="attachImg.url" />
+                            </div>
+                            <ng-template #pdf>
+                                <img class="img-attach" src="assets/img/pdf.png" />
+                            </ng-template>
+                            <div class="text-center" style="margin: 20px 15px 0px 5px;">
+                                <label>{{ attachImg.name }}</label>
+                                <br>
+                                <!-- access file size to make inner join storage -->
+                                <!-- <label>({{ attachImg[i].file.size | fileSize }})</label> -->
+                                <div style="width: 100%;">
+                                    <a [download]="attachImg.name" [href]="attachImg.url" target="_blank" type="button" class="btn-card-attach" rel="tooltip" title="Download"><i
+                                            class="fa fa-download"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <!-- <span>
+                        Imagens
+                    </span> -->
+                    <!-- <div class="text-center"> -->
+                    <!-- <p-lightbox [images]="attachments"></p-lightbox> -->
+                    <!-- <iframe preload="none" autoplay="false" width="560" height="315" src="https://firebasestorage.googleapis.com/v0/b/akademic-dev.appspot.com/o/test%2FThaeme%20%20Thiago%20%20Onde%20J%20Se%20Viu%20%20Clipe%20Oficial%20-%20HD%20720p%20%5BFile2HD.com%5D.mp4?alt=media&token=a7b60012-1505-4eef-922d-8a87333707b0"
+                            frameborder="0" allowfullscreen></iframe> -->
+                    <!-- </div> -->
+
+                    <!-- <span>
+                        Vídeos
+                    </span> -->
+                    <!-- <p-lightbox type="content"> -->
+                    <!-- <a class="group" href="#">
+                        Assistir Video
+                    </a> -->
+                    <!-- <video width="320" height="240" controls>
+                        <source src="https://firebasestorage.googleapis.com/v0/b/akademic-dev.appspot.com/o/test%2F2018-08-29-Z%20Felipe%20%20Banheira%20de%20Espuma%20(Clipe%20Oficial)%20-%20HD%20720p%20%5BFile2HD.com%5D.mp4?alt=media&token=7889b268-7b9f-41b5-8383-c2711f8386c5"
+                            type="video/mp4">
+                    </video> -->
+                    <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/9bZkp7q19f0" frameborder="0" allowfullscreen></iframe> -->
+
+                    <!-- </p-lightbox> -->
                     <!-- <video id="my-video" class="video-js" controls preload="auto" width="640" height="264"
                     poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
 

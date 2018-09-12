@@ -27,7 +27,7 @@
                 <label for="course">Curso</label>
                 <select class="form-control" placeholder="asdasdasd" formControlName="course" [compareWith]="compare">
                   <option value="null" disabled="true" [selected]="true">Selecione..</option>
-                  <option *ngFor="let course of $courses | async" [ngValue]="course">{{course.description}}</option>
+                  <option *ngFor="let course of courses$ | async" [ngValue]="course">{{course.description}}</option>
                 </select>
               </div>
               <aka-message-control-error [control]="ruleForm.get('course')" error="required" msg="Curso é obrigatório."></aka-message-control-error>
@@ -46,7 +46,7 @@
                 <label for="activityType">Tipo de Atividade</label>
                 <select class="form-control" placeholder="asdasdasd" formControlName="activityType" [compareWith]="compare">
                   <option value="null" disabled="true" [selected]="true">Selecione..</option>
-                  <option *ngFor="let activityType of $activityTypes | async" [ngValue]="activityType">{{activityType.description}}</option>
+                  <option *ngFor="let activityType of activityTypes$ | async" [ngValue]="activityType">{{activityType.description}}</option>
                 </select>
               </div>
               <aka-message-control-error [control]="ruleForm.get('activityType')" error="required" msg="Tipo de atividade é obrigatório."></aka-message-control-error>
@@ -62,7 +62,7 @@
         <div class="table-full-width">
           <table class="table">
             <tbody>
-              <tr *ngFor="let rule of $rules | async">
+              <tr *ngFor="let rule of rules$ | async">
                 <td>{{ rule.name }} | {{ rule.course.description }} | {{ rule.hours }} | {{ rule.activityType.description }}</td>
                 <td class="td-actions text-right">
                   <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
@@ -77,7 +77,7 @@
           </table>
         </div>
         <div class="footer">
-          <hr> {{ ($rules | async)?.length }} registros
+          <hr> {{ (rules$ | async)?.length }} registros
         </div>
       </div>
     </div>

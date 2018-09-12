@@ -1,15 +1,12 @@
-import { ActivityTypeService } from './../../../services/activity-type.service';
-import { ActivityType } from 'app/models/activity-type.interface';
+import { FormGroup,  FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FormGroup,  FormBuilder,
-  Validators,
-  FormControl
-} from '@angular/forms';
 import { Rules } from '../../../models/rules.interface';
+import { Course } from '../../../models/course.interface';
+import { ActivityType } from 'app/models/activity-type.interface';
 import { Ruleservice } from '../../../services/rules.service';
 import { CourseService } from '../../../services/course.service';
-import { Course } from '../../../models/course.interface';
+import { ActivityTypeService } from './../../../services/activity-type.service';
 
 @Component({
   selector: 'aka-rules',
@@ -22,9 +19,9 @@ export class RulesComponent implements OnInit {
   button = 'Adicionar';
   ruleForm: FormGroup;
   rule: Rules;
-  $rules: Observable<Rules[]>;
-  $courses: Observable<Course[]>;
-  $activityTypes: Observable<ActivityType[]>;
+  rules$: Observable<Rules[]>;
+  courses$: Observable<Course[]>;
+  activityTypes$: Observable<ActivityType[]>;
   @ViewChild('inputFocus')
   focusIn: ElementRef;
 
@@ -36,9 +33,9 @@ export class RulesComponent implements OnInit {
   ) {}
 
    ngOnInit() {
-    this.$rules = this._rulesService.get();
-    this.$activityTypes = this._activityTypeService.get();
-    this.$courses = this._courseService.get();
+    this.rules$ = this._rulesService.get();
+    this.activityTypes$ = this._activityTypeService.get();
+    this.courses$ = this._courseService.get();
     this.buildForm();
     this.focusIn.nativeElement.focus();
    }

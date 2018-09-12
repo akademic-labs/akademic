@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { UploadPageComponent } from './upload-page/upload-page.component';
 import { DropZoneDirective } from './drop-zone.directive';
 import { FileSizePipe } from './file-size.pipe';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FileUploadModule
   ],
   declarations: [UploadPageComponent, DropZoneDirective, FileSizePipe],
   exports: [UploadPageComponent]

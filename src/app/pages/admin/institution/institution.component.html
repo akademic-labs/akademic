@@ -29,7 +29,7 @@
         <div class="table-full-width">
           <table class="table">
             <tbody>
-              <tr *ngFor="let institution of $institutions | async">
+              <tr *ngFor="let institution of institutions$ | async">
                 <td>{{institution.name}}</td>
                 <td class="td-actions text-right">
                   <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
@@ -44,7 +44,7 @@
           </table>
         </div>
         <div class="footer">
-          <hr> {{ ($institutions | async)?.length }} registros
+          <hr> {{ (institutions$ | async)?.length }} registros
         </div>
       </div>
     </div>

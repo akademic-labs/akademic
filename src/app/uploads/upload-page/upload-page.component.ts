@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
-
-import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
-import { AngularFirestore } from 'angularfire2/firestore';
-
 import { Observable } from 'rxjs';
+import { AngularFireUploadTask } from 'angularfire2/storage';
 import { Attachment } from 'app/models/attachment.interface';
-
 import { NotifyService } from 'app/services/notify.service';
 
 @Component({
@@ -14,48 +10,71 @@ import { NotifyService } from 'app/services/notify.service';
   styleUrls: ['./upload-page.component.css']
 })
 export class UploadPageComponent {
-  // Main task
-  task: AngularFireUploadTask;
 
-  // Progress monitoring
-  percentage: Observable<number>;
+  folderStorage = 'top';
+  fileAccept = ['image/jpeg', 'image/png', 'application/pdf', 'image/x-eps'];
+  attach: Attachment[] = [];
+  uploads = [];
+  attachsImage = [];
 
   snapshot: Observable<any>;
-
+  // Main task
+  task: AngularFireUploadTask;
+  // Progress monitoring
+  percentage: Observable<number>;
   // State for dropzone CSS toggling
   isHovering: boolean;
 
-  attach: Attachment;
+  constructor(private _notify: NotifyService) { }
 
-  constructor(private storage: AngularFireStorage, private _notify: NotifyService) { }
+  startUpload(event: FileList) {
+    for (let i = 0; i < event.length; i++) {
+      // get date and hour of the moment and replace '/' per '-'
+      const date = new Date().toLocaleString().replace(/\//g, '-');
+      const file = event[i];
+      const name = file.name;
+      // The storage path
+      const path = `${this.folderStorage}/${date} ${name}`;
+      // Totally optional metadata
+      const metadata = {
+        customMetadata: {
+          'location': 'Araucária, PR, Brazil',
+          'activity': 'complementary-activity'
+        }
+      }
+      // Client-side validation
+      const image = true ? file.type.split('/')[0] === 'image' : false;
+      const pdf = true ? file.type.split('/')[1] === 'pdf' : false;
+      if (image || pdf) {
+        this.attach.push({ name: file.name, type: file.type, url: path });
+        this.uploads.push({ path, file, metadata });
+      } else {
+        this._notify.update('warning', `Arquivo '${file.name}' não suportado.`);
+      }
+    }
+    // Render attachments on screen
+    this.renderAttach(this.uploads);
+  }
+
+  removeAttach(index: number) {
+    this.uploads.splice(index, 1);
+    this.attach.splice(index, 1);
+    this.attachsImage.splice(index, 1);
+  }
+
+  renderAttach(uploads) {
+    for (let i = 0; i < uploads.length; i++) {
+      const reader = new FileReader();
+      const file = uploads[i].file;
+      reader.onloadend = () => {
+        this.attachsImage[i] = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 
   toggleHover(event: boolean) {
     this.isHovering = event;
-  }
-
-  startUpload(event: FileList) {
-    // The File object
-    const file = event.item(0);
-
-    // Client-side validation example
-    if (file.type.split('/')[0] !== 'image') {
-      this._notify.update('warning', 'Arquivo não suportado.')
-      return;
-    }
-
-    // The storage path
-    const path = `activities-attach/${new Date().getTime()}-${file.name}`;
-
-    // Totally optional metadata
-    const customMetadata = { app: 'atividade-complementar!' };
-
-    // The main task
-    this.task = this.storage.upload(path, file, { customMetadata });
-
-    this.attach = { name: file.name, type: file.type, url: path };
-
-    // Progress monitoring
-    this.percentage = this.task.percentageChanges();
   }
 
   // Determines if the upload task is active
@@ -64,4 +83,5 @@ export class UploadPageComponent {
       snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes
     );
   }
+
 }

@@ -1,11 +1,11 @@
-import { Activity } from './../../models/activity.interface';
-import { ActivityService } from 'app/services/activity.service';
 import { Component, OnInit } from '@angular/core';
 import { ChartType } from 'app/shared/chart-card/chart-card/chart-card.component';
-
-import { AuthService } from 'app/services/auth.service';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
+import { Activity } from './../../models/activity.interface';
+import { ActivityService } from 'app/services/activity.service';
+import { AuthService } from 'app/services/auth.service';
 
 @Component({
   selector: 'aka-home',
@@ -27,18 +27,13 @@ export class HomeComponent implements OnInit {
   public activityChartData: any;
   public activityChartOptions: any;
 
-  $actsToApprove: Observable<Activity[]>
-
-  actsToApprove = [];
+  actsToApprove$: Observable<Activity[]>
 
   constructor(private _auth: AuthService, private _actService: ActivityService, private _router: Router) { }
 
   ngOnInit() {
-    this._auth.user$.subscribe(res => {
-      this.$actsToApprove = this._actService.getActivitiesToApprove(res.uid);
-
-      this._actService.getActivitiesToApprove(res.uid)
-        .subscribe(data => this.actsToApprove = data);
+    this._auth.user.subscribe(res => {
+      this.actsToApprove$ = this._actService.getActivitiesToApprove(res.uid);
     });
 
     // calc of the last 6 months

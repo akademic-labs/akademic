@@ -3194,10 +3194,9 @@ fieldset[disabled] .form-control {
 }
 
 .img-attach {
-  height: 250px;
-  width: 200px;
-  padding: 4px;
-  display: block;
+  height: 80px;
+  width: 65px;
+  margin: 7px;
 
   -webkit-animation: swing 1s ease;
   animation: swing 1s ease;
@@ -3206,7 +3205,7 @@ fieldset[disabled] .form-control {
 }
 
 .card-attachment {
-  display: inline-block;
+  display: -webkit-inline-box;
   margin: 5px;
 }
 
@@ -3216,15 +3215,16 @@ fieldset[disabled] .form-control {
   transform: scale(1.3);
 }
 
-.btn-card-remove {
+.btn-card-attach {
   border: none;
   background: none;
-  width: 100%;
+  color: black;
+  /* width: 100%; */
   outline: 0;
   font-size: 20px;
 }
 
 .show-attachs {
   text-align: center;
-  margin-bottom: 5px;
+  margin: 5px;
 }
