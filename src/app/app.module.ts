@@ -8,7 +8,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AppRoutingModule } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginModule } from './pages/login/login.module';
+import { SignModule } from './pages/sign/sign.module';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { SidebarModule } from './shared/sidebar/sidebar.module';
@@ -18,14 +18,15 @@ import { ChartCardModule } from './shared/chart-card/chart-card.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UserComponent } from 'app/pages/user/user.component';
-import { InputActivityComponent } from './pages/user/input-activity/input-activity.component';
-import { ValidateActivityComponent } from './pages/cordinator/validate-activity/validate-activity.component';
-import { CordinatorComponent } from './pages/cordinator/cordinator.component';
-import { ActivitypeTypeComponent } from './pages/admin/activitype-type/activitype-type.component';
 import { RulesComponent } from './pages/admin/rules/rules.component';
-import { ControllerComponent } from './pages/admin/controller/controller.component';
 import { CourseComponent } from './pages/admin/course/course.component';
+import { Error404Component } from './shared/error404/error404.component';
+import { CordinatorComponent } from './pages/cordinator/cordinator.component';
+import { ControllerComponent } from './pages/admin/controller/controller.component';
 import { InstitutionComponent } from './pages/admin/institution/institution.component';
+import { InputActivityComponent } from './pages/user/input-activity/input-activity.component';
+import { ActivitypeTypeComponent } from './pages/admin/activitype-type/activitype-type.component';
+import { ValidateActivityComponent } from './pages/cordinator/validate-activity/validate-activity.component';
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -60,7 +61,8 @@ import { LightboxModule } from 'primeng/lightbox';
     ControllerComponent,
     RulesComponent,
     ActivitypeTypeComponent,
-    InstitutionComponent
+    InstitutionComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,7 @@ import { LightboxModule } from 'primeng/lightbox';
     RouterModule,
     AppRoutingModule,
     ChartCardModule,
-    LoginModule,
+    SignModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,

@@ -22,16 +22,13 @@ import { FormControl } from '@angular/forms';
   ]
 })
 export class MessageControlErrorComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-
-  // tslint:disable-next-line:member-ordering
   @Input() error: string;
-  // tslint:disable-next-line:member-ordering
   @Input() msg: string;
-  // tslint:disable-next-line:member-ordering
   @Input() control: FormControl;
+
+  constructor() { }
+
+  ngOnInit() { }
 
   checkOut(): boolean {
     return (

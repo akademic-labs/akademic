@@ -39,7 +39,6 @@ export class AuthService {
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(credential => {
-        this._router.navigate(['/dashboard']);
         this._userService.createUserData(credential.user); // if using firestore
       })
       .catch((error) => this.handleError(error));
@@ -65,8 +64,7 @@ export class AuthService {
   private oAuthLogin(provider: any) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then(credential => {
-        this._userService.createUserData(credential.user); // if using firestore
-        // this._notify.update('success', 'Bem vindo!');
+        this._userService.createUserData(credential.user);
       })
       .catch(error => this.handleError(error));
   }
@@ -83,11 +81,6 @@ export class AuthService {
     return this.afAuth.auth.sendPasswordResetEmail(email)
       .then(() => this._notify.update('info', 'Atualização de senha enviada por e-mail'))
       .catch((error) => this.handleError(error));
-  }
-
-  // should maybe be implemented
-  emailSignUp(email: string, senha: string) {
-    this._router.navigate(['./']);
   }
 
   // If error, notify user

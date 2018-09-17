@@ -21,6 +21,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./input-activity.component.css']
 })
 export class InputActivityComponent implements OnInit {
+  @ViewChild('inputFocus') focusIn: ElementRef;
+  @ViewChild(UploadPageComponent) fileUpload: UploadPageComponent;
 
   title = 'Entrada de Atividade';
   activity: Activity;
@@ -29,8 +31,6 @@ export class InputActivityComponent implements OnInit {
   states$: Observable<States[]>;
   cities$: Observable<Cities[]>;
   disabledSave: boolean;
-  @ViewChild('inputFocus') focusIn: ElementRef;
-  @ViewChild(UploadPageComponent) fileUpload: UploadPageComponent;
   task: AngularFireUploadTask;
   percentage: Observable<number>;
 
@@ -114,7 +114,7 @@ export class InputActivityComponent implements OnInit {
   onSubmit() {
     if (this.activityForm.valid) {
       this._activityService
-        .createActivity(this.activityForm.value, this.fileUpload.attach, this.fileUpload.uploads)
+        .createActivity(this.activityForm.value, this.fileUpload.attach)
         .then(result => {
           // console.log(result);
           // Upload Attachments

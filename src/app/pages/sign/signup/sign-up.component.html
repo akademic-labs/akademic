@@ -1,0 +1,70 @@
+<form [formGroup]="signUpForm" (submit)="createUser()">
+  <div class="row">
+    <div class="col-lg-12">
+      <pre>{{ signUpForm.value | json }}</pre>
+      <div class="form-group" formGroupName="roles">
+        <label for="firstName">Você é?</label>
+        <div class="btn-group btn-group-justified" data-toggle="buttons">
+          <label for="student" class="btn btn-action">
+            <input type="radio" formControlName="student" [value]="true">Estudante
+          </label>
+          <label for="controller" class="btn btn-action">
+            <input type="radio" formControlName="controller" [value]="true">Coordenador
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" class="form-control" formControlName="email" required placeholder="Ex. email@email.com">
+      </div>
+      <aka-message-control-error [control]="signUpForm.get('email')" error="required" msg="E-mail é obrigatório."></aka-message-control-error>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label for="firstName">Primeiro nome</label>
+        <input type="text" class="form-control" formControlName="firstName" required placeholder="Primeiro nome">
+      </div>
+      <aka-message-control-error [control]="signUpForm.get('firstName')" error="required" msg="Primeiro nome é obrigatório."></aka-message-control-error>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label for="lastName">Último nome</label>
+        <input type="text" class="form-control" formControlName="lastName" required placeholder="Último nome">
+      </div>
+      <aka-message-control-error [control]="signUpForm.get('lastName')" error="required" msg="Último nome é obrigatório."></aka-message-control-error>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" class="form-control" formControlName="password" required placeholder="Senha">
+      </div>
+      <aka-message-control-error [control]="signUpForm.get('password')" error="required" msg="Senha deve incluir uma letra e um número, deve conter ao menos 8 e no máximo 25 caracteres."></aka-message-control-error>
+    </div>
+  </div>
+
+  <!--div class="row">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <label for="password2">Repetir a Senha</label>
+        <input type="password" class="form-control" formControlName="password2" required placeholder="Repetir a senha">
+      </div>
+    </div>
+  </div-->
+
+
+  <div class="flex-space">
+    <label type="button" class="text-primary pointer left" [routerLink]="['/']">Já tem uma conta?</label>
+    <button type="submit" class="btn-action right">Criar conta</button>
+  </div>
+</form>

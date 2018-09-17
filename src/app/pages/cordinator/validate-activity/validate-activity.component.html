@@ -25,7 +25,8 @@
                     </div>
                     <hr>
                     <span class="icon-report">
-                        <i class="fa fa-clock-o"></i>{{ activity?.initialDate | date: 'dd/MM/yyyy'}} - {{ activity?.finalDate
+                        <i class="fa fa-clock-o"></i>{{ activity?.initialDate | date: 'dd/MM/yyyy'}} - {{
+                        activity?.finalDate
                         | date: 'dd/MM/yyyy' }}
                         <!-- {{ activity?.finalDate.toDate() | date: 'dd/MM/yyyy' }} -->
                     </span>
@@ -68,8 +69,8 @@
                                 <!-- access file size to make inner join storage -->
                                 <!-- <label>({{ attachImg[i].file.size | fileSize }})</label> -->
                                 <div style="width: 100%;">
-                                    <a [download]="attachImg.name" [href]="attachImg.url" target="_blank" type="button" class="btn-card-attach" rel="tooltip" title="Download"><i
-                                            class="fa fa-download"></i></a>
+                                    <a [download]="attachImg.name" [href]="attachImg.url" target="_blank" type="button"
+                                        class="btn-card-attach" rel="tooltip" title="Download"><i class="fa fa-download"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -117,17 +118,18 @@
                     <div class="author">
                         <div>Solicitante</div>
                         <div style="padding:20px 0px">
-                            <img src="assets/img/default-avatar.png" alt="Foto do Usuário" width="80" height="80" style="border-radius: 50%; margin-right: 10px"
-                            />
-                            <h5 style="display: inline-grid;">{{activity?.user.displayName + ' ' + activity?.user.lastName}}
-                                <br/>
+                            <img src="assets/img/default-avatar.png" alt="Foto do Usuário" width="80" height="80" style="border-radius: 50%; margin-right: 10px" />
+                            <h5 style="display: inline-grid;">{{activity?.user.firstName + ' ' +
+                                activity?.user.lastName}}
+                                <br />
                                 <small style="text-transform: lowercase">{{activity?.user.email}}</small>
                             </h5>
                         </div>
                     </div>
-                    <button type="button" (click)="toApprove()" class="btn btn-info btn-fill pull-right" style="margin-left: 10px;">Aprovar</button>
-                    <button type="button" (click)="toReprove()" class="btn btn-link pull-right" style="border:none;">Reprovar</button>
-                    <div class="clearfix"></div>
+                    <div class="clearfix">
+                        <button type="button" (click)="toApprove()" class="btn btn-info btn-fill pull-right" style="margin-left: 10px;">Aprovar</button>
+                        <button type="button" (click)="toReprove()" class="btn btn-link pull-right" style="border:none;">Reprovar</button>
+                    </div>
                 </form>
             </div>
         </div>

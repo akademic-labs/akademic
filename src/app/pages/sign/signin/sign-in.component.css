@@ -1,0 +1,42 @@
+.login-footer {
+  padding: 10px;
+}
+
+.form-control {
+  float: none;
+  font-size: 16px;
+  border-width: 0px 0px 1px 0px;
+  width: 90%;
+}
+
+.input-group .input-group-addon {
+  border: 0;
+}
+
+.btn-action {
+  width: 100%;
+}
+
+.danger {
+  color: #ff0026;
+  display: block;
+}
+
+.hr-section {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  color: #9A9A9A;
+  margin: 30px 0px;
+}
+
+.hr-section::before,
+.hr-section::after {
+  content: "";
+  flex-grow: 1;
+  background: #9A9A9A;
+  height: 1px;
+  font-size: 0px;
+  line-height: 0px;
+  margin: 0px 8px;
+}
