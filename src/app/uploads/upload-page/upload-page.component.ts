@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { AngularFireUploadTask } from 'angularfire2/storage';
 import { Attachment } from 'app/models/attachment.interface';
 import { NotifyService } from 'app/services/notify.service';
+import { MessageServicePrimeNG } from '../../services/message.service';
 
 @Component({
   selector: 'aka-upload-page',
@@ -17,6 +18,8 @@ export class UploadPageComponent {
   uploads = [];
   attachsImage = [];
 
+  indexRemove;
+
   snapshot: Observable<any>;
   // Main task
   task: AngularFireUploadTask;
@@ -25,7 +28,10 @@ export class UploadPageComponent {
   // State for dropzone CSS toggling
   isHovering: boolean;
 
-  constructor(private _notify: NotifyService) { }
+  constructor(
+    private _notify: NotifyService,
+    private _messageService: MessageServicePrimeNG
+  ) { }
 
   startUpload(event: FileList) {
     for (let i = 0; i < event.length; i++) {
@@ -56,10 +62,9 @@ export class UploadPageComponent {
     this.renderAttach(this.uploads);
   }
 
-  removeAttach(index: number) {
-    this.uploads.splice(index, 1);
-    this.attach.splice(index, 1);
-    this.attachsImage.splice(index, 1);
+  confirmRemove(file, index: number) {
+    this.indexRemove = index;
+    this._messageService.messageConfirm('remove', true, 'warn', '', `Deseja realmente descartar o anexo '${file.name}' ?`);
   }
 
   renderAttach(uploads) {
@@ -71,6 +76,17 @@ export class UploadPageComponent {
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  removeAttach() {
+    this.uploads.splice(this.indexRemove, 1);
+    this.attach.splice(this.indexRemove, 1);
+    this.attachsImage.splice(this.indexRemove, 1);
+    this.toReject();
+  }
+
+  toReject() {
+    this._messageService.closeMessageConfirm('remove');
   }
 
   toggleHover(event: boolean) {

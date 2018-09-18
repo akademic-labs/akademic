@@ -74,7 +74,7 @@ export class ControllerComponent implements OnInit {
     this.controllerForm.reset();
     this.button = 'Adicionar';
     this.focusIn.nativeElement.focus();
-    this.onReject();
+    this.toReject();
   }
 
   compareCourse(obj1, obj2) {
@@ -86,7 +86,7 @@ export class ControllerComponent implements OnInit {
     this._messageService.messageConfirm('remove', true, 'warn', '', `Deseja realmente excluir '${obj.name}' ?`);
   }
 
-  onReject() {
+  toReject() {
     this._messageService.closeMessageConfirm('remove');
   }
 

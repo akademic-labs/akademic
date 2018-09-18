@@ -6,7 +6,7 @@ import { Cities } from '../models/cities.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class CityStateService {
+export class UtilsService {
 
   constructor(
     private _http: HttpClient
@@ -29,5 +29,16 @@ export class CityStateService {
       `https://ip-api.io/api/json`
     );
   }
+
+  sortBy(array, key, order) {
+    return array.sort(function (a, b) {
+      const x = a[key], y = b[key];
+      if (order === 'asc') {
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+      } else if (order === 'desc') {
+        return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+      }
+    })
+  };
 
 }
