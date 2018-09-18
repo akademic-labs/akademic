@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AngularFireUploadTask, AngularFireStorage } from 'angularfire2/storage';
 
 import { ActivityService } from 'app/services/activity.service';
@@ -21,6 +21,8 @@ import { UploadPageComponent } from 'app/uploads/upload-page/upload-page.compone
   styleUrls: ['./input-activity.component.css']
 })
 export class InputActivityComponent implements OnInit {
+  @ViewChild('inputFocus') focusIn: ElementRef;
+  @ViewChild(UploadPageComponent) fileUpload: UploadPageComponent;
 
   title = 'Entrada de Atividade';
   activity: Activity;
@@ -29,8 +31,6 @@ export class InputActivityComponent implements OnInit {
   states$: Observable<States[]>;
   cities$: Observable<Cities[]>;
   disabledSave: boolean;
-  @ViewChild('inputFocus') focusIn: ElementRef;
-  @ViewChild(UploadPageComponent) fileUpload: UploadPageComponent;
   task: AngularFireUploadTask;
   percentage: Observable<number>;
   subscribe: Subscription;
@@ -106,7 +106,6 @@ export class InputActivityComponent implements OnInit {
   onSubmit() {
     if (this.activityForm.valid) {
       this._activityService
-        // .createActivity(this.activityForm.value, this.fileUpload.attach, this.fileUpload.uploads)
         .createActivity(this.activityForm.value, this.fileUpload.attach)
         .then(result => {
           // console.log(result);

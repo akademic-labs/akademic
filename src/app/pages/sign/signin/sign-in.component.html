@@ -1,0 +1,68 @@
+<div *ngIf="!isReseting">
+  <div class="form-group text-center">
+    <ul class="social-icons">
+      <li><a (click)="signInWithGoogle()"><i class="fa fa-google-plus mr-4"></i></a></li>
+      <li><a (click)="signInWithFacebook()"><i class="fa fa-facebook mr-4"></i></a></li>
+      <li><a (click)="signInWithTwitter()"><i class="fa fa-twitter"></i></a></li>
+    </ul>
+  </div>
+  <div class="form-group">
+    <div class="hr-section">ou logue com</div>
+  </div>
+</div>
+
+<form [formGroup]="userForm" (submit)="login()">
+  <div class="input-group">
+    <span class="input-group-addon">
+      <i class="fa fa-user-circle-o"></i>
+    </span>
+    <div class="form-group">
+      <label class="control-label">E-mail</label>
+      <input type="email" class="form-control" formControlName="email" required>
+    </div>
+  </div>
+
+  <div class="input-group" *ngIf="!isReseting">
+    <span class="input-group-addon">
+      <i class="fa fa-unlock-alt"></i>
+    </span>
+    <div class="form-group">
+      <label class="control-label">Senha</label>
+      <input type="password" class="form-control" formControlName="password" required>
+    </div>
+  </div>
+
+  <div class="login-footer text-center">
+    <button class="btn-action" type="submit" *ngIf="!isReseting">
+      Login
+    </button>
+
+    <button class="btn-action" type="button" (click)="resetPassword()" *ngIf="isReseting">
+      Redefinir senha
+    </button>
+  </div>
+</form>
+
+<div class="text-center">
+  <label class="text-primary pointer mr-1" [routerLink]="['/signup']" *ngIf="!isReseting">
+    Cadastre-se agora |
+  </label>
+  <label class="text-primary pointer" (click)="isReseting = true" *ngIf="!isReseting">
+    Esqueceu a senha?
+  </label>
+  <label class="text-primary pointer" (click)="isReseting = false" *ngIf="isReseting">
+    Voltar
+  </label>
+</div>
+
+<div class="text-center" *ngIf="loading">
+  <img src="../../../assets/img/eclipse-loading.svg" alt="Login loading">
+</div>
+
+<div class="text-center danger" *ngIf="formErrors.email">
+  {{ formErrors.email }}
+</div>
+
+<div class="text-center danger" *ngIf="formErrors.password">
+  {{ formErrors.password }}
+</div>

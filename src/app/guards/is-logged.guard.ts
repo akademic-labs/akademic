@@ -10,7 +10,7 @@ import { take, map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginGuard implements CanActivate {
+export class IsLoggedGuard implements CanActivate {
 
   constructor(private _auth: AuthService, private router: Router, private notify: NotifyService) { }
 

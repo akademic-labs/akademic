@@ -6,14 +6,15 @@ type UserFields = 'email' | 'password';
 type FormErrors = { [u in UserFields]: string };
 
 @Component({
-  selector: 'aka-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'aka-sign-in',
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.css']
 })
-export class LoginComponent implements OnInit {
+export class SignInComponent implements OnInit {
 
   loading = false;
   userForm: FormGroup;
+  isReseting = false;
   formErrors: FormErrors = {
     'email': '',
     'password': '',

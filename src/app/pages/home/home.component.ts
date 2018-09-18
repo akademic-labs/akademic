@@ -81,9 +81,9 @@ export class HomeComponent implements OnInit {
         {
           data: [32, 6, 62],
           backgroundColor: [
-            'rgba(255,99,132, 0.4)',
-            'rgba(54, 162, 235, 0.4)',
-            'rgba(255, 206, 86, 0.4)'
+            'rgba(255,99,132)',
+            'rgba(54, 162, 235)',
+            'rgba(255, 206, 86)'
           ],
           borderColor: [
             'rgba(255,99,132, 1)',
@@ -136,7 +136,7 @@ export class HomeComponent implements OnInit {
       labels: this.lastSemester,
       datasets: [{
         label: 'Último semestre',
-        backgroundColor: 'rgba(75, 192, 192, 0.4)',
+        backgroundColor: 'rgba(75, 192, 192)',
         borderColor: 'rgba(75, 192, 192, 1)',
         data: [0, 10, 5, 2, 20, 30, 45],
       }]
@@ -153,12 +153,12 @@ export class HomeComponent implements OnInit {
         label: '# of Votes',
         data: [12, 19, 3, 5, 2, 3],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.4)',
-          'rgba(54, 162, 235, 0.4)',
-          'rgba(255, 206, 86, 0.4)',
-          'rgba(75, 192, 192, 0.4)',
-          'rgba(153, 102, 255, 0.4)',
-          'rgba(255, 159, 64, 0.4)'
+          'rgba(255, 99, 132)',
+          'rgba(54, 162, 235)',
+          'rgba(255, 206, 86)',
+          'rgba(75, 192, 192)',
+          'rgba(153, 102, 255)',
+          'rgba(255, 159, 64)'
         ],
         borderColor: [
           'rgba(255, 99, 132, 1)',
