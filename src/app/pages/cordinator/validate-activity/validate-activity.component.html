@@ -125,11 +125,29 @@
                             </h5>
                         </div>
                     </div>
-                    <button type="button" (click)="toApprove()" class="btn btn-info btn-fill pull-right" style="margin-left: 10px;">Aprovar</button>
-                    <button type="button" (click)="toReprove()" class="btn btn-link pull-right" style="border:none;">Reprovar</button>
+                    <button type="button" (click)="toConfirm('approve')" class="btn btn-info btn-fill pull-right" style="margin-left: 10px;">Aprovar</button>
+                    <button type="button" (click)="toConfirm('disapprove')" class="btn btn-link pull-right" style="border:none;">Reprovar</button>
                     <div class="clearfix"></div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<p-toast position="center" key="remove" (onClose)="toReject()" [modal]="true" [baseZIndex]="9999">
+    <ng-template let-message pTemplate="message">
+        <div class="text-center">
+            <i class="pi pi-exclamation-triangle"></i>
+            <h3>{{message.summary}}</h3>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="toAccept()" label="Sim" class="ui-button-success"></button>
+            </div>
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="toReject()" label="Não" class="ui-button-secondary"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

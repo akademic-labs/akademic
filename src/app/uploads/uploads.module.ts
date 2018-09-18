@@ -4,11 +4,13 @@ import { UploadPageComponent } from './upload-page/upload-page.component';
 import { DropZoneDirective } from './drop-zone.directive';
 import { FileSizePipe } from './file-size.pipe';
 import { FileUploadModule } from 'primeng/fileupload';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   imports: [
     CommonModule,
-    FileUploadModule
+    FileUploadModule,
+    ToastModule
   ],
   declarations: [UploadPageComponent, DropZoneDirective, FileSizePipe],
   exports: [UploadPageComponent]

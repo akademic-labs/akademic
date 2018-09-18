@@ -11,6 +11,7 @@
             <div class="content">
                 <!-- {{ testes | json }} -->
                 <!-- {{ massa | json }} -->
+                <!-- <pre>{{ states$ | json }}</pre> -->
                 <form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
                     <!-- <pre>Forms: {{ activityForm.value | json }}</pre> {{ activityForm.valid }} {{ activityForm.invalid }} -->
                     <!-- <pre>Attachments Render: {{ attachmentsRender | json }}</pre> -->
@@ -99,7 +100,7 @@
                             <div class="form-group">
                                 <label for="state">Estado</label>
                                 <p-dropdown formControlName="state" (onChange)="getCities()" placeholder="Selecione" emptyFilterMessage="Nenhum resultado."
-                                    [options]="states$ | async" optionLabel="nome" [showClear]="true" filter="true"></p-dropdown>
+                                    [options]="states$" optionLabel="nome" [showClear]="true" filter="true"></p-dropdown>
                                 <!-- <select class="form-control" formControlName="state" (change)="getCities()">
                                     <option *ngFor="let state of $states | async" [ngValue]="state">{{state.nome}}</option>
                                 </select> -->
@@ -109,7 +110,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
                             <div class="form-group">
                                 <label for="city">Cidade</label>
-                                <p-dropdown formControlName="city" placeholder="Selecione" emptyFilterMessage="Nenhum resultado." [options]="cities$ | async"
+                                <p-dropdown formControlName="city" placeholder="Selecione" emptyFilterMessage="Nenhum resultado." [options]="cities$"
                                     optionLabel="nome" [showClear]="true" filter="true"></p-dropdown>
                                 <!-- <select class="form-control" formControlName="city">
                                     <option *ngFor="let city of $cities | async" [ngValue]="city.nome">{{city.nome}}</option>

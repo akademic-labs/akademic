@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { Activity } from './../../models/activity.interface';
+import { User } from '../../models/user.interface';
 import { ActivityService } from 'app/services/activity.service';
 import { AuthService } from 'app/services/auth.service';
+import { RolesService } from './../../services/roles.service';
 
 @Component({
   selector: 'aka-home',
@@ -13,38 +15,68 @@ import { AuthService } from 'app/services/auth.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  private monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+  private monthNames = [
+    'Janeiro', 'Fevereiro', 'Março', 'Abril',
+    'Maio', 'Junho', 'Julho', 'Agosto',
+    'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+  ];
+  public activityCategoryChartType: ChartType;
+  public activityCategoryChartData: any;
+  public activityCategoryChartOptions: any;
+
+  public activityStatusChartType: ChartType;
+  public activityStatusChartData: any;
+  public activityStatusChartOptions: any;
+
+  public lastSemesterChartType: ChartType;
+  public lastSemesterChartData: any;
+  public lastSemesterChartOptions: any;
   private lastSemester = [];
-  public emailChartType: ChartType;
-  public emailChartData: any;
-  public emailChartOptions: any;
 
-  public hoursChartType: ChartType;
-  public hoursChartData: any;
+  public rankStudentsChartType: ChartType;
+  public rankStudentsChartData: any;
+  public rankStudentsChartOptions: any;
 
-  public activityChartType: ChartType;
-  public activityChartData: any;
-  public activityChartOptions: any;
+  activitiesToAnalyze$: Observable<Activity[]>
+  activitiesStudent$: Activity[];
+  user: User;
 
-  actsToApprove$: Observable<Activity[]>
+  labels = [];
+  labelsTest = ['Palestra', 'Curso Extensão', 'Monitoria'];
 
-  constructor(private _auth: AuthService, private _actService: ActivityService, private _router: Router) { }
+  constructor(
+    private _auth: AuthService,
+    private _activityService: ActivityService,
+    private _router: Router,
+    public _rolesService: RolesService
+  ) { }
 
   ngOnInit() {
     this._auth.user$.subscribe(res => {
-      this.actsToApprove$ = this._actService.getActivitiesToApprove(res.uid);
+      this.user = res;
+      if (this._rolesService.isController(this.user)) {
+        this.activitiesToAnalyze$ = this._activityService.getActivitiesToApprove();
+      }
+      if (this._rolesService.isStudent(this.user)) {
+        this._activityService.getActivitiesStudent(res.uid)
+          .subscribe(data => {
+            this.activitiesStudent$ = data;
+            this.labels = data.map(e => e.activityType.description);
+            this.labels = this.labels.filter((v, i, a) => a.indexOf(v) === i);
+            console.log(this.labels);
+            // const labels2 = ['etc', 'asdasd', 'papapap'];
+          });
+      }
+      if (this._rolesService.isAdmin(this.user)) {
+        // methods Admin here
+      }
     });
 
-    // calc of the last 6 months
-    for (let i = 6; i > 0; i -= 1) {
-      const d = new Date(new Date().getFullYear(), new Date().getMonth() - i, 1);
-      this.lastSemester.push(this.monthNames[d.getMonth()]);
-    }
-
-    this.emailChartType = ChartType.Pie;
-    this.emailChartData = {
-      labels: ['Pesquisa', 'Cultura', 'Extracurriculares'],
+    // CHART ACTIVITY PER CATEGORY
+    this.activityCategoryChartType = ChartType.Pie;
+    this.activityCategoryChartData = {
+      labels: this.labelsTest,
       datasets: [
         {
           data: [32, 6, 62],
@@ -63,12 +95,44 @@ export class HomeComponent implements OnInit {
         }
       ]
     };
-    this.emailChartOptions = {
+    this.activityCategoryChartOptions = {
       maintainAspectRatio: false
     }
 
-    this.hoursChartType = ChartType.Line;
-    this.hoursChartData = {
+    // CHART ACTIVITY PER STATUS
+    this.activityStatusChartType = ChartType.Doughnut;
+    this.activityStatusChartData = {
+      datasets: [{
+        data: [11, 4, 2],
+        backgroundColor: [
+          'rgba(75, 192, 192, 0.4)',
+          'rgba(153, 102, 255, 0.4)',
+          'rgba(255,99,132, 0.4)'
+        ],
+        borderColor: [
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255,99,132, 1)'
+        ],
+      }],
+      labels: [
+        'Aprovada',
+        'Pendente',
+        'Reprovada'
+      ]
+    };
+    this.activityStatusChartOptions = {
+      maintainAspectRatio: false
+    }
+
+    // CHART ACTIVITY LAST 6 SEMESTERS
+    // calc of the last 6 months
+    for (let i = 6; i > 0; i -= 1) {
+      const d = new Date(new Date().getFullYear(), new Date().getMonth() - i, 1);
+      this.lastSemester.push(this.monthNames[d.getMonth()]);
+    }
+    this.lastSemesterChartType = ChartType.Line;
+    this.lastSemesterChartData = {
       labels: this.lastSemester,
       datasets: [{
         label: 'Último semestre',
@@ -77,9 +141,13 @@ export class HomeComponent implements OnInit {
         data: [0, 10, 5, 2, 20, 30, 45],
       }]
     };
+    this.lastSemesterChartOptions = {
+      maintainAspectRatio: false
+    }
 
-    this.activityChartType = ChartType.Bar;
-    this.activityChartData = {
+    // CHART RANK STUDENTS
+    this.rankStudentsChartType = ChartType.Bar;
+    this.rankStudentsChartData = {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
       datasets: [{
         label: '# of Votes',
@@ -103,7 +171,7 @@ export class HomeComponent implements OnInit {
         borderWidth: 1
       }]
     };
-    this.activityChartOptions = {
+    this.rankStudentsChartOptions = {
       scales: {
         yAxes: [{
           ticks: {
@@ -112,10 +180,15 @@ export class HomeComponent implements OnInit {
         }]
       }
     };
+
   }
 
-  toEdit(uid) {
-    // console.log(uid);
-    this._router.navigate(['validate-activity', { id: uid }]);
+  toAnalyze(data) {
+    this._router.navigate(['validate-activity', { id: data.uid }]);
   }
+
+  toEdit(data) {
+    this._router.navigate(['input-activity', { id: data.uid }]);
+  }
+  
 }

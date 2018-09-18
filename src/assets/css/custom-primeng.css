@@ -103,14 +103,6 @@ form .ui-dropdown {
     height: 29px;
 }
 
-.ui-dialog-mask {
-    /* z-index: 1 !important; */
-}
-
-.ui-toast .ui-toast-message.ui-toast-message-warn {
-    /* background-color: white; */
-}
-
 .ui-table .ui-table-tbody>tr {
     border: solid 1px #c8c8c8;
 }
@@ -173,4 +165,17 @@ body .ui-fileupload .ui-fileupload-content {
 
 .ui-fileupload-row>div {
     display: inline-block;
+}
+
+body .ui-toast .ui-toast-message.ui-toast-message-warn {
+    background-color: white;
+    border-radius: 4px;
+}
+
+p-toast i {
+    font-size: 3em !important;
+}
+
+p-toast p {
+    word-wrap: break-word;
 }

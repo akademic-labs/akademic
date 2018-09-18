@@ -31,7 +31,7 @@
                 <br>
                 <label>({{ uploads[i].file.size | fileSize }})</label>
                 <div style="width: 100%;">
-                    <button type="button" class="btn-card-attach" rel="tooltip" title="Descartar" (click)="removeAttach(i)"><i
+                    <button type="button" class="btn-card-attach" rel="tooltip" title="Descartar" (click)="confirmRemove(uploads[i].file, i)"><i
                             class="fa fa-trash"></i></button>
                     <a [download]="uploads[i].file.name" [href]="attachImg" target="_blank" type="button" class="btn-card-attach" rel="tooltip"
                         title="Download"><i class="fa fa-download"></i></a>
@@ -42,6 +42,24 @@
         </div>
     </div>
 </div>
+
+<p-toast position="center" key="remove" (onClose)="toReject()" [modal]="true" [baseZIndex]="9999">
+    <ng-template let-message pTemplate="message">
+        <div class="text-center">
+            <i class="pi pi-exclamation-triangle"></i>
+            <h3>{{message.summary}}</h3>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="removeAttach()" label="Sim" class="ui-button-success"></button>
+            </div>
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="toReject()" label="Não" class="ui-button-secondary"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
 
 <!-- <div *ngIf="percentage | async as pct">
     <progress class="progress progress-custom is-info" [value]="pct" max="100"></progress>

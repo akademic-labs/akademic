@@ -6,10 +6,20 @@ import { User } from '../models/user.interface';
 })
 export class RolesService {
 
-  constructor() {
-  }
+  constructor() {}
 
-  // helpers role-based authorization, to be used in a *ngIf or similar
+  // determines if user has matching role
+  public checkAuthorization(user: User, allowedRoles: string[]): boolean {
+    if (!user) { return false; }
+
+    for (const role of allowedRoles) {
+      if (user.roles[role]) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 
   isStudent(user: User): boolean {
     const allowed = ['student', 'administrator'];
@@ -26,17 +36,4 @@ export class RolesService {
     return this.checkAuthorization(user, allowed);
   }
 
-  // determines if user has matching role
-  public checkAuthorization(user: User, allowedRoles: string[]): boolean {
-    if (!user) { return false; }
-
-    for (const role of allowedRoles) {
-      if (user.roles[role]) {
-        return true;
-      }
-    }
-
-    return false;
-  }
 }
-

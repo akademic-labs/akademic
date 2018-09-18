@@ -5,7 +5,8 @@ import { Chart } from 'chart.js';
 export enum ChartType {
   Pie,
   Line,
-  Bar
+  Bar,
+  Doughnut
 }
 
 @Component({
@@ -73,6 +74,13 @@ export class ChartCardComponent implements OnInit, AfterViewInit {
       case ChartType.Bar:
         this.chart = new Chart(this.chartId, {
           type: 'bar',
+          data: this.chartData,
+          options: this.chartOptions
+        });
+        break;
+      case ChartType.Doughnut:
+        this.chart = new Chart(this.chartId, {
+          type: 'doughnut',
           data: this.chartData,
           options: this.chartOptions
         });

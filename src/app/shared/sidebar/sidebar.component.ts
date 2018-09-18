@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-import { User } from 'app/models/user.interface';
 import { AuthService } from 'app/services/auth.service';
 import { RolesService } from 'app/services/roles.service';
 
@@ -13,11 +11,11 @@ declare interface RouteInfo {
 
 export const ROUTES: RouteInfo[] = [
     { path: 'dashboard', title: 'Dashboard', icon: 'fa fa-pie-chart', roles: ['student', 'controller', 'administrator'] },
-    { path: 'user', title: 'Meu perfil', icon: 'fa fa-user-circle-o', roles: ['student', 'controller'] },
+    { path: 'user', title: 'Meu perfil', icon: 'fa fa-user-circle-o', roles: ['student', 'controller', 'administrator'] },
     { path: 'input-activity', title: 'Entrada de Atividade', icon: 'fa fa-paperclip', roles: ['student', 'administrator'] },
     { path: 'institution', title: 'Instituições', icon: 'fa fa-university nav-icon', roles: ['administrator'] },
-    { path: 'controller', title: 'Controladores', icon: 'fa fa-users nav-icon', roles: ['controller', 'administrator'] },
-    { path: 'course', title: 'Cursos', icon: 'fa fa-graduation-cap nav-icon', roles: ['controller', 'administrator'] },
+    { path: 'controller', title: 'Controladores', icon: 'fa fa-users nav-icon', roles: ['administrator'] },
+    { path: 'course', title: 'Cursos', icon: 'fa fa-graduation-cap nav-icon', roles: ['administrator'] },
     { path: 'acitivityType', title: 'Tipos de Atividade', icon: 'fa fa-pencil nav-icon', roles: ['controller', 'administrator'] },
     { path: 'rules', title: 'Regras', icon: 'fa fa-exclamation-triangle nav-icon', roles: ['controller', 'administrator'] }
 ];
@@ -37,6 +35,7 @@ export class SidebarComponent implements OnInit {
         });
     }
 
+    // Are you using the methods below or you'll to use in the future?
     isMobileMenu() {
         if ($(window).width() > 991) {
             return false;
