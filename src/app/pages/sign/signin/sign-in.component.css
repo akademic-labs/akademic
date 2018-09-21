@@ -2,11 +2,17 @@
   padding: 10px;
 }
 
-.form-control {
+.form-control, .form-control:focus {
   float: none;
-  font-size: 16px;
+  font-size: 15px;
   border-width: 0px 0px 1px 0px;
   width: 90%;
+  outline: 0;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+  border-radius: 0;
 }
 
 .input-group .input-group-addon {
@@ -39,4 +45,9 @@
   font-size: 0px;
   line-height: 0px;
   margin: 0px 8px;
+}
+
+/* remove background yellow chrome autofill input */
+input:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;
 }

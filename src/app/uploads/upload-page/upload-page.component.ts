@@ -14,10 +14,9 @@ export class UploadPageComponent {
 
   folderStorage = 'top';
   fileAccept = ['image/jpeg', 'image/png', 'application/pdf', 'image/x-eps'];
-  attach: Attachment[] = [];
+  attachs: Attachment[] = [];
   uploads = [];
-  attachsImage = [];
-
+  attachShow = [];
   indexRemove;
 
   snapshot: Observable<any>;
@@ -52,7 +51,7 @@ export class UploadPageComponent {
       const image = true ? file.type.split('/')[0] === 'image' : false;
       const pdf = true ? file.type.split('/')[1] === 'pdf' : false;
       if (image || pdf) {
-        this.attach.push({ name: file.name, type: file.type, url: path });
+        this.attachs.push({ name: file.name, type: file.type, url: path });
         this.uploads.push({ path, file, metadata });
       } else {
         this._notify.update('warning', `Arquivo '${file.name}' não suportado.`);
@@ -72,7 +71,7 @@ export class UploadPageComponent {
       const reader = new FileReader();
       const file = uploads[i].file;
       reader.onloadend = () => {
-        this.attachsImage[i] = reader.result;
+        this.attachShow[i] = reader.result;
       };
       reader.readAsDataURL(file);
     }
@@ -80,8 +79,8 @@ export class UploadPageComponent {
 
   removeAttach() {
     this.uploads.splice(this.indexRemove, 1);
-    this.attach.splice(this.indexRemove, 1);
-    this.attachsImage.splice(this.indexRemove, 1);
+    this.attachs.splice(this.indexRemove, 1);
+    this.attachShow.splice(this.indexRemove, 1);
     this.toReject();
   }
 
