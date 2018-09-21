@@ -105,9 +105,9 @@ export class HomeComponent implements OnInit {
       datasets: [{
         data: [11, 4, 2],
         backgroundColor: [
-          'rgba(75, 192, 192, 0.4)',
-          'rgba(153, 102, 255, 0.4)',
-          'rgba(255,99,132, 0.4)'
+          'rgba(75, 192, 192)',
+          'rgba(153, 102, 255)',
+          'rgba(255,99,132)'
         ],
         borderColor: [
           'rgba(75, 192, 192, 1)',
@@ -148,9 +148,9 @@ export class HomeComponent implements OnInit {
     // CHART RANK STUDENTS
     this.rankStudentsChartType = ChartType.Bar;
     this.rankStudentsChartData = {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: ['Juliana', 'Patrick', 'Carlos', 'Luiz', 'Helen', 'Cleverson'],
       datasets: [{
-        label: '# of Votes',
+        label: 'Quantidade',
         data: [12, 19, 3, 5, 2, 3],
         backgroundColor: [
           'rgba(255, 99, 132)',
@@ -172,6 +172,7 @@ export class HomeComponent implements OnInit {
       }]
     };
     this.rankStudentsChartOptions = {
+      // maintainAspectRatio: false,
       scales: {
         yAxes: [{
           ticks: {

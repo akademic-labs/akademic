@@ -106,7 +106,7 @@ export class InputActivityComponent implements OnInit {
   onSubmit() {
     if (this.activityForm.valid) {
       this._activityService
-        .createActivity(this.activityForm.value, this.fileUpload.attach)
+        .createActivity(this.activityForm.value, this.fileUpload.attachs)
         .then(result => {
           // console.log(result);
           // Upload Attachments

@@ -1,9 +1,9 @@
 <!-- <pre>
     {{ activitiesStudent$ | async | json }}
 </pre> -->
-<pre>
+<!-- <pre>
     {{ labels }}
-</pre>
+</pre> -->
 <div class="row">
     <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por categoria'" [chartType]="activityCategoryChartType" [chartData]="activityCategoryChartData"
@@ -27,7 +27,7 @@
     </div>
 
     <div *ngIf="_rolesService.isController(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por mês'" [chartType]="rankStudentsChartType" [chartData]="rankStudentsChartData"
+        <aka-chart-card [title]="'Ranking'" [subtitle]="'Atividades dos alunos do curso'" [chartType]="rankStudentsChartType" [chartData]="rankStudentsChartData"
             [chartOptions]="rankStudentsChartOptions" [withHr]="true" [footerIconClass]="'fa fa-check'" [footerText]="'Atualizado 3 minutos atrás'">
         </aka-chart-card>
     </div>
@@ -45,10 +45,10 @@
                     <p-table [value]="activitiesToAnalyze$ | async" selectionMode="single" (onRowSelect)="toAnalyze($event.data)" #dt [globalFilterFields]="['description','hoursDuration','activityType.description', 'user.displayName','createdAt']"
                         [paginator]="true" [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]">
                         <ng-template pTemplate="caption">
-                            <div style="text-align: right">
-                                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                                <input type="text" pInputText size="50" placeholder="Pesquisar.." (input)="dt.filterGlobal($event.target.value, 'contains')"
-                                    style="width:auto">
+                            <div>
+                                <!-- <i class="fa fa-search" style="margin:4px 4px 0 0"></i> -->
+                                <input type="text" class="form-control" placeholder="Pesquisar.." (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                    style="width:auto;">
                             </div>
                         </ng-template>
                         <ng-template pTemplate="header">
@@ -105,7 +105,7 @@
                             </tr>
                         </ng-template>
                     </p-table>
-                    <div class="footer">
+                    <div class="footer text-center">
                         {{ (activitiesToAnalyze$ | async)?.length }} registros
                     </div>
                     <!-- <div *ngIf="($actsToApprove | async)?.length > 0; else nothing">
@@ -114,12 +114,12 @@
                     <ng-template #nothing>
                         <hr> Nenhuma atividade para analisar
                     </ng-template> -->
-                    <div class="footer">
-                        <!-- <hr> -->
-                        <div class="stats">
+                    <!-- <div class="footer"> -->
+                    <!-- <hr> -->
+                    <!-- <div class="stats">
                             <i class="fa fa-history"></i> Dados atualizados
-                        </div>
-                    </div>
+                        </div> -->
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
@@ -135,8 +135,8 @@
             <div class="content">
                 <div class="table-full-width">
                     <!-- <pre>{{ activitiesStudent$ | async | json }}</pre> -->
-                    <p-table [value]="activitiesStudent$" [paginator]="true" selectionMode="single" (onRowSelect)="toEdit($event.data)" [rows]="5" 
-                    #dt [globalFilterFields]="['description','hoursDuration','activityType.description', 'user.displayName','createdAt']"
+                    <p-table [value]="activitiesStudent$" [paginator]="true" selectionMode="single" (onRowSelect)="toEdit($event.data)" [rows]="5"
+                        #dt [globalFilterFields]="['description','hoursDuration','activityType.description', 'user.displayName','createdAt']"
                         [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]">
                         <ng-template pTemplate="caption">
                             <div style="text-align: right">
@@ -184,8 +184,8 @@
                             </tr>
                         </ng-template>
                     </p-table>
-                    <div class="footer">
-                        {{ (activitiesStudent$ | async)?.length }} registros
+                    <div class="footer text-center">
+                        {{ (activitiesStudent$)?.length }} registros
                     </div>
                     <!-- <div *ngIf="($actsToApprove | async)?.length > 0; else nothing">
                             <hr> {{ ($actsToApprove | async)?.length }} registros
@@ -194,7 +194,7 @@
                             <hr> Nenhuma atividade para analisar
                         </ng-template> -->
                     <div class="footer">
-                        <!-- <hr> -->
+                        <hr>
                         <div class="stats">
                             <i class="fa fa-history"></i> Dados atualizados
                         </div>
