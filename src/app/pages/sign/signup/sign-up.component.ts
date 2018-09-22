@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'app/services/auth.service';
+import { User } from 'app/models/user.interface';
 
 @Component({
   selector: 'aka-sign-up',
@@ -15,9 +16,28 @@ export class SignUpComponent implements OnInit {
     this.buildForm();
   }
 
-  createUser() {
-    if (this.signUpForm.valid) {
+  createUser({ value, valid }: { value: User, valid: boolean }) {
+    if (valid) {
+      this._auth.createUser(value);
     }
+  }
+
+  isStudent() {
+    this.signUpForm.patchValue({
+      roles: {
+        student: true,
+        controller: false
+      }
+    });
+  }
+
+  isController() {
+    this.signUpForm.patchValue({
+      roles: {
+        student: false,
+        controller: true
+      }
+    });
   }
 
   buildForm() {

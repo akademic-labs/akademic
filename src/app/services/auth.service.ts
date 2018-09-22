@@ -39,9 +39,16 @@ export class AuthService {
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(credential => {
-        this._userService.createUserData(credential.user); // if using firestore
+        this._userService.createUserData(credential.user, { student: true }); // if using firestore
       })
       .catch((error) => this.handleError(error));
+  }
+
+  createUser(user: User) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
+      .then(credential => {
+        this._userService.createUserData(credential.user, user.roles); // if using firestore
+      });
   }
 
   // OAuth Methods
@@ -61,15 +68,6 @@ export class AuthService {
     return this.oAuthLogin(provider);
   }
 
-  private oAuthLogin(provider: any) {
-    return this.afAuth.auth.signInWithPopup(provider)
-      .then(credential => {
-        this._userService.createUserData(credential.user);
-      })
-      .catch(error => this.handleError(error));
-  }
-
-
   logOut() {
     this.afAuth.auth.signOut().then(() => {
       this._router.navigate(['/']);
@@ -81,6 +79,14 @@ export class AuthService {
     return this.afAuth.auth.sendPasswordResetEmail(email)
       .then(() => this._notify.update('info', 'Atualização de senha enviada por e-mail'))
       .catch((error) => this.handleError(error));
+  }
+
+  private oAuthLogin(provider: any) {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then(credential => {
+        this._userService.createUserData(credential.user, { student: true });
+      })
+      .catch(error => this.handleError(error));
   }
 
   // If error, notify user
