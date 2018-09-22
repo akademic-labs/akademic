@@ -1,9 +1,9 @@
 <!-- <pre>{{ attach | json }}</pre> -->
 <!-- <pre>{{ uploads | json }}</pre> -->
-<!-- <pre>{{ attachsImage | json }}</pre> -->
+<!-- <pre>{{ attachShow | json }}</pre> -->
 <hr>
 <div class="dropzone" akaDropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)" [class.hovering]="isHovering">
-    <p>Arraste</p>
+    <label class="mt-4">Arraste</label>
     <div class="file">
         <label class="file-label">
             <input class="file-input" #inputUpload multiple type="file" (change)="startUpload($event.target.files)" [accept]="fileAccept"
@@ -13,35 +13,50 @@
                     <i class="fa fa-upload"></i>
                 </span>
                 <span class="file-label">
-                    ou escolha um arquivo...
+                    ou escolha o(s) arquivo(s)...
                 </span>
             </span>
         </label>
     </div>
-    <div class="show-attachs">
-        <div *ngFor="let attachImg of attachsImage; index as i" class="card card-attachment">
+    <div class="show-attach">
+        <!-- class="col-xs-10 col-sm-10 col-md-4 col-lg-3 col-xl-3 -->
+        <div *ngFor="let attach of attachShow; index as i" class=" card card-attach">
             <div *ngIf="uploads[i].file.type !== 'application/pdf'; else pdf">
-                <img class="img-attach" [src]="attachImg" />
+                <img class="img-attach" [src]="attach" />
             </div>
             <ng-template #pdf>
-                <img class="img-attach" src="assets/img/pdf.png" />
+                <img class="pdf-attach" src="assets/img/pdf.png" />
             </ng-template>
-            <div class="text-center" style="margin: 5px 10px 0px 0px;">
-                <label>{{ uploads[i].file.name }}</label>
-                <br>
-                <label>({{ uploads[i].file.size | fileSize }})</label>
-                <div style="width: 100%;">
-                    <button type="button" class="btn-card-attach" rel="tooltip" title="Descartar" (click)="removeAttach(i)"><i
+            <div>
+                <label class="label-attach">{{ uploads[i].file.name }}<br>{{ uploads[i].file.size | fileSize }}</label>
+                <div>
+                    <button type="button" class="btn-attach" rel="tooltip" title="Descartar" (click)="confirmRemove(uploads[i].file, i)"><i
                             class="fa fa-trash"></i></button>
-                    <a [download]="uploads[i].file.name" [href]="attachImg" target="_blank" type="button" class="btn-card-attach" rel="tooltip"
-                        title="Download"><i class="fa fa-download"></i></a>
-                    <!-- <iframe src="https://firebasestorage.googleapis.com/v0/b/akademic-dev.appspot.com/o/test%2FCalend%C3%A1rio-2018.pdf?alt=media&token=1cd89cbb-8634-415c-b6c7-4e0d3fdb35ff"
-                        style="width:600px; height:500px;" frameborder="0"></iframe> -->
+                    <a [download]="uploads[i].file.name" [href]="attach" target="_blank" type="button" class="btn-attach" rel="tooltip" title="Download"><i
+                            class="fa fa-download"></i></a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<p-toast position="center" key="remove" (onClose)="toReject()" [modal]="true" [baseZIndex]="9999">
+    <ng-template let-message pTemplate="message">
+        <div class="text-center">
+            <i class="pi pi-exclamation-triangle"></i>
+            <h3>{{message.summary}}</h3>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="removeAttach()" label="Sim" class="ui-button-success"></button>
+            </div>
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="toReject()" label="Não" class="ui-button-secondary"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
 
 <!-- <div *ngIf="percentage | async as pct">
     <progress class="progress progress-custom is-info" [value]="pct" max="100"></progress>

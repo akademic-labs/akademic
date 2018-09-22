@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Activity } from 'app/models/activity.interface';
 import { ActivityService } from 'app/services/activity.service';
+import { MessageServicePrimeNG } from '../../../services/message.service';
 
 @Component({
   selector: 'aka-validate-activity',
@@ -15,67 +16,64 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
   title = 'Validação de Atividade';
   activity: Activity;
   uidActivity: string;
-  inscricao: Subscription;
+  subscribe: Subscription;
   attachments = [];
-  images = [];
+  lastAction;
 
   constructor(
     private _route: ActivatedRoute,
-    private _actService: ActivityService,
+    private _router: Router,
+    private _activityService: ActivityService,
     private _storage: AngularFireStorage,
-    private _router: Router
+    private _messageService: MessageServicePrimeNG
   ) { }
 
   ngOnInit() {
-    this.inscricao = this._route.paramMap.subscribe(params => {
+    this.subscribe = this._route.paramMap.subscribe(params => {
       this.uidActivity = params.get('id');
-      this._actService.getActivityById(this.uidActivity)
+      this._activityService.getActivityById(this.uidActivity)
         .subscribe(response => {
           this.activity = response;
           response.attachment.forEach(element => {
-            // console.log('element:' + element)
             this._storage.ref(element.url).getDownloadURL().
               subscribe(res => {
-                // using my card
                 const data = { name: element.name, type: element.type, url: res };
-                // using lightbox
-                // const data = { source: res, thumbnail: res, title: element.name };
                 this.attachments.push(data)
-                // , console.log(data)
               });
           });
         });
     });
-
-    // GALLERIA
-    // this.images.push({ source: 'assets/img/akademic-name-black.png', alt: 'Description for Image 1', title: 'Title 1' });
-    // this.images.push({ source: 'assets/img/default-avatar.png', alt: 'Description for Image 2', title: 'Title 2' });
-    // this.images.push({ source: 'assets/img/login.png', alt: 'Description for Image 3', title: 'Title 3' });
-    // this.images.push({ source: 'assets/img/sidebar.jpg', alt: 'Description for Image 4', title: 'Title 4' });
-
-    // LIGTHBOX
-    this.images.push({ source: 'assets/img/akademic-name-black.png', thumbnail: 'assets/img/akademic-name-black.png', title: 'Title 1' });
-    this.images.push({ source: 'assets/img/default-avatar.png', thumbnail: 'assets/img/default-avatar.png', title: 'Title 1' });
-    this.images.push({ source: 'assets/img/login.png', thumbnail: 'assets/img/login.png', title: 'Title 1' });
-    this.images.push({ source: 'assets/img/sidebar.jpg', thumbnail: 'assets/img/sidebar.jpg', title: 'Title 1' });
   }
 
   ngOnDestroy() {
-    this.inscricao.unsubscribe();
+    this.subscribe.unsubscribe();
   }
 
-  toApprove() {
-    // status 'A' (Aproved)
-    this.activity.status = 'A';
-    this._actService.updateActivity(this.uidActivity, this.activity, 'aprovada');
-    this._router.navigate(['/dashboard']);
+  toConfirm(param) {
+    this.lastAction = param;
+    let msg;
+    if (param === 'approve') {
+      msg = 'aprovação';
+    }
+    if (param === 'disapprove') {
+      msg = 'reprovação';
+    }
+    this._messageService.messageConfirm('remove', true, 'warn', '', `Confirma ${msg} da atividade '${this.activity.description}' ?`);
   }
 
-  toReprove() {
-    // status 'R' (Reproved)
-    this.activity.status = 'R';
-    this._actService.updateActivity(this.uidActivity, this.activity, 'reprovada');
-    this._router.navigate(['/dashboard']);
+  toAccept() {
+    if (this.lastAction === 'approve') {
+      this.activity.status = 'A'; // Aproved
+      this._activityService.updateActivity(this.uidActivity, this.activity, 'aprovada');
+    }
+    if (this.lastAction === 'disapprove') {
+      this.activity.status = 'R'; // Reproved
+      this._activityService.updateActivity(this.uidActivity, this.activity, 'reprovada');
+    }
+  }
+
+  toReject() {
+    this._messageService.closeMessageConfirm('remove');
   }
 
 }

@@ -21,8 +21,10 @@ export class ErrorService {
     'network-request-failed': 'Ocorreu um erro de conexão à internet',
     'user-cancelled': 'Você não permitiu acesso à aplicação',
     'popup-closed-by-user': 'Você não finalizou o acesso',
-    'internal-error': 'Erro interno no servidor'
-    /* ADD HERE THE OTHERs IDs AND THE CORRESPONDING MESSAGEs */
+    'internal-error': 'Erro interno no servidor',
+    'unauthorized-domain': 'Sua rede está bloqueando a solicitação',
+    'cancelled-popup-request': 'Você cancelou a solicitação'
+    /* Add here the others IDs and the corresponding messages */
   } as MessagesIndex;
 
   constructor(private _notify: NotifyService) { }

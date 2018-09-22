@@ -1,19 +1,19 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { AngularFireUploadTask, AngularFireStorage } from 'angularfire2/storage';
 
 import { ActivityService } from 'app/services/activity.service';
 import { ActivityTypeService } from 'app/services/activity-type.service';
-import { CityStateService } from './../../../services/city-state.service';
 import { ValidatorService } from './../../../services/validator.service';
+import { UtilsService } from '../../../services/utils.service';
 
 import { Activity } from 'app/models/activity.interface';
 import { ActivityType } from 'app/models/activity-type.interface';
 import { States } from 'app/models/states.interface';
 import { Cities } from 'app/models/cities.interface';
 import { UploadPageComponent } from 'app/uploads/upload-page/upload-page.component';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'aka-input-activity',
@@ -33,10 +33,7 @@ export class InputActivityComponent implements OnInit {
   disabledSave: boolean;
   task: AngularFireUploadTask;
   percentage: Observable<number>;
-
-  testes = [];
-  testes2: any = [];
-  massa = [];
+  subscribe: Subscription;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -44,52 +41,47 @@ export class InputActivityComponent implements OnInit {
     private _actTypesService: ActivityTypeService,
     private _validatorService: ValidatorService,
     private _storage: AngularFireStorage,
-    private _cityStateService: CityStateService,
-    private _router: Router
+    private _utilsService: UtilsService,
+    private _route: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.buildForm();
     setTimeout(() => { this.focusIn.nativeElement.focus(); }, 100);
     this.activityTypes$ = this._actTypesService.get();
-    this.states$ = this._cityStateService.getStates();
-
-    this._cityStateService.getStates()
+    this._utilsService.getStates()
       .subscribe(res => {
-        this.testes = res
-        // , console.log(res)
-        // this.massa = this.testes.sort((a, b) => a.toLocaleUpperCase() < b.toLocaleUpperCase() ? -1 : 1);
-
-        // function sortByKey(array, key) {
-        //   return array.sort(function(a, b) {
-        //       const x = a[key];
-        //       const y = b[key];
-        //       return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-        //   });
-      // }
-        // this.massa = this.testes.sort((n1, n2) => {
-        //   if (n1 > n2) {
-        //     return 1;
-        //   }
-
-        //   if (n1 < n2) {
-        //     return -1;
-        //   }
-
-        //   return 0;
-        // });
-
+        this.states$ = this._utilsService.sortBy(res, 'nome', 'asc');
       });
+    this.subscribe = this._route.paramMap.subscribe(params => {
+      if (params.get('id')) {
+        this._activityService.getActivityById(params.get('id'))
+          .subscribe(response => {
+            this.activityForm = this._formBuilder.group({
+              initialDate: response.initialDate,
+              finalDate: response.finalDate,
+              createdAt: response.createdAt,
+              description: response.description,
+              hoursDuration: response.hoursDuration,
+              local: response.local,
+              city: response.city,
+              state: response.state,
+              schoolYear: response.schoolYear,
+              semester: response.semester,
+              observation: response.observation,
+              activityType: response.activityType,
+              attach: ['']
+            });
+          })
+      }
+    });
   }
 
   getCities() {
     const state = this.activityForm.get('state').value;
-    this.cities$ = this._cityStateService.getCities(state.id);
-
-    this._cityStateService.getCities(state.id)
+    this._utilsService.getCities(state.id)
       .subscribe(res => {
-        this.testes2 = res
-        // , console.log(res)
+        this.cities$ = this._utilsService.sortBy(res, 'nome', 'asc');
       });
   }
 
@@ -114,20 +106,17 @@ export class InputActivityComponent implements OnInit {
   onSubmit() {
     if (this.activityForm.valid) {
       this._activityService
-        .createActivity(this.activityForm.value, this.fileUpload.attach)
+        .createActivity(this.activityForm.value, this.fileUpload.attachs)
         .then(result => {
           // console.log(result);
           // Upload Attachments
           for (let i = 0; i < this.fileUpload.uploads.length; i++) {
             // The main task
-            // tslint:disable-next-line:max-line-length
             this.task = this._storage.upload(this.fileUpload.uploads[i].path, this.fileUpload.uploads[i].file, this.fileUpload.uploads[i].metadata);
             // Progress monitoring
             this.percentage = this.task.percentageChanges();
           }
           this.activityForm.reset();
-          this.focusIn.nativeElement.focus();
-          this._router.navigate(['/dashboard']);
         });
     } else {
       this._validatorService.checkOut(this.activityForm);

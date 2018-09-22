@@ -25,8 +25,7 @@
                     </div>
                     <hr>
                     <span class="icon-report">
-                        <i class="fa fa-clock-o"></i>{{ activity?.initialDate | date: 'dd/MM/yyyy'}} - {{
-                        activity?.finalDate
+                        <i class="fa fa-clock-o"></i>{{ activity?.initialDate | date: 'dd/MM/yyyy'}} - {{ activity?.finalDate
                         | date: 'dd/MM/yyyy' }}
                         <!-- {{ activity?.finalDate.toDate() | date: 'dd/MM/yyyy' }} -->
                     </span>
@@ -55,22 +54,22 @@
                                 <label>{{ attach.name }}</label>
                         </div>
                     </div> -->
-                    <div class="show-attachs">
-                        <div *ngFor="let attachImg of attachments; index as i" class="card card-attachment">
-                            <div *ngIf="attachImg.type !== 'application/pdf'; else pdf">
-                                <img class="img-attach" [src]="attachImg.url" />
+                    <div class="show-attach">
+                        <!-- class="col-xs-10 col-sm-10 col-md-4 col-lg-3 col-xl-3 -->
+                        <div *ngFor="let attach of attachments; index as i" class=" card card-attach">
+                            <div *ngIf="attach.type !== 'application/pdf'; else pdf">
+                                <img class="img-attach" [src]="attach.url" />
                             </div>
                             <ng-template #pdf>
-                                <img class="img-attach" src="assets/img/pdf.png" />
+                                <img class="pdf-attach" src="assets/img/pdf.png" />
                             </ng-template>
-                            <div class="text-center" style="margin: 20px 15px 0px 5px;">
-                                <label>{{ attachImg.name }}</label>
-                                <br>
+                            <div>
+                                <label class="label-attach">{{ attach.name }}</label>
                                 <!-- access file size to make inner join storage -->
                                 <!-- <label>({{ attachImg[i].file.size | fileSize }})</label> -->
-                                <div style="width: 100%;">
-                                    <a [download]="attachImg.name" [href]="attachImg.url" target="_blank" type="button"
-                                        class="btn-card-attach" rel="tooltip" title="Download"><i class="fa fa-download"></i></a>
+                                <div>
+                                    <a [download]="attach.name" [href]="attach.url" target="_blank" type="button" class="btn-attach" rel="tooltip" title="Download"><i
+                                            class="fa fa-download"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -126,11 +125,29 @@
                         </div>
                     </div>
                     <div class="clearfix">
-                        <button type="button" (click)="toApprove()" class="btn btn-info btn-fill pull-right" style="margin-left: 10px;">Aprovar</button>
-                        <button type="button" (click)="toReprove()" class="btn btn-link pull-right" style="border:none;">Reprovar</button>
+                        <button type="button" class="btn-action btn-right radius" (click)="toConfirm('approve')">Aprovar</button>
+                        <button type="button" class="btn-action btn-right border-none" (click)="toConfirm('disapprove')">Reprovar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<p-toast position="center" key="remove" (onClose)="toReject()" [modal]="true" [baseZIndex]="9999">
+    <ng-template let-message pTemplate="message">
+        <div class="text-center">
+            <i class="pi pi-exclamation-triangle"></i>
+            <h3>{{message.summary}}</h3>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="toAccept()" label="Sim" class="ui-button-success"></button>
+            </div>
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="toReject()" label="Não" class="ui-button-secondary"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { AngularFireUploadTask } from 'angularfire2/storage';
 import { Attachment } from 'app/models/attachment.interface';
 import { NotifyService } from 'app/services/notify.service';
+import { MessageServicePrimeNG } from '../../services/message.service';
 
 @Component({
   selector: 'aka-upload-page',
@@ -13,9 +14,10 @@ export class UploadPageComponent {
 
   folderStorage = 'top';
   fileAccept = ['image/jpeg', 'image/png', 'application/pdf', 'image/x-eps'];
-  attach: Attachment[] = [];
+  attachs: Attachment[] = [];
   uploads = [];
-  attachsImage = [];
+  attachShow = [];
+  indexRemove;
 
   snapshot: Observable<any>;
   // Main task
@@ -25,7 +27,10 @@ export class UploadPageComponent {
   // State for dropzone CSS toggling
   isHovering: boolean;
 
-  constructor(private _notify: NotifyService) { }
+  constructor(
+    private _notify: NotifyService,
+    private _messageService: MessageServicePrimeNG
+  ) { }
 
   startUpload(event: FileList) {
     for (let i = 0; i < event.length; i++) {
@@ -46,7 +51,7 @@ export class UploadPageComponent {
       const image = true ? file.type.split('/')[0] === 'image' : false;
       const pdf = true ? file.type.split('/')[1] === 'pdf' : false;
       if (image || pdf) {
-        this.attach.push({ name: file.name, type: file.type, url: path });
+        this.attachs.push({ name: file.name, type: file.type, url: path });
         this.uploads.push({ path, file, metadata });
       } else {
         this._notify.update('warning', `Arquivo '${file.name}' não suportado.`);
@@ -56,10 +61,9 @@ export class UploadPageComponent {
     this.renderAttach(this.uploads);
   }
 
-  removeAttach(index: number) {
-    this.uploads.splice(index, 1);
-    this.attach.splice(index, 1);
-    this.attachsImage.splice(index, 1);
+  confirmRemove(file, index: number) {
+    this.indexRemove = index;
+    this._messageService.messageConfirm('remove', true, 'warn', '', `Deseja realmente descartar o anexo '${file.name}' ?`);
   }
 
   renderAttach(uploads) {
@@ -67,10 +71,21 @@ export class UploadPageComponent {
       const reader = new FileReader();
       const file = uploads[i].file;
       reader.onloadend = () => {
-        this.attachsImage[i] = reader.result;
+        this.attachShow[i] = reader.result;
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  removeAttach() {
+    this.uploads.splice(this.indexRemove, 1);
+    this.attachs.splice(this.indexRemove, 1);
+    this.attachShow.splice(this.indexRemove, 1);
+    this.toReject();
+  }
+
+  toReject() {
+    this._messageService.closeMessageConfirm('remove');
   }
 
   toggleHover(event: boolean) {

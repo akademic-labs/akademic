@@ -11,7 +11,7 @@ export class NotifyService {
     $.notify({ icon: 'fa fa-bell-o', message: message },
       {
         type: type,
-        timer: 500,
+        timer: 100,
         allow_dismiss: false,
         placement: {
           from: 'top',
