@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartType } from 'app/shared/chart-card/chart-card/chart-card.component';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -8,6 +8,7 @@ import { User } from '../../models/user.interface';
 import { ActivityService } from 'app/services/activity.service';
 import { AuthService } from 'app/services/auth.service';
 import { RolesService } from './../../services/roles.service';
+import Chart = require('chart.js');
 
 @Component({
   selector: 'aka-home',
@@ -45,6 +46,14 @@ export class HomeComponent implements OnInit {
   labels = [];
   labelsTest = ['Palestra', 'Curso Extensão', 'Monitoria'];
 
+  @ViewChild('lineCanvas') lineCanvas;
+
+  values = [32, 6, 62];
+
+  charLabelData = null;
+
+  private barChart: any;
+
   constructor(
     private _auth: AuthService,
     private _activityService: ActivityService,
@@ -61,11 +70,16 @@ export class HomeComponent implements OnInit {
       if (this._rolesService.isStudent(this.user)) {
         this._activityService.getActivitiesStudent(res.uid)
           .subscribe(data => {
+
             this.activitiesStudent$ = data;
             this.labels = data.map(e => e.activityType.description);
             this.labels = this.labels.filter((v, i, a) => a.indexOf(v) === i);
             console.log(this.labels);
             // const labels2 = ['etc', 'asdasd', 'papapap'];
+
+            const datas = [12, 19, 3];
+
+            this.chartTest(this.labels, datas);
           });
       }
       if (this._rolesService.isAdmin(this.user)) {
@@ -79,7 +93,7 @@ export class HomeComponent implements OnInit {
       labels: this.labelsTest,
       datasets: [
         {
-          data: [32, 6, 62],
+          data: this.values,
           backgroundColor: [
             'rgba(255,99,132)',
             'rgba(54, 162, 235)',
@@ -191,5 +205,32 @@ export class HomeComponent implements OnInit {
   toEdit(data) {
     this._router.navigate(['input-activity', { id: data.uid }]);
   }
-  
+
+  chartTest(labels, data) {
+    this.barChart = new Chart(this.lineCanvas.nativeElement, {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: [
+            'rgba(255,99,132)',
+            'rgba(54, 162, 235)',
+            'rgba(255, 206, 86)'
+          ],
+          borderColor: [
+            'rgba(255,99,132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)'
+          ],
+          borderWidth: 1,
+          hoverBorderWidth: 2
+        }]
+      },
+      options: {
+        maintainAspectRatio: false
+      }
+    });
+  }
+
 }

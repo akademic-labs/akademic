@@ -1,16 +1,32 @@
-<!-- <pre>
-    {{ activitiesStudent$ | async | json }}
-</pre> -->
-<!-- <pre>
-    {{ labels }}
-</pre> -->
 <div class="row">
-    <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="card">
+            <div class="header text-center">
+                <h4 class="title">Atividades</h4>
+                <p class="category">Atividades por categoria</p>
+                <hr>
+            </div>
+            <div class="content">
+                <div [ngClass]="'chart-size'">
+                    <canvas #lineCanvas></canvas>
+                </div>
+                <div class="footer">
+                    <hr *ngIf="true">
+                    <div class="stats">
+                        <i [ngClass]="'fa fa-clock-o'"></i>Dados atualizados
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por categoria'" [chartType]="activityCategoryChartType" [chartData]="activityCategoryChartData"
             [withHr]="true" [footerIconClass]="'fa fa-clock-o'" [footerText]="'Atualizado a 2 minutos atrás'" [chartOptions]="activityCategoryChartOptions"
             [canvasClass]="'chart-size'">
         </aka-chart-card>
-    </div>
+    </div> -->
 
     <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por status'" [chartType]="activityStatusChartType" [chartData]="activityStatusChartData"
@@ -18,6 +34,13 @@
             [canvasClass]="'chart-size'">
         </aka-chart-card>
     </div>
+
+    <pre>
+        {{ labels }}
+    </pre>
+    <pre>
+        {{ activitiesStudent$ | json }}
+    </pre>
 
     <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <aka-chart-card [title]="'Atividades último semestre'" [subtitle]="'Número de atividades dos últimos 6 meses'" [chartType]="lastSemesterChartType"
