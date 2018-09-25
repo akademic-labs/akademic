@@ -3497,6 +3497,7 @@ fieldset[disabled] .form-control {
   color: black;
   outline: 0;
   font-size: 20px;
+<<<<<<< HEAD
 }
 
 .loading-index {
@@ -3514,3 +3515,6 @@ fieldset[disabled] .form-control {
   top: 50%;
   left: 50%;
 } */
+=======
+}
+>>>>>>> a1f2814fd4d17d69faf10ca2db62b2ee9376cde9
