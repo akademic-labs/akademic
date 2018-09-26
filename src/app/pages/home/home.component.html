@@ -35,12 +35,12 @@
         </aka-chart-card>
     </div>
 
-    <pre>
+    <!-- <pre>
         {{ labels }}
     </pre>
     <pre>
         {{ activitiesStudent$ | json }}
-    </pre>
+    </pre> -->
 
     <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <aka-chart-card [title]="'Atividades último semestre'" [subtitle]="'Número de atividades dos últimos 6 meses'" [chartType]="lastSemesterChartType"

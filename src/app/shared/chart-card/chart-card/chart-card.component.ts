@@ -48,43 +48,31 @@ export class ChartCardComponent implements OnInit, AfterViewInit {
 
   public chart: Chart;
 
+  private type: string;
+
   constructor() {
   }
 
-  public ngOnInit(): void {
+  ngOnInit() {
     this.chartId = `canvas-${ChartCardComponent.currentId++}`;
   }
 
-  public ngAfterViewInit(): void {
+  ngAfterViewInit() {
+
     switch (this.chartType) {
-      case ChartType.Pie:
-        this.chart = new Chart(this.chartId, {
-          type: 'pie',
-          data: this.chartData,
-          options: this.chartOptions
-        });
-        break;
-      case ChartType.Line:
-        this.chart = new Chart(this.chartId, {
-          type: 'line',
-          data: this.chartData,
-          options: this.chartOptions
-        });
-        break;
-      case ChartType.Bar:
-        this.chart = new Chart(this.chartId, {
-          type: 'bar',
-          data: this.chartData,
-          options: this.chartOptions
-        });
-        break;
-      case ChartType.Doughnut:
-        this.chart = new Chart(this.chartId, {
-          type: 'doughnut',
-          data: this.chartData,
-          options: this.chartOptions
-        });
-        break;
+
+      case ChartType.Pie: this.type = 'pie'; break
+      case ChartType.Doughnut: this.type = 'doughnut'; break
+      case ChartType.Line: this.type = 'line'; break
+      case ChartType.Bar: this.type = 'bar'; break
+
     }
+
+    this.chart = new Chart(this.chartId, {
+      type: this.type,
+      data: this.chartData,
+      options: this.chartOptions
+    });
+
   }
 }

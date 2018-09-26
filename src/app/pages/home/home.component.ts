@@ -43,16 +43,9 @@ export class HomeComponent implements OnInit {
   activitiesStudent$: Activity[];
   user: User;
 
-  labels = [];
-  labelsTest = ['Palestra', 'Curso Extensão', 'Monitoria'];
-
   @ViewChild('lineCanvas') lineCanvas;
-
-  values = [32, 6, 62];
-
-  charLabelData = null;
-
   private barChart: any;
+  labels = [];
 
   constructor(
     private _auth: AuthService,
@@ -70,15 +63,11 @@ export class HomeComponent implements OnInit {
       if (this._rolesService.isStudent(this.user)) {
         this._activityService.getActivitiesStudent(res.uid)
           .subscribe(data => {
-
             this.activitiesStudent$ = data;
             this.labels = data.map(e => e.activityType.description);
             this.labels = this.labels.filter((v, i, a) => a.indexOf(v) === i);
-            console.log(this.labels);
-            // const labels2 = ['etc', 'asdasd', 'papapap'];
-
+            // console.log(this.labels);
             const datas = [12, 19, 3];
-
             this.chartTest(this.labels, datas);
           });
       }
@@ -90,10 +79,10 @@ export class HomeComponent implements OnInit {
     // CHART ACTIVITY PER CATEGORY
     this.activityCategoryChartType = ChartType.Pie;
     this.activityCategoryChartData = {
-      labels: this.labelsTest,
+      labels: ['Palestra', 'Curso Extensão', 'Monitoria'],
       datasets: [
         {
-          data: this.values,
+          data: [32, 6, 62],
           backgroundColor: [
             'rgba(255,99,132)',
             'rgba(54, 162, 235)',
@@ -206,13 +195,13 @@ export class HomeComponent implements OnInit {
     this._router.navigate(['input-activity', { id: data.uid }]);
   }
 
-  chartTest(labels, data) {
+   chartTest(labels, datas) {
     this.barChart = new Chart(this.lineCanvas.nativeElement, {
       type: 'pie',
       data: {
         labels: labels,
         datasets: [{
-          data: data,
+          data: datas,
           backgroundColor: [
             'rgba(255,99,132)',
             'rgba(54, 162, 235)',
@@ -232,5 +221,4 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-
 }
