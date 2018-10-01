@@ -24,7 +24,7 @@ export class ActivityService {
 
   getActivitiesToApprove() {
     const actReference = this._afs.collection<Activity>('activities',
-      ref => ref.where('status', '==', 'P'));
+      ref => ref.where('status', '==', 'Pendente'));
 
     return actReference.snapshotChanges().pipe(
       map((actions) => {
@@ -59,7 +59,7 @@ export class ActivityService {
   }
 
   async createActivity(content: Activity, attach) {
-    content.status = 'P'; // Input Defaut Pending
+    content.status = 'Pendente';
     content.attachment = attach;
     this._auth.user$.subscribe(user => {
       content.user = { uid: user.uid, displayName: user.displayName, email: user.email }

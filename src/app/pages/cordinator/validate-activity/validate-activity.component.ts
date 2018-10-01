@@ -63,11 +63,11 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
 
   toAccept() {
     if (this.lastAction === 'approve') {
-      this.activity.status = 'A'; // Aproved
+      this.activity.status = 'Aprovada';
       this._activityService.updateActivity(this.uidActivity, this.activity, 'aprovada');
     }
     if (this.lastAction === 'disapprove') {
-      this.activity.status = 'R'; // Reproved
+      this.activity.status = 'Reprovada';
       this._activityService.updateActivity(this.uidActivity, this.activity, 'reprovada');
     }
   }
