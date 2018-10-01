@@ -18,6 +18,7 @@
     </span>
     <div class="form-group">
       <label class="control-label">E-mail</label>
+      <small *ngIf="isReseting" class="show">Será enviado um link para troca de senha no seu e-mail.</small>
       <input type="email" class="form-control" formControlName="email" required>
     </div>
   </div>
@@ -33,11 +34,11 @@
   </div>
 
   <div class="login-footer text-center">
-    <button class="btn-action" type="submit" *ngIf="!isReseting">
+    <button class="btn btn-action btn-wd" type="submit" *ngIf="!isReseting">
       Login
     </button>
 
-    <button class="btn-action" type="button" (click)="resetPassword()" *ngIf="isReseting">
+    <button class="btn btn-action" type="button" (click)="resetPassword()" *ngIf="isReseting">
       Redefinir senha
     </button>
   </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from 'app/services/auth.service';
 import { User } from 'app/models/user.interface';
 
@@ -16,7 +16,7 @@ export class SignUpComponent implements OnInit {
     this.buildForm();
   }
 
-  createUser({ value, valid }: { value: User, valid: boolean }) {
+  onSubmit({ value, valid }: { value: User, valid: boolean }) {
     if (valid) {
       this._auth.createUser(value);
     }
@@ -51,13 +51,26 @@ export class SignUpComponent implements OnInit {
       'password': ['', [
         Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
         Validators.minLength(8),
-        Validators.maxLength(25)
+        Validators.maxLength(25),
+        Validators.required
       ]],
+      confirmPassword: ['', Validators.required],
       roles: this.fb.group({
         student: [null, Validators.required],
         controller: [null, Validators.required]
       })
+    }, {
+      validator: this.matchPassword // validation method for password
     });
   }
 
+  private matchPassword(control: AbstractControl) {
+    const password = control.get('password').value;
+    const confirmPassword = control.get('confirmPassword').value;
+    if (password !== confirmPassword) {
+      control.get('confirmPassword').setErrors({ matchPassword: true })
+    } else {
+      return null
+    }
+  }
 }

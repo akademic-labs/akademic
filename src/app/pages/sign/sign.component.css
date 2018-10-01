@@ -1,26 +1,19 @@
 .card {
-    display: inline-block;
     width: 400px;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
     padding-bottom: 15px;
-    opacity: 0.97;
 }
 
 .card .card-content {
     padding: 35px 25px 10px 25px;
 }
 
-.card .card-header {
-    padding: 15px 20px 0;
-    z-index: 3;
-}
-
-.card [data-background-color] {
+.card-header {
     margin: -40px 15px 0;
     padding: 15px;
+    background: linear-gradient(60deg, #b224ef, #7579ff);
 }
 
-.card [data-background-color="purple"] {
-    background: linear-gradient(60deg, #b224ef, #7579ff);
-    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(178, 36, 239, 0.4);
+.background-sign {
+    overflow: hidden;
+    background: linear-gradient(150deg, #53f 15%, #05d5ff 70%, #a6ffcb 94%);
 }
