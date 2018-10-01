@@ -25,20 +25,30 @@
     <link href="assets/css/animate.min.css" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+
+    <!-- inline loading styles to be able to display right away -->
+    <style type="text/css">
+        .loader {
+            width: 90px;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
 </head>
 
 <body>
     <aka-root>
         <img src="assets/img/loader.gif" alt="loading" class="loader">
-         <!-- <img src="assets/img/Loading_icon.gif" alt="loading" class="loader"> -->
-        <!-- <img src="assets/img/eclipse-loading.svg" alt="loading" class="loader"> -->
-        <!-- <i class="fa fa-spinner fa-spin loading-index"></i> -->
-        <noscript>
-            <p>
-                Javascript precisa estar habilitado para usar esta aplicação.
-            </p>
-        </noscript>
     </aka-root>
+    <noscript>
+        <p>
+            Javascript precisa estar habilitado para usar esta aplicação.
+        </p>
+    </noscript>
 </body>
 
 </html>

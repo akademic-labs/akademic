@@ -89,7 +89,8 @@ p-spinner.ng-dirty.ng-invalid .ui-spinner-button.ui-button {
     border-radius: 3px;
 }
 
-body form .ui-inputtext, body form .ui-dropdown {
+body form .ui-inputtext,
+body form .ui-dropdown {
     width: 100% !important;
     border: 1px solid #e3e3e3;
     color: var(--color-label);
@@ -201,7 +202,7 @@ body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight 
     margin-right: 4px;
 }
 
-body .ui-datepicker table td > a.ui-state-active {
+body .ui-datepicker table td>a.ui-state-active {
     color: #ffffff;
     background: linear-gradient(60deg, #b224ef, #7579ff);
 }
@@ -218,6 +219,7 @@ body .ui-table {
     margin: 15px;
     margin-top: 5px;
 }
+
 body .ui-table .ui-sortable-column.ui-state-highlight,
 body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
     background: linear-gradient(60deg, #b224ef, #7579ff);
@@ -227,7 +229,8 @@ body .ui-table .ui-paginator {
     padding: 10px 15px;
 }
 
-body .ui-table .ui-table-thead>tr>th, body .ui-table .ui-table-tfoot>tr>td {
+body .ui-table .ui-table-thead>tr>th,
+body .ui-table .ui-table-tfoot>tr>td {
     border: 1px solid #eaeaea;
 }
 
@@ -266,7 +269,8 @@ body .ui-table.ui-table-hoverable-rows .ui-table-tbody>tr:not(.ui-state-highligh
     background-color: #b224ef;
 }
 
-body .ui-table .ui-table-caption, body .ui-table .ui-table-summary {
+body .ui-table .ui-table-caption,
+body .ui-table .ui-table-summary {
     border: none;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;

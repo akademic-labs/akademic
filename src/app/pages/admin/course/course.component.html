@@ -20,7 +20,9 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 label-block">
                             <label></label>
-                            <button [disabled]="courseForm.invalid" type="submit" class="btn btn-info btn-fill left">{{ button }}</button>
+                            <button [disabled]="courseForm.invalid" type="submit" class="btn btn-action left">
+                                {{ button }}
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -32,12 +34,12 @@
                             <tr *ngFor="let course of courses$ | async">
                                 <td>{{course.description}}</td>
                                 <td class="td-actions text-right">
-                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                                        <i class="fa fa-edit" (click)="edit(course)"></i>
-                                    </button>
-                                    <button type="button" rel="tooltip" (click)="remove(course.uid)" title="Remover" class="btn btn-danger btn-simple btn-xs">
+                                    <a class="btn" (click)="edit(course)">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a (click)="remove(course.uid)" class="btn text-danger">
                                         <i class="fa fa-times"></i>
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>

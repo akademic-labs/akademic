@@ -53,7 +53,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 label-block">
               <label></label>
-              <button [disabled]="ruleForm.invalid" type="submit" class="btn btn-info btn-fill left">{{ button }}</button>
+              <button [disabled]="ruleForm.invalid" type="submit" class="btn btn-action left">{{ button }}</button>
             </div>
           </div>
         </form>
@@ -65,12 +65,12 @@
               <tr *ngFor="let rule of rules$ | async">
                 <td>{{ rule.name }} | {{ rule.course.description }} | {{ rule.hours }} | {{ rule.activityType.description }}</td>
                 <td class="td-actions text-right">
-                  <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                    <i class="fa fa-edit" (click)="edit(rule)"></i>
-                  </button>
-                  <button type="button" rel="tooltip" (click)="remove(rule.uid)" title="Remover" class="btn btn-danger btn-simple btn-xs">
-                    <i class="fa fa-times"></i>
-                  </button>
+                  <a class="btn" (click)="edit(rule)">
+                      <i class="fa fa-edit"></i>
+                    </a>
+                    <a (click)="remove(rule.uid)" class="btn text-danger">
+                      <i class="fa fa-times"></i>
+                    </a>
                 </td>
               </tr>
             </tbody>
