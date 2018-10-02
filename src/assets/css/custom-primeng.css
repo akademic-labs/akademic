@@ -241,11 +241,12 @@ body .ui-table .ui-sortable-column:not(.ui-state-highlight):hover {
 
 body .ui-table .ui-table-tbody>tr {
     background: #ffffff;
+    border: 1px solid #eaeaea;
 }
 
 body .ui-table .ui-table-tbody>tr>td {
     background: inherit;
-    border: 1px solid #eaeaea !important;
+    border: 1px solid #eaeaea;
 }
 
 body .ui-table .ui-table-tbody>tr.ui-state-highlight {
@@ -277,7 +278,11 @@ body .ui-table .ui-table-summary {
 }
 
 body .ui-paginator {
-    border: none;
+    border: 1px solid #eaeaea;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
+}
+
+body .ui-table.ui-table-responsive .ui-paginator-bottom {
+    border-top: 0;
 }

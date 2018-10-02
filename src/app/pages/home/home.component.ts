@@ -1,13 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ChartType } from 'app/shared/chart-card/chart-card/chart-card.component';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { ChartType } from 'app/shared/chart-card/chart-card/chart-card.component';
 
-import { Activity } from './../../models/activity.interface';
 import { User } from '../../models/user.interface';
+import { Activity } from '../../models/activity.interface';
 import { ActivityService } from 'app/services/activity.service';
 import { AuthService } from 'app/services/auth.service';
 import { RolesService } from './../../services/roles.service';
+import { UtilsService } from '../../services/utils.service';
+
 import Chart = require('chart.js');
 
 @Component({
@@ -43,18 +45,21 @@ export class HomeComponent implements OnInit {
   activitiesStudent$: Activity[];
   user: User;
 
-  @ViewChild('lineCanvas') lineCanvas;
-  private barChart: any;
-  labels = [];
+  @ViewChild('categoryCanvas') categoryCanvas;
+  public categoryChart: any;
+  @ViewChild('statusCanvas') statusCanvas;
+  public statusChart: any;
 
   constructor(
     private _auth: AuthService,
     private _activityService: ActivityService,
     private _router: Router,
-    public _rolesService: RolesService
+    public _rolesService: RolesService,
+    private _utilsService: UtilsService
   ) { }
 
   ngOnInit() {
+
     this._auth.user$.subscribe(res => {
       this.user = res;
       if (this._rolesService.isController(this.user)) {
@@ -64,11 +69,29 @@ export class HomeComponent implements OnInit {
         this._activityService.getActivitiesStudent(res.uid)
           .subscribe(data => {
             this.activitiesStudent$ = data;
-            this.labels = data.map(e => e.activityType.description);
-            this.labels = this.labels.filter((v, i, a) => a.indexOf(v) === i);
-            // console.log(this.labels);
-            const datas = [12, 19, 3];
-            this.chartTest(this.labels, datas);
+
+            let dataFirebaseCategory = [];
+            let dataChartCategory;
+            let dataFirebaseStatus = [];
+            let dataChartStatus;
+
+            data.forEach(e => {
+              dataFirebaseCategory.push({ activity: e.activityType.description, hours: e.hoursDuration });
+              dataFirebaseCategory = this._utilsService.groupBy(dataFirebaseCategory, 'activity', 'hours');
+              dataChartCategory = this._utilsService.preparateDataChart(dataFirebaseCategory, 'activity', 'hours');
+
+              dataFirebaseStatus.push({ status: e.status, count: 1 });
+              dataFirebaseStatus = this._utilsService.groupBy(dataFirebaseStatus, 'status', 'count');
+              dataChartStatus = this._utilsService.preparateDataChart(dataFirebaseStatus, 'status', 'count');
+            });
+
+            // console.log(dataFirebaseCategory);
+            // console.log(dataChartCategory);
+            // console.log(dataFirebaseStatus);
+            // console.log(dataChartStatus);
+
+            this.buildChartCategory(dataChartCategory);
+            this.buildChartStatus(dataChartStatus);
           });
       }
       if (this._rolesService.isAdmin(this.user)) {
@@ -76,7 +99,21 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    // CHART ACTIVITY PER CATEGORY
+    // this.buildChartByCategory();
+    // this.buildCByStatus();
+    this.buildCByLastSemester();
+    this.buildCRankStudents();
+  }
+
+  toAnalyze(data) {
+    this._router.navigate(['validate-activity', { id: data.uid }]);
+  }
+
+  toEdit(data) {
+    this._router.navigate(['input-activity', { id: data.uid }]);
+  }
+
+  buildChartByCategory() {
     this.activityCategoryChartType = ChartType.Pie;
     this.activityCategoryChartData = {
       labels: ['Palestra', 'Curso Extensão', 'Monitoria'],
@@ -101,8 +138,9 @@ export class HomeComponent implements OnInit {
     this.activityCategoryChartOptions = {
       maintainAspectRatio: false
     }
+  }
 
-    // CHART ACTIVITY PER STATUS
+  buildCByStatus() {
     this.activityStatusChartType = ChartType.Doughnut;
     this.activityStatusChartData = {
       datasets: [{
@@ -127,8 +165,9 @@ export class HomeComponent implements OnInit {
     this.activityStatusChartOptions = {
       maintainAspectRatio: false
     }
+  }
 
-    // CHART ACTIVITY LAST 6 SEMESTERS
+  buildCByLastSemester() {
     // calc of the last 6 months
     for (let i = 6; i > 0; i -= 1) {
       const d = new Date(new Date().getFullYear(), new Date().getMonth() - i, 1);
@@ -147,8 +186,9 @@ export class HomeComponent implements OnInit {
     this.lastSemesterChartOptions = {
       maintainAspectRatio: false
     }
+  }
 
-    // CHART RANK STUDENTS
+  buildCRankStudents() {
     this.rankStudentsChartType = ChartType.Bar;
     this.rankStudentsChartData = {
       labels: ['Juliana', 'Patrick', 'Carlos', 'Luiz', 'Helen', 'Cleverson'],
@@ -184,24 +224,15 @@ export class HomeComponent implements OnInit {
         }]
       }
     };
-
   }
 
-  toAnalyze(data) {
-    this._router.navigate(['validate-activity', { id: data.uid }]);
-  }
-
-  toEdit(data) {
-    this._router.navigate(['input-activity', { id: data.uid }]);
-  }
-
-   chartTest(labels, datas) {
-    this.barChart = new Chart(this.lineCanvas.nativeElement, {
+  buildChartCategory(dataChart) {
+    this.categoryChart = new Chart(this.categoryCanvas.nativeElement, {
       type: 'pie',
       data: {
-        labels: labels,
+        labels: dataChart.labels,
         datasets: [{
-          data: datas,
+          data: dataChart.data,
           backgroundColor: [
             'rgba(255,99,132)',
             'rgba(54, 162, 235)',
@@ -221,4 +252,30 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  buildChartStatus(dataChart) {
+    this.statusChart = new Chart(this.statusCanvas.nativeElement, {
+      type: 'doughnut',
+      data: {
+        labels: dataChart.labels,
+        datasets: [{
+          data: dataChart.data,
+          backgroundColor: [
+            'rgba(153, 102, 255)',
+            'rgba(75, 192, 192)',
+            'rgba(255,99,132)'
+          ],
+          borderColor: [
+            'rgba(153, 102, 255, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(255,99,132, 1)'
+          ],
+        }]
+      },
+      options: {
+        maintainAspectRatio: false
+      }
+    });
+  }
+
 }
