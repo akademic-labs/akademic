@@ -216,8 +216,7 @@ body .ui-dropdown-panel .ui-dropdown-filter-container .ui-dropdown-filter-icon {
 
 body .ui-table {
     font-size: calc(13px + var(--font-size-control));
-    margin: 15px;
-    margin-top: 5px;
+    margin: -14px 0px 7px 0px;
 }
 
 body .ui-table .ui-sortable-column.ui-state-highlight,
@@ -225,12 +224,13 @@ body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
     background: linear-gradient(60deg, #b224ef, #7579ff);
 }
 
-body .ui-table .ui-paginator {
-    padding: 10px 15px;
+body .ui-table.ui-table-hoverable-rows .ui-table-tbody > tr:not(.ui-state-highlight):not(.ui-contextmenu-selected):hover {
+    background-color: #F7F7F8;
 }
 
 body .ui-table .ui-table-thead>tr>th,
 body .ui-table .ui-table-tfoot>tr>td {
+    background-color: #F7F7F8;
     border: 1px solid #eaeaea;
 }
 
@@ -247,6 +247,7 @@ body .ui-table .ui-table-tbody>tr {
 body .ui-table .ui-table-tbody>tr>td {
     background: inherit;
     border: 1px solid #eaeaea;
+    border-right: 1px solid #eaeaea !important;
 }
 
 body .ui-table .ui-table-tbody>tr.ui-state-highlight {
@@ -270,19 +271,52 @@ body .ui-table.ui-table-hoverable-rows .ui-table-tbody>tr:not(.ui-state-highligh
     background-color: #b224ef;
 }
 
-body .ui-table .ui-table-caption,
-body .ui-table .ui-table-summary {
-    border: none;
+body .ui-table .ui-table-caption {
+    background-color: #F7F7F8;
+    border: 1px solid #eaeaea;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+    border-bottom: none;
+    height: 50px;
+    padding: 0px;
 }
 
-body .ui-paginator {
+body .ui-table .ui-table-summary {
+    background-color: #F7F7F8;
     border: 1px solid #eaeaea;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
+    border-top: none;
+    padding-top: 10px;
+}
+
+body .ui-paginator {
+    background-color: #F7F7F8;
+    border: 1px solid #eaeaea;
+    border-bottom: none;
+    padding-top: 10px;
 }
 
 body .ui-table.ui-table-responsive .ui-paginator-bottom {
     border-top: 0;
+}
+
+.input-filter {
+    position: relative;
+    font-weight: normal;
+    float: right;
+    padding: 7px;
+}
+
+.input-filter input {
+    text-indent: 20px;
+    height: 33px;
+    /* width: 300px; */
+}
+
+.input-filter i {
+    position: absolute;
+    color: #9B9B9B;
+    top: 18px;
+    left: 16px;
 }

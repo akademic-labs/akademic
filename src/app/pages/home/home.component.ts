@@ -85,10 +85,10 @@ export class HomeComponent implements OnInit {
               dataChartStatus = this._utilsService.preparateDataChart(dataFirebaseStatus, 'status', 'count');
             });
 
-            // console.log(dataFirebaseCategory);
-            // console.log(dataChartCategory);
-            // console.log(dataFirebaseStatus);
-            // console.log(dataChartStatus);
+            console.log(dataFirebaseCategory);
+            console.log(dataChartCategory);
+            console.log(dataFirebaseStatus);
+            console.log(dataChartStatus);
 
             this.buildChartCategory(dataChartCategory);
             this.buildChartStatus(dataChartStatus);
@@ -101,8 +101,8 @@ export class HomeComponent implements OnInit {
 
     // this.buildChartByCategory();
     // this.buildCByStatus();
-    this.buildCByLastSemester();
-    this.buildCRankStudents();
+    this.buildChartByLastSemester();
+    this.buildChartRankStudents();
   }
 
   toAnalyze(data) {
@@ -167,7 +167,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  buildCByLastSemester() {
+  buildChartByLastSemester() {
     // calc of the last 6 months
     for (let i = 6; i > 0; i -= 1) {
       const d = new Date(new Date().getFullYear(), new Date().getMonth() - i, 1);
@@ -188,7 +188,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  buildCRankStudents() {
+  buildChartRankStudents() {
     this.rankStudentsChartType = ChartType.Bar;
     this.rankStudentsChartData = {
       labels: ['Juliana', 'Patrick', 'Carlos', 'Luiz', 'Helen', 'Cleverson'],

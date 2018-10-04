@@ -11,7 +11,7 @@
             <div class="content">
                 <form [formGroup]="activityTypeForm" (ngSubmit)="save()">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
                                 <label for="description">Descrição</label>
                                 <input type="text" class="form-control" formControlName="description" #inputFocus>
@@ -19,9 +19,9 @@
                             <aka-message-control-error [control]="activityTypeForm.get('description')" error="required"
                                 msg="Descrição é obrigatório."></aka-message-control-error>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 label-block">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-2 label-block p-0">
                             <label></label>
-                            <button [disabled]="activityTypeForm.invalid" type="submit" class="btn btn-action left">{{
+                            <button [disabled]="activityTypeForm.invalid" type="submit" class="btn btn-action btn-block left">{{
                                 button }}</button>
                         </div>
                     </div>
