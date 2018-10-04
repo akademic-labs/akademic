@@ -636,7 +636,6 @@ input:focus {
   background: rgba(203, 203, 210, .15);
   position: relative;
   /* z-index: 2; */
-  z-index: 12000;
   float: right;
   width: calc(100% - 260px);
   min-height: 100%;
@@ -2620,10 +2619,9 @@ fieldset[disabled] .form-control {
   font-size: 20px;
 }
 
-/* .container-fluid {
-  z-index: 4 !important;
+@media (max-width: 991px) {
+  .main-panel {
+      -webkit-transform: inherit;
+      transform: inherit;
+  }
 }
-
-.card {
-  z-index: 4 !important;
-} */
