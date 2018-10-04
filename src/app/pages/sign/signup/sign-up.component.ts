@@ -16,9 +16,18 @@ export class SignUpComponent implements OnInit {
     this.buildForm();
   }
 
-  onSubmit({ value, valid }: { value: User, valid: boolean }) {
+  onSubmit({ value, valid }: { value, valid: boolean }) {
     if (valid) {
-      this._auth.createUser(value);
+      const dataUser: User = {
+        uid: null,
+        email: value.email,
+        displayName: value.displayName,
+        photoURL: null,
+        status: 'A',
+        roles: value.roles,
+        createdAt: new Date()
+      };
+      this._auth.createUser(dataUser, value.password);
     }
   }
 
@@ -42,13 +51,12 @@ export class SignUpComponent implements OnInit {
 
   buildForm() {
     this.signUpForm = this.fb.group({
-      'email': ['', [
+      email: ['', [
         Validators.required,
         Validators.email
       ]],
-      'firstName': ['', Validators.required],
-      'lastName': ['', Validators.required],
-      'password': ['', [
+      displayName: ['', Validators.required],
+      password: ['', [
         Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
         Validators.minLength(8),
         Validators.maxLength(25),
@@ -60,8 +68,9 @@ export class SignUpComponent implements OnInit {
         controller: [null, Validators.required]
       })
     }, {
-      validator: this.matchPassword // validation method for password
-    });
+        validator: this.matchPassword // validation method for password
+      }
+    );
   }
 
   private matchPassword(control: AbstractControl) {

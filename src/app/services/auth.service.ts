@@ -13,6 +13,7 @@ import { switchMap } from 'rxjs/operators';
 import * as firebase from 'firebase/app';
 
 import { User } from 'app/models/user.interface';
+import { UserInfo } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -39,15 +40,18 @@ export class AuthService {
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(credential => {
-        this._userService.createUserData(credential.user, { student: true }); // if using firestore
+        const dataUser = this.authCredentialToUser(credential.user);
+        this._userService.createUserData(dataUser);
       })
       .catch((error) => this.handleError(error));
   }
 
-  createUser(user: User) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
+  createUser(user: User, password: string) {
+    console.log(user);
+    return this.afAuth.auth.createUserWithEmailAndPassword(user.email, password)
       .then(credential => {
-        this._userService.createUserData(credential.user, user.roles); // if using firestore
+        user.uid = credential.user.uid;
+        this._userService.createUserData(user);
       });
   }
 
@@ -84,9 +88,24 @@ export class AuthService {
   private oAuthLogin(provider: any) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then(credential => {
-        this._userService.createUserData(credential.user, { student: true });
+        const dataUser = this.authCredentialToUser(credential.user);
+        this._userService.createUserData(dataUser);
       })
       .catch(error => this.handleError(error));
+  }
+
+  private authCredentialToUser(credentialUser: UserInfo) {
+    const dataUser: User = {
+      uid: credentialUser.uid,
+      email: credentialUser.email,
+      displayName: credentialUser.displayName || 'nameless',
+      photoURL: credentialUser.photoURL,
+      status: 'A',
+      roles: { student: true },
+      createdAt: new Date()
+    };
+
+    return dataUser;
   }
 
   // If error, notify user
