@@ -1,0 +1,67 @@
+<form [formGroup]="signUpForm" (submit)="onSubmit(signUpForm)">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group" formGroupName="roles">
+        <label for="btn-group" style="display: block;">Você é?</label>
+        <div class="btn-group btn-group-justified">
+          <div class="btn-group">
+            <button type="button" class="btn btn-secondary" [class.active]="signUpForm.get('roles.student').value" (click)="isStudent()">Estudante</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-secondary" [class.active]="signUpForm.get('roles.controller').value"
+              (click)="isController()">Coordenador</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" class="form-control" formControlName="email" id="email" required placeholder="Ex. email@email.com">
+      </div>
+      <aka-message-control-error [control]="signUpForm.get('email')" error="required" msg="E-mail é obrigatório."></aka-message-control-error>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <label for="displayName">Nome completo</label>
+        <input type="text" class="form-control" formControlName="displayName" id="displayName" required>
+      </div>
+      <aka-message-control-error [control]="signUpForm.get('displayName')" error="required" msg="Nome completo é obrigatório."></aka-message-control-error>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" class="form-control" id="password" formControlName="password" required>
+      </div>
+      <aka-message-control-error [control]="signUpForm.get('password')" error="required" msg="Senha é obrigatória."></aka-message-control-error>
+      <aka-message-control-error [control]="signUpForm.get('password')" error="pattern" msg="Senha deve conter uma letra maiúscula e um número."></aka-message-control-error>
+      <aka-message-control-error [control]="signUpForm.get('password')" error="minLength" msg="Senha deve conter no mínimo 8 caracteres."></aka-message-control-error>
+      <aka-message-control-error [control]="signUpForm.get('password')" error="maxLength" msg="Senha deve conter no máximo 25 caracteres."></aka-message-control-error>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <label for="confirm">Repetir a Senha</label>
+        <input type="password" class="form-control" id="confirm" formControlName="confirmPassword" required>
+      </div>
+      <aka-message-control-error [control]="signUpForm.get('confirmPassword')" error="matchPassword" msg="Senhas não coincidem."></aka-message-control-error>
+      <aka-message-control-error [control]="signUpForm.get('confirmPassword')" error="required" msg="Repetir a senha é obrigatório."></aka-message-control-error>
+    </div>
+  </div>
+
+  <div class="flex-space">
+    <label type="button" class="text-primary pointer left" [routerLink]="['/']">Já tem uma conta?</label>
+    <button type="submit" class="btn btn-action right" [disabled]="!signUpForm.valid">Criar conta</button>
+  </div>
+</form>

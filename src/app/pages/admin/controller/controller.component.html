@@ -33,8 +33,8 @@
               <div class="form-group">
                 <label for="course">Curso</label>
                 <!-- {{ courses | json }} -->
-                <p-dropdown formControlName="course" dataKey="uid" placeholder="Selecione" emptyFilterMessage="Nenhum resultado." [options]="courses$ | async"
-                  optionLabel="description" [showClear]="true" filter="true"></p-dropdown>
+                <p-dropdown formControlName="course" dataKey="uid" placeholder="Selecione" emptyFilterMessage="Nenhum resultado."
+                  [options]="courses$ | async" optionLabel="description" [showClear]="true" filter="true"></p-dropdown>
                 <!-- <select class="form-control" placeholder="asdasdasd" formControlName="course" [compareWith]="compareCourse">
                   <option value="null" disabled="true" [selected]="true">Selecione..</option>
                   <option *ngFor="let course of $courses | async" [ngValue]="course">{{course.description}}</option>
@@ -44,7 +44,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 label-block">
               <label></label>
-              <button [disabled]="controllerForm.invalid" type="submit" class="btn btn-info btn-fill left">{{ button }}</button>
+              <button [disabled]="controllerForm.invalid" type="submit" class="btn btn-action left">{{ button }}</button>
             </div>
           </div>
         </form>
@@ -56,15 +56,15 @@
               <tr *ngFor="let controller of controllers$ | async">
                 <td>{{ controller.name }} | {{ controller.course.description }}</td>
                 <td class="td-actions text-right">
-                  <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                    <i class="fa fa-edit" (click)="edit(controller)"></i>
-                  </button>
+                  <a class="btn" (click)="edit(controller)">
+                    <i class="fa fa-edit"></i>
+                  </a>
+                  <a (click)="confirmRemove(controller)" class="btn text-danger">
+                    <i class="fa fa-times"></i>
+                  </a>
                   <!-- <button type="button" rel="tooltip" (click)="remove(controller.uid)" title="Remover" class="btn btn-danger btn-simple btn-xs">
                     <i class="fa fa-times"></i>
                   </button> -->
-                  <button type="button" rel="tooltip" (click)="confirmRemove(controller)" title="Remover" class="btn btn-danger btn-simple btn-xs">
-                    <i class="fa fa-times"></i>
-                  </button>
                 </td>
               </tr>
             </tbody>

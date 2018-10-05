@@ -4,9 +4,9 @@ import { AngularFirestoreDocument, AngularFirestore, AngularFirestoreCollection 
 import { User } from 'app/models/user.interface';
 
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { UserInfo } from 'firebase';
+import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { NotifyService } from './notify.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class UserService {
 
   userCollection: AngularFirestoreCollection<any>;
 
-  constructor(private afs: AngularFirestore, private _router: Router) {
+  constructor(private afs: AngularFirestore, private _router: Router, private _notify: NotifyService) {
     this.userCollection = this.afs.collection('users', (ref) => ref.orderBy('time', 'desc').limit(5));
   }
 
@@ -35,37 +35,17 @@ export class UserService {
     return this.afs.doc<any>(`users/${id}`);
   }
 
-  createUser(content: User) {
-    return this.userCollection.add(content);
-  }
-
   updateUser(id: string, data: any) {
     return this.getUser(id).update(data);
   }
 
-  public createUserData(authUser: UserInfo) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${authUser.uid}`);
+  public createUserData(user: User) {
+    // sets user data to firestore on login
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    userRef.set(user, { merge: true });
 
-    userRef.snapshotChanges().pipe(take(1)).subscribe(d => {
-      if (!d.payload.exists) {
-        // save the user
-        const data: User = {
-          uid: authUser.uid,
-          email: authUser.email,
-          displayName: authUser.displayName.substr(0, authUser.displayName.indexOf(' ')) || 'nameless',
-          lastName: authUser.displayName.substr(authUser.displayName.indexOf(' ') + 1),
-          photoURL: authUser.photoURL,
-          status: 'A',
-          roles: {
-            student: true
-          },
-          createdAt: new Date()
-        };
-        userRef.set(data);
-      }
-
-      this._router.navigate(['/dashboard']);
-    })
+    this._router.navigate(['/dashboard']);
+    this._notify.update('success', 'Bem vindo!');
   }
 
   deleteUser(id: string) {

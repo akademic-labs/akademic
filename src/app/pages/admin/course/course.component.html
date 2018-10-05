@@ -20,32 +20,67 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 label-block">
                             <label></label>
-                            <button [disabled]="courseForm.invalid" type="submit" class="btn btn-info btn-fill left">{{ button }}</button>
+                            <button [disabled]="courseForm.invalid" type="submit" class="btn btn-action left">
+                                {{ button }}
+                            </button>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="content">
-                <div class="table-full-width">
-                    <table class="table">
-                        <tbody>
-                            <tr *ngFor="let course of courses$ | async">
-                                <td>{{course.description}}</td>
-                                <td class="td-actions text-right">
-                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                                        <i class="fa fa-edit" (click)="edit(course)"></i>
-                                    </button>
-                                    <button type="button" rel="tooltip" (click)="remove(course.uid)" title="Remover" class="btn btn-danger btn-simple btn-xs">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="footer">
-                    <hr> {{ (courses$ | async)?.length }} registros
-                </div>
+
+                <p-table [value]="courses$ | async" selectionMode="single" #dt [globalFilterFields]="['description']" [paginator]="true"
+                    [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]" [resizableColumns]="true" [reorderableColumns]="true">
+                    <ng-template pTemplate="caption">
+                        <div class="input-filter">
+                            <i class="fa fa-search"></i>
+                            <input type="text" class="form-control" placeholder="Pesquisar.." (input)="dt.filterGlobal($event.target.value, 'contains')">
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th [pSortableColumn]="'description'" pResizableColumn pReorderableColumn style="width: 75%">Nome
+                                <p-sortIcon></p-sortIcon>
+                            </th>
+                            <th style="width: 15%">Ações</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-course>
+                        <tr [pSelectableRow]="course">
+                            <td>
+                                <span class="ui-column-title">Nome:</span>
+                                {{course.description}}
+                            </td>
+                            <td class="td-actions">
+                                <a class="btn" (click)="edit(course)">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a (click)="remove(course.uid)" class="btn text-danger">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </td>
+                            <!-- <td class="td-actions">
+                            <span class="ui-column-title">Ações:</span>
+                            <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
+                              <i class="fa fa-edit" (click)="edit(course)"></i>
+                            </button>
+                            <button type="button" (click)="remove(course.uid)" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
+                              <i class="fa fa-times"></i>
+                            </button>
+                          </td> -->
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        {{ (courses$ | async)?.length }} registros
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                            <td colspan="5">
+                                Nenhuma registro encontrado.
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
             </div>
         </div>
     </div>

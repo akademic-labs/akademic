@@ -54,21 +54,21 @@
                                 <label>{{ attach.name }}</label>
                         </div>
                     </div> -->
-                    <div class="show-attachs">
-                        <div *ngFor="let attachImg of attachments; index as i" class="card card-attachment">
-                            <div *ngIf="attachImg.type !== 'application/pdf'; else pdf">
-                                <img class="img-attach" [src]="attachImg.url" />
+                    <div class="show-attach">
+                        <!-- class="col-xs-10 col-sm-10 col-md-4 col-lg-3 col-xl-3 -->
+                        <div *ngFor="let attach of attachments; index as i" class=" card card-attach">
+                            <div *ngIf="attach.type !== 'application/pdf'; else pdf">
+                                <img class="img-attach" [src]="attach.url" />
                             </div>
                             <ng-template #pdf>
-                                <img class="img-attach" src="assets/img/pdf.png" />
+                                <img class="pdf-attach" src="assets/img/pdf.png" />
                             </ng-template>
-                            <div class="text-center" style="margin: 20px 15px 0px 5px;">
-                                <label>{{ attachImg.name }}</label>
-                                <br>
+                            <div>
+                                <label class="label-attach">{{ attach.name }}</label>
                                 <!-- access file size to make inner join storage -->
                                 <!-- <label>({{ attachImg[i].file.size | fileSize }})</label> -->
-                                <div style="width: 100%;">
-                                    <a [download]="attachImg.name" [href]="attachImg.url" target="_blank" type="button" class="btn-card-attach" rel="tooltip" title="Download"><i
+                                <div>
+                                    <a [download]="attach.name" [href]="attach.url" target="_blank" type="button" class="btn-attach" rel="tooltip" title="Download"><i
                                             class="fa fa-download"></i></a>
                                 </div>
                             </div>
@@ -117,17 +117,17 @@
                     <div class="author">
                         <div>Solicitante</div>
                         <div style="padding:20px 0px">
-                            <img src="assets/img/default-avatar.png" alt="Foto do Usuário" width="80" height="80" style="border-radius: 50%; margin-right: 10px"
-                            />
-                            <h5 style="display: inline-grid;">{{activity?.user.displayName + ' ' + activity?.user.lastName}}
-                                <br/>
+                            <img src="assets/img/default-avatar.png" alt="Foto do Usuário" width="80" height="80" style="border-radius: 50%; margin-right: 10px" />
+                            <h5 style="display: inline-grid;">{{activity?.user.displayName}}
+                                <br />
                                 <small style="text-transform: lowercase">{{activity?.user.email}}</small>
                             </h5>
                         </div>
                     </div>
-                    <button type="button" (click)="toConfirm('approve')" class="btn btn-info btn-fill pull-right" style="margin-left: 10px;">Aprovar</button>
-                    <button type="button" (click)="toConfirm('disapprove')" class="btn btn-link pull-right" style="border:none;">Reprovar</button>
-                    <div class="clearfix"></div>
+                    <div class="clearfix">
+                        <button type="button" class="btn btn-action pull-right" (click)="toConfirm('approve')">Aprovar</button>
+                        <button type="button" class="btn btn-secondary pull-right mr-2" (click)="toConfirm('disapprove')">Reprovar</button>
+                    </div>
                 </form>
             </div>
         </div>

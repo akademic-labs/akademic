@@ -7,7 +7,6 @@ export interface Roles {
 export interface User {
   uid: string;
   displayName: string;
-  lastName: string;
   registration?: string;
   birthday?: Date;
   createdAt: Date;
@@ -15,6 +14,7 @@ export interface User {
   phone?: string;
   photoURL: string;
   status: string;
+  password?: string;
 
   // firebase user
   phoneNumber?: string | null;

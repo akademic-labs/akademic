@@ -89,32 +89,26 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
                                 <label for="local">Local</label>
                                 <input type="text" class="form-control" formControlName="local">
                             </div>
                             <aka-message-control-error [control]="activityForm.get('local')" error="required" msg="Local é obrigatório."></aka-message-control-error>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
                             <div class="form-group">
                                 <label for="state">Estado</label>
-                                <p-dropdown formControlName="state" (onChange)="getCities()" placeholder="Selecione" emptyFilterMessage="Nenhum resultado."
-                                    [options]="states$" optionLabel="nome" [showClear]="true" filter="true"></p-dropdown>
-                                <!-- <select class="form-control" formControlName="state" (change)="getCities()">
-                                    <option *ngFor="let state of $states | async" [ngValue]="state">{{state.nome}}</option>
-                                </select> -->
+                                <p-dropdown formControlName="state" [options]="states$" optionLabel="nome" (onChange)="getCities()" placeholder="Selecione"
+                                    filter="true" [showClear]="true" emptyFilterMessage="Nenhum resultado."></p-dropdown>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('state')" error="required" msg="Estado é obrigatório."></aka-message-control-error>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
                             <div class="form-group">
                                 <label for="city">Cidade</label>
-                                <p-dropdown formControlName="city" placeholder="Selecione" emptyFilterMessage="Nenhum resultado." [options]="cities$"
-                                    optionLabel="nome" [showClear]="true" filter="true"></p-dropdown>
-                                <!-- <select class="form-control" formControlName="city">
-                                    <option *ngFor="let city of $cities | async" [ngValue]="city.nome">{{city.nome}}</option>
-                                </select> -->
+                                <p-dropdown formControlName="city" [options]="cities$" optionLabel="nome" placeholder="Selecione" filter="true" [showClear]="true"
+                                    emptyFilterMessage="Nenhum resultado."></p-dropdown>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('city')" error="required" msg="Cidade é obrigatório."></aka-message-control-error>
                         </div>
@@ -138,8 +132,9 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-info btn-fill pull-right" [disabled]="disabledSave && activityForm.invalid">Salvar</button>
-                    <div class="clearfix"></div>
+                    <div class="clearfix">
+                        <button type="submit" class="btn btn-action pull-right radius" [disabled]="disabledSave && activityForm.invalid">Salvar</button>
+                    </div>
                 </form>
             </div>
         </div>

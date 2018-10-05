@@ -6,14 +6,15 @@ type UserFields = 'email' | 'password';
 type FormErrors = { [u in UserFields]: string };
 
 @Component({
-  selector: 'aka-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'aka-sign-in',
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.css']
 })
-export class LoginComponent implements OnInit {
+export class SignInComponent implements OnInit {
 
-  loading = false;
   userForm: FormGroup;
+  loading = false;
+  isReseting = false;
   formErrors: FormErrors = {
     'email': '',
     'password': '',
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder, public _auth: AuthService) { }
+  constructor(private _fb: FormBuilder, public _auth: AuthService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -67,7 +68,7 @@ export class LoginComponent implements OnInit {
   }
 
   buildForm() {
-    this.userForm = this.fb.group({
+    this.userForm = this._fb.group({
       'email': ['', [
         Validators.required,
         Validators.email

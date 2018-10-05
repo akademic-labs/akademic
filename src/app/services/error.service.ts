@@ -30,6 +30,7 @@ export class ErrorService {
   constructor(private _notify: NotifyService) { }
 
   public printErrorByCode(code: string): string {
+    console.log(code);
     code = code.split('/')[1];
     if (this.params[code]) {
       return (this.params[code]);

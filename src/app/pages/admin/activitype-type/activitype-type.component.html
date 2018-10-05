@@ -11,16 +11,18 @@
             <div class="content">
                 <form [formGroup]="activityTypeForm" (ngSubmit)="save()">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
                                 <label for="description">Descrição</label>
                                 <input type="text" class="form-control" formControlName="description" #inputFocus>
                             </div>
-                            <aka-message-control-error [control]="activityTypeForm.get('description')" error="required" msg="Descrição é obrigatório."></aka-message-control-error>
+                            <aka-message-control-error [control]="activityTypeForm.get('description')" error="required"
+                                msg="Descrição é obrigatório."></aka-message-control-error>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 label-block">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-2 label-block p-0">
                             <label></label>
-                            <button [disabled]="activityTypeForm.invalid" type="submit" class="btn btn-info btn-fill left">{{ button }}</button>
+                            <button [disabled]="activityTypeForm.invalid" type="submit" class="btn btn-action btn-block left">{{
+                                button }}</button>
                         </div>
                     </div>
                 </form>
@@ -32,12 +34,12 @@
                             <tr *ngFor="let activityType of activityTypes$ | async">
                                 <td>{{activityType.description}}</td>
                                 <td class="td-actions text-right">
-                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                                        <i class="fa fa-edit" (click)="edit(activityType)"></i>
-                                    </button>
-                                    <button type="button" rel="tooltip" (click)="remove(activityType.uid)" title="Remover" class="btn btn-danger btn-simple btn-xs">
+                                    <a type="button" class="btn" (click)="edit(activityType)">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a type="button" (click)="remove(activityType.uid)" class="btn text-danger">
                                         <i class="fa fa-times"></i>
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>

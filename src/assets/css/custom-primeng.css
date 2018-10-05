@@ -79,9 +79,6 @@ p-spinner.ng-dirty.ng-invalid .ui-spinner-button.ui-button {
 }
 
 /* OTHERS */
-form .ui-dropdown {
-    width: 100% !important;
-}
 
 .ui-calendar {
     width: 100%;
@@ -92,15 +89,21 @@ form .ui-dropdown {
     border-radius: 3px;
 }
 
-.ui-inputtext {
-    width: 100%;
-    height: 39px;
+body form .ui-inputtext,
+body form .ui-dropdown {
+    width: 100% !important;
+    border: 1px solid #e3e3e3;
+    color: var(--color-label);
+}
+
+body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item {
+    color: var(--color-label);
 }
 
 .ui-dropdown .ui-dropdown-label {
     text-transform: capitalize;
-    margin-top: 4px;
     height: 29px;
+    text-indent: 5px;
 }
 
 .ui-table .ui-table-tbody>tr {
@@ -116,7 +119,6 @@ p-lightbox img {
     width: 200px;
     height: 300px;
     margin-right: 20px;
-    /* border-radius: 8px; */
 }
 
 .ui-lightbox .ui-lightbox-caption {
@@ -178,4 +180,143 @@ p-toast i {
 
 p-toast p {
     word-wrap: break-word;
+}
+
+body .ui-dropdown .ui-dropdown-trigger .ui-dropdown-trigger-icon:before {
+    /* content: ""; */
+    content: "\e906";
+}
+
+body .ui-dropdown-panel .ui-dropdown-items {
+    padding: 5px 5px 5px 10px;
+    /* word-break: break-word; */
+}
+
+body .ui-corner-all {
+    border-radius: 4px;
+}
+
+body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight {
+    color: #ffffff;
+    background: linear-gradient(60deg, #b224ef, #7579ff);
+    margin-right: 4px;
+}
+
+body .ui-datepicker table td>a.ui-state-active {
+    color: #ffffff;
+    background: linear-gradient(60deg, #b224ef, #7579ff);
+}
+
+body .ui-dropdown-panel .ui-dropdown-filter-container .ui-dropdown-filter-icon {
+    top: 50%;
+    margin-top: -.5em;
+    right: 1.357em;
+    color: #b224ef;
+}
+
+body .ui-table {
+    font-size: calc(13px + var(--font-size-control));
+    margin: -14px 0px 7px 0px;
+}
+
+body .ui-table .ui-sortable-column.ui-state-highlight,
+body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+    background: linear-gradient(60deg, #b224ef, #7579ff);
+}
+
+body .ui-table.ui-table-hoverable-rows .ui-table-tbody > tr:not(.ui-state-highlight):not(.ui-contextmenu-selected):hover {
+    background-color: #F7F7F8;
+}
+
+body .ui-table .ui-table-thead>tr>th,
+body .ui-table .ui-table-tfoot>tr>td {
+    background-color: #F7F7F8;
+    border: 1px solid #eaeaea;
+}
+
+body .ui-table .ui-sortable-column:not(.ui-state-highlight):hover {
+    background-color: #f7f7f9;
+    color: #1d1e1f;
+}
+
+body .ui-table .ui-table-tbody>tr {
+    background: #ffffff;
+    border: 1px solid #eaeaea;
+}
+
+body .ui-table .ui-table-tbody>tr>td {
+    background: inherit;
+    border: 1px solid #eaeaea;
+    border-right: 1px solid #eaeaea !important;
+}
+
+body .ui-table .ui-table-tbody>tr.ui-state-highlight {
+    background-color: #b224ef;
+    color: #ffffff;
+}
+
+body .ui-table .ui-table-tbody>tr:nth-child(even).ui-state-highlight {
+    background-color: #b224ef;
+    color: #ffffff;
+}
+
+body .ui-table .ui-table-tbody>tr:nth-child(even).ui-contextmenu-selected {
+    background-color: #b224ef;
+    color: #ffffff;
+}
+
+body .ui-table.ui-table-hoverable-rows .ui-table-tbody>tr:not(.ui-state-highlight):hover {
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #b224ef;
+}
+
+body .ui-table .ui-table-caption {
+    background-color: #F7F7F8;
+    border: 1px solid #eaeaea;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom: none;
+    height: 50px;
+    padding: 0px;
+}
+
+body .ui-table .ui-table-summary {
+    background-color: #F7F7F8;
+    border: 1px solid #eaeaea;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-top: none;
+    padding-top: 10px;
+}
+
+body .ui-paginator {
+    background-color: #F7F7F8;
+    border: 1px solid #eaeaea;
+    border-bottom: none;
+    padding-top: 10px;
+}
+
+body .ui-table.ui-table-responsive .ui-paginator-bottom {
+    border-top: 0;
+}
+
+.input-filter {
+    position: relative;
+    font-weight: normal;
+    float: right;
+    padding: 7px;
+}
+
+.input-filter input {
+    text-indent: 20px;
+    height: 33px;
+    /* width: 300px; */
+}
+
+.input-filter i {
+    position: absolute;
+    color: #9B9B9B;
+    top: 18px;
+    left: 16px;
 }

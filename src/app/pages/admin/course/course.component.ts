@@ -21,7 +21,7 @@ export class CourseComponent implements OnInit {
   constructor(
     private _courseFormBuilder: FormBuilder,
     private _courseService: CourseService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.courses$ = this._courseService.get();
@@ -29,7 +29,7 @@ export class CourseComponent implements OnInit {
     this.focusIn.nativeElement.focus();
   }
 
-  buildForm(){
+  buildForm() {
     this.courseForm = this._courseFormBuilder.group({
       uid: new FormControl({ value: null, disabled: true }),
       description: [null, Validators.compose([Validators.required])]

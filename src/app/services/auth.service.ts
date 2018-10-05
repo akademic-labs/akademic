@@ -13,6 +13,7 @@ import { switchMap } from 'rxjs/operators';
 import * as firebase from 'firebase/app';
 
 import { User } from 'app/models/user.interface';
+import { UserInfo } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -39,10 +40,19 @@ export class AuthService {
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(credential => {
-        this._router.navigate(['/dashboard']);
-        this._userService.createUserData(credential.user); // if using firestore
+        const dataUser = this.authCredentialToUser(credential.user);
+        this._userService.createUserData(dataUser);
       })
       .catch((error) => this.handleError(error));
+  }
+
+  createUser(user: User, password: string) {
+    console.log(user);
+    return this.afAuth.auth.createUserWithEmailAndPassword(user.email, password)
+      .then(credential => {
+        user.uid = credential.user.uid;
+        this._userService.createUserData(user);
+      });
   }
 
   // OAuth Methods
@@ -62,16 +72,6 @@ export class AuthService {
     return this.oAuthLogin(provider);
   }
 
-  private oAuthLogin(provider: any) {
-    return this.afAuth.auth.signInWithPopup(provider)
-      .then(credential => {
-        this._userService.createUserData(credential.user); // if using firestore
-        // this._notify.update('success', 'Bem vindo!');
-      })
-      .catch(error => this.handleError(error));
-  }
-
-
   logOut() {
     this.afAuth.auth.signOut().then(() => {
       this._router.navigate(['/']);
@@ -85,9 +85,27 @@ export class AuthService {
       .catch((error) => this.handleError(error));
   }
 
-  // should maybe be implemented
-  emailSignUp(email: string, senha: string) {
-    this._router.navigate(['./']);
+  private oAuthLogin(provider: any) {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then(credential => {
+        const dataUser = this.authCredentialToUser(credential.user);
+        this._userService.createUserData(dataUser);
+      })
+      .catch(error => this.handleError(error));
+  }
+
+  private authCredentialToUser(credentialUser: UserInfo) {
+    const dataUser: User = {
+      uid: credentialUser.uid,
+      email: credentialUser.email,
+      displayName: credentialUser.displayName || 'nameless',
+      photoURL: credentialUser.photoURL,
+      status: 'A',
+      roles: { student: true },
+      createdAt: new Date()
+    };
+
+    return dataUser;
   }
 
   // If error, notify user
