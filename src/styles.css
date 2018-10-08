@@ -2624,3 +2624,10 @@ fieldset[disabled] .form-control {
   outline: 0;
   font-size: 20px;
 }
+
+@media (max-width: 991px) {
+  .main-panel {
+      -webkit-transform: inherit;
+      transform: inherit;
+  }
+}
