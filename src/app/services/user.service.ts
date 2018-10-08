@@ -35,12 +35,12 @@ export class UserService {
     return this.afs.doc<any>(`users/${id}`);
   }
 
-  updateUser(id: string, data: any) {
-    return this.getUser(id).update(data);
+  updateUser(id: string, data: User) {
+    return this.getUser(id).set(data, { merge: true });
   }
 
   public createUserData(user: User) {
-    // sets user data to firestore on login
+    // sets user data to firestore
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
     userRef.set(user, { merge: true });
 

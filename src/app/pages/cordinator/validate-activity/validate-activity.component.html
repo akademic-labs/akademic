@@ -2,9 +2,8 @@
     <div class="col-md-12">
         <div class="card border-top">
             <div class="header">
-                <i class="fa fa-check-circle-o"></i>
                 <div class="title">
-                    {{ title }}
+                    <i class="fa fa-check-circle-o"></i>{{ title }}
                 </div>
                 <hr>
             </div>
@@ -25,7 +24,8 @@
                     </div>
                     <hr>
                     <span class="icon-report">
-                        <i class="fa fa-clock-o"></i>{{ activity?.initialDate | date: 'dd/MM/yyyy'}} - {{ activity?.finalDate
+                        <i class="fa fa-clock-o"></i>{{ activity?.initialDate | date: 'dd/MM/yyyy'}} - {{
+                        activity?.finalDate
                         | date: 'dd/MM/yyyy' }}
                         <!-- {{ activity?.finalDate.toDate() | date: 'dd/MM/yyyy' }} -->
                     </span>
@@ -68,8 +68,8 @@
                                 <!-- access file size to make inner join storage -->
                                 <!-- <label>({{ attachImg[i].file.size | fileSize }})</label> -->
                                 <div>
-                                    <a [download]="attach.name" [href]="attach.url" target="_blank" type="button" class="btn-attach" rel="tooltip" title="Download"><i
-                                            class="fa fa-download"></i></a>
+                                    <a [download]="attach.name" [href]="attach.url" target="_blank" type="button" class="btn-attach"
+                                        rel="tooltip" title="Download"><i class="fa fa-download"></i></a>
                                 </div>
                             </div>
                         </div>
