@@ -149,8 +149,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-position: center;
-  background-size: cover;
+  padding: 0 15px;
 }
 
 .background-sign {
@@ -158,6 +157,7 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%237d86e9' points='800 100 0 200 0 800 1600 800 1600 200'/%3E%3Cpolygon fill='%23929aec' points='800 200 0 400 0 800 1600 800 1600 400'/%3E%3Cpolygon fill='%23a8aef0' points='800 300 0 600 0 800 1600 800 1600 600'/%3E%3Cpolygon fill='%23bec3f4' points='1600 800 800 400 0 800'/%3E%3Cpolygon fill='%23d4d7f8' points='1280 800 800 500 320 800'/%3E%3Cpolygon fill='%23e9ebfb' points='533.3 800 1066.7 800 800 600'/%3E%3Cpolygon fill='%23ffffff' points='684.1 800 914.3 800 800 700'/%3E%3C/g%3E%3C/svg%3E");
   background-attachment: fixed;
   background-size: cover;
+  background-position: center;
 }
 
 /* light css */
@@ -1518,21 +1518,6 @@ fieldset[disabled] .form-control {
   margin: 0px -5px 20px -5px;
 }
 
-.card .image {
-  width: 100%;
-  overflow: hidden;
-  height: 260px;
-  border-radius: 4px 4px 0 0;
-  position: relative;
-  -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  transform-style: preserve-3d
-}
-
-.card .image img {
-  width: 100%
-}
-
 .card .filter {
   position: absolute;
   z-index: 2;
@@ -1678,11 +1663,6 @@ fieldset[disabled] .form-control {
   height: 110px
 }
 
-.card-user .image-plain {
-  height: 0;
-  margin-top: 110px
-}
-
 .card-user .author {
   text-align: center;
   text-transform: none;
@@ -1703,26 +1683,6 @@ fieldset[disabled] .form-control {
 
 .card-user .title {
   line-height: 24px
-}
-
-.card-user .footer,
-.card-price .footer {
-  padding: 5px 15px 10px
-}
-
-.card-user hr,
-.card-price hr {
-  margin: 5px 15px
-}
-
-.card-plain {
-  background-color: transparent;
-  box-shadow: none;
-  border-radius: 0
-}
-
-.card-plain .image {
-  border-radius: 4px
 }
 
 .chart-size {

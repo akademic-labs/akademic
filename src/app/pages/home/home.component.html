@@ -69,7 +69,7 @@
         </aka-chart-card>
     </div>
 
-    <div *ngIf="_rolesService.isController(user)" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div *ngIf="_rolesService.isController(user)" class="col-xs-12">
         <div class="card">
             <div class="header text-center">
                 <h4 class="title">Tarefas</h4>
@@ -145,7 +145,7 @@
         </div>
     </div>
 
-    <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12">
         <div class="card">
             <div class="header text-center">
                 <h4 class="title">Minhas atividades</h4>
@@ -199,12 +199,12 @@
                             </td>
                             <td class="td-actions">
                                 <span class="ui-column-title">Ações:</span>
-                                <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
+                                <a type="button" class="btn">
                                     <i class="fa fa-edit" (click)="toEdit(activity.uid)"></i>
-                                </button>
-                                <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
+                                </a>
+                                <a type="button" class="btn text-danger">
                                     <i class="fa fa-times"></i>
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     </ng-template>
