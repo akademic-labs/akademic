@@ -5,14 +5,6 @@
     <hr>
   </div>
   <div class="content">
-    <div [ngClass]="canvasClass">
-      <canvas [attr.id]="chartId">{{ chart }}</canvas>
-    </div>
-    <div class="footer">
-      <hr *ngIf="withHr">
-      <div class="stats">
-        <i [ngClass]="footerIconClass"></i> {{ footerText }}
-      </div>
-    </div>
+    <p-chart [type]="chartType" [data]="chartData"></p-chart>
   </div>
 </div>

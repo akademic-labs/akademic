@@ -9,7 +9,6 @@
                         <a href="#">
                             <img class="avatar border-gray" [src]="user.photoURL ? user.photoURL : '../../../assets/img/default-avatar.png'"
                                 alt="Foto do perfil" />
-
                             <h4 class="title">{{user.displayName}}
                                 <br />
                                 <small>{{user.email}}</small>
@@ -39,11 +38,9 @@
                                     <input type="email" class="form-control" formControlName="email">
                                     <aka-message-control-error [control]="form.get('email')" error="required" msg="E-mail é obrigatório."
                                         readonly="readonly"></aka-message-control-error>
-
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="form-group">
@@ -86,7 +83,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">

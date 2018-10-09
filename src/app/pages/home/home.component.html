@@ -1,52 +1,13 @@
 <div class="row">
-    <div class="col-xs-12 col-md-6">
-        <div class="card">
-            <div class="header text-center">
-                <h4 class="title">Atividades</h4>
-                <p class="category">Atividades por categoria</p>
-                <hr>
-            </div>
-            <div class="content">
-                <div [ngClass]="'chart-size'">
-                    <canvas #categoryCanvas></canvas>
-                </div>
-                <div class="footer">
-                    <hr *ngIf="true">
-                    <div class="stats">
-                        <i [ngClass]="'fa fa-clock-o'"></i>Dados atualizados
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xs-12 col-md-6">
-        <div class="card">
-            <div class="header text-center">
-                <h4 class="title">Atividades</h4>
-                <p class="category">Atividades por status</p>
-                <hr>
-            </div>
-            <div class="content">
-                <div [ngClass]="'chart-size'">
-                    <canvas #statusCanvas></canvas>
-                </div>
-                <div class="footer">
-                    <hr *ngIf="true">
-                    <div class="stats">
-                        <i [ngClass]="'fa fa-clock-o'"></i>Dados atualizados
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por categoria'" [chartType]="activityCategoryChartType" [chartData]="activityCategoryChartData"
-            [withHr]="true" [footerIconClass]="'fa fa-clock-o'" [footerText]="'Atualizado a 2 minutos atrás'" [chartOptions]="activityCategoryChartOptions"
-            [canvasClass]="'chart-size'">
+    <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-md-6">
+        <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por categoria'" chartType="pie" [chartData]="activityCategoryChartData">
         </aka-chart-card>
-    </div> -->
+    </div>
+
+    <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-md-6">
+        <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por status'" chartType="pie" [chartData]="activityStatusChartData">
+        </aka-chart-card>
+    </div>
 
     <!-- <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por status'" [chartType]="activityStatusChartType" [chartData]="activityStatusChartData"
@@ -57,15 +18,12 @@
 
     <div *ngIf="_rolesService.isController(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <aka-chart-card [title]="'Atividades último semestre'" [subtitle]="'Número de atividades dos últimos 6 meses'"
-            [chartType]="lastSemesterChartType" [chartData]="lastSemesterChartData" [withHr]="true" [footerIconClass]="'fa fa-history'"
-            [footerText]="'Atualizado 4 minutos atrás'" [chartOptions]="lastSemesterChartOptions" [canvasClass]="'chart-size'">
+            chartType="line" [chartData]="lastSemesterChartData">
         </aka-chart-card>
     </div>
 
     <div *ngIf="_rolesService.isController(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        <aka-chart-card [title]="'Ranking'" [subtitle]="'Atividades dos alunos do curso'" [chartType]="rankStudentsChartType"
-            [chartData]="rankStudentsChartData" [chartOptions]="rankStudentsChartOptions" [withHr]="true"
-            [footerIconClass]="'fa fa-check'" [footerText]="'Atualizado 3 minutos atrás'">
+        <aka-chart-card [title]="'Ranking'" [subtitle]="'Atividades dos alunos do curso'" chartType="bar" [chartData]="rankStudentsChartData">
         </aka-chart-card>
     </div>
 
@@ -89,21 +47,25 @@
                         </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
-                                <th [pSortableColumn]="'user.displayName'" pResizableColumn pReorderableColumn style="width: 25%">Solicitante
+                                <th [pSortableColumn]="'user.displayName'" pResizableColumn pReorderableColumn>
+                                    Solicitante
                                     <p-sortIcon></p-sortIcon>
                                 </th>
-                                <th [pSortableColumn]="'description'" pResizableColumn pReorderableColumn style="width: 30%">Atividade
+                                <th [pSortableColumn]="'description'" pResizableColumn pReorderableColumn>
+                                    Atividade
                                     <p-sortIcon></p-sortIcon>
                                 </th>
-                                <th [pSortableColumn]="'activityType.description'" pResizableColumn pReorderableColumn
-                                    style="width: 20%">Tipo
+                                <th [pSortableColumn]="'activityType.description'" pResizableColumn pReorderableColumn>
+                                    Tipo
                                     <p-sortIcon></p-sortIcon>
                                 </th>
-                                <th [pSortableColumn]="'activity.createdAt'" pResizableColumn pReorderableColumn style="width: 15%">Data
+                                <th [pSortableColumn]="'activity.createdAt'" pResizableColumn pReorderableColumn>
+                                    Data
                                     Cadastro
                                     <p-sortIcon></p-sortIcon>
                                 </th>
-                                <th [pSortableColumn]="'hoursDuration'" pResizableColumn pReorderableColumn style="width: 10%">Duração
+                                <th [pSortableColumn]="'hoursDuration'" pResizableColumn pReorderableColumn>
+                                    Duração
                                     <p-sortIcon></p-sortIcon>
                                 </th>
                             </tr>
@@ -163,20 +125,22 @@
                         </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
-                                <th [pSortableColumn]="'description'" pResizableColumn pReorderableColumn style="width: 35%">Atividade
+                                <th [pSortableColumn]="'description'" pResizableColumn pReorderableColumn>
+                                    Atividade
                                     <p-sortIcon></p-sortIcon>
                                 </th>
-                                <th [pSortableColumn]="'hoursDuration'" pResizableColumn pReorderableColumn style="width: 10%">Duração
+                                <th [pSortableColumn]="'hoursDuration'" pResizableColumn pReorderableColumn>
+                                    Duração
                                     <p-sortIcon></p-sortIcon>
                                 </th>
-                                <th [pSortableColumn]="'activityType.description'" pResizableColumn pReorderableColumn
-                                    style="width: 25%">Tipo
+                                <th [pSortableColumn]="'activityType.description'" pResizableColumn pReorderableColumn>
+                                    Tipo
                                     <p-sortIcon></p-sortIcon>
                                 </th>
-                                <th [pSortableColumn]="'status'" pResizableColumn pReorderableColumn style="width: 20%">Status
+                                <th [pSortableColumn]="'status'" pResizableColumn pReorderableColumn>Status
                                     <p-sortIcon></p-sortIcon>
                                 </th>
-                                <th style="width: 10%"></th>
+                                <th></th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-activity>
