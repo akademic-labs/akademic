@@ -1,15 +1,13 @@
-<div *ngIf="!(_auth.user | async)" class="center-div background-sign">
+<div *ngIf="!(_auth.user$ | async)" class="center-div background-sign">
   <div class="card">
     <div class="card-header text-center">
       <span class="card-title">
         <img src="../assets/img/akademic-name-white.png" alt="Logo image" width="250px">
       </span>
     </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card-content">
-          <router-outlet></router-outlet>
-        </div>
+    <div class="card-content">
+      <div class="sign-content">
+        <router-outlet></router-outlet>
       </div>
     </div>
   </div>
