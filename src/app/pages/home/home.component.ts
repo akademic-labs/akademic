@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
   public rankStudentsChartOptions: any;
 
   activitiesToAnalyze$: Observable<Activity[]>
-  activitiesStudent$: Activity[];
+  activitiesStudent: Activity[];
   user: User;
 
   @ViewChild('categoryCanvas') categoryCanvas;
@@ -66,33 +66,33 @@ export class HomeComponent implements OnInit {
         this.activitiesToAnalyze$ = this._activityService.getActivitiesToApprove();
       }
       if (this._rolesService.isStudent(this.user)) {
-        this._activityService.getActivitiesStudent(res.uid)
-          .subscribe(data => {
-            this.activitiesStudent$ = data;
+        this._activityService.getActivitiesStudent(res.uid).subscribe(responseData => {
+          this.activitiesStudent = responseData;
 
-            let dataFirebaseCategory = [];
-            let dataChartCategory;
-            let dataFirebaseStatus = [];
-            let dataChartStatus;
+          let dataFirebaseCategory = [];
+          let dataChartCategory;
+          let dataFirebaseStatus = [];
+          let dataChartStatus;
 
-            data.forEach(e => {
-              dataFirebaseCategory.push({ activity: e.activityType.description, hours: e.hoursDuration });
-              dataFirebaseCategory = this._utilsService.groupBy(dataFirebaseCategory, 'activity', 'hours');
-              dataChartCategory = this._utilsService.preparateDataChart(dataFirebaseCategory, 'activity', 'hours');
+          responseData.forEach(e => {
+            dataFirebaseCategory.push({ activity: e.activityType.description, hours: e.hoursDuration });
+            dataFirebaseCategory = this._utilsService.groupBy(dataFirebaseCategory, 'activity', 'hours');
+            dataChartCategory = this._utilsService.preparateDataChart(dataFirebaseCategory, 'activity', 'hours');
 
-              dataFirebaseStatus.push({ status: e.status, count: 1 });
-              dataFirebaseStatus = this._utilsService.groupBy(dataFirebaseStatus, 'status', 'count');
-              dataChartStatus = this._utilsService.preparateDataChart(dataFirebaseStatus, 'status', 'count');
-            });
-
-            console.log(dataFirebaseCategory);
-            console.log(dataChartCategory);
-            console.log(dataFirebaseStatus);
-            console.log(dataChartStatus);
-
-            this.buildChartCategory(dataChartCategory);
-            this.buildChartStatus(dataChartStatus);
+            dataFirebaseStatus.push({ status: e.status, count: 1 });
+            dataFirebaseStatus = this._utilsService.groupBy(dataFirebaseStatus, 'status', 'count');
+            dataChartStatus = this._utilsService.preparateDataChart(dataFirebaseStatus, 'status', 'count');
           });
+
+          console.log(responseData);
+          console.log(dataFirebaseCategory);
+          console.log(dataChartCategory);
+          console.log(dataFirebaseStatus);
+          console.log(dataChartStatus);
+
+          this.buildChartCategory(dataChartCategory);
+          this.buildChartStatus(dataChartStatus);
+        });
       }
       if (this._rolesService.isAdmin(this.user)) {
         // methods Admin here
@@ -278,5 +278,4 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-
 }
