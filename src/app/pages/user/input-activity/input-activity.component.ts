@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -20,15 +20,14 @@ import { UploadPageComponent } from 'app/uploads/upload-page/upload-page.compone
   templateUrl: './input-activity.component.html',
   styleUrls: ['./input-activity.component.css']
 })
-export class InputActivityComponent implements OnInit {
+export class InputActivityComponent implements OnInit, OnDestroy {
   @ViewChild('inputFocus') focusIn: ElementRef;
   @ViewChild(UploadPageComponent) fileUpload: UploadPageComponent;
 
-  title = 'Entrada de Atividade';
   activity: Activity;
   activityForm: FormGroup;
   activityTypes$: Observable<ActivityType[]>;
-  states$: Observable<States[]>;
+  states: States[];
   cities$: Observable<Cities[]>;
   disabledSave: boolean;
   task: AngularFireUploadTask;
@@ -47,31 +46,19 @@ export class InputActivityComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
-    setTimeout(() => { this.focusIn.nativeElement.focus(); }, 100);
+
     this.activityTypes$ = this._actTypesService.get();
+
     this._utilsService.getStates()
       .subscribe(res => {
-        this.states$ = this._utilsService.sortBy(res, 'nome', 'asc');
+        this.states = this._utilsService.sortBy(res, 'nome', 'asc');
       });
+
     this.subscribe = this._route.paramMap.subscribe(params => {
       if (params.get('id')) {
         this._activityService.getActivityById(params.get('id'))
-          .subscribe(response => {
-            this.activityForm = this._formBuilder.group({
-              initialDate: response.initialDate,
-              finalDate: response.finalDate,
-              createdAt: response.createdAt,
-              description: response.description,
-              hoursDuration: response.hoursDuration,
-              local: response.local,
-              city: response.city,
-              state: response.state,
-              schoolYear: response.schoolYear,
-              semester: response.semester,
-              observation: response.observation,
-              activityType: response.activityType,
-              attach: ['']
-            });
+          .subscribe(activity => {
+            this.activityForm.patchValue(activity);
           })
       }
     });
@@ -89,7 +76,7 @@ export class InputActivityComponent implements OnInit {
     this.activityForm = this._formBuilder.group({
       initialDate: ['', Validators.required],
       finalDate: ['', Validators.required],
-      createdAt: [new Date().toISOString().split('T')[0]],
+      createdAt: [new Date()],
       description: ['', Validators.required],
       hoursDuration: ['', Validators.required],
       local: ['', Validators.required],
@@ -99,28 +86,31 @@ export class InputActivityComponent implements OnInit {
       semester: ['', Validators.required],
       observation: [''],
       activityType: ['', Validators.required],
-      attach: ['']
+      attach: [''],
+      status: ['Pendente']
     });
   }
 
   onSubmit() {
     if (this.activityForm.valid) {
-      this._activityService
-        .createActivity(this.activityForm.value, this.fileUpload.attachs)
+      this._activityService.createActivity(this.activityForm.value, this.fileUpload.attachs)
         .then(result => {
-          // console.log(result);
-          // Upload Attachments
+          // upload attachs
           for (let i = 0; i < this.fileUpload.uploads.length; i++) {
-            // The main task
+            // main task
             this.task = this._storage.upload(this.fileUpload.uploads[i].path, this.fileUpload.uploads[i].file, this.fileUpload.uploads[i].metadata);
-            // Progress monitoring
+            // progress monitoring
             this.percentage = this.task.percentageChanges();
           }
-          this.activityForm.reset();
+          this.buildForm();
         });
     } else {
-      this._validatorService.checkOut(this.activityForm);
+      this._validatorService.markAllFieldsAsDirty(this.activityForm);
       this.disabledSave = true;
     }
+  }
+
+  ngOnDestroy() {
+    this.subscribe.unsubscribe();
   }
 }

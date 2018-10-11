@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { Activity } from '../../models/activity.interface';
 import { User } from '../../models/user.interface';
@@ -15,7 +15,7 @@ import { RolesService } from './../../services/roles.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   private monthNames = [
     'Janeiro', 'Fevereiro', 'Março', 'Abril',
@@ -23,14 +23,16 @@ export class HomeComponent implements OnInit {
     'Setembro', 'Outubro', 'Novembro', 'Dezembro'
   ];
 
-  public activityCategoryChartData: ChartData;
+  subscribe: Subscription;
 
-  public activityStatusChartData: ChartData;
+  activityCategoryChartData: ChartData;
 
-  public lastSemesterChartData: ChartData;
+  activityStatusChartData: ChartData;
+
+  lastSemesterChartData: ChartData;
   private lastSemester = [];
 
-  public rankStudentsChartData: ChartData;
+  rankStudentsChartData: ChartData;
 
   activitiesToAnalyze$: Observable<Activity[]>
   activitiesStudent: Activity[];
@@ -45,8 +47,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    this._auth.user$.subscribe(res => {
+    this.subscribe = this._auth.user$.subscribe(res => {
       this.user = res;
       if (this._rolesService.isController(this.user)) {
         this.activitiesToAnalyze$ = this._activityService.getActivitiesToApprove();
@@ -85,10 +86,6 @@ export class HomeComponent implements OnInit {
 
   toAnalyze(data) {
     this._router.navigate(['validate-activity', { id: data.uid }]);
-  }
-
-  toEdit(data) {
-    this._router.navigate(['input-activity', { id: data.uid }]);
   }
 
   buildChartByCategory(dataChart) {
@@ -191,5 +188,9 @@ export class HomeComponent implements OnInit {
         maintainAspectRatio: false
       }
     };
+  }
+
+  ngOnDestroy() {
+    this.subscribe.unsubscribe();
   }
 }

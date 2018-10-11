@@ -24,6 +24,7 @@
                     <h4 class="title"><i class="fa fa fa-user-circle-o"></i>Editar Perfil</h4>
                 </div>
                 <div class="content">
+                    <pre>{{form.value | json}}</pre>
                     <form [formGroup]="form" (submit)="onSubmit(form)">
                         <div class="row">
                             <div class="col-md-4">
@@ -42,14 +43,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-7">
                                 <div class="form-group">
                                     <label>Nome completo</label>
                                     <input type="text" class="form-control" placeholder="Nome completo" formControlName="displayName">
                                 </div>
                                 <aka-message-control-error [control]="form.get('displayName')" error="required" msg="Nome completo é obrigatório."></aka-message-control-error>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="form-group">
                                     <label>Data de nascimento</label>
                                     <div class="input-group">
@@ -107,8 +108,18 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label>Vincular Instituição</label>
+                                    <p-dropdown placeholder="Selecione" emptyFilterMessage="Nenhum resultado."
+                                        [options]="instituitions$ | async" optionLabel="name" [showClear]="true" filter="true"
+                                        (onChange)="onSelectInstituition($event.value)"></p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label>Sobre mim</label>
-                                    <textarea rows="5" class="form-control" placeholder="Aqui você pode colocar sua descrição"
+                                    <textarea rows="3" class="form-control" placeholder="Aqui você pode colocar sua descrição"
                                         formControlName="about"></textarea>
                                 </div>
                             </div>

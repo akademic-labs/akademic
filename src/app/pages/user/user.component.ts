@@ -5,6 +5,8 @@ import { User } from 'app/models/user.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'app/services/user.service';
 import { NotifyService } from '../../services/notify.service';
+import { InstitutionService } from 'app/services/institution.service';
+import { Institution } from 'app/models/institution.interface';
 
 @Component({
   selector: 'aka-user',
@@ -14,21 +16,24 @@ import { NotifyService } from '../../services/notify.service';
 export class UserComponent implements OnInit {
   user$: Observable<User>;
   form: FormGroup;
+  instituitions$: Observable<Institution[]>;
 
   constructor(private _auth: AuthService, private fb: FormBuilder, private _userService: UserService,
-    private _notify: NotifyService) {
+    private _notify: NotifyService, private _institutionService: InstitutionService) {
     this.user$ = this._auth.user$;
   }
 
   ngOnInit() {
     this.user$.subscribe(user => {
       this.form.patchValue(user);
-    })
+    });
+
+    this.instituitions$ = this._institutionService.get();
+
     this.buildForm();
   }
 
   onSubmit({ value, valid }: { value: User, valid: boolean }) {
-    console.log(value, valid);
     if (valid) {
       this._userService.updateUser(value.uid, value)
         .then(_ => {
@@ -42,6 +47,10 @@ export class UserComponent implements OnInit {
     cep = cep.replace(/^(\d{2})(\d)/, '$1.$2'); // após dois valores colocar o ponto (.)
     cep = cep.replace(/\.(\d{3})(\d)/, '.$1-$2'); // após três valores colocar o hífen (-)
     this.form.patchValue({ address: { zipCode: cep } });
+  }
+
+  onSelectInstituition(value: Institution) {
+    this.form.patchValue({ instituitionUid: value.uid });
   }
 
   buildForm() {
@@ -64,6 +73,7 @@ export class UserComponent implements OnInit {
         state: [null],
         country: [null]
       }),
+      instituitionUid: [],
       about: ['']
     });
   }
