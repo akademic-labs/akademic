@@ -5,6 +5,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import { Activity } from 'app/models/activity.interface';
 import { ActivityService } from 'app/services/activity.service';
 import { MessageServicePrimeNG } from '../../../services/message.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'aka-validate-activity',
@@ -19,14 +20,24 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
   subscribe: Subscription;
   attachments = [];
   lastAction;
+  display: boolean;
+  attachView;
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private _activityService: ActivityService,
     private _storage: AngularFireStorage,
-    private _messageService: MessageServicePrimeNG
+    private _messageService: MessageServicePrimeNG,
+
+    public sanitizer: DomSanitizer
   ) { }
+
+  showDialog(attach) {
+    console.log(attach);
+    this.display = true;
+    this.attachView = attach;
+  }
 
   ngOnInit() {
     this.subscribe = this._route.paramMap.subscribe(params => {

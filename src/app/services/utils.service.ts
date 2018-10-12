@@ -24,6 +24,10 @@ export class UtilsService {
     );
   }
 
+  getColleges(search) {
+    return this._http.get(`https://querobolsa.com.br/simple_universities_search.json?term=${search}&all_universities=true&per_page=10&page=1`);
+  }
+
   getLocation() {
     return this._http.get<any[]>(
       `https://ip-api.io/api/json`

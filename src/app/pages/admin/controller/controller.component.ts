@@ -1,3 +1,4 @@
+import { UtilsService } from './../../../services/utils.service';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -22,11 +23,14 @@ export class ControllerComponent implements OnInit {
   courses$: Observable<Course[]>;
   @ViewChild('inputFocus') focusIn: ElementRef;
 
+  colleges;
+
   constructor(
     private _controllerFormBuilder: FormBuilder,
     private _controllerService: ControllerService,
     private _courseService: CourseService,
-    private _messageService: MessageServicePrimeNG
+    private _messageService: MessageServicePrimeNG,
+    private _utilsService: UtilsService
   ) { }
 
   ngOnInit() {
@@ -34,6 +38,9 @@ export class ControllerComponent implements OnInit {
     this.controllers$ = this._controllerService.get();
     this.buildForm();
     this.focusIn.nativeElement.focus();
+
+    this.colleges = this._utilsService.getColleges('unif');
+    this.colleges = this.colleges.items;
   }
 
   // tslint:disable-next-line:member-ordering
@@ -49,6 +56,11 @@ export class ControllerComponent implements OnInit {
       name: [null, Validators.compose(this.validatorsName)],
       course: [null, Validators.required]
     });
+  }
+
+  searchCollege(search) {
+    this.colleges = this._utilsService.getColleges(search);
+    this.colleges = this.colleges.items;
   }
 
   save() {

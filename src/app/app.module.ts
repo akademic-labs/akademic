@@ -48,6 +48,7 @@ import { TableModule } from 'primeng/table';
 import { FileUploadModule } from 'primeng/fileupload';
 import { GalleriaModule } from 'primeng/galleria';
 import { LightboxModule } from 'primeng/lightbox';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { LightboxModule } from 'primeng/lightbox';
     TableModule,
     GalleriaModule,
     LightboxModule,
-    FileUploadModule
+    FileUploadModule,
+    DialogModule
   ],
   providers: [AuthGuard, MessageService],
   bootstrap: [AppComponent]
