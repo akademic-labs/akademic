@@ -35,14 +35,6 @@ export class SidebarComponent implements OnInit {
         });
     }
 
-    // Are you using the methods below or you'll to use in the future?
-    isMobileMenu() {
-        if ($(window).width() > 991) {
-            return false;
-        }
-        return true;
-    };
-
     sidebarClose() {
         document.body.classList.remove('nav-open');
         document.getElementById('toggle-button').classList.remove('toggled');

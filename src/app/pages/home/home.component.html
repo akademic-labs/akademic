@@ -1,224 +1,186 @@
 <div class="row">
-
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        <div class="card">
-            <div class="header text-center">
-                <h4 class="title">Atividades</h4>
-                <p class="category">Atividades por categoria</p>
-                <hr>
-            </div>
-            <div class="content">
-                <div [ngClass]="'chart-size'">
-                    <canvas #categoryCanvas></canvas>
-                </div>
-                <div class="footer">
-                    <hr *ngIf="true">
-                    <div class="stats">
-                        <i [ngClass]="'fa fa-clock-o'"></i>Dados atualizados
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-md-6">
+        <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por categoria'" chartType="pie" [chartData]="activityCategoryChartData">
+        </aka-chart-card>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        <div class="card">
-            <div class="header text-center">
-                <h4 class="title">Atividades</h4>
-                <p class="category">Atividades por status</p>
-                <hr>
-            </div>
-            <div class="content">
-                <div [ngClass]="'chart-size'">
-                    <canvas #statusCanvas></canvas>
-                </div>
-                <div class="footer">
-                    <hr *ngIf="true">
-                    <div class="stats">
-                        <i [ngClass]="'fa fa-clock-o'"></i>Dados atualizados
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por categoria'" [chartType]="activityCategoryChartType" [chartData]="activityCategoryChartData"
-            [withHr]="true" [footerIconClass]="'fa fa-clock-o'" [footerText]="'Atualizado a 2 minutos atrás'" [chartOptions]="activityCategoryChartOptions"
-            [canvasClass]="'chart-size'">
-        </aka-chart-card>
-    </div> -->
-
-    <!-- <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por status'" [chartType]="activityStatusChartType" [chartData]="activityStatusChartData"
-            [chartOptions]="activityStatusChartOptions" [withHr]="true" [footerIconClass]="'fa fa-clock-o'" [footerText]="'Atualizado a 2 minutos atrás'"
-            [canvasClass]="'chart-size'">
-        </aka-chart-card>
-    </div> -->
-
-    <div *ngIf="_rolesService.isController(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        <aka-chart-card [title]="'Atividades último semestre'" [subtitle]="'Número de atividades dos últimos 6 meses'" [chartType]="lastSemesterChartType"
-            [chartData]="lastSemesterChartData" [withHr]="true" [footerIconClass]="'fa fa-history'" [footerText]="'Atualizado 4 minutos atrás'"
-            [chartOptions]="lastSemesterChartOptions" [canvasClass]="'chart-size'">
+    <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-md-6">
+        <aka-chart-card [title]="'Atividades'" [subtitle]="'Atividades por status'" chartType="pie" [chartData]="activityStatusChartData">
         </aka-chart-card>
     </div>
 
     <div *ngIf="_rolesService.isController(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        <aka-chart-card [title]="'Ranking'" [subtitle]="'Atividades dos alunos do curso'" [chartType]="rankStudentsChartType" [chartData]="rankStudentsChartData"
-            [chartOptions]="rankStudentsChartOptions" [withHr]="true" [footerIconClass]="'fa fa-check'" [footerText]="'Atualizado 3 minutos atrás'">
+        <aka-chart-card [title]="'Atividades último semestre'" [subtitle]="'Número de atividades dos últimos 6 meses'"
+            chartType="line" [chartData]="lastSemesterChartData">
         </aka-chart-card>
     </div>
 
-    <div *ngIf="_rolesService.isController(user)" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <div class="card">
-            <div class="header text-center">
-                <h4 class="title">Tarefas</h4>
-                <p class="category">Atividades a serem analisadas</p>
-                <hr>
-            </div>
-            <div class="content">
-                <p-table [value]="activitiesToAnalyze$ | async" selectionMode="single" (onRowSelect)="toAnalyze($event.data)" #dt [globalFilterFields]="['description','hoursDuration','activityType.description', 'user.displayName','createdAt']"
-                    [paginator]="true" [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]" [resizableColumns]="true"
-                    [reorderableColumns]="true">
-                    <ng-template pTemplate="caption">
-                        <div class="input-filter">
-                            <i class="fa fa-search"></i>
-                            <input type="text" class="form-control" placeholder="Pesquisar.." (input)="dt.filterGlobal($event.target.value, 'contains')">
-                        </div>
-                    </ng-template>
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th [pSortableColumn]="'user.displayName'" pResizableColumn pReorderableColumn style="width: 25%">Solicitante
-                                <p-sortIcon></p-sortIcon>
-                            </th>
-                            <th [pSortableColumn]="'description'" pResizableColumn pReorderableColumn style="width: 30%">Atividade
-                                <p-sortIcon></p-sortIcon>
-                            </th>
-                            <th [pSortableColumn]="'activityType.description'" pResizableColumn pReorderableColumn style="width: 20%">Tipo
-                                <p-sortIcon></p-sortIcon>
-                            </th>
-                            <th [pSortableColumn]="'activity.createdAt'" pResizableColumn pReorderableColumn style="width: 15%">Data
-                                Cadastro
-                                <p-sortIcon></p-sortIcon>
-                            </th>
-                            <th [pSortableColumn]="'hoursDuration'" pResizableColumn pReorderableColumn style="width: 10%">Duração
-                                <p-sortIcon></p-sortIcon>
-                            </th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-activity>
-                        <tr [pSelectableRow]="activity">
-                            <td>
-                                <span class="ui-column-title">Solicitante:</span>
-                                {{ activity.user.displayName }}
-                            </td>
-                            <td>
-                                <span class="ui-column-title">Atividade:</span>
-                                {{ activity.description }}
-                            </td>
-                            <td>
-                                <span class="ui-column-title">Tipo:</span>
-                                {{ activity.activityType.description }}
-                            </td>
-                            <td>
-                                <span class="ui-column-title">Data Cadastro:</span>
-                                {{ activity.createdAt | date: 'dd/MM/yyyy' }}
-                            </td>
-                            <td>
-                                <span class="ui-column-title">Duração:</span>
-                                {{ activity.hoursDuration }} horas
-                            </td>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="summary">
-                        {{ (activitiesToAnalyze$ | async)?.length }} registros
-                    </ng-template>
-                    <ng-template pTemplate="emptymessage" let-columns>
-                        <tr>
-                            <td colspan="5">
-                                Nenhuma registro encontrado.
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
+    <div *ngIf="_rolesService.isController(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <aka-chart-card [title]="'Ranking'" [subtitle]="'Atividades dos alunos do curso'" chartType="bar" [chartData]="rankStudentsChartData">
+        </aka-chart-card>
+    </div>
+
+    <div *ngIf="_rolesService.isController(user)" class="col-xs-12">
+        <div *ngIf="activitiesToAnalyze$  | async as actsToAnalyze">
+            <div class="card">
+                <div class="header text-center">
+                    <h4 class="title">Tarefas</h4>
+                    <p class="category">Atividades a serem analisadas</p>
+                    <hr>
+                </div>
+                <div class="content">
+                    <p-table [value]="actsToAnalyze" selectionMode="single" #dt [globalFilterFields]="['description','hoursDuration','activityType.description', 'user.displayName','createdAt']"
+                        [paginator]="true" [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]"
+                        [resizableColumns]="true" [reorderableColumns]="true">
+                        <ng-template pTemplate="caption">
+                            <div class="input-filter">
+                                <i class="fa fa-search"></i>
+                                <input type="text" class="form-control" placeholder="Pesquisar" (input)="dt.filterGlobal($event.target.value, 'contains')">
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th [pSortableColumn]="'user.displayName'" pResizableColumn pReorderableColumn>
+                                    Solicitante
+                                    <p-sortIcon></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'description'" pResizableColumn pReorderableColumn>
+                                    Atividade
+                                    <p-sortIcon></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'activityType.description'" pResizableColumn pReorderableColumn>
+                                    Tipo
+                                    <p-sortIcon></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'activity.createdAt'" pResizableColumn pReorderableColumn>
+                                    Cadastro
+                                    <p-sortIcon></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'hoursDuration'" pResizableColumn pReorderableColumn>
+                                    Duração
+                                    <p-sortIcon></p-sortIcon>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-activity>
+                            <tr (click)="toAnalyze(activity)">
+                                <td>
+                                    <span class="ui-column-title">Solicitante:</span>
+                                    {{ activity.user?.displayName }}
+                                </td>
+                                <td>
+                                    <span class="ui-column-title">Atividade:</span>
+                                    {{ activity.description }}
+                                </td>
+                                <td>
+                                    <span class="ui-column-title">Tipo:</span>
+                                    {{ activity.activityType.description }}
+                                </td>
+                                <td>
+                                    <span class="ui-column-title">Cadastro:</span>
+                                    {{ activity.createdAt.toDate() | date: 'dd/MM/yyyy' }}
+                                </td>
+                                <td>
+                                    <span class="ui-column-title">Duração:</span>
+                                    {{ activity.hoursDuration }} horas
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="summary">
+                            {{ actsToAnalyze.length }} registros
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage" let-columns>
+                            <tr>
+                                <td colspan="5">
+                                    Nenhuma registro encontrado.
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
             </div>
         </div>
     </div>
 
-    <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <div class="card">
-            <div class="header text-center">
-                <h4 class="title">Minhas atividades</h4>
-                <p class="category">Atividades já realizadas</p>
-                <hr>
-            </div>
-            <div class="content">
-                <p-table [value]="activitiesStudent$" selectionMode="single" (onRowSelect)="toEdit($event.data)" #dt [globalFilterFields]="['description','hoursDuration','activityType.description', 'status']"
-                    [paginator]="true" [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]" [resizableColumns]="true"
-                    [reorderableColumns]="true">
-                    <ng-template pTemplate="caption">
-                        <div class="input-filter">
-                            <i class="fa fa-search"></i>
-                            <input type="text" class="form-control" placeholder="Pesquisar.." (input)="dt.filterGlobal($event.target.value, 'contains')">
-                        </div>
-                    </ng-template>
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th [pSortableColumn]="'description'" pResizableColumn pReorderableColumn style="width: 35%">Atividade
-                                <p-sortIcon></p-sortIcon>
-                            </th>
-                            <th [pSortableColumn]="'hoursDuration'" pResizableColumn pReorderableColumn style="width: 10%">Duração
-                                <p-sortIcon></p-sortIcon>
-                            </th>
-                            <th [pSortableColumn]="'activityType.description'" pResizableColumn pReorderableColumn style="width: 25%">Tipo
-                                <p-sortIcon></p-sortIcon>
-                            </th>
-                            <th [pSortableColumn]="'status'" pResizableColumn pReorderableColumn style="width: 20%">Status
-                                <p-sortIcon></p-sortIcon>
-                            </th>
-                            <th style="width: 10%">Ações</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-activity>
-                        <tr [pSelectableRow]="activity">
-                            <td>
-                                <span class="ui-column-title">Atividade:</span>
-                                {{activity.description}}
-                            </td>
-                            <td>
-                                <span class="ui-column-title">Duração:</span>
-                                {{activity.hoursDuration}}
-                            </td>
-                            <td>
-                                <span class="ui-column-title">Tipo:</span>
-                                {{activity.activityType.description}}
-                            </td>
-                            <td>
-                                <span class="ui-column-title">Status:</span>
-                                {{activity.status}}
-                            </td>
-                            <td class="td-actions">
-                                <span class="ui-column-title">Ações:</span>
-                                <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                                    <i class="fa fa-edit" (click)="toEdit(activity.uid)"></i>
-                                </button>
-                                <button type="button" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="summary">
-                        {{ (activitiesToAnalyze$ | async)?.length }} registros
-                    </ng-template>
-                    <ng-template pTemplate="emptymessage" let-columns>
-                        <tr>
-                            <td colspan="5">
-                                Nenhuma registro encontrado.
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
+    <div *ngIf="_rolesService.isStudent(user)" class="col-xs-12">
+        <div *ngIf="activitiesStudent">
+            <div class="card">
+                <div class="header text-center">
+                    <h4 class="title">Minhas atividades</h4>
+                    <p class="category">Atividades já realizadas</p>
+                    <hr>
+                </div>
+                <div class="content">
+                    <p-table [value]="activitiesStudent" selectionMode="single" #dt [globalFilterFields]="['description','hoursDuration','activityType.description', 'status']"
+                        [paginator]="true" [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]"
+                        [resizableColumns]="true" [reorderableColumns]="true">
+                        <ng-template pTemplate="caption">
+                            <div class="input-filter">
+                                <i class="fa fa-search"></i>
+                                <input type="text" class="form-control" placeholder="Pesquisar" (input)="dt.filterGlobal($event.target.value, 'contains')">
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th [pSortableColumn]="'description'" pResizableColumn pReorderableColumn>
+                                    Atividade
+                                    <p-sortIcon></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'hoursDuration'" pResizableColumn pReorderableColumn>
+                                    Duração
+                                    <p-sortIcon></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'activityType.description'" pResizableColumn pReorderableColumn>
+                                    Tipo
+                                    <p-sortIcon></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'status'" pResizableColumn pReorderableColumn>Status
+                                    <p-sortIcon></p-sortIcon>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-activity>
+                            <tr>
+                                <td>
+                                    <span class="ui-column-title">Atividade:</span>
+                                    {{activity.description}}
+                                </td>
+                                <td>
+                                    <span class="ui-column-title">Duração:</span>
+                                    {{activity.hoursDuration}}
+                                </td>
+                                <td>
+                                    <span class="ui-column-title">Tipo:</span>
+                                    {{activity.activityType.description}}
+                                </td>
+                                <td>
+                                    <span class="ui-column-title">Status:</span>
+                                    {{activity.status}}
+                                </td>
+                                <td class="td-actions">
+                                    <span class="ui-column-title">Ações:</span>
+                                    <a type="button" class="btn">
+                                        <i class="fa fa-edit" [routerLink]="['/input-activity/' + activity.uid]"></i>
+                                    </a>
+                                    <a type="button" class="btn text-danger">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="summary">
+                            {{ activitiesStudent.length }} registros
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage" let-columns>
+                            <tr>
+                                <td colspan="5">
+                                    Nenhuma registro encontrado.
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
             </div>
         </div>
     </div>

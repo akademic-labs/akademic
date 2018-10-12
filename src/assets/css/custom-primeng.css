@@ -1,33 +1,24 @@
 /* VALIDATIONS */
 /* BORDER VALID */
-/* Inputtext */
 .ui-inputtext.ng-touched:valid,
-/* Dropdown */
 p-dropdown.ng-dirty.ng-touched.ng-valid .ui-dropdown,
-/* Spinner */
 p-spinner.ng-touched.ng-valid .ui-spinner-input {
     border: var(--border-valid);
 }
 
 /* BORDER INVALID */
-/* Inputtext */
 .ui-inputtext.ng-touched.ng-invalid,
 z .ui-inputtext.ng-dirty.ng-invalid,
-/* Dropdown */
 p-dropdown.ng-touched.ng-invalid .ui-dropdown,
 p-dropdown.ng-dirty.ng-invalid .ui-dropdown,
-/* Spinner */
 p-spinner.ng-touched.ng-invalid .ui-spinner-input,
 p-spinner.ng-dirty.ng-invalid .ui-spinner-input {
     border: var(--border-invalid);
 }
 
 /* FOCUSED - BORDER VALID */
-/* Inputtext */
 .ui-inputtext:focus,
-/* Dropdown */
 .ui-dropdown:not(.ui-state-disabled).ui-state-focus,
-/* Spinner */
 p-spinner .ui-spinner-input:enabled:focus:not(.ui-state-error) {
     outline: 0;
     border: var(--border-valid);
@@ -37,15 +28,12 @@ p-spinner .ui-spinner-input:enabled:focus:not(.ui-state-error) {
 }
 
 /* FOCUSED - BORDER INVALID */
-/* Inputtext */
 .ui-inputtext.ng-touched.ng-invalid:focus,
 .ui-inputtext.ng-dirty.ng-invalid:hover,
 .ui-inputtext.ng-dirty.ng-invalid:active,
-/* Dropdown */
 p-dropdown.ng-touched.ng-invalid .ui-dropdown:not(.ui-state-disabled).ui-state-focus,
 p-dropdown.ng-touched.ng-dirty .ui-dropdown:not(.ui-state-disabled).ui-state-hover,
 p-dropdown.ng-touched.ng-dirty .ui-dropdown:not(.ui-state-disabled).ui-state-active,
-/* Spinner */
 p-spinner.ng-touched.ng-invalid .ui-spinner-input:enabled:focus:not(.ui-state-error),
 p-spinner.ng-dirty.ng-invalid .ui-spinner-input:enabled:focus:not(.ui-state-error) {
     outline: 0;
@@ -56,23 +44,18 @@ p-spinner.ng-dirty.ng-invalid .ui-spinner-input:enabled:focus:not(.ui-state-erro
 }
 
 /* ICON VALID */
-/* Dropdown - Icon Arrow */
 p-dropdown.ng-touched.ng-valid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
 p-dropdown.ng-dirty.ng-valid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
-/* Dropdown - Icon Clear */
 p-dropdown.ng-touched.ng-valid .ui-dropdown .ui-dropdown-clear-icon,
 p-dropdown.ng-dirty.ng-valid .ui-dropdown .ui-dropdown-clear-icon,
-/* Spinner - Icon Arrow */
 p-spinner.ng-touched.ng-valid .ui-spinner-button.ui-button,
 p-spinner.ng-dirty.ng-valid .ui-spinner-button.ui-button {
     color: var(--color-valid);
 }
 
 /* ICON INVALID */
-/* Dropdown - Icon Arrow */
 p-dropdown.ng-touched.ng-invalid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
 p-dropdown.ng-dirty.ng-invalid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
-/* Spinner - Icon Arrow */
 p-spinner.ng-touched.ng-invalid .ui-spinner-button.ui-button,
 p-spinner.ng-dirty.ng-invalid .ui-spinner-button.ui-button {
     color: var(--color-invalid);
@@ -183,13 +166,11 @@ p-toast p {
 }
 
 body .ui-dropdown .ui-dropdown-trigger .ui-dropdown-trigger-icon:before {
-    /* content: ""; */
     content: "\e906";
 }
 
 body .ui-dropdown-panel .ui-dropdown-items {
     padding: 5px 5px 5px 10px;
-    /* word-break: break-word; */
 }
 
 body .ui-corner-all {
@@ -219,12 +200,17 @@ body .ui-table {
     margin: -14px 0px 7px 0px;
 }
 
+.ui-table table {
+    table-layout: auto;
+}
+
+
 body .ui-table .ui-sortable-column.ui-state-highlight,
 body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
     background: linear-gradient(60deg, #b224ef, #7579ff);
 }
 
-body .ui-table.ui-table-hoverable-rows .ui-table-tbody > tr:not(.ui-state-highlight):not(.ui-contextmenu-selected):hover {
+body .ui-table.ui-table-hoverable-rows .ui-table-tbody>tr:not(.ui-state-highlight):not(.ui-contextmenu-selected):hover {
     background-color: #F7F7F8;
 }
 
@@ -232,6 +218,7 @@ body .ui-table .ui-table-thead>tr>th,
 body .ui-table .ui-table-tfoot>tr>td {
     background-color: #F7F7F8;
     border: 1px solid #eaeaea;
+    text-transform: uppercase;
 }
 
 body .ui-table .ui-sortable-column:not(.ui-state-highlight):hover {
@@ -274,8 +261,6 @@ body .ui-table.ui-table-hoverable-rows .ui-table-tbody>tr:not(.ui-state-highligh
 body .ui-table .ui-table-caption {
     background-color: #F7F7F8;
     border: 1px solid #eaeaea;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
     border-bottom: none;
     height: 50px;
     padding: 0px;
@@ -284,8 +269,6 @@ body .ui-table .ui-table-caption {
 body .ui-table .ui-table-summary {
     background-color: #F7F7F8;
     border: 1px solid #eaeaea;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
     border-top: none;
     padding-top: 10px;
 }
@@ -311,7 +294,6 @@ body .ui-table.ui-table-responsive .ui-paginator-bottom {
 .input-filter input {
     text-indent: 20px;
     height: 33px;
-    /* width: 300px; */
 }
 
 .input-filter i {

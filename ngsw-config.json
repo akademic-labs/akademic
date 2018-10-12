@@ -2,7 +2,7 @@
   "index": "/index.html",
   "appData": {
     "name": "Akademic",
-    "description": "Sistema de atividades complementares."
+    "description": "Atividades complementares."
   },
   "assetGroups": [{
     "name": "app",

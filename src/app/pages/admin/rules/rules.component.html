@@ -2,9 +2,8 @@
   <div class="col-md-12">
     <div class="card">
       <div class="header">
-        <i class="fa fa-exclamation-triangle"></i>
         <div class="title">
-          {{ title }}
+          <i class="fa fa-exclamation-triangle"></i>{{ title }}
         </div>
         <hr>
       </div>
@@ -63,14 +62,15 @@
           <table class="table">
             <tbody>
               <tr *ngFor="let rule of rules$ | async">
-                <td>{{ rule.name }} | {{ rule.course.description }} | {{ rule.hours }} | {{ rule.activityType.description }}</td>
+                <td>{{ rule.name }} | {{ rule.course.description }} | {{ rule.hours }} | {{
+                  rule.activityType.description }}</td>
                 <td class="td-actions text-right">
                   <a class="btn" (click)="edit(rule)">
-                      <i class="fa fa-edit"></i>
-                    </a>
-                    <a (click)="remove(rule.uid)" class="btn text-danger">
-                      <i class="fa fa-times"></i>
-                    </a>
+                    <i class="fa fa-edit"></i>
+                  </a>
+                  <a (click)="remove(rule.uid)" class="btn text-danger">
+                    <i class="fa fa-times"></i>
+                  </a>
                 </td>
               </tr>
             </tbody>

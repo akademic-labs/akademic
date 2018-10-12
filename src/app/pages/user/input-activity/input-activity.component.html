@@ -2,47 +2,46 @@
     <div class="col-md-12">
         <div class="card border-top">
             <div class="header">
-                <i class="fa fa-paperclip"></i>
                 <div class="title">
-                    {{ title }}
+                    <i class="fa fa-paperclip"></i> Entrada de Atividade
                 </div>
                 <hr>
             </div>
             <div class="content">
-                <!-- {{ testes | json }} -->
-                <!-- {{ massa | json }} -->
-                <!-- <pre>{{ states$ | json }}</pre> -->
                 <form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
-                    <!-- <pre>Forms: {{ activityForm.value | json }}</pre> {{ activityForm.valid }} {{ activityForm.invalid }} -->
+                    <pre>Forms: {{ activityForm.value | json }}</pre>
                     <!-- <pre>Attachments Render: {{ attachmentsRender | json }}</pre> -->
                     <!-- <pre>Attachments: {{ attachments | json }}</pre> -->
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">
+                        <div class="col-sm-12 col-lg-7">
                             <div class="form-group">
                                 <label for="description">Descrição</label>
-                                <input type="text" class="form-control" formControlName="description" #inputFocus>
+                                <input type="text" class="form-control" formControlName="description" autofocus>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('description')" error="required" msg="Descrição é obrigatório."></aka-message-control-error>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-lg-3">
                             <div class="form-group">
                                 <label for="activityType">Tipo de Atividade</label>
                                 <select class="form-control" formControlName="activityType">
                                     <option *ngFor="let type of activityTypes$ | async" [ngValue]="type">{{type.description}}</option>
                                 </select>
                             </div>
-                            <aka-message-control-error [control]="activityForm.get('activityType')" error="required" msg="Tipo de Atividade é obrigatório."></aka-message-control-error>
+                            <aka-message-control-error [control]="activityForm.get('activityType')" error="required"
+                                msg="Tipo de Atividade é obrigatório."></aka-message-control-error>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                        <div class="col-sm-12 col-lg-2">
                             <div class="form-group">
                                 <label for="hoursDuration">Carga Horária</label>
-                                <input type="number" [min]="0" oninput="validity.valid||(value='');" class="form-control" formControlName="hoursDuration">
+                                <input type="number" min="0" oninput="validity.valid||(value='');" class="form-control"
+                                    formControlName="hoursDuration">
                             </div>
-                            <aka-message-control-error [control]="activityForm.get('hoursDuration')" error="required" msg="Carga Horária é obrigatório."></aka-message-control-error>
+                            <aka-message-control-error [control]="activityForm.get('hoursDuration')" error="required"
+                                msg="Carga Horária é obrigatório."></aka-message-control-error>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-lg-3">
                             <div class="form-group">
                                 <label for="schoolYear">Período Letivo</label>
                                 <select class="form-control" formControlName="schoolYear">
@@ -54,7 +53,7 @@
                             </div>
                             <aka-message-control-error [control]="activityForm.get('schoolYear')" error="required" msg="Período Letivo é obrigatório."></aka-message-control-error>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-lg-3">
                             <div class="form-group">
                                 <label for="semester">Semestre</label>
                                 <select class="form-control" formControlName="semester">
@@ -72,49 +71,48 @@
                             </div>
                             <aka-message-control-error [control]="activityForm.get('semester')" error="required" msg="Semestre é obrigatório."></aka-message-control-error>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-lg-3">
                             <div class="form-group">
                                 <label for="initialDate">Data Inicial</label>
                                 <input type="date" class="form-control" formControlName="initialDate">
                             </div>
                             <aka-message-control-error [control]="activityForm.get('initialDate')" error="required" msg="Data Inicial é obrigatório."></aka-message-control-error>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-lg-3">
                             <div class="form-group">
                                 <label for="finalDate">Data Final</label>
-                                <p-calendar formControlName="finalDate" dateFormat="dd/mm/yy" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"></p-calendar>
-                                <!-- <input type="date" class="form-control" formControlName="finalDate"> -->
+                                <input type="date" class="form-control" formControlName="finalDate">
                             </div>
                             <aka-message-control-error [control]="activityForm.get('finalDate')" error="required" msg="Data Final é obrigatório."></aka-message-control-error>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="col-sm-12 col-lg-6">
                             <div class="form-group">
                                 <label for="local">Local</label>
                                 <input type="text" class="form-control" formControlName="local">
                             </div>
                             <aka-message-control-error [control]="activityForm.get('local')" error="required" msg="Local é obrigatório."></aka-message-control-error>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-lg-3">
                             <div class="form-group">
                                 <label for="state">Estado</label>
-                                <p-dropdown formControlName="state" [options]="states$" optionLabel="nome" (onChange)="getCities()" placeholder="Selecione"
-                                    filter="true" [showClear]="true" emptyFilterMessage="Nenhum resultado."></p-dropdown>
+                                <p-dropdown formControlName="state" [options]="states" optionLabel="nome" (onChange)="getCities()"
+                                    placeholder="Selecione" filter="true" [showClear]="true" emptyFilterMessage="Nenhum resultado."></p-dropdown>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('state')" error="required" msg="Estado é obrigatório."></aka-message-control-error>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-lg-3">
                             <div class="form-group">
                                 <label for="city">Cidade</label>
-                                <p-dropdown formControlName="city" [options]="cities$" optionLabel="nome" placeholder="Selecione" filter="true" [showClear]="true"
-                                    emptyFilterMessage="Nenhum resultado."></p-dropdown>
+                                <p-dropdown formControlName="city" [options]="cities$" optionLabel="nome" placeholder="Selecione"
+                                    filter="true" [showClear]="true" emptyFilterMessage="Nenhum resultado."></p-dropdown>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('city')" error="required" msg="Cidade é obrigatório."></aka-message-control-error>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="col-sm-12 col-lg-12">
                             <div class="form-group">
                                 <div *ngIf="percentage | async as pct" class="text-center">
                                     <progress class="progress progress-custom is-info" [value]="pct" max="100"></progress>
@@ -125,7 +123,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="col-lg-12">
                             <div class="form-group">
                                 <label for="observation">Observação</label>
                                 <textarea rows="4" class="form-control" formControlName="observation" placeholder="Aqui você pode colocar sua observação"></textarea>

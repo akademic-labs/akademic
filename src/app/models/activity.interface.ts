@@ -23,7 +23,8 @@ export interface Activity {
   observation: string;
   validatedHours: number;
   status: string;
-  user: Partial<User>;
+  userUid: string;
+  user: User;
   controllerId: string;
 
   // subcollection

@@ -49,6 +49,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { GalleriaModule } from 'primeng/galleria';
 import { LightboxModule } from 'primeng/lightbox';
 import { DialogModule } from 'primeng/dialog';
+import { ToSelectIdPipe } from './pipes/to-select-id.pipe';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { DialogModule } from 'primeng/dialog';
     RulesComponent,
     ActivitypeTypeComponent,
     InstitutionComponent,
-    Error404Component
+    Error404Component,
+    ToSelectIdPipe
   ],
   imports: [
     BrowserModule,

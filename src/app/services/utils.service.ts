@@ -58,13 +58,14 @@ export class UtilsService {
       { __array: [] }
     ).__array.sort((a, b) => b[aggregator] - a[aggregator]);
   }
+
   preparateDataChart(array, keyLabels, keyData) {
     const labels = [], data = []; let result;
     for (let index = 0; index < array.length; index++) {
       labels.push(array[index][keyLabels]);
       data.push(array[index][keyData]);
     }
-    result = {labels: labels, data: data};
+    result = { labels: labels, data: data };
     return result;
   }
 

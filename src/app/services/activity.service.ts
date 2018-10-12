@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Activity } from '../models/activity.interface';
 import { AuthService } from './auth.service';
 import { NotifyService } from './notify.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,7 @@ export class ActivityService {
 
   getActivitiesStudent(id: string) {
     const actReference = this._afs.collection<Activity>('activities',
-      ref => ref.where('user.uid', '==', id));
+      ref => ref.where('userUid', '==', id));
 
     return actReference.snapshotChanges()
       .pipe(map((actions) => {
@@ -50,43 +51,43 @@ export class ActivityService {
       }));
   }
 
-  getActivityDocument(id: string) {
-    return this._afs.doc<any>(`activities/${id}`);
+  getActivityDocument(id: string): AngularFirestoreDocument<Activity> {
+    return this._afs.doc<Activity>(`activities/${id}`);
   }
 
-  getActivityById(uid: string) {
+  getActivityById(uid: string): Observable<Activity> {
     return this._afs.doc<Activity>(`activities/${uid}`).valueChanges()
   }
 
   async createActivity(content: Activity, attach) {
-    content.status = 'Pendente';
     content.attachment = attach;
     this._auth.user$.subscribe(user => {
-      content.user = { uid: user.uid, displayName: user.displayName, email: user.email }
+      content.userUid = user.uid;
       return this.activityCollection.add(content)
         .then(() => {
           this._notify.update('success', 'Atividade criada com sucesso!');
-          this._router.navigate(['/dashboard']);
         })
         .catch(() => this._notify.update('danger', 'Houve um erro na requisição!'));
     });
   }
 
-  updateActivity(id: string, data: any, msg: string) {
-    return this.getActivityDocument(id).update(data)
-      .then(() => {
-        this._notify.update('success', `Atividade ${msg} com sucesso!`);
-        this._router.navigate(['/dashboard']);
-      })
-      .catch(() => this._notify.update('danger', 'Houve um erro na requisição!'));
+  async updateActivity(id: string, data: any, msg: string) {
+    try {
+      await this.getActivityDocument(id).update(data);
+      this._notify.update('success', `Atividade ${msg} com sucesso!`);
+      this._router.navigate(['/dashboard']);
+    } catch (e) {
+      return this._notify.update('danger', 'Houve um erro na requisição!');
+    }
   }
 
-  deleteActivity(id: string) {
-    return this.getActivityDocument(id).delete()
-      .then(() => {
-        this._notify.update('success', 'Atividade deletada com sucesso!');
-        this._router.navigate(['/dashboard']);
-      })
-      .catch(() => this._notify.update('danger', 'Houve um erro na requisição!'));
+  async deleteActivity(id: string) {
+    try {
+      await this.getActivityDocument(id).delete();
+      this._notify.update('success', 'Atividade deletada com sucesso!');
+      this._router.navigate(['/dashboard']);
+    } catch (e) {
+      return this._notify.update('danger', 'Houve um erro na requisição!');
+    }
   }
 }
