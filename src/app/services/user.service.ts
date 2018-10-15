@@ -13,15 +13,12 @@ import { NotifyService } from './notify.service';
 })
 export class UserService {
 
-  userCollection: AngularFirestoreCollection<any>;
-
   constructor(private afs: AngularFirestore, private _router: Router, private _notify: NotifyService) {
-    this.userCollection = this.afs.collection('users', (ref) => ref.orderBy('time', 'desc').limit(5));
   }
 
-  getData(): Observable<any[]> {
+  getAllUsers(): Observable<User[]> {
     // ['added', 'modified', 'removed']
-    return this.userCollection.snapshotChanges().pipe(
+    return this.afs.collection<User>('users').snapshotChanges().pipe(
       map((actions) => {
         return actions.map((a) => {
           const data = a.payload.doc.data();
@@ -31,12 +28,12 @@ export class UserService {
     );
   }
 
-  getUser(id: string) {
-    return this.afs.doc<any>(`users/${id}`);
+  getUserDocById(id: string) {
+    return this.afs.doc<User>(`users/${id}`);
   }
 
   updateUser(id: string, data: User) {
-    return this.getUser(id).set(data, { merge: true });
+    return this.getUserDocById(id).set(data, { merge: true });
   }
 
   public createUserData(user: User) {
@@ -49,6 +46,6 @@ export class UserService {
   }
 
   deleteUser(id: string) {
-    return this.getUser(id).delete();
+    return this.getUserDocById(id).delete();
   }
 }

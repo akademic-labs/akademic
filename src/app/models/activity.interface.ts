@@ -24,7 +24,6 @@ export interface Activity {
   validatedHours: number;
   status: string;
   userUid: string;
-  user: User;
   controllerId: string;
 
   // subcollection
@@ -36,4 +35,6 @@ export interface Activity {
 
   // root collection
   activityType: ActivityType;
+
+  user: User;
 }

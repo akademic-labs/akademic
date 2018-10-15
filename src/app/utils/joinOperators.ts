@@ -1,7 +1,42 @@
 import { AngularFirestore } from 'angularfire2/firestore';
 
-import { combineLatest, pipe, of, defer } from 'rxjs';
+import { combineLatest, of, defer } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
+
+export const documentJoin = (afs: AngularFirestore, paths: { [key: string]: string }) => {
+  return source =>
+    defer(() => {
+      let parent;
+      const keys = Object.keys(paths);
+
+      return source.pipe(
+        switchMap(data => {
+          // Save the parent data state
+          parent = data;
+
+          // Map each path to an Observable
+          const docs$ = keys.map(k => {
+            const fullPath = `${paths[k]}/${parent[k]}`;
+            return afs.doc(fullPath).valueChanges();
+          });
+
+          // return combineLatest, it waits for all reads to finish
+          return combineLatest(docs$);
+        }),
+        map(arr => {
+          // We now have all the associated documents
+          // Reduce them to a single object based on the parent's keys
+          const joins = keys.reduce((acc, cur, idx) => {
+            return { ...acc, [cur]: arr[idx] };
+          }, {});
+
+          // Return the parent doc with the joined objects
+          return { ...parent, ...joins };
+        })
+      );
+    });
+};
+
 
 export const leftJoin = (afs: AngularFirestore, field, collection, limit = 100) => {
   return source =>
@@ -51,7 +86,9 @@ export const leftJoin = (afs: AngularFirestore, field, collection, limit = 100) 
     });
 };
 
-export const leftJoinDocument = (afs: AngularFirestore, field, collection) => {
+// usage => .pipe(leftJoinDocument(afs, 'userId', 'users', 'user'))
+
+export const leftJoinDocument = (afs: AngularFirestore, fieldId, collection, fieldObject) => {
   return source =>
     defer(() => {
       // Operator state
@@ -70,7 +107,7 @@ export const leftJoinDocument = (afs: AngularFirestore, field, collection) => {
           let i = 0;
           for (const doc of collectionData) {
             // Skip if doc field does not exist or is already in cache
-            if (!doc[field] || cache.get(doc[field])) {
+            if (!doc[fieldId] || cache.get(doc[fieldId])) {
               continue;
             }
 
@@ -78,10 +115,10 @@ export const leftJoinDocument = (afs: AngularFirestore, field, collection) => {
             reads$.push(
               afs
                 .collection(collection)
-                .doc(doc[field])
+                .doc(doc[fieldId])
                 .valueChanges()
             );
-            cache.set(doc[field], i);
+            cache.set(doc[fieldId], i);
             i++;
           }
 
@@ -89,8 +126,8 @@ export const leftJoinDocument = (afs: AngularFirestore, field, collection) => {
         }),
         map(joins => {
           return collectionData.map((v, i) => {
-            const joinIdx = cache.get(v[field]);
-            return { ...v, [field]: joins[joinIdx] || null };
+            const joinIndex = cache.get(v[fieldId]);
+            return { ...v, [fieldObject]: joins[joinIndex] || null };
           });
         }),
         tap(final =>

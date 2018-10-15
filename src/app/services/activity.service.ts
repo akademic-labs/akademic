@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { leftJoinDocument } from 'app/utils/joinOperators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { Activity } from '../models/activity.interface';
 import { AuthService } from './auth.service';
+import { FirestoreService } from './firestore.service';
 import { NotifyService } from './notify.service';
-import { Observable } from 'rxjs';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,79 +19,64 @@ export class ActivityService {
   activityCollection: AngularFirestoreCollection<Activity>;
 
   constructor(
-    private _afs: AngularFirestore,
-    private _auth: AuthService,
-    private _router: Router,
-    private _notify: NotifyService
+    private afs: AngularFirestore,
+    private auth: AuthService,
+    private router: Router,
+    private notify: NotifyService,
+    private userService: UserService,
+    private fsService: FirestoreService
   ) {
-    this.activityCollection = this._afs.collection('activities');
+    this.activityCollection = this.afs.collection('activities');
   }
 
   getActivitiesToApprove() {
-    const actReference = this._afs.collection<Activity>('activities',
-      ref => ref.where('status', '==', 'Pendente'));
-
-    return actReference.snapshotChanges().pipe(
-      map((actions) => {
-        return actions.map((a) => {
-          const data = a.payload.doc.data();
-          data.uid = a.payload.doc.id;
-          return data;
-        })
-      }));
+    return this.fsService.colWithId$<Activity>('activities', ref => ref.where('status', '==', 'Pendente'))
+      .pipe(
+        leftJoinDocument(this.afs, 'userUid', 'users', 'user')
+      );
   }
 
-  getActivitiesStudent(id: string) {
-    const actReference = this._afs.collection<Activity>('activities',
-      ref => ref.where('userUid', '==', id));
-
-    return actReference.snapshotChanges()
-      .pipe(map((actions) => {
-        return actions.map((a) => {
-          const data = a.payload.doc.data();
-          data.uid = a.payload.doc.id;
-          return data;
-        })
-      }));
+  getActivitiesStudent(uid: string) {
+    return this.fsService.colWithId$<Activity>('activities', ref => ref.where('userUid', '==', uid));
   }
 
-  getActivityDocument(id: string): AngularFirestoreDocument<Activity> {
-    return this._afs.doc<Activity>(`activities/${id}`);
+  getActivityDocument(uid: string): AngularFirestoreDocument<Activity> {
+    return this.afs.doc<Activity>(`activities/${uid}`);
   }
 
   getActivityById(uid: string): Observable<Activity> {
-    return this._afs.doc<Activity>(`activities/${uid}`).valueChanges()
+    return this.afs.doc<Activity>(`activities/${uid}`).valueChanges()
   }
 
   async createActivity(content: Activity, attach) {
     content.attachment = attach;
-    this._auth.user$.subscribe(user => {
+    this.auth.user$.subscribe(user => {
       content.userUid = user.uid;
       return this.activityCollection.add(content)
         .then(() => {
-          this._notify.update('success', 'Atividade criada com sucesso!');
+          this.notify.update('success', 'Atividade criada com sucesso!');
         })
-        .catch(() => this._notify.update('danger', 'Houve um erro na requisição!'));
+        .catch(() => this.notify.update('danger', 'Houve um erro na requisição!'));
     });
   }
 
   async updateActivity(id: string, data: any, msg: string) {
     try {
       await this.getActivityDocument(id).update(data);
-      this._notify.update('success', `Atividade ${msg} com sucesso!`);
-      this._router.navigate(['/dashboard']);
+      this.notify.update('success', `Atividade ${msg} com sucesso!`);
+      this.router.navigate(['/dashboard']);
     } catch (e) {
-      return this._notify.update('danger', 'Houve um erro na requisição!');
+      return this.notify.update('danger', 'Houve um erro na requisição!');
     }
   }
 
   async deleteActivity(id: string) {
     try {
       await this.getActivityDocument(id).delete();
-      this._notify.update('success', 'Atividade deletada com sucesso!');
-      this._router.navigate(['/dashboard']);
+      this.notify.update('success', 'Atividade deletada com sucesso!');
+      this.router.navigate(['/dashboard']);
     } catch (e) {
-      return this._notify.update('danger', 'Houve um erro na requisição!');
+      return this.notify.update('danger', 'Houve um erro na requisição!');
     }
   }
 }
