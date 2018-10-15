@@ -34,7 +34,7 @@ export class UploadPageComponent {
 
   startUpload(event: FileList) {
     for (let i = 0; i < event.length; i++) {
-      // get date and hour of the moment and replace '/' per '-'
+      // Get date and hour of the moment and replace '/' per '-'
       const date = new Date().toLocaleString().replace(/\//g, '-');
       const file = event[i];
       const name = file.name;
@@ -47,7 +47,7 @@ export class UploadPageComponent {
           'activity': 'complementary-activity'
         }
       }
-      // Client-side validation
+      // Validation if file is image or pdf, case not, show message unsuportted format
       const image = true ? file.type.split('/')[0] === 'image' : false;
       const pdf = true ? file.type.split('/')[1] === 'pdf' : false;
       if (image || pdf) {

@@ -48,6 +48,7 @@ import { TableModule } from 'primeng/table';
 import { FileUploadModule } from 'primeng/fileupload';
 import { GalleriaModule } from 'primeng/galleria';
 import { LightboxModule } from 'primeng/lightbox';
+import { DialogModule } from 'primeng/dialog';
 import { ToSelectIdPipe } from './pipes/to-select-id.pipe';
 
 @NgModule({
@@ -95,7 +96,8 @@ import { ToSelectIdPipe } from './pipes/to-select-id.pipe';
     TableModule,
     GalleriaModule,
     LightboxModule,
-    FileUploadModule
+    FileUploadModule,
+    DialogModule
   ],
   providers: [AuthGuard, MessageService],
   bootstrap: [AppComponent]
