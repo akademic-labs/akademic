@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Activity } from '../../models/activity.interface';
 import { User } from '../../models/user.interface';
@@ -23,8 +23,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     'Setembro', 'Outubro', 'Novembro', 'Dezembro'
   ];
 
-  subscribe: Subscription;
-
   activityCategoryChartData: ChartData;
 
   activityStatusChartData: ChartData;
@@ -34,7 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   rankStudentsChartData: ChartData;
 
-  activitiesToAnalyze$: Observable<Activity[]>
+  activitiesToAnalyze$: Observable<{}>;
   activitiesStudent: Activity[];
   user: User;
 
@@ -47,33 +45,34 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.subscribe = this._auth.user$.subscribe(res => {
+    this._auth.user$.subscribe(res => {
       this.user = res;
       if (this._rolesService.isController(this.user)) {
         this.activitiesToAnalyze$ = this._activityService.getActivitiesToApprove();
       }
       if (this._rolesService.isStudent(this.user)) {
-        this._activityService.getActivitiesStudent(res.uid).subscribe(responseData => {
-          this.activitiesStudent = responseData;
+        this._activityService.getActivitiesStudent(res.uid)
+          .subscribe(responseData => {
+            this.activitiesStudent = responseData;
 
-          let dataFirebaseCategory = [];
-          let dataChartCategory;
-          let dataFirebaseStatus = [];
-          let dataChartStatus;
+            let dataFirebaseCategory = [];
+            let dataChartCategory;
+            let dataFirebaseStatus = [];
+            let dataChartStatus;
 
-          responseData.forEach(e => {
-            dataFirebaseCategory.push({ activity: e.activityType.description, hours: e.hoursDuration });
-            dataFirebaseCategory = this._utilsService.groupBy(dataFirebaseCategory, 'activity', 'hours');
-            dataChartCategory = this._utilsService.preparateDataChart(dataFirebaseCategory, 'activity', 'hours');
+            responseData.forEach(e => {
+              dataFirebaseCategory.push({ activity: e.activityType.description, hours: e.hoursDuration });
+              dataFirebaseCategory = this._utilsService.groupBy(dataFirebaseCategory, 'activity', 'hours');
+              dataChartCategory = this._utilsService.preparateDataChart(dataFirebaseCategory, 'activity', 'hours');
 
-            dataFirebaseStatus.push({ status: e.status, count: 1 });
-            dataFirebaseStatus = this._utilsService.groupBy(dataFirebaseStatus, 'status', 'count');
-            dataChartStatus = this._utilsService.preparateDataChart(dataFirebaseStatus, 'status', 'count');
+              dataFirebaseStatus.push({ status: e.status, count: 1 });
+              dataFirebaseStatus = this._utilsService.groupBy(dataFirebaseStatus, 'status', 'count');
+              dataChartStatus = this._utilsService.preparateDataChart(dataFirebaseStatus, 'status', 'count');
+            });
+
+            this.buildChartByCategory(dataChartCategory);
+            this.buildChartStatus(dataChartStatus);
           });
-
-          this.buildChartByCategory(dataChartCategory);
-          this.buildChartStatus(dataChartStatus);
-        });
       }
       if (this._rolesService.isAdmin(this.user)) {
         // methods Admin here
@@ -85,7 +84,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   toAnalyze(data) {
-    this._router.navigate(['validate-activity', { id: data.uid }]);
+    this._router.navigate(['validate-activity/', data.uid]);
   }
 
   buildChartByCategory(dataChart) {
@@ -191,6 +190,5 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscribe.unsubscribe();
   }
 }

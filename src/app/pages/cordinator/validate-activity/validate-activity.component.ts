@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Activity } from 'app/models/activity.interface';
@@ -25,7 +25,6 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
 
   constructor(
     private _route: ActivatedRoute,
-    private _router: Router,
     private _activityService: ActivityService,
     private _storage: AngularFireStorage,
     private _messageService: MessageServicePrimeNG,
