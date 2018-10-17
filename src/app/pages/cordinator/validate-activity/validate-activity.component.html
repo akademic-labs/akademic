@@ -7,6 +7,7 @@
                 </div>
                 <hr>
             </div>
+            <!-- <pre>{{ activity | json }}</pre> -->
             <div class="content">
                 <form>
                     <div class="uppercase" style="color: #9A9A9A;text-align: center;font-size: 16px;">
@@ -65,9 +66,12 @@
                         <div>Solicitante</div>
                         <div style="padding:20px 0px">
                             <img src="assets/img/default-avatar.png" alt="Foto do Usuário" width="80" height="80" style="border-radius: 50%; margin-right: 10px" />
-                            <h5 style="display: inline-grid;">{{activity?.user.displayName}}
+                            <h5 style="display: inline-grid;">
+                                <!-- {{activity?.user.displayName}} -->
                                 <br />
-                                <small style="text-transform: lowercase">{{activity?.user.email}}</small>
+                                <small style="text-transform: lowercase">
+                                    <!-- {{activity?.user.email}} -->
+                                </small>
                             </h5>
                         </div>
                     </div>
@@ -103,7 +107,7 @@
     [baseZIndex]="10000" styleClass="center">
     <div *ngIf="attachView?.type !== 'application/pdf'; else pdf" style="width: 100%; height: 100%;">
         <img class="img-dialog" [src]="attachView?.url" />
-        <button class="btn-download-attach" type="button" label="Download"><i class="fa fa-download mt-4"></i></button>
+        <!-- <button class="btn-download-attach" type="button" label="Download"><i class="fa fa-download mt-4"></i></button> -->
     </div>
     <ng-template #pdf>
         <iframe class="pdf-dialog" [src]="sanitizer.bypassSecurityTrustResourceUrl(attachView?.url)"></iframe>

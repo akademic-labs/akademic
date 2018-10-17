@@ -9,13 +9,13 @@
         </aka-chart-card>
     </div>
 
-    <div *ngIf="_rolesService.isController(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    <div *ngIf="_rolesService.isController(user)" class="col-xs-12 col-md-6">
         <aka-chart-card [title]="'Atividades último semestre'" [subtitle]="'Número de atividades dos últimos 6 meses'"
             chartType="line" [chartData]="lastSemesterChartData">
         </aka-chart-card>
     </div>
 
-    <div *ngIf="_rolesService.isController(user)" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    <div *ngIf="_rolesService.isController(user)" class="col-xs-12 col-md-6">
         <aka-chart-card [title]="'Ranking'" [subtitle]="'Atividades dos alunos do curso'" chartType="bar" [chartData]="rankStudentsChartData">
         </aka-chart-card>
     </div>

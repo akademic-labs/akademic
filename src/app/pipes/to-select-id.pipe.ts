@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ToSelectIdPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    return null;
+    return value ? value.uid : null;
   }
 
 }

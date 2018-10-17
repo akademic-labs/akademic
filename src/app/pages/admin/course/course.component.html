@@ -3,19 +3,32 @@
         <div class="card">
             <div class="header">
                 <div class="title">
-                    <i class="fa fa-graduation-cap"></i>{{ title }}
+                    <i class="fa fa-graduation-cap"></i>Cursos
                 </div>
                 <hr>
             </div>
+            <pre>{{ courseForm.value | json }}</pre>
+            <pre>{{ courses$ | async | json }}</pre>
+            <pre>{{ opa | toSelectId }}</pre>
             <div class="content">
                 <form [formGroup]="courseForm" (ngSubmit)="save()">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="col-xs-12 col-md-6">
                             <div class="form-group">
                                 <label for="description">Descrição</label>
                                 <input type="text" class="form-control" formControlName="description" #inputFocus>
                             </div>
                             <aka-message-control-error [control]="courseForm.get('description')" error="required" msg="Descrição é obrigatório."></aka-message-control-error>
+                        </div>
+                        {{ courseForm.get('instituitionUid').value | json }}
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group">
+                                <label for="state">Instituição</label>
+                                <p-dropdown placeholder="Selecione" emptyFilterMessage="Nenhum resultado." [options]="institutions$ | async"
+                                    optionLabel="name" [showClear]="true" filter="true" formControlName="instituitionUid | toSelectId"></p-dropdown>
+                            </div>
+                            <aka-message-control-error [control]="courseForm.get('instituitionUid')" error="required"
+                                msg="Instituição é obrigatório."></aka-message-control-error>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 label-block">
                             <label></label>
@@ -28,8 +41,9 @@
             </div>
             <div class="content">
 
-                <p-table [value]="courses$ | async" selectionMode="single" #dt [globalFilterFields]="['description']" [paginator]="true"
-                    [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]" [resizableColumns]="true" [reorderableColumns]="true">
+                <p-table [value]="courses$ | async" selectionMode="single" #dt [globalFilterFields]="['description']"
+                    [paginator]="true" [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]"
+                    [resizableColumns]="true" [reorderableColumns]="true">
                     <ng-template pTemplate="caption">
                         <div class="input-filter">
                             <i class="fa fa-search"></i>
