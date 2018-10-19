@@ -163,6 +163,11 @@ p-toast i {
 
 p-toast p {
     word-wrap: break-word;
+    width: 250px;
+}
+
+body .ui-toast .ui-toast-message {
+    max-width: 280px;
 }
 
 body .ui-dropdown .ui-dropdown-trigger .ui-dropdown-trigger-icon:before {

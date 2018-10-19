@@ -106,6 +106,7 @@ export const leftJoinDocument = (afs: AngularFirestore, fieldId, collection, fie
           const reads$ = [];
           let i = 0;
           for (const doc of collectionData) {
+            console.log('joinzera doc: ' + doc);
             // Skip if doc field does not exist or is already in cache
             if (!doc[fieldId] || cache.get(doc[fieldId])) {
               continue;

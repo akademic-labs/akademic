@@ -27,8 +27,7 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _activityService: ActivityService,
     private _storage: AngularFireStorage,
-    private _messageService: MessageServicePrimeNG,
-
+    public _messageService: MessageServicePrimeNG,
     public sanitizer: DomSanitizer
   ) { }
 
@@ -68,7 +67,7 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
     if (param === 'disapprove') {
       msg = 'reprovação';
     }
-    this._messageService.messageConfirm('remove', true, 'warn', '', `Confirma ${msg} da atividade '${this.activity.description}' ?`);
+    this._messageService.messageConfirm('confirmation', true, 'warn', null, `Confirma ${msg} da atividade '${this.activity.description}' ?`);
   }
 
   toAccept() {
@@ -80,10 +79,6 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
       this.activity.status = 'Reprovada';
       this._activityService.updateActivity(this.uidActivity, this.activity, 'reprovada');
     }
-  }
-
-  toReject() {
-    this._messageService.closeMessageConfirm('remove');
   }
 
 }

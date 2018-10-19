@@ -20,7 +20,7 @@ export class ControllerComponent implements OnInit {
   controllerForm: FormGroup;
   controller: Controller;
   controllers$: Observable<Controller[]>;
-  courses$: Observable<Course[]>;
+  courses$: Observable<{}>;
   @ViewChild('inputFocus') focusIn: ElementRef;
 
   colleges;
@@ -29,7 +29,7 @@ export class ControllerComponent implements OnInit {
     private _controllerFormBuilder: FormBuilder,
     private _controllerService: ControllerService,
     private _courseService: CourseService,
-    private _messageService: MessageServicePrimeNG,
+    public _messageService: MessageServicePrimeNG,
     private _utilsService: UtilsService
   ) { }
 
@@ -86,7 +86,7 @@ export class ControllerComponent implements OnInit {
     this.controllerForm.reset();
     this.button = 'Adicionar';
     this.focusIn.nativeElement.focus();
-    this.toReject();
+    this._messageService.close();
   }
 
   compareCourse(obj1, obj2) {
@@ -96,10 +96,6 @@ export class ControllerComponent implements OnInit {
   confirmRemove(obj) {
     this.controller = obj;
     this._messageService.messageConfirm('remove', true, 'warn', '', `Deseja realmente excluir '${obj.name}' ?`);
-  }
-
-  toReject() {
-    this._messageService.closeMessageConfirm('remove');
   }
 
 }

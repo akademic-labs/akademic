@@ -29,7 +29,7 @@ export class UploadPageComponent {
 
   constructor(
     private _notify: NotifyService,
-    private _messageService: MessageServicePrimeNG
+    public _messageService: MessageServicePrimeNG
   ) { }
 
   startUpload(event: FileList) {
@@ -61,9 +61,9 @@ export class UploadPageComponent {
     this.renderAttach(this.uploads);
   }
 
-  confirmRemove(file, index: number) {
+  confirm(file, index: number) {
     this.indexRemove = index;
-    this._messageService.messageConfirm('remove', true, 'warn', '', `Deseja realmente descartar o anexo '${file.name}' ?`);
+    this._messageService.messageConfirm('confirmation', true, 'warn', null, `Deseja realmente descartar o anexo '${file.name}' ?`);
   }
 
   renderAttach(uploads) {
@@ -81,11 +81,7 @@ export class UploadPageComponent {
     this.uploads.splice(this.indexRemove, 1);
     this.attachs.splice(this.indexRemove, 1);
     this.attachShow.splice(this.indexRemove, 1);
-    this.toReject();
-  }
-
-  toReject() {
-    this._messageService.closeMessageConfirm('remove');
+    this._messageService.close();
   }
 
   toggleHover(event: boolean) {

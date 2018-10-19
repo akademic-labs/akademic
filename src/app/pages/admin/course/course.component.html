@@ -7,32 +7,34 @@
                 </div>
                 <hr>
             </div>
-            <pre>{{ courseForm.value | json }}</pre>
-            <pre>{{ courses$ | async | json }}</pre>
-            <pre>{{ opa | toSelectId }}</pre>
+            <!-- <pre>{{ courseForm.value | json }}</pre> -->
+            <!-- <pre>{{ courses$ | async | json }}</pre> -->
+            <!-- <pre>{{ institutions$ | async | json }}</pre> -->
             <div class="content">
                 <form [formGroup]="courseForm" (ngSubmit)="save()">
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <div class="form-group">
-                                <label for="description">Descrição</label>
-                                <input type="text" class="form-control" formControlName="description" #inputFocus>
+                                <label for="name">Nome</label>
+                                <input type="text" class="form-control" formControlName="name" #inputFocus>
                             </div>
-                            <aka-message-control-error [control]="courseForm.get('description')" error="required" msg="Descrição é obrigatório."></aka-message-control-error>
+                            <aka-message-control-error [control]="courseForm.get('name')" error="required" msg="Descrição é obrigatório."></aka-message-control-error>
                         </div>
-                        {{ courseForm.get('instituitionUid').value | json }}
-                        <div class="col-xs-12 col-md-6">
+                        <!-- <pre>{{ courseForm.get('instituitionUid').value | toSelectId }}</pre> -->
+                        <!-- <pre>{{ courseForm.get('institutionUid').value?.uid }}</pre> -->
+                        <div class="col-xs-12 col-md-4">
                             <div class="form-group">
                                 <label for="state">Instituição</label>
-                                <p-dropdown placeholder="Selecione" emptyFilterMessage="Nenhum resultado." [options]="institutions$ | async"
-                                    optionLabel="name" [showClear]="true" filter="true" formControlName="instituitionUid | toSelectId"></p-dropdown>
+                                <p-dropdown formControlName="institutionUid" datakey="name" placeholder="Selecione"
+                                    emptyFilterMessage="Nenhum resultado." [options]="institutions$ | async"
+                                    optionLabel="name" [showClear]="true" filter="true"></p-dropdown>
                             </div>
-                            <aka-message-control-error [control]="courseForm.get('instituitionUid')" error="required"
+                            <aka-message-control-error [control]="courseForm.get('institutionUid')" error="required"
                                 msg="Instituição é obrigatório."></aka-message-control-error>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 label-block">
+                        <div class="col-xs-12 col-md-2 label-block mb-3">
                             <label></label>
-                            <button [disabled]="courseForm.invalid" type="submit" class="btn btn-action left">
+                            <button [disabled]="courseForm.invalid" type="submit" class="btn btn-action btn-block">
                                 {{ button }}
                             </button>
                         </div>
@@ -40,10 +42,9 @@
                 </form>
             </div>
             <div class="content">
-
-                <p-table [value]="courses$ | async" selectionMode="single" #dt [globalFilterFields]="['description']"
-                    [paginator]="true" [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]"
-                    [resizableColumns]="true" [reorderableColumns]="true">
+                <p-table [value]="courses$ | async" #dt [globalFilterFields]="['name', 'institution']" [paginator]="true"
+                    [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]" [resizableColumns]="true"
+                    [reorderableColumns]="true">
                     <ng-template pTemplate="caption">
                         <div class="input-filter">
                             <i class="fa fa-search"></i>
@@ -52,39 +53,38 @@
                     </ng-template>
                     <ng-template pTemplate="header">
                         <tr>
-                            <th [pSortableColumn]="'description'" pResizableColumn pReorderableColumn style="width: 75%">Nome
+                            <th [pSortableColumn]="'name'" pResizableColumn pReorderableColumn style="width: 40%">Nome
                                 <p-sortIcon></p-sortIcon>
                             </th>
-                            <th style="width: 15%">Ações</th>
+                            <th [pSortableColumn]="'institution'" pResizableColumn pReorderableColumn style="width: 35%">Instituição
+                                <p-sortIcon></p-sortIcon>
+                            </th>
+                            <th>Ações</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-course>
                         <tr [pSelectableRow]="course">
                             <td>
-                                <span class="ui-column-title">Nome:</span>
-                                {{course.description}}
+                                <span class="ui-column-title">Curso:</span>
+                                {{course.name}}
+                            </td>
+                            <td>
+                                <span class="ui-column-title">Instituição:</span>
+                                {{course.institution?.name}}
                             </td>
                             <td class="td-actions">
-                                <a class="btn" (click)="edit(course)">
+                                <span class="ui-column-title">Ações:</span>
+                                <a pTooltip="Editar" tooltipPosition="bottom" (click)="edit(course)" class="btn">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <a (click)="remove(course.uid)" class="btn text-danger">
+                                <a pTooltip="Excluir" tooltipPosition="bottom" (click)="confirm(course)" class="btn text-danger">
                                     <i class="fa fa-times"></i>
                                 </a>
                             </td>
-                            <!-- <td class="td-actions">
-                            <span class="ui-column-title">Ações:</span>
-                            <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-xs">
-                              <i class="fa fa-edit" (click)="edit(course)"></i>
-                            </button>
-                            <button type="button" (click)="remove(course.uid)" rel="tooltip" title="Remover" class="btn btn-danger btn-simple btn-xs">
-                              <i class="fa fa-times"></i>
-                            </button>
-                          </td> -->
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="summary">
-                        {{ (courses$ | async)?.length }} registros
+                        <!-- {{ (courses$ | async)?.length }} registros -->
                     </ng-template>
                     <ng-template pTemplate="emptymessage" let-columns>
                         <tr>
@@ -98,3 +98,25 @@
         </div>
     </div>
 </div>
+
+<p-toast position="center" key="confirmation" (onClose)="_messageService.close()" [modal]="true">
+    <ng-template let-message pTemplate="message">
+        <div class="ui-g ui-fluid">
+            <div class="center mt-3">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <h3 class="mt-3">{{ message.summary }}</h3>
+                <p>{{ message.detail }}</p>
+            </div>
+            <div class="ui-g-6">
+                <button type="button" (click)="remove()" class="btn btn-action btn-block">
+                    Sim
+                </button>
+            </div>
+            <div class="ui-g-6">
+                <button type="button" (click)="_messageService.close()" class="btn btn-secondary btn-block">
+                    Não
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

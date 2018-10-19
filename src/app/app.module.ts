@@ -49,7 +49,12 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { GalleriaModule } from 'primeng/galleria';
 import { LightboxModule } from 'primeng/lightbox';
 import { DialogModule } from 'primeng/dialog';
+import { TooltipModule } from 'primeng/tooltip';
+
 import { ToSelectIdPipe } from './pipes/to-select-id.pipe';
+import { HttpModule } from '@angular/http';
+import { FormDebugComponent } from './shared/form-debug/form-debug.component';
+
 
 @NgModule({
   declarations: [
@@ -65,6 +70,7 @@ import { ToSelectIdPipe } from './pipes/to-select-id.pipe';
     ActivitypeTypeComponent,
     InstitutionComponent,
     Error404Component,
+    FormDebugComponent,
     ToSelectIdPipe
   ],
   imports: [
@@ -72,6 +78,7 @@ import { ToSelectIdPipe } from './pipes/to-select-id.pipe';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    HttpModule,
     NavbarModule,
     FooterModule,
     SidebarModule,
@@ -97,7 +104,8 @@ import { ToSelectIdPipe } from './pipes/to-select-id.pipe';
     GalleriaModule,
     LightboxModule,
     FileUploadModule,
-    DialogModule
+    DialogModule,
+    TooltipModule
   ],
   providers: [AuthGuard, MessageService],
   bootstrap: [AppComponent]

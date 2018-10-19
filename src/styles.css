@@ -974,7 +974,7 @@ fieldset[disabled] .form-control {
 }
 
 .table .td-actions {
-  min-width: 90px
+  min-width: 90px;
 }
 
 .table>tbody>tr {
@@ -2590,4 +2590,8 @@ fieldset[disabled] .form-control {
 
 .center {
   text-align: center;
+}
+
+.right {
+  float: right !important;
 }
