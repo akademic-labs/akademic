@@ -3,6 +3,9 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Course } from '../../../models/course.interface';
 import { CourseService } from '../../../services/course.service';
+import { Institution } from 'app/models/institution.interface';
+import { InstitutionService } from 'app/services/institution.service';
+import { MessageServicePrimeNG } from 'app/services/message.service';
 
 @Component({
   selector: 'aka-course',
@@ -11,54 +14,69 @@ import { CourseService } from '../../../services/course.service';
 })
 export class CourseComponent implements OnInit {
 
-  title = 'Cursos';
-  button = 'Adicionar';
   courseForm: FormGroup;
   course: Course;
-  courses$: Observable<Course[]>;
-  @ViewChild('inputFocus') focusIn: ElementRef;
+  courses$: Observable<{}>;
+  institutions$: Observable<Institution[]>;
+  @ViewChild('inputFocus') focus: ElementRef;
+  button = 'Adicionar';
 
   constructor(
     private _courseFormBuilder: FormBuilder,
-    private _courseService: CourseService
+    private _courseService: CourseService,
+    private _institutionService: InstitutionService,
+    public _messageService: MessageServicePrimeNG,
   ) { }
 
   ngOnInit() {
-    this.courses$ = this._courseService.get();
+    this.courses$ = this._courseService.getJoinInstitution();
+    this.institutions$ = this._institutionService.get();
     this.buildForm();
-    this.focusIn.nativeElement.focus();
+    this.focus.nativeElement.focus();
   }
 
   buildForm() {
     this.courseForm = this._courseFormBuilder.group({
       uid: new FormControl({ value: null, disabled: true }),
-      description: [null, Validators.compose([Validators.required])]
+      name: [null, Validators.required],
+      institutionUid: [null, Validators.required]
     });
   }
 
   save() {
+    // before submit assigns only the institution uid in the course
+    this.courseForm.patchValue({ institutionUid: this.courseForm.get('institutionUid').value.uid });
     if (!this.courseForm.get('uid').value) {
       this._courseService.post(this.courseForm.value);
     } else {
       this._courseService.put(this.course.uid, this.courseForm.value);
     }
-    this.courseForm.reset();
-    this.button = 'Adicionar';
-    this.focusIn.nativeElement.focus();
+    this.renderForm();
   }
 
   edit(obj) {
-    this.courseForm.patchValue({ uid: obj.uid, description: obj.description });
+    const institutionUid = { uid: obj.institutionUid, name: obj.institution.name };
+    this.courseForm.patchValue({ uid: obj.uid, name: obj.name, institutionUid: institutionUid });
     this.course = obj;
     this.button = 'Atualizar';
-    this.focusIn.nativeElement.focus();
+    this.focus.nativeElement.focus();
   }
 
-  remove(uid) {
-    this._courseService.delete(uid);
-    this.courseForm.reset();
+  remove() {
+    this._courseService.delete(this.course.uid);
+    this.renderForm();
+    this._messageService.close();
+  }
+
+  renderForm() {
     this.button = 'Adicionar';
-    this.focusIn.nativeElement.focus();
+    this.courseForm.reset();
+    this.focus.nativeElement.focus();
+  }
+
+  confirm(obj) {
+    this.course = obj;
+    this._messageService.messageConfirm('confirmation', true, 'warn', null, `Deseja realmente excluir '${obj.name}' ?`);
   }
 
 }

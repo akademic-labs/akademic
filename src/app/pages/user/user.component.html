@@ -24,8 +24,8 @@
                     <h4 class="title"><i class="fa fa fa-user-circle-o"></i>Editar Perfil</h4>
                 </div>
                 <div class="content">
-                    <pre>{{form.value | json}}</pre>
-                    <form [formGroup]="form" (submit)="onSubmit(form)">
+                    <aka-form-debug [form]="form"></aka-form-debug>
+                    <form [formGroup]="form" (submit)="onSubmit()">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -67,20 +67,35 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>CEP</label>
-                                        <input type="text" id="cepField" class="form-control" formControlName="zipCode"
-                                            (keyup)="cepMask($event.target.value)">
+                                        <input type="text" maxlength="10" class="form-control" formControlName="zipCode"
+                                            (keyup)="cepMask($event.target.value)" (blur)="searchCep()">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Endereço</label>
                                         <input type="text" class="form-control" placeholder="Endereço" formControlName="street">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Número</label>
                                         <input type="number" class="form-control" placeholder="Número" formControlName="number">
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                        <label>Complemento</label>
+                                        <input type="text" class="form-control" placeholder="Complemento"
+                                            formControlName="complement">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Bairro</label>
+                                        <input type="text" class="form-control" placeholder="Bairro" formControlName="neighborhood">
                                     </div>
                                 </div>
                             </div>
@@ -105,14 +120,25 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- <pre>{{ courses$ | json }}</pre> -->
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Vincular Instituição</label>
                                     <p-dropdown placeholder="Selecione" emptyFilterMessage="Nenhum resultado."
                                         [options]="instituitions$ | async" optionLabel="name" [showClear]="true" filter="true"
-                                        (onChange)="onSelectInstituition($event.value)"></p-dropdown>
+                                        (onChange)="getCourses($event.value)"></p-dropdown>
+                                    <!-- (onChange)="onSelectInstituition($event.value)" -->
                                 </div>
+                                <!-- <aka-message-control-error [control]="form.get('instituitionUid')" error="required" msg="Vínculo com a instituição é obrigatório."></aka-message-control-error> -->
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Vincular Curso</label>
+                                    <p-dropdown formControlName="courseUid" placeholder="Selecione" emptyFilterMessage="Nenhum resultado."
+                                        [options]="courses$" optionLabel="name" [showClear]="true" filter="true"></p-dropdown>
+                                </div>
+                                <aka-message-control-error [control]="form.get('courseUid')" error="required" msg="Vínculo com o curso é obrigatório."></aka-message-control-error>
                             </div>
                         </div>
                         <div class="row">
@@ -124,8 +150,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="clearfix">
-                            <button type="submit" class="btn btn-action pull-right">Atualizar Perfil</button>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4 right">
+                                <button type="submit" class="btn btn-action btn-block" [disabled]="disabledSave && form.invalid">Atualizar
+                                    Perfil</button>
+                            </div>
                         </div>
                     </form>
                 </div>

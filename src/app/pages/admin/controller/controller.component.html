@@ -59,7 +59,7 @@
           <table class="table">
             <tbody>
               <tr *ngFor="let controller of controllers$ | async">
-                <td>{{ controller.name }} | {{ controller.course.description }}</td>
+                <td>{{ controller.name }} | {{ controller.course.name }}</td>
                 <td class="td-actions text-right">
                   <a class="btn" (click)="edit(controller)">
                     <i class="fa fa-edit"></i>
@@ -85,7 +85,7 @@
 
 <p-toast position="top-right"></p-toast>
 
-<p-toast position="center" key="remove" (onClose)="toReject()" [modal]="true" [baseZIndex]="9999">
+<p-toast position="center" key="remove" (onClose)="_messageService.close()" [modal]="true" [baseZIndex]="9999">
   <ng-template let-message pTemplate="message">
     <div style="text-align: center">
       <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
@@ -97,7 +97,7 @@
         <button type="button" pButton (click)="remove()" label="Sim" class="ui-button-success"></button>
       </div>
       <div class="ui-g-6">
-        <button type="button" pButton (click)="toReject()" label="Não" class="ui-button-secondary"></button>
+        <button type="button" pButton (click)="_messageService.close()" label="Não" class="ui-button-secondary"></button>
       </div>
     </div>
   </ng-template>
