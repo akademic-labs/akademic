@@ -1,8 +1,10 @@
-import { Injectable } from "@angular/core";
-import { AngularFirestoreCollection, AngularFirestore } from "angularfire2/firestore";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { Rules } from '../models/rules.interface';
+import { ErrorService } from './error.service';
 import { NotifyService } from './notify.service';
 
 @Injectable({
@@ -10,9 +12,9 @@ import { NotifyService } from './notify.service';
 })
 export class Ruleservice {
 
-rulesCollection: AngularFirestoreCollection<Rules>;
+  rulesCollection: AngularFirestoreCollection<Rules>;
 
-  constructor(private _afs: AngularFirestore, private _notify: NotifyService) {
+  constructor(private _afs: AngularFirestore, private _notify: NotifyService, private _error: ErrorService) {
     this.rulesCollection = _afs.collection('rules');
   }
 
@@ -24,22 +26,25 @@ rulesCollection: AngularFirestoreCollection<Rules>;
     );
   }
 
-  post(content: Rules){
+  post(content: Rules) {
     this._afs.collection('rules').add(content)
-      .then (() => this._notify.update('success', 'Regra adicionada com sucesso!'))
-      .catch (() => this._notify.update('danger', 'Houve um erro na requisição!'));
+      .then(() => this._notify.update('success', 'Regra adicionada com sucesso!'))
+      .catch(e => this.handleError(e));
   }
 
-  put(uid: string, content: Rules){
+  put(uid: string, content: Rules) {
     this._afs.collection('rules').doc(uid).set(content)
-      .then (() => this._notify.update('success', 'Regra atualizada com sucesso!'))
-      .catch (() => this._notify.update('danger', 'Houve um erro na requisição!'));
+      .then(() => this._notify.update('success', 'Regra atualizada com sucesso!'))
+      .catch(e => this.handleError(e));
   }
 
-  delete(uid: string){
+  delete(uid: string) {
     this._afs.collection('rules').doc(uid).delete()
-      .then (() => this._notify.update('success', 'Regra removida com sucesso!'))
-      .catch (() => this._notify.update('danger', 'Houve um erro na requisição!'));
+      .then(() => this._notify.update('success', 'Regra removida com sucesso!'))
+      .catch(e => this.handleError(e));
   }
 
+  private handleError(error) {
+    this._notify.update('danger', this._error.printErrorByCode(error.code));
+  }
 }

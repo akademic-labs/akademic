@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NotifyService } from './notify.service';
+
 import { Institution } from '../models/institution.interface';
+import { ErrorService } from './error.service';
+import { NotifyService } from './notify.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ export class InstitutionService {
 
   institutionCollection: AngularFirestoreCollection<Institution>;
 
-  constructor(private _afs: AngularFirestore, private _notify: NotifyService) {
+  constructor(private _afs: AngularFirestore, private _notify: NotifyService, private _error: ErrorService) {
     this.institutionCollection = _afs.collection('institutions');
   }
 
@@ -27,19 +29,22 @@ export class InstitutionService {
   post(content: Institution) {
     this._afs.collection('institutions').add(content)
       .then(() => this._notify.update('success', 'Instituição adicionada com sucesso!'))
-      .catch(() => this._notify.update('danger', 'Houve um erro na requisição!'));
+      .catch(e => this.handleError(e));
   }
 
   put(uid: string, content: Institution) {
     this._afs.collection('institutions').doc(uid).set(content)
       .then(() => this._notify.update('success', 'Instituição atualizada com sucesso!'))
-      .catch(() => this._notify.update('danger', 'Houve um erro na requisição!'));
+      .catch(e => this.handleError(e));
   }
 
   delete(uid: string) {
     this._afs.collection('institutions').doc(uid).delete()
       .then(() => this._notify.update('success', 'Instituição removida com sucesso!'))
-      .catch(() => this._notify.update('danger', 'Houve um erro na requisição!'));
+      .catch(e => this.handleError(e));
   }
 
+  private handleError(error) {
+    this._notify.update('danger', this._error.printErrorByCode(error.code));
+  }
 }

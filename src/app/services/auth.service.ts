@@ -43,12 +43,11 @@ export class AuthService {
         const dataUser = this.authCredentialToUser(credential.user);
         this._userService.createUserData(dataUser);
       })
-      .catch((error) => this.handleError(error));
+      .catch(e => this.handleError(e));
   }
 
   createUser(user: User, password: string) {
-    console.log(user);
-    return this.afAuth.auth.createUserWithEmailAndPassword(user.email, password)
+    this.afAuth.auth.createUserWithEmailAndPassword(user.email, password)
       .then(credential => {
         user.uid = credential.user.uid;
         this._userService.createUserData(user);
@@ -59,17 +58,17 @@ export class AuthService {
 
   googleLogin() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    return this.oAuthLogin(provider);
+    this.oAuthLogin(provider);
   }
 
   facebookLogin() {
     const provider = new firebase.auth.FacebookAuthProvider();
-    return this.oAuthLogin(provider);
+    this.oAuthLogin(provider);
   }
 
   twitterLogin() {
     const provider = new firebase.auth.TwitterAuthProvider();
-    return this.oAuthLogin(provider);
+    this.oAuthLogin(provider);
   }
 
   logOut() {
@@ -80,18 +79,17 @@ export class AuthService {
 
   // Sends email allowing user to reset password
   resetPassword(email: string) {
-    return this.afAuth.auth.sendPasswordResetEmail(email)
+    this.afAuth.auth.sendPasswordResetEmail(email)
       .then(() => this._notify.update('info', 'Atualização de senha enviada por e-mail'))
-      .catch((error) => this.handleError(error));
+      .catch(error => this.handleError(error));
   }
 
   private oAuthLogin(provider: any) {
-    return this.afAuth.auth.signInWithPopup(provider)
-      .then(credential => {
-        const dataUser = this.authCredentialToUser(credential.user);
-        this._userService.createUserData(dataUser);
-      })
-      .catch(error => this.handleError(error));
+    this.afAuth.auth.signInWithPopup(provider).then(credential => {
+      const dataUser = this.authCredentialToUser(credential.user);
+      this._userService.createUserData(dataUser);
+    })
+      .catch(e => this.handleError(e));
   }
 
   private authCredentialToUser(credentialUser: UserInfo) {

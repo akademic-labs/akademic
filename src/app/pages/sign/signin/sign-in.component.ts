@@ -46,16 +46,16 @@ export class SignInComponent implements OnInit {
     }
   }
 
-  async signInWithGoogle() {
-    await this._auth.googleLogin();
+  signInWithGoogle() {
+    this._auth.googleLogin();
   }
 
-  async signInWithFacebook() {
-    await this._auth.facebookLogin();
+  signInWithFacebook() {
+    this._auth.facebookLogin();
   }
 
-  async signInWithTwitter() {
-    await this._auth.twitterLogin();
+  signInWithTwitter() {
+    this._auth.twitterLogin();
   }
 
   resetPassword() {

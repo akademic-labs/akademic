@@ -94,7 +94,7 @@ export class InputActivityComponent implements OnInit, OnDestroy {
   onSubmit() {
     if (this.activityForm.valid) {
       this._activityService.createActivity(this.activityForm.value, this.fileUpload.attachs)
-        .then(result => {
+        .then(() => {
           // upload attachs
           for (let i = 0; i < this.fileUpload.uploads.length; i++) {
             // main task

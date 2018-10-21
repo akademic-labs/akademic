@@ -9,6 +9,7 @@ import { ChartData } from './../../models/chart-data.interface';
 import { ActivityService } from './../../services/activity.service';
 import { AuthService } from './../../services/auth.service';
 import { RolesService } from './../../services/roles.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'aka-home',
@@ -32,7 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   rankStudentsChartData: ChartData;
 
-  activitiesToAnalyze$: Observable<{}>;
+  activitiesToAnalyze$: Observable<Activity[]>;
   activitiesStudent: Activity[];
   user: User;
 
@@ -45,7 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this._auth.user$.subscribe(res => {
+    this._auth.user$.pipe(take(1)).subscribe(res => {
       this.user = res;
       if (this._rolesService.isController(this.user)) {
         this.activitiesToAnalyze$ = this._activityService.getActivitiesToApprove();
