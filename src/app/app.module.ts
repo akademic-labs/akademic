@@ -44,6 +44,7 @@ import { MessageControlErrorModule } from './shared/message-control-error/messag
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { SidebarModule } from './shared/sidebar/sidebar.module';
 import { UploadsModule } from './uploads/uploads.module';
+import { ActivityResolve } from './resolvers/activity.resolver';
 
 export const firebaseConfig = environment.firebaseConfig;
 
@@ -97,7 +98,7 @@ export const firebaseConfig = environment.firebaseConfig;
     DialogModule,
     TooltipModule
   ],
-  providers: [AuthGuard, MessageService],
+  providers: [AuthGuard, MessageService, ActivityResolve],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -88,7 +88,7 @@ export const leftJoin = (afs: AngularFirestore, field, collection, limit = 100) 
 
 // usage => .pipe(leftJoinDocument(afs, 'userId', 'users', 'user'))
 
-export const leftJoinDocument = (afs: AngularFirestore, fieldId, collection, fieldObject) => {
+export const leftJoinDocument = (afs: AngularFirestore, fieldToJoin, collection) => {
   return source =>
     defer(() => {
       // Operator state
@@ -107,7 +107,7 @@ export const leftJoinDocument = (afs: AngularFirestore, fieldId, collection, fie
           let i = 0;
           for (const doc of collectionData) {
             // Skip if doc field does not exist or is already in cache
-            if (!doc[fieldId] || cache.get(doc[fieldId])) {
+            if (!doc[fieldToJoin] || cache.get(doc[fieldToJoin])) {
               continue;
             }
 
@@ -115,10 +115,10 @@ export const leftJoinDocument = (afs: AngularFirestore, fieldId, collection, fie
             reads$.push(
               afs
                 .collection(collection)
-                .doc(doc[fieldId])
+                .doc(doc[fieldToJoin])
                 .valueChanges()
             );
-            cache.set(doc[fieldId], i);
+            cache.set(doc[fieldToJoin], i);
             i++;
           }
 
@@ -126,8 +126,8 @@ export const leftJoinDocument = (afs: AngularFirestore, fieldId, collection, fie
         }),
         map(joins => {
           return collectionData.map((v, i) => {
-            const joinIndex = cache.get(v[fieldId]);
-            return { ...v, [fieldObject]: joins[joinIndex] || null };
+            const joinIndex = cache.get(v[fieldToJoin]);
+            return { ...v, [fieldToJoin]: joins[joinIndex] || null };
           });
         }),
         tap(final =>

@@ -3,7 +3,7 @@
         <div class="card border-top">
             <div class="header">
                 <div class="title">
-                    <i class="fa fa-check-circle-o"></i>{{ title }}
+                    <i class="fa fa-check-circle-o"></i>Validação de Atividade
                 </div>
                 <hr>
             </div>
@@ -11,35 +11,35 @@
             <div class="content">
                 <form>
                     <div class="uppercase" style="color: #9A9A9A;text-align: center;font-size: 16px;">
-                        {{activity?.activityType.description}}
+                        {{activity.activityType.description}}
                     </div>
                     <div style="font-size: 50px;text-align: center;">
-                        {{activity?.hoursDuration}}
+                        {{activity.hoursDuration}}
                         <span style="font-size: 25px;text-align: center;">horas</span>
                     </div>
                     <div class="uppercase" style="color: #9A9A9A;text-align: center;">
-                        {{activity?.local}}
+                        {{activity.local}}
                     </div>
                     <hr>
                     <span class="icon-report">
-                        <i class="fa fa-clock-o"></i>{{ activity?.initialDate | date: 'dd/MM/yyyy'}} - {{
-                        activity?.finalDate
+                        <i class="fa fa-clock-o"></i>{{ activity.initialDate | date: 'dd/MM/yyyy'}} - {{
+                        activity.finalDate
                         | date: 'dd/MM/yyyy' }}
                     </span>
                     <hr>
                     <span class="icon-report">
-                        <i class="fa fa-calendar"></i>Semestre: {{ activity?.semester }} | </span>
+                        <i class="fa fa-calendar"></i>Semestre: {{ activity.semester }} | </span>
                     <span>
-                        Ano: {{ activity?.schoolYear }}
+                        Ano: {{ activity.schoolYear }}
                     </span>
                     <hr>
                     <span class="icon-report">
-                        <i class="fa fa-home"></i>{{ activity?.city.nome }} / {{ activity?.state.sigla }}
+                        <i class="fa fa-home"></i>{{ activity.city.nome }} / {{ activity.state.sigla }}
                     </span>
                     <hr>
-                    <div>Descrição: {{ activity?.description }}</div>
+                    <div>Descrição: {{ activity.description }}</div>
                     <hr>
-                    <div>Observação: {{ activity?.observation }}</div>
+                    <div>Observação: {{ activity.observation }}</div>
                     <hr>
                     <div>Anexos:</div>
                     <div class="show-attach">
@@ -65,19 +65,20 @@
                     <div class="author">
                         <div>Solicitante</div>
                         <div style="padding:20px 0px">
-                            <img src="assets/img/default-avatar.png" alt="Foto do Usuário" width="80" height="80" style="border-radius: 50%; margin-right: 10px" />
+                            <img [src]="activity.user.photoURL ? activity.user.photoURL : 'assets/img/default-avatar.png'" alt="Foto do Usuário"
+                                width="80" height="80" style="border-radius: 50%; margin-right: 10px" />
                             <h5 style="display: inline-grid;">
-                                <!-- {{activity?.user.displayName}} -->
+                                {{activity.user.displayName}}
                                 <br />
                                 <small style="text-transform: lowercase">
-                                    <!-- {{activity?.user.email}} -->
+                                    {{activity.user.email}}
                                 </small>
                             </h5>
                         </div>
                     </div>
                     <div class="clearfix">
-                        <button type="button" class="btn btn-action pull-right" (click)="toConfirm('approve')">Aprovar</button>
-                        <button type="button" class="btn btn-secondary pull-right mr-2" (click)="toConfirm('disapprove')">Reprovar</button>
+                        <button type="button" class="btn btn-action pull-right" (click)="toConfirm(true)">Aprovar</button>
+                        <button type="button" class="btn btn-secondary pull-right mr-2" (click)="toConfirm(false)">Reprovar</button>
                     </div>
                 </form>
             </div>
@@ -94,7 +95,7 @@
                 <p>{{ message.detail }}</p>
             </div>
             <div class="ui-g-6">
-                <button type="button" (click)="toAccept()" class="btn btn-action btn-block">
+                <button type="button" (click)="onApprove()" class="btn btn-action btn-block">
                     Sim
                 </button>
             </div>

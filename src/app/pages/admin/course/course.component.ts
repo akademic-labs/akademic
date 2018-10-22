@@ -40,13 +40,13 @@ export class CourseComponent implements OnInit {
     this.courseForm = this._courseFormBuilder.group({
       uid: new FormControl({ value: null, disabled: true }),
       name: [null, Validators.required],
-      institutionUid: [null, Validators.required]
+      institution: [null, Validators.required]
     });
   }
 
   save() {
     // before submit assigns only the institution uid in the course
-    this.courseForm.patchValue({ institutionUid: this.courseForm.get('institutionUid').value.uid });
+    this.courseForm.patchValue({ institution: this.courseForm.get('institution').value.uid });
     if (this.courseForm.get('uid').value) {
       this._courseService.put(this.course.uid, this.courseForm.value);
     } else {
@@ -56,8 +56,8 @@ export class CourseComponent implements OnInit {
   }
 
   edit(obj) {
-    const institutionUid = { uid: obj.institutionUid, name: obj.institution.name };
-    this.courseForm.patchValue({ uid: obj.uid, name: obj.name, institutionUid: institutionUid });
+    const institution = { uid: obj.institution, name: obj.institution.name };
+    this.courseForm.patchValue({ uid: obj.uid, name: obj.name, institution: institution });
     this.course = obj;
     this.button = 'Atualizar';
     this.focus.nativeElement.focus();

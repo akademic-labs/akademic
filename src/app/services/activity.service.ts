@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { leftJoinDocument } from 'app/utils/joinOperators';
+import { leftJoinDocument, documentJoin } from 'app/utils/joinOperators';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -28,12 +28,12 @@ export class ActivityService {
   getActivitiesToApprove(): Observable<Activity[]> {
     return this.dbService.colWithId$<Activity>('activities', ref => ref.where('status', '==', 'Pendente'))
       .pipe(
-        leftJoinDocument(this.afs, 'userUid', 'users', 'user')
+        leftJoinDocument(this.afs, 'user', 'users')
       ) as Observable<Activity[]>;
   }
 
   getActivitiesStudent(uid: string) {
-    return this.dbService.colWithId$<Activity>('activities', ref => ref.where('userUid', '==', uid));
+    return this.dbService.colWithId$<Activity>('activities', ref => ref.where('user', '==', uid));
   }
 
   getActivityDocument(uid: string): AngularFirestoreDocument<Activity> {
@@ -41,20 +41,22 @@ export class ActivityService {
   }
 
   getActivityById(uid: string): Observable<Activity> {
-    return this.afs.doc<Activity>(`activities/${uid}`).valueChanges()
+    return this.dbService.docWithId$('activities/' + uid).pipe(
+      documentJoin(this.afs, { user: 'users' })
+    ) as Observable<Activity>;
   }
 
   async createActivity(content: Activity, attach) {
-    content.attachment = attach;
+    content.attachments = attach;
     const user = await this.auth.user$.pipe(take(1)).toPromise();
-    content.userUid = user.uid;
+    content.user = user.uid;
     await this.dbService.add<Activity>('activities', content);
     this.notify.update('success', 'Atividade criada com sucesso!');
   }
 
-  async updateActivity(id: string, data: any, msg: string) {
+  async onApprove(data: Activity, msg: string) {
     try {
-      await this.getActivityDocument(id).update(data);
+      await this.getActivityDocument(data.uid).update(data);
       this.notify.update('success', `Atividade ${msg} com sucesso!`);
       this.router.navigate(['/dashboard']);
     } catch (e) {

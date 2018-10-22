@@ -1,26 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireStorage } from 'angularfire2/storage';
-import { Subscription } from 'rxjs';
 
+import { Activity } from '../../../models/activity.interface';
+import { ActivityService } from '../../../services/activity.service';
 import { MessageServicePrimeNG } from '../../../services/message.service';
-import { Activity } from 'app/models/activity.interface';
-import { ActivityService } from 'app/services/activity.service';
 
 @Component({
   selector: 'aka-validate-activity',
   templateUrl: './validate-activity.component.html',
   styleUrls: ['./validate-activity.component.css']
 })
-export class ValidateActivityComponent implements OnInit, OnDestroy {
+export class ValidateActivityComponent implements OnInit {
 
-  title = 'Validação de Atividade';
   activity: Activity;
-  uidActivity: string;
-  subscribe: Subscription;
   attachments = [];
-  lastAction;
+  isApproved: boolean;
   display: boolean;
   attachView;
 
@@ -39,47 +35,28 @@ export class ValidateActivityComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscribe = this._route.paramMap.subscribe(params => {
-      this.uidActivity = params.get('id');
-      this._activityService.getActivityById(this.uidActivity)
-        .subscribe(response => {
-          this.activity = response;
-          response.attachment.forEach(element => {
-            this._storage.ref(element.url).getDownloadURL().
-              subscribe(res => {
-                const data = { name: element.name, type: element.type, url: res };
-                this.attachments.push(data)
-              });
+    this.activity = this._route.snapshot.data['activity'];
+
+    console.log(this.activity);
+
+    if (this.activity.attachments.length) {
+      this.activity.attachments.forEach(element => {
+        this._storage.ref(element.url).getDownloadURL()
+          .subscribe(res => {
+            this.attachments.push({ name: element.name, type: element.type, url: res })
           });
-        });
-    });
-  }
-
-  ngOnDestroy() {
-    this.subscribe.unsubscribe();
-  }
-
-  toConfirm(param) {
-    this.lastAction = param;
-    let msg;
-    if (param === 'approve') {
-      msg = 'aprovação';
-    }
-    if (param === 'disapprove') {
-      msg = 'reprovação';
-    }
-    this._messageService.messageConfirm('confirmation', true, 'warn', null, `Confirma ${msg} da atividade '${this.activity.description}' ?`);
-  }
-
-  toAccept() {
-    if (this.lastAction === 'approve') {
-      this.activity.status = 'Aprovada';
-      this._activityService.updateActivity(this.uidActivity, this.activity, 'aprovada');
-    }
-    if (this.lastAction === 'disapprove') {
-      this.activity.status = 'Reprovada';
-      this._activityService.updateActivity(this.uidActivity, this.activity, 'reprovada');
+      });
     }
   }
 
+  toConfirm(isApproved: boolean) {
+    this.isApproved = isApproved;
+    this._messageService.messageConfirm('confirmation', true, 'warn', null,
+      `Confirma ${isApproved ? 'aprovação' : 'reprovação'} da atividade?`);
+  }
+
+  onApprove() {
+    this.activity.status = this.isApproved ? 'Aprovada' : 'Reprovação';
+    this._activityService.onApprove(this.activity, this.isApproved ? 'aprovada' : 'reprovada');
+  }
 }

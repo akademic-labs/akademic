@@ -23,7 +23,6 @@ export interface Activity {
   observation: string;
   validatedHours: number;
   status: string;
-  userUid: string;
   controllerId: string;
 
   // subcollection
@@ -31,10 +30,11 @@ export interface Activity {
 
   // subcollection
   // attachment: Attachment;
-  attachment: any;
+  attachments: any;
 
   // root collection
   activityType: ActivityType;
 
-  user: User;
+  // could be the uid or the object
+  user: any;
 }

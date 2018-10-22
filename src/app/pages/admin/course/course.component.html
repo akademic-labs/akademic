@@ -21,15 +21,15 @@
                             <aka-message-control-error [control]="courseForm.get('name')" error="required" msg="Descrição é obrigatório."></aka-message-control-error>
                         </div>
                         <!-- <pre>{{ courseForm.get('instituitionUid').value | toSelectId }}</pre> -->
-                        <!-- <pre>{{ courseForm.get('institutionUid').value?.uid }}</pre> -->
+                        <!-- <pre>{{ courseForm.get('institution').value?.uid }}</pre> -->
                         <div class="col-xs-12 col-md-4">
                             <div class="form-group">
                                 <label for="state">Instituição</label>
-                                <p-dropdown formControlName="institutionUid" datakey="name" placeholder="Selecione"
+                                <p-dropdown formControlName="institution" datakey="name" placeholder="Selecione"
                                     emptyFilterMessage="Nenhum resultado." [options]="institutions$ | async"
                                     optionLabel="name" [showClear]="true" filter="true"></p-dropdown>
                             </div>
-                            <aka-message-control-error [control]="courseForm.get('institutionUid')" error="required"
+                            <aka-message-control-error [control]="courseForm.get('institution')" error="required"
                                 msg="Instituição é obrigatório."></aka-message-control-error>
                         </div>
                         <div class="col-xs-12 col-md-2 label-block mb-3">

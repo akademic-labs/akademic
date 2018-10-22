@@ -27,12 +27,12 @@ export class CourseService {
   getWithInstitution(): Observable<Course[]> {
     return this.dbService.colWithId$<Course>('courses')
       .pipe(
-        leftJoinDocument(this._afs, 'institutionUid', 'institutions', 'institution')
+        leftJoinDocument(this._afs, 'institution', 'institutions')
       ) as Observable<Course[]>;
   }
 
   getCoursesInstitution(uid: string) {
-    return this.dbService.colWithId$<Course>('courses', ref => ref.where('institutionUid', '==', uid));
+    return this.dbService.colWithId$<Course>('courses', ref => ref.where('institution', '==', uid));
   }
 
   post(content: Course) {
