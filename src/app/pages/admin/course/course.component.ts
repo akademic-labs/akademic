@@ -1,11 +1,12 @@
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+
 import { Course } from '../../../models/course.interface';
+import { Institution } from '../../../models/institution.interface';
 import { CourseService } from '../../../services/course.service';
-import { Institution } from 'app/models/institution.interface';
-import { InstitutionService } from 'app/services/institution.service';
-import { MessageServicePrimeNG } from 'app/services/message.service';
+import { InstitutionService } from '../../../services/institution.service';
+import { MessageServicePrimeNG } from '../../../services/message.service';
 
 @Component({
   selector: 'aka-course',
@@ -14,11 +15,11 @@ import { MessageServicePrimeNG } from 'app/services/message.service';
 })
 export class CourseComponent implements OnInit {
 
+  @ViewChild('inputFocus') focus: ElementRef;
   courseForm: FormGroup;
   course: Course;
-  courses$: Observable<{}>;
+  courses$: Observable<Course[]>;
   institutions$: Observable<Institution[]>;
-  @ViewChild('inputFocus') focus: ElementRef;
   button = 'Adicionar';
 
   constructor(
@@ -29,7 +30,7 @@ export class CourseComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.courses$ = this._courseService.getJoinInstitution();
+    this.courses$ = this._courseService.getWithInstitution();
     this.institutions$ = this._institutionService.get();
     this.buildForm();
     this.focus.nativeElement.focus();
@@ -46,10 +47,10 @@ export class CourseComponent implements OnInit {
   save() {
     // before submit assigns only the institution uid in the course
     this.courseForm.patchValue({ institutionUid: this.courseForm.get('institutionUid').value.uid });
-    if (!this.courseForm.get('uid').value) {
-      this._courseService.post(this.courseForm.value);
-    } else {
+    if (this.courseForm.get('uid').value) {
       this._courseService.put(this.course.uid, this.courseForm.value);
+    } else {
+      this._courseService.post(this.courseForm.value);
     }
     this.renderForm();
   }

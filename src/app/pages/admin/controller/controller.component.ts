@@ -1,12 +1,13 @@
-import { UtilsService } from './../../../services/utils.service';
-import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+
 import { Controller } from '../../../models/controller.interace';
-import { Course } from './../../../models/course.interface';
-import { ControllerService } from './../../../services/controller.service';
 import { CourseService } from '../../../services/course.service';
+import { ControllerService } from './../../../services/controller.service';
 import { MessageServicePrimeNG } from './../../../services/message.service';
+import { UtilsService } from './../../../services/utils.service';
+import { Course } from 'app/models/course.interface';
 
 @Component({
   selector: 'aka-controller',
@@ -15,13 +16,12 @@ import { MessageServicePrimeNG } from './../../../services/message.service';
 })
 export class ControllerComponent implements OnInit {
 
-  title = 'Controladores';
+  @ViewChild('inputFocus') focusIn: ElementRef;
   button = 'Adicionar';
   controllerForm: FormGroup;
   controller: Controller;
   controllers$: Observable<Controller[]>;
-  courses$: Observable<{}>;
-  @ViewChild('inputFocus') focusIn: ElementRef;
+  courses$: Observable<Course[]>;
 
   colleges;
 
@@ -43,17 +43,14 @@ export class ControllerComponent implements OnInit {
     this.colleges = this.colleges.items;
   }
 
-  // tslint:disable-next-line:member-ordering
-  validatorsName = [
-    Validators.required,
-    Validators.pattern('[a-zA-ZÀ-ú ]*'),
-    Validators.maxLength(20)
-  ];
-
   buildForm() {
     this.controllerForm = this._controllerFormBuilder.group({
       uid: new FormControl({ value: null, disabled: true }),
-      name: [null, Validators.compose(this.validatorsName)],
+      name: [null, [
+        Validators.required,
+        Validators.pattern('[a-zA-ZÀ-ú ]*'),
+        Validators.maxLength(20)
+      ]],
       course: [null, Validators.required]
     });
   }

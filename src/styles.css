@@ -1725,18 +1725,6 @@ fieldset[disabled] .form-control {
     display: none !important
   }
 
-  .card form [class*="col-"] {
-    padding: 6px
-  }
-
-  .card form [class*="col-"]:first-child {
-    padding-left: 15px
-  }
-
-  .card form [class*="col-"]:last-child {
-    padding-right: 15px
-  }
-
   .navbar-cmp-fixed .navbar {
     width: calc(100% - 260px)
   }

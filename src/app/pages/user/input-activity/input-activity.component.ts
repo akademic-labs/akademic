@@ -1,19 +1,18 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AngularFireUploadTask, AngularFireStorage } from 'angularfire2/storage';
-
-import { ActivityService } from 'app/services/activity.service';
-import { ActivityTypeService } from 'app/services/activity-type.service';
-import { ValidatorService } from './../../../services/validator.service';
-import { UtilsService } from '../../../services/utils.service';
-
-import { Activity } from 'app/models/activity.interface';
-import { ActivityType } from 'app/models/activity-type.interface';
-import { States } from 'app/models/states.interface';
-import { Cities } from 'app/models/cities.interface';
+import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { UploadPageComponent } from 'app/uploads/upload-page/upload-page.component';
+import { Observable, Subscription } from 'rxjs';
+
+import { UtilsService } from '../../../services/utils.service';
+import { ActivityType } from './../../../models/activity-type.interface';
+import { Activity } from './../../../models/activity.interface';
+import { Cities } from './../../../models/cities.interface';
+import { States } from './../../../models/states.interface';
+import { ActivityTypeService } from './../../../services/activity-type.service';
+import { ActivityService } from './../../../services/activity.service';
+import { ValidatorService } from './../../../services/validator.service';
 
 @Component({
   selector: 'aka-input-activity',
@@ -21,13 +20,12 @@ import { UploadPageComponent } from 'app/uploads/upload-page/upload-page.compone
   styleUrls: ['./input-activity.component.css']
 })
 export class InputActivityComponent implements OnInit, OnDestroy {
-  @ViewChild('inputFocus') focusIn: ElementRef;
   @ViewChild(UploadPageComponent) fileUpload: UploadPageComponent;
 
   activity: Activity;
   activityForm: FormGroup;
   activityTypes$: Observable<ActivityType[]>;
-  states: States[];
+  states$: Observable<States[]>;
   cities$: Observable<Cities[]>;
   disabledSave: boolean;
   task: AngularFireUploadTask;
@@ -49,10 +47,7 @@ export class InputActivityComponent implements OnInit, OnDestroy {
 
     this.activityTypes$ = this._actTypesService.get();
 
-    this._utilsService.getStates()
-      .subscribe(res => {
-        this.states = this._utilsService.sortBy(res, 'nome', 'asc');
-      });
+    this.states$ = this._utilsService.getStates();
 
     this.subscribe = this._route.paramMap.subscribe(params => {
       if (params.get('id')) {
@@ -66,17 +61,13 @@ export class InputActivityComponent implements OnInit, OnDestroy {
 
   getCities() {
     const state = this.activityForm.get('state').value;
-    this._utilsService.getCities(state.id)
-      .subscribe(res => {
-        this.cities$ = this._utilsService.sortBy(res, 'nome', 'asc');
-      });
+    this.cities$ = this._utilsService.getCities(state.id);
   }
 
   buildForm() {
     this.activityForm = this._formBuilder.group({
       initialDate: ['', Validators.required],
       finalDate: ['', Validators.required],
-      createdAt: [new Date()],
       description: ['', Validators.required],
       hoursDuration: ['', Validators.required],
       local: ['', Validators.required],

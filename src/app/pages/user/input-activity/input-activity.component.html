@@ -97,7 +97,7 @@
                         <div class="col-sm-12 col-lg-3">
                             <div class="form-group">
                                 <label for="state">Estado</label>
-                                <p-dropdown formControlName="state" [options]="states" optionLabel="nome" (onChange)="getCities()"
+                                <p-dropdown formControlName="state" [options]="states$ | async" optionLabel="nome" (onChange)="getCities()"
                                     placeholder="Selecione" filter="true" [showClear]="true" emptyFilterMessage="Nenhum resultado."></p-dropdown>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('state')" error="required" msg="Estado é obrigatório."></aka-message-control-error>
@@ -105,7 +105,7 @@
                         <div class="col-sm-12 col-lg-3">
                             <div class="form-group">
                                 <label for="city">Cidade</label>
-                                <p-dropdown formControlName="city" [options]="cities$" optionLabel="nome" placeholder="Selecione"
+                                <p-dropdown formControlName="city" [options]="cities$ | async" optionLabel="nome" placeholder="Selecione"
                                     filter="true" [showClear]="true" emptyFilterMessage="Nenhum resultado."></p-dropdown>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('city')" error="required" msg="Cidade é obrigatório."></aka-message-control-error>

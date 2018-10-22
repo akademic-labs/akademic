@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { leftJoinDocument } from 'app/utils/joinOperators';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -10,36 +10,30 @@ import { AuthService } from './auth.service';
 import { ErrorService } from './error.service';
 import { FirestoreService } from './firestore.service';
 import { NotifyService } from './notify.service';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActivityService {
-
-  activityCollection: AngularFirestoreCollection<Activity>;
-
   constructor(
     private afs: AngularFirestore,
     private auth: AuthService,
     private router: Router,
     private notify: NotifyService,
-    private userService: UserService,
     private error: ErrorService,
-    private fsService: FirestoreService
+    private dbService: FirestoreService
   ) {
-    this.activityCollection = this.afs.collection('activities');
   }
 
   getActivitiesToApprove(): Observable<Activity[]> {
-    return this.fsService.colWithId$<Activity>('activities', ref => ref.where('status', '==', 'Pendente'))
+    return this.dbService.colWithId$<Activity>('activities', ref => ref.where('status', '==', 'Pendente'))
       .pipe(
         leftJoinDocument(this.afs, 'userUid', 'users', 'user')
       ) as Observable<Activity[]>;
   }
 
   getActivitiesStudent(uid: string) {
-    return this.fsService.colWithId$<Activity>('activities', ref => ref.where('userUid', '==', uid));
+    return this.dbService.colWithId$<Activity>('activities', ref => ref.where('userUid', '==', uid));
   }
 
   getActivityDocument(uid: string): AngularFirestoreDocument<Activity> {
@@ -54,7 +48,7 @@ export class ActivityService {
     content.attachment = attach;
     const user = await this.auth.user$.pipe(take(1)).toPromise();
     content.userUid = user.uid;
-    await this.activityCollection.add(content);
+    await this.dbService.add<Activity>('activities', content);
     this.notify.update('success', 'Atividade criada com sucesso!');
   }
 

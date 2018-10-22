@@ -1,11 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
+import { Subscription } from 'rxjs';
+
+import { MessageServicePrimeNG } from '../../../services/message.service';
 import { Activity } from 'app/models/activity.interface';
 import { ActivityService } from 'app/services/activity.service';
-import { MessageServicePrimeNG } from '../../../services/message.service';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'aka-validate-activity',

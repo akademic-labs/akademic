@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { States } from '../models/states.interface';
 import { Cities } from '../models/cities.interface';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,23 @@ export class UtilsService {
   ) { }
 
   getStates() {
-    return this._http.get<States[]>(
-      'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
+    const url = 'assets/json/states.json';
+    return this._http.get<States[]>(url).pipe(
+      map(states => this.sortBy(states, 'nome', 'asc'))
     );
   }
 
   getCities(idState) {
     return this._http.get<Cities[]>(
       `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idState}/municipios`
+    ).pipe(
+      map(cities => {
+        const newCities = cities.map(({ id, nome }) => {
+          const city = { id, nome };
+          return city;
+        });
+        return this.sortBy(newCities, 'nome', 'asc') as Cities[];
+      })
     );
   }
 

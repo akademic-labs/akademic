@@ -32,7 +32,7 @@ export class InstitutionComponent implements OnInit {
   buildForm() {
     this.institutionForm = this._institutionFormBuilder.group({
       uid: new FormControl({ value: null, disabled: true }),
-      name: [null, Validators.compose([Validators.required])]
+      name: [null, Validators.required]
     });
   }
 

@@ -3,7 +3,7 @@
     <div class="card">
       <div class="header">
         <div class="title">
-          <i class="fa fa-users"></i>{{ title }}
+          <i class="fa fa-users"></i>Controlador
         </div>
         <hr>
       </div>
@@ -19,7 +19,6 @@
       <pre>
           {{ colleges | async | json }}
       </pre>
-      <!-- <iframe src="http://buscafaculdade.com/plugins/vestibular.php" scrolling="yes" frameborder="0" style=" width: 300px; height:400px"> </iframe>  -->
       <div class="content">
         <form [formGroup]="controllerForm" (ngSubmit)="save()">
           <div class="row">
