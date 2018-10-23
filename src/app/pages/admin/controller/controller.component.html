@@ -84,20 +84,4 @@
 
 <p-toast position="top-right"></p-toast>
 
-<p-toast position="center" key="remove" (onClose)="_messageService.close()" [modal]="true" [baseZIndex]="9999">
-  <ng-template let-message pTemplate="message">
-    <div style="text-align: center">
-      <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
-      <h3>{{message.summary}}</h3>
-      <p>{{message.detail}}</p>
-    </div>
-    <div class="ui-g ui-fluid">
-      <div class="ui-g-6">
-        <button type="button" pButton (click)="remove()" label="Sim" class="ui-button-success"></button>
-      </div>
-      <div class="ui-g-6">
-        <button type="button" pButton (click)="_messageService.close()" label="Não" class="ui-button-secondary"></button>
-      </div>
-    </div>
-  </ng-template>
-</p-toast>
+<aka-confirmation key="remove" (onAccept)="remove()"></aka-confirmation>

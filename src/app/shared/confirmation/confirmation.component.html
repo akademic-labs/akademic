@@ -1,0 +1,21 @@
+<p-toast position="center" [key]="key" (onClose)="toClear()" [modal]="true">
+  <ng-template let-message pTemplate="message">
+      <div class="ui-g ui-fluid">
+          <div class="center mt-3">
+              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+              <h3 class="mt-3">{{ message.summary }}</h3>
+              <p>{{ message.detail }}</p>
+          </div>
+          <div class="ui-g-6">
+              <button type="button" (click)="toAccept()" class="btn btn-action btn-block">
+                  {{labelApprove}}
+              </button>
+          </div>
+          <div class="ui-g-6">
+              <button type="button" (click)="toDeny()" class="btn btn-secondary btn-block">
+                  {{labelDeny}}
+              </button>
+          </div>
+      </div>
+  </ng-template>
+</p-toast>

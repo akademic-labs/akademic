@@ -99,24 +99,4 @@
     </div>
 </div>
 
-<p-toast position="center" key="confirmation" (onClose)="_messageService.close()" [modal]="true">
-    <ng-template let-message pTemplate="message">
-        <div class="ui-g ui-fluid">
-            <div class="center mt-3">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                <h3 class="mt-3">{{ message.summary }}</h3>
-                <p>{{ message.detail }}</p>
-            </div>
-            <div class="ui-g-6">
-                <button type="button" (click)="remove()" class="btn btn-action btn-block">
-                    Sim
-                </button>
-            </div>
-            <div class="ui-g-6">
-                <button type="button" (click)="_messageService.close()" class="btn btn-secondary btn-block">
-                    Não
-                </button>
-            </div>
-        </div>
-    </ng-template>
-</p-toast>
+<aka-confirmation key="confirmation" (onAccept)="remove()"></aka-confirmation>

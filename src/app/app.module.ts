@@ -36,15 +36,16 @@ import { HomeComponent } from './pages/home/home.component';
 import { SignModule } from './pages/sign/sign.module';
 import { InputActivityComponent } from './pages/user/input-activity/input-activity.component';
 import { ToSelectIdPipe } from './pipes/to-select-id.pipe';
+import { ActivityResolve } from './resolvers/activity.resolver';
 import { ChartCardModule } from './shared/chart-card/chart-card.module';
 import { Error404Component } from './shared/error404/error404.component';
 import { FooterModule } from './shared/footer/footer.module';
 import { FormDebugComponent } from './shared/form-debug/form-debug.component';
 import { MessageControlErrorModule } from './shared/message-control-error/message-control-error.module';
 import { NavbarModule } from './shared/navbar/navbar.module';
+import { SharedModule } from './shared/shared.module';
 import { SidebarModule } from './shared/sidebar/sidebar.module';
 import { UploadsModule } from './uploads/uploads.module';
-import { ActivityResolve } from './resolvers/activity.resolver';
 
 export const firebaseConfig = environment.firebaseConfig;
 
@@ -62,7 +63,7 @@ export const firebaseConfig = environment.firebaseConfig;
     InstitutionComponent,
     Error404Component,
     FormDebugComponent,
-    ToSelectIdPipe
+    ToSelectIdPipe,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +78,7 @@ export const firebaseConfig = environment.firebaseConfig;
     AppRoutingModule,
     ChartCardModule,
     SignModule,
+    SharedModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,

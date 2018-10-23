@@ -37,8 +37,6 @@ export class ValidateActivityComponent implements OnInit {
   ngOnInit() {
     this.activity = this._route.snapshot.data['activity'];
 
-    console.log(this.activity);
-
     if (this.activity.attachments.length) {
       this.activity.attachments.forEach(element => {
         this._storage.ref(element.url).getDownloadURL()
@@ -55,7 +53,7 @@ export class ValidateActivityComponent implements OnInit {
       `Confirma ${isApproved ? 'aprovação' : 'reprovação'} da atividade?`);
   }
 
-  onApprove() {
+  onAccept() {
     this.activity.status = this.isApproved ? 'Aprovada' : 'Reprovação';
     this._activityService.onApprove(this.activity, this.isApproved ? 'aprovada' : 'reprovada');
   }
