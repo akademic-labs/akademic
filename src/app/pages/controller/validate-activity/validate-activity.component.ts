@@ -19,6 +19,7 @@ export class ValidateActivityComponent implements OnInit {
   isApproved: boolean;
   display: boolean;
   attachView;
+  loading = true;
 
   constructor(
     private _route: ActivatedRoute,
@@ -28,23 +29,22 @@ export class ValidateActivityComponent implements OnInit {
     public sanitizer: DomSanitizer
   ) { }
 
-  showDialog(attach) {
-    console.log(attach);
-    this.display = true;
-    this.attachView = attach;
-  }
-
   ngOnInit() {
     this.activity = this._route.snapshot.data['activity'];
 
-    if (this.activity.attachments.length) {
+    if (this.activity.attachments !== undefined) {
       this.activity.attachments.forEach(element => {
         this._storage.ref(element.url).getDownloadURL()
           .subscribe(res => {
-            this.attachments.push({ name: element.name, type: element.type, url: res })
+            this.attachments.push({ name: element.name, type: element.type, url: res }),
+              this.loading = false;
           });
       });
-    }
+    } else { this.loading = false; }
+  }
+
+  showAttach(attach) {
+    this.attachView = attach;
   }
 
   toConfirm(isApproved: boolean) {

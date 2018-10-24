@@ -43,7 +43,11 @@
                     <hr>
                     <div>Anexos:</div>
                     <div class="show-attach">
-                        <div *ngFor="let attach of attachments; index as i" class=" card card-attach">
+                        <h5 *ngIf="!activity.attachments" style="display: inline-grid;">Nenhum anexo
+                            encontrado.</h5>
+                        <img *ngIf="loading" class="loader-attachs" src="assets/img/loader-attachs.gif">
+                        <div *ngFor="let attach of attachments; index as i" class=" card card-attach" (click)="showAttach(attach)"
+                            data-toggle="modal" data-target="#myModal">
                             <div *ngIf="attach.type !== 'application/pdf'; else pdf">
                                 <img class="img-attach" [src]="attach.url" />
                             </div>
@@ -55,8 +59,10 @@
                                 <!-- access file size to make inner join storage -->
                                 <!-- <label>({{ attachImg[i].file.size | fileSize }})</label> -->
                                 <div>
-                                    <a (click)="showDialog(attach)" [download]="attach.name" target="_blank" type="button"
-                                        class="btn-attach" rel="tooltip" title="Download"><i class="fa fa-download"></i></a>
+                                    <!-- <a (click)="showAttach(attach)" [download]="attach.name" target="_blank" type="button"
+                                        class="btn-attach" rel="tooltip" title="Download"><i class="fa fa-download"></i></a> -->
+                                    <a (click)="showAttach(attach)" data-toggle="modal" data-target="#myModal" type="button"
+                                        class="btn-attach" pTooltip="Abrir Anexo" tooltipPosition="bottom"><i class="fa fa-download"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -65,8 +71,8 @@
                     <div class="author">
                         <div>Solicitante</div>
                         <div style="padding:20px 0px">
-                            <img [src]="activity.user.photoURL ? activity.user.photoURL : 'assets/img/default-avatar.png'" alt="Foto do Usuário"
-                                width="80" height="80" style="border-radius: 50%; margin-right: 10px" />
+                            <img [src]="activity.user.photoURL ? activity.user.photoURL : 'assets/img/default-avatar.png'"
+                                alt="Foto do Usuário" width="80" height="80" style="border-radius: 50%; margin-right: 10px" />
                             <h5 style="display: inline-grid;">
                                 {{activity.user.displayName}}
                                 <br />
@@ -88,13 +94,14 @@
 
 <aka-confirmation key="confirmation" (onAccept)="onAccept()"></aka-confirmation>
 
-<p-dialog [header]="attachView?.name" [(visible)]="display" [modal]="true" [responsive]="true" [maximizable]="true"
-    [baseZIndex]="10000" styleClass="center">
-    <div *ngIf="attachView?.type !== 'application/pdf'; else pdf" style="width: 100%; height: 100%;">
-        <img class="img-dialog" [src]="attachView?.url" />
-        <!-- <button class="btn-download-attach" type="button" label="Download"><i class="fa fa-download mt-4"></i></button> -->
-    </div>
-    <ng-template #pdf>
-        <iframe class="pdf-dialog" [src]="sanitizer.bypassSecurityTrustResourceUrl(attachView?.url)"></iframe>
-    </ng-template>
-</p-dialog>
+<div class="modal fade" id="myModal" role="dialog">
+    <h5 style="text-align: center;
+    color: #ffff;
+    margin-top: 20px;">{{ attachView?.name }}</h5>
+    <a class="btn-download-modal" pTooltip="Efetuar Download" tooltipPosition="bottom">
+        <i class="icon-close-modal fa fa-cloud-download"></i></a>
+    <a class="btn-close-modal" data-dismiss="modal" pTooltip="Fechar Anexo" tooltipPosition="bottom">
+        <i class="icon-close-modal fa fa-close" style="    -webkit-text-stroke: 3px #808080;"></i></a>
+    <img *ngIf="attachView?.type !== 'application/pdf'" class="img-dialog" [src]="attachView?.url" />
+    <iframe *ngIf="attachView?.type === 'application/pdf'" class="pdf-dialog" [src]="attachView?.url | safe: 'resourceUrl'"></iframe>
+</div>

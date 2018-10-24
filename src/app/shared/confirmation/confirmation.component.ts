@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { MessageService } from 'primeng/components/common/messageservice';
 
 @Component({
@@ -6,26 +6,15 @@ import { MessageService } from 'primeng/components/common/messageservice';
   templateUrl: './confirmation.component.html'
 })
 export class ConfirmationComponent implements OnInit {
+
   @Input() labelApprove = 'Sim';
   @Input() labelDeny = 'Não';
   @Input() key: string;
+  @Output() onAccept: EventEmitter<any> = new EventEmitter();
 
-  onAccept = new EventEmitter();
-  onDeny = new EventEmitter();
+  constructor(public _messageService: MessageService) { }
 
-  constructor(private _messageService: MessageService) { }
-
-  ngOnInit() {
-  }
-
-  toDeny() {
-    this.toClear();
-    this.onDeny.next();
-  }
-
-  toClear() {
-    this._messageService.clear(this.key);
-  }
+  ngOnInit() { }
 
   toAccept() {
     this.onAccept.next();

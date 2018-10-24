@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { SafePipe } from '../pipes/safe.pipe';
+import { ToastModule } from 'primeng/toast';
 
 import { ConfirmationComponent } from './confirmation/confirmation.component';
-import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   imports: [
@@ -10,11 +11,13 @@ import { ToastModule } from 'primeng/toast';
     ToastModule
   ],
   declarations: [
-    ConfirmationComponent
+    ConfirmationComponent,
+    SafePipe
   ],
   exports: [
     ConfirmationComponent,
-    ToastModule
+    ToastModule,
+    SafePipe
   ]
 })
 export class SharedModule { }

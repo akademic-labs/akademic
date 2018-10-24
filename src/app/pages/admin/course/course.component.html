@@ -7,8 +7,9 @@
                 </div>
                 <hr>
             </div>
-            <!-- <pre>{{ courseForm.value | json }}</pre> -->
-            <!-- <pre>{{ courses$ | async | json }}</pre> -->
+            <pre>{{ courseForm.value | json }}</pre>
+            <pre>{{ courses$ | async | json }}</pre>
+            <pre>{{ course | json }}</pre>
             <!-- <pre>{{ institutions$ | async | json }}</pre> -->
             <div class="content">
                 <form [formGroup]="courseForm" (ngSubmit)="save()">
@@ -29,8 +30,7 @@
                                     emptyFilterMessage="Nenhum resultado." [options]="institutions$ | async"
                                     optionLabel="name" [showClear]="true" filter="true"></p-dropdown>
                             </div>
-                            <aka-message-control-error [control]="courseForm.get('institution')" error="required"
-                                msg="Instituição é obrigatório."></aka-message-control-error>
+                            <aka-message-control-error [control]="courseForm.get('institution')" error="required" msg="Instituição é obrigatório."></aka-message-control-error>
                         </div>
                         <div class="col-xs-12 col-md-2 label-block mb-3">
                             <label></label>
