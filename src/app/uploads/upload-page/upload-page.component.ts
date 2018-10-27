@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { AngularFireUploadTask } from 'angularfire2/storage';
 import { Attachment } from 'app/models/attachment.interface';
 import { NotifyService } from 'app/services/notify.service';
-import { MessageServicePrimeNG } from '../../services/message.service';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @Component({
   selector: 'aka-upload-page',
@@ -29,7 +29,7 @@ export class UploadPageComponent {
 
   constructor(
     private _notify: NotifyService,
-    public _messageService: MessageServicePrimeNG
+    public _messageService: MessageService
   ) { }
 
   startUpload(event: FileList) {
@@ -63,7 +63,10 @@ export class UploadPageComponent {
 
   confirm(file, index: number) {
     this.indexRemove = index;
-    this._messageService.messageConfirm('confirmation', true, 'warn', null, `Deseja realmente descartar o anexo '${file.name}' ?`);
+    this._messageService.add({
+      key: 'confirmation', sticky: true, severity: 'warn', summary: 'Tem certeza?',
+      detail: `Deseja realmente descartar o anexo '${file.name}'?`
+    });
   }
 
   renderAttach(uploads) {
@@ -81,7 +84,7 @@ export class UploadPageComponent {
     this.uploads.splice(this.indexRemove, 1);
     this.attachs.splice(this.indexRemove, 1);
     this.attachShow.splice(this.indexRemove, 1);
-    this._messageService.close();
+    this._messageService.clear();
   }
 
   toggleHover(event: boolean) {

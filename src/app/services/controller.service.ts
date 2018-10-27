@@ -5,8 +5,8 @@ import { map } from 'rxjs/operators';
 
 import { Controller } from '../models/controller.interace';
 import { ErrorService } from './error.service';
-import { MessageServicePrimeNG } from './message.service';
 import { NotifyService } from './notify.service';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class ControllerService {
   ControllerCollection: AngularFirestoreCollection<Controller>;
 
   constructor(private _afs: AngularFirestore, private _notify: NotifyService,
-  private _message: MessageServicePrimeNG, private _error: ErrorService) {
+    private _message: MessageService, private _error: ErrorService) {
     this.ControllerCollection = _afs.collection('controllers');
   }
 
@@ -30,20 +30,20 @@ export class ControllerService {
 
   post(content: Controller) {
     this._afs.collection('controllers').add(content)
-      .then (() => this._message.messageGrowl('success', 'Confirmação', `Controlador '${content.name}' adicionado com sucesso!`))
+      .then(() => this._message.add({ severity: 'success', summary: `Controlador '${content.name}' adicionado com sucesso!` }))
       .catch (e => this.handleError(e));
   }
 
   put(uid: string, content: Controller) {
     this._afs.collection('controllers').doc(uid).set(content)
-      .then (() => this._notify.update('success', 'Controlador atualizado com sucesso!'))
-      .catch (e => this.handleError(e));
+      .then(() => this._notify.update('success', 'Controlador atualizado com sucesso!'))
+      .catch(e => this.handleError(e));
   }
 
   delete(uid: string) {
     this._afs.collection('controllers').doc(uid).delete()
-      .then (() => this._notify.update('success', 'Controlador removido com sucesso!'))
-      .catch (e => this.handleError(e));
+      .then(() => this._notify.update('success', 'Controlador removido com sucesso!'))
+      .catch(e => this.handleError(e));
   }
 
   private handleError(error) {

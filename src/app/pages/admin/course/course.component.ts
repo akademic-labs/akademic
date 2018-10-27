@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/components/common/messageservice';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -6,7 +7,6 @@ import { Course } from '../../../models/course.interface';
 import { Institution } from '../../../models/institution.interface';
 import { CourseService } from '../../../services/course.service';
 import { InstitutionService } from '../../../services/institution.service';
-import { MessageServicePrimeNG } from '../../../services/message.service';
 
 @Component({
   selector: 'aka-course',
@@ -26,7 +26,7 @@ export class CourseComponent implements OnInit {
     private _courseFormBuilder: FormBuilder,
     private _courseService: CourseService,
     private _institutionService: InstitutionService,
-    public _messageService: MessageServicePrimeNG,
+    public _messageService: MessageService,
   ) { }
 
   ngOnInit() {
@@ -66,7 +66,7 @@ export class CourseComponent implements OnInit {
   remove() {
     this._courseService.delete(this.course.uid);
     this.renderForm();
-    this._messageService.close();
+    this._messageService.clear();
   }
 
   renderForm() {
@@ -77,7 +77,10 @@ export class CourseComponent implements OnInit {
 
   confirm(obj) {
     this.course = obj;
-    this._messageService.messageConfirm('confirmation', true, 'warn', null, `Deseja realmente excluir '${obj.name}' ?`);
+    this._messageService.add({
+      key: 'confirmationKey', sticky: true, severity: 'warn', summary: 'Tem certeza?',
+      detail: `Deseja realmente excluir '${obj.name}'?`
+    });
   }
 
 }

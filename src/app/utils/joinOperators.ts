@@ -86,7 +86,7 @@ export const leftJoin = (afs: AngularFirestore, field, collection, limit = 100) 
     });
 };
 
-// usage => .pipe(leftJoinDocument(afs, 'userId', 'users', 'user'))
+// usage => .pipe(leftJoinDocument(afs, 'user', 'users'))
 
 export const leftJoinDocument = (afs: AngularFirestore, fieldToJoin, collection) => {
   return source =>

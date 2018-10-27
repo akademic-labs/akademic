@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'app/services/auth.service';
-import { RolesService } from 'app/services/roles.service';
+import { take } from 'rxjs/operators';
+
+import { AuthService } from '../../services/auth.service';
+import { RolesService } from '../../services/roles.service';
 
 declare interface RouteInfo {
     path: string;
@@ -29,10 +31,10 @@ export class SidebarComponent implements OnInit {
 
     constructor(public _auth: AuthService, private _roles: RolesService) { }
 
-    ngOnInit() {
-        this._auth.user$.subscribe(user => {
-            this.menuItems = ROUTES.filter(menuItem => this._roles.checkAuthorization(user, menuItem.roles));
-        });
+    async ngOnInit() {
+        const user = await this._auth.user$.pipe(take(1)).toPromise();
+
+        this.menuItems = ROUTES.filter(menuItem => this._roles.checkAuthorization(user, menuItem.roles));
     }
 
     sidebarClose() {
