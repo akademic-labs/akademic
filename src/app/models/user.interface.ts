@@ -28,8 +28,8 @@ export interface User {
   phoneNumber?: string;
   providerId?: string;
   roles: Roles;
-  courseUid?: string;
+  course?: string;
   address?: Address;
   about?: string;
-  instituitionUid?: string;
+  instituition?: string;
 }

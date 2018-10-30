@@ -32,7 +32,7 @@ export class ValidateActivityComponent implements OnInit {
   ngOnInit() {
     this.activity = this._route.snapshot.data['activity'];
 
-    if (this.activity.attachments !== undefined) {
+    if (this.activity.attachments) {
       this.activity.attachments.forEach(element => {
         this._storage.ref(element.url).getDownloadURL()
           .subscribe(res => {

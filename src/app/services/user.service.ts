@@ -37,7 +37,6 @@ export class UserService {
   }
 
   public createUserData(user: User) {
-    // sets user data to firestore
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
     userRef.set(user, { merge: true });
 

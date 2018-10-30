@@ -31,7 +31,7 @@ export class CourseComponent implements OnInit {
 
   ngOnInit() {
     this.courses$ = this._courseService.getWithInstitution();
-    this.institutions$ = this._institutionService.get();
+    this.institutions$ = this._institutionService.getInstitutionByUF('PR');
     this.buildForm();
     this.focus.nativeElement.focus();
   }

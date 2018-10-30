@@ -41,19 +41,18 @@ export class UserComponent implements OnInit {
     this.user$.subscribe(user => {
       this.form.patchValue(user);
     });
-    this.instituitions$ = this._institutionService.get();
     this.buildForm();
   }
 
   onSubmit() {
-    const courseUid = this.form.get('courseUid').value;
     if (this.form.valid) {
       // before submit assigns only the course uid in the user
-      this.form.patchValue({ courseUid: this.form.get('courseUid').value.uid });
+      if (this.form.get('course').value) {
+        this.form.patchValue({ course: this.form.get('course').value.uid });
+      }
       this._userService.updateUser(this.form.get('uid').value, this.form.value)
         .then(_ => {
           this._notify.update('success', 'Perfil atualizado!');
-          this.form.patchValue({ courseUid: courseUid });
         });
     } else {
       this._validatorService.markAllFieldsAsDirty(this.form);
@@ -68,7 +67,8 @@ export class UserComponent implements OnInit {
     this.form.patchValue({ address: { zipCode: cep } });
   }
 
-  getCourses(instituition) {
+  getCourses(instituition: Institution) {
+    this.form.patchValue({ instituition: instituition.uid });
     this._courseService.getCoursesInstitution(instituition.uid)
       .subscribe(res => {
         this.courses$ = res;
@@ -78,22 +78,19 @@ export class UserComponent implements OnInit {
   searchCep() {
     this.clearAddressForm();
     const cep = this.form.get('address.zipCode').value;
-    if (cep !== undefined && cep !== '') {
-      this._cepService.consultaCEP(cep)
-        .subscribe(
-          dados => {
-            if (dados.erro) {
-              this._notify.update('warning', `Cep não encontrado.`);
-            } else {
-              this.setAddressForm(dados)
-            }
-          },
-          error => {
-            this._notify.update('danger', 'Houve um erro na requisição! ==> ' + error);
-          }
-        );
+    if (cep) {
+      this._cepService.consultaCEP(cep).subscribe(dados => {
+        if (dados.erro) {
+          this._notify.update('warning', 'CEP não encontrado.');
+        } else {
+          this.setAddressForm(dados);
+          this.instituitions$ = this._institutionService.getInstitutionByUF(dados.uf);
+        }
+      }, error => {
+        this._notify.update('danger', `Houve um erro na requisição! ==> ${error}`);
+      });
     } else {
-      this._notify.update('warning', `Cep inválido.`);
+      this._notify.update('warning', 'CEP inválido.');
     }
   }
 
@@ -123,10 +120,6 @@ export class UserComponent implements OnInit {
     })
   };
 
-  onSelectInstituition(value: Institution) {
-    this.form.patchValue({ instituitionUid: value.uid });
-  }
-
   buildForm() {
     this.form = this._fb.group({
       uid: [null],
@@ -149,8 +142,8 @@ export class UserComponent implements OnInit {
         state: [null],
         country: [null]
       }),
-      // instituitionUid: [null, Validators.required],
-      courseUid: [null, Validators.required],
+      instituition: [null],
+      course: [null],
       about: ['']
     });
   }

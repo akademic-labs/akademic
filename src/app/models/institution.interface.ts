@@ -1,4 +1,16 @@
 export interface Institution {
-    uid: string;
-    name: string;
+    uid: string
+    codMantenedora: number;
+    razaoSocial: string;
+    cnpj: string;
+    naturezaJuridica: string;
+    codigoIES: number;
+    instituicao: string;
+    sigla: string;
+    endereco: string;
+    municipio: string;
+    uf: string;
+    organizacaoAcademica: string;
+    tipoCredenciamento: string;
+    categoria: string;
 }
