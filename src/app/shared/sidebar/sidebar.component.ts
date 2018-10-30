@@ -31,10 +31,10 @@ export class SidebarComponent implements OnInit {
 
     constructor(public _auth: AuthService, private _roles: RolesService) { }
 
-    async ngOnInit() {
-        const user = await this._auth.user$.pipe(take(1)).toPromise();
-
-        this.menuItems = ROUTES.filter(menuItem => this._roles.checkAuthorization(user, menuItem.roles));
+    ngOnInit() {
+        this._auth.user$.subscribe(user => {
+            this.menuItems = ROUTES.filter(menuItem => this._roles.checkAuthorization(user, menuItem.roles));
+        });
     }
 
     sidebarClose() {

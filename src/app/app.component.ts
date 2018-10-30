@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
   constructor(public _auth: AuthService) { }
 
-  async ngOnInit() {
-    this.user = await this._auth.user$.pipe(take(1)).toPromise();
+  ngOnInit() {
+    this._auth.user$.subscribe(user => this.user = user);
   }
 }
