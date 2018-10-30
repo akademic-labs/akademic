@@ -31,5 +31,4 @@ export interface User {
   course?: string;
   address?: Address;
   about?: string;
-  instituition?: string;
 }

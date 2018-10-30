@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { User } from 'app/models/user.interface';
-import { AuthService } from 'app/services/auth.service';
-import { UserService } from 'app/services/user.service';
+
+import { Institution } from '../../models/institution.interface';
+import { User } from '../../models/user.interface';
+import { AuthService } from '../../services/auth.service';
+import { InstitutionService } from '../../services/institution.service';
 import { NotifyService } from '../../services/notify.service';
-import { InstitutionService } from 'app/services/institution.service';
-import { Institution } from 'app/models/institution.interface';
-import { ValidatorService } from './../../services/validator.service';
-import { CourseService } from './../../services/course.service';
+import { UserService } from '../../services/user.service';
 import { CepService } from './../../services/cep.service';
+import { CourseService } from './../../services/course.service';
+import { ValidatorService } from './../../services/validator.service';
 
 @Component({
   selector: 'aka-user',
@@ -68,7 +69,6 @@ export class UserComponent implements OnInit {
   }
 
   getCourses(instituition: Institution) {
-    this.form.patchValue({ instituition: instituition.uid });
     this._courseService.getCoursesInstitution(instituition.uid)
       .subscribe(res => {
         this.courses$ = res;
@@ -142,7 +142,6 @@ export class UserComponent implements OnInit {
         state: [null],
         country: [null]
       }),
-      instituition: [null],
       course: [null],
       about: ['']
     });

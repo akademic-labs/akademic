@@ -1,5 +1,7 @@
+import { Institution } from './institution.interface';
+
 export interface Course {
     uid: string;
     name: string;
-    institution: any;
+    institution: Institution;
 }

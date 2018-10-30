@@ -26,11 +26,11 @@ export class CourseComponent implements OnInit {
     private _courseFormBuilder: FormBuilder,
     private _courseService: CourseService,
     private _institutionService: InstitutionService,
-    public _messageService: MessageService,
+    public _messageService: MessageService
   ) { }
 
   ngOnInit() {
-    this.courses$ = this._courseService.getWithInstitution();
+    this.courses$ = this._courseService.get();
     this.institutions$ = this._institutionService.getInstitutionByUF('PR');
     this.buildForm();
     this.focus.nativeElement.focus();
@@ -45,8 +45,6 @@ export class CourseComponent implements OnInit {
   }
 
   save() {
-    // before submit assigns only the institution uid in the course
-    this.courseForm.patchValue({ institution: this.courseForm.get('institution').value.uid });
     if (this.courseForm.get('uid').value) {
       this._courseService.put(this.course.uid, this.courseForm.value);
     } else {
@@ -56,8 +54,6 @@ export class CourseComponent implements OnInit {
   }
 
   edit(obj) {
-    const institution = { uid: obj.institution, name: obj.institution.name };
-    this.courseForm.patchValue({ uid: obj.uid, name: obj.name, institution: institution });
     this.course = obj;
     this.button = 'Atualizar';
     this.focus.nativeElement.focus();
