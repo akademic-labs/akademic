@@ -7,7 +7,6 @@
                 </div>
                 <hr>
             </div>
-            <!-- <pre>{{ activity | json }}</pre> -->
             <div class="content">
                 <form>
                     <div class="uppercase" style="color: #9A9A9A;text-align: center;font-size: 16px;">
@@ -43,26 +42,26 @@
                     <hr>
                     <div>Anexos:</div>
                     <div class="show-attach">
-                        <h5 *ngIf="!activity.attachments" style="display: inline-grid;">Nenhum anexo
-                            encontrado.</h5>
                         <img *ngIf="loading" class="loader-attachs" src="assets/img/loader-attachs.gif">
-                        <div *ngFor="let attach of attachments; index as i" class=" card card-attach" (click)="showAttach(attach)"
-                            data-toggle="modal" data-target="#myModal">
-                            <div *ngIf="attach.type !== 'application/pdf'; else pdf">
-                                <img class="img-attach" [src]="attach.url" />
+                        <div *ngIf="!activity.attachments.length" style="margin: -5px 0px 35px 0px;">
+                            Nenhum arquivo anexado.
+                        </div>
+                        <div *ngFor="let attach of attachments;" class=" card card-attach" (click)="showAttach(attach)"
+                            pTooltip="Clique para abrir anexo" tooltipPosition="bottom" data-toggle="modal" data-target="#attachModal">
+                            <div [ngSwitch]="attach.type">
+                                <img *ngSwitchCase="'application/pdf'" class="pdf-attach" src="assets/img/pdf.png" />
+                                <img *ngSwitchCase="'video/mp4'" class="img-attach" src="assets/img/video.png" />
+                                <img *ngSwitchDefault class="img-attach" [src]="attach.url" />
                             </div>
-                            <ng-template #pdf>
-                                <img class="pdf-attach" src="assets/img/pdf.png" />
-                            </ng-template>
-                            <div>
+                            <div style="margin-top: 25px;">
                                 <label class="label-attach">{{ attach.name }}</label>
                                 <!-- access file size to make inner join storage -->
                                 <!-- <label>({{ attachImg[i].file.size | fileSize }})</label> -->
                                 <div>
                                     <!-- <a (click)="showAttach(attach)" [download]="attach.name" target="_blank" type="button"
                                         class="btn-attach" rel="tooltip" title="Download"><i class="fa fa-download"></i></a> -->
-                                    <a (click)="showAttach(attach)" data-toggle="modal" data-target="#myModal" type="button"
-                                        class="btn-attach" pTooltip="Abrir Anexo" tooltipPosition="bottom"><i class="fa fa-download"></i></a>
+                                    <!-- <a (click)="showAttach(attach)" data-toggle="modal" data-target="#attachModal" type="button"
+                                        class="btn-attach" pTooltip="Abrir Anexo" tooltipPosition="bottom"><i class="fa fa-download"></i></a> -->
                                 </div>
                             </div>
                         </div>
@@ -94,14 +93,17 @@
 
 <aka-confirmation key="confirmation" (onAccept)="onAccept()"></aka-confirmation>
 
-<div class="modal fade" id="myModal" role="dialog">
-    <h5 style="text-align: center;
-    color: #ffff;
-    margin-top: 20px;">{{ attachView?.name }}</h5>
-    <a class="btn-download-modal" pTooltip="Efetuar Download" tooltipPosition="bottom">
-        <i class="icon-close-modal fa fa-cloud-download"></i></a>
+<div class="modal fade" id="attachModal" role="dialog" [ngSwitch]="attachView?.type">
+    <h5 class="title-dialog">{{ attachView?.name }}</h5>
+    <!-- <a class="btn-download-modal" pTooltip="Efetuar Download" tooltipPosition="bottom" [href]="attachView?.url">
+        <i class="icon-close-modal fa fa-cloud-download"></i></a> -->
     <a class="btn-close-modal" data-dismiss="modal" pTooltip="Fechar Anexo" tooltipPosition="bottom">
         <i class="icon-close-modal fa fa-close" style="    -webkit-text-stroke: 3px #808080;"></i></a>
-    <img *ngIf="attachView?.type !== 'application/pdf'" class="img-dialog" [src]="attachView?.url" />
-    <iframe *ngIf="attachView?.type === 'application/pdf'" class="pdf-dialog" [src]="attachView?.url | safe: 'resourceUrl'"></iframe>
+
+    <iframe *ngSwitchCase="'application/pdf'" class="pdf-dialog" [src]="attachView?.url | safe: 'resourceUrl'"></iframe>
+    <iframe *ngSwitchCase="'video/mp4'" class="pdf-dialog" [src]="attachView?.url | safe: 'resourceUrl'"></iframe>
+    <!-- <video *ngSwitchCase="'video/mp4'" class="pdf-dialog" controls>
+        <source [src]="attachView?.url | safe: 'resourceUrl'" type="video/mp4">
+    </video> -->
+    <img *ngSwitchDefault class="img-attach" class="img-dialog" [src]="attachView?.url" />
 </div>

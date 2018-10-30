@@ -64,6 +64,7 @@ progress::-webkit-progress-value {
     top: 0;
     width: .01em;
 }
+
 .progress-custom {
     height: 10px;
     margin-bottom: 0px;

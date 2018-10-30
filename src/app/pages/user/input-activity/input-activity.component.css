@@ -1,71 +1,57 @@
-.dropzone {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font-weight: 200;
-    border: 2px dashed #b224ef;
-    border-radius: 5px;
-    background: white;
-    margin: 10px 0;
-}
-
-.dropzone:hover {
-    border: 2px solid #b224ef;
-}
-
-progress::-webkit-progress-value {
-    transition: width 0.1s ease;
-}
-
-.file-cta {
-    background-color: #f5f5f5;
-    color: #4a4a4a;
-    -webkit-appearance: none;
-    align-items: center;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    box-shadow: none;
-    display: inline-flex;
-    font-size: 1rem;
-    height: 2.25em;
-    justify-content: flex-start;
-    line-height: 1.5;
-    padding-bottom: calc(.375em - 1px);
-    padding-left: calc(.625em - 1px);
-    padding-right: calc(.625em - 1px);
-    padding-top: calc(.375em - 1px);
-    position: relative;
-    vertical-align: top;
-}
-
-.file {
-    align-items: stretch;
-    display: flex;
-    justify-content: flex-start;
+input[type="date"] {
     position: relative;
 }
 
-.file-cta,
-.file-name {
-    border-color: #dbdbdb;
-    border-radius: 4px;
-    font-size: 1em;
-    padding-left: 1em;
-    padding-right: 1em;
-    white-space: nowrap;
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: transparent;
+    background: none;
+    z-index: 1;
 }
 
-.file-input {
-    height: .01em;
-    left: 0;
-    outline: 0;
+input[type="date"]:before {
     position: absolute;
-    top: 0;
-    width: .01em;
+    font-family: 'FontAwesome';
+    content: '\f073';
+    right: 15px;
+    color: #555;
 }
+
 .progress-custom {
     height: 10px;
     margin-bottom: 0px;
     width: 100%;
+}
+
+progress {
+    border: none;
+    background: crimson;
+    color: lightblue;
+    border-radius: 16px;
+    transition: width 0.1s ease;
+}
+
+progress::-webkit-progress-value {
+    background: var(--akademic-color);
+}
+
+progress::-webkit-progress-bar {
+    background: lightblue;
+}
+
+progress::-webkit-progress-bar {
+    border: 0;
+    height: 10px;
+    border-radius: 16px;
+}
+
+progress::-webkit-progress-value {
+    border: 0;
+    height: 10px;
+    border-radius: 16px;
+}
+
+progress::-moz-progress-bar {
+    border: 0;
+    height: 10px;
+    border-radius: 16px;
 }

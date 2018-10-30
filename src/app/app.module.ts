@@ -11,7 +11,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { UserComponent } from 'app/pages/user/user.component';
-import { CalendarModule } from 'primeng/calendar';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
@@ -91,7 +90,6 @@ export const firebaseConfig = environment.firebaseConfig;
 
     // PrimeNG
     DropdownModule,
-    CalendarModule,
     ToastModule,
     TableModule,
     GalleriaModule,

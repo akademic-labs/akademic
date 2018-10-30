@@ -74,11 +74,11 @@
                                 </td>
                                 <td>
                                     <span class="ui-column-title">Tipo:</span>
-                                    {{ activity.activityType.description }}
+                                    {{ activity.activityType?.description }}
                                 </td>
                                 <td>
                                     <span class="ui-column-title">Cadastro:</span>
-                                    {{ activity.createdAt.toDate() | date: 'dd/MM/yyyy' }}
+                                    {{ activity.createdAt?.toDate() | date:'dd/MM/yyyy HH:mm' }}
                                 </td>
                                 <td>
                                     <span class="ui-column-title">Duração:</span>
@@ -111,7 +111,7 @@
                     <hr>
                 </div>
                 <div class="content">
-                    <p-table [value]="activitiesStudent" selectionMode="single" #dt [globalFilterFields]="['description','hoursDuration','activityType.description', 'status']"
+                    <p-table [value]="activitiesStudent" selectionMode="single" #dt [globalFilterFields]="['description','hoursDuration','activityType.description', 'status','createdAt']"
                         [paginator]="true" [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]"
                         [resizableColumns]="true" [reorderableColumns]="true">
                         <ng-template pTemplate="caption">
@@ -134,6 +134,10 @@
                                     Tipo
                                     <p-sortIcon></p-sortIcon>
                                 </th>
+                                <th [pSortableColumn]="'activity.createdAt'" pResizableColumn pReorderableColumn>
+                                    Cadastro
+                                    <p-sortIcon></p-sortIcon>
+                                </th>
                                 <th [pSortableColumn]="'status'" pResizableColumn pReorderableColumn>Status
                                     <p-sortIcon></p-sortIcon>
                                 </th>
@@ -152,7 +156,11 @@
                                 </td>
                                 <td>
                                     <span class="ui-column-title">Tipo:</span>
-                                    {{activity.activityType.description}}
+                                    {{activity.activityType?.description}}
+                                </td>
+                                <td>
+                                    <span class="ui-column-title">Cadastro:</span>
+                                    {{ activity.createdAt?.toDate() | date:'dd/MM/yyyy HH:mm' }}
                                 </td>
                                 <td>
                                     <span class="ui-column-title">Status:</span>

@@ -1,7 +1,7 @@
 <p-toast position="center" [key]="key" (onClose)="_messageService.clear(key)" [modal]="true">
     <ng-template let-message pTemplate="message">
         <div class="ui-g ui-fluid">
-            <div class="center mt-3">
+            <div class="text-center mt-3">
                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                 <h3 class="mt-3">{{ message.summary }}</h3>
                 <p>{{ message.detail }}</p>

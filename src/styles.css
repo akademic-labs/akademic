@@ -1,5 +1,17 @@
 /* akademic custom css */
 
+:root {
+  /* COLORS PATTERNS - VALIDATIONS COMPONENTS */
+  --color-valid: #28a745;
+  --color-invalid: #dc3545;
+  /* COLOR BORDER - VALIDATION */
+  --border-valid: 1px solid var(--color-valid);
+  --border-invalid: 1px solid var(--color-invalid);
+  --color-label: #848484;
+  --akademic-color: #9c27b0;
+  --akademic-gradient: linear-gradient(60deg, #b224ef, #7579ff);
+}
+
 /* margins top */
 .mt-1,
 .mx-1 {
@@ -264,7 +276,7 @@ h1 .subtitle {
 }
 
 .text-primary {
-  color: #9c27b0 !important;
+  color: var(--akademic-color) !important;
   position: relative;
 }
 
@@ -275,7 +287,7 @@ h1 .subtitle {
   height: 1px;
   bottom: 0;
   left: 0;
-  background-color: #9c27b0;
+  background-color: var(--akademic-color);
   visibility: hidden;
   -webkit-transform: scaleX(0);
   transform: scaleX(0);
@@ -373,7 +385,8 @@ input:focus {
 .wrapper {
   position: relative;
   top: 0;
-  height: 100vh
+  height: 100vh;
+  /* z-index: 300; */
 }
 
 .sidebar {
@@ -395,7 +408,7 @@ input:focus {
   max-height: calc(100vh - 75px);
   min-height: 100%;
   overflow: auto;
-  width: 260px;
+  width: 264px;
   z-index: 4;
   padding-bottom: 75px
 }
@@ -688,7 +701,7 @@ input:focus {
 
 .btn-secondary.active {
   color: #fff;
-  background: linear-gradient(60deg, #b224ef, #7579ff);
+  background: var(--akademic-gradient);
   outline: none;
   box-shadow: inset 0px 0px 5px #c1c1c1;
 }
@@ -739,7 +752,8 @@ input:focus {
   padding: 8px 12px;
   height: 35px;
   -webkit-box-shadow: none;
-  box-shadow: none
+  box-shadow: none;
+  text-overflow: ellipsis;
 }
 
 .form-control:focus {
@@ -2366,33 +2380,19 @@ fieldset[disabled] .form-control {
   }
 }
 
-
-/* CHANGES, BY: LUIZ */
-
-/* VALIDATIONS */
-:root {
-  /* COLORS PATTERNS - VALIDATIONS COMPONENTS */
-  --color-valid: #28a745;
-  --color-invalid: #dc3545;
-  /* COLOR BORDER - VALIDATION */
-  --border-valid: 1px solid var(--color-valid);
-  --border-invalid: 1px solid var(--color-invalid);
-  --color-label: #848484;
-}
-
-/* BORDER VALID */
+/* Border Valid */
 .form-control.ng-valid.ng-touched,
 .form-control.ng-valid.ng-pristine {
   border: var(--border-valid);
 }
 
-/* BORDER INVALID */
+/* Border Invalid */
 .form-control.ng-invalid.ng-touched,
 .form-control.ng-invalid.ng-dirty {
   border: var(--border-invalid);
 }
 
-/* FOCUSED - BORDER VALID */
+/* Focused - Border Valid */
 .form-control:focus {
   border: var(--border-valid);
   box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.25);
@@ -2400,7 +2400,7 @@ fieldset[disabled] .form-control {
   -moz-box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.25);
 }
 
-/* FOCUSED - BORDER INVALID */
+/* Focused - Border Invalid */
 .form-control.ng-invalid.ng-touched:focus {
   border: var(--border-invalid);
   box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
@@ -2498,21 +2498,17 @@ fieldset[disabled] .form-control {
 }
 
 .img-attach {
-  background: none;
   height: 80px;
-  border-radius: 5px;
   width: 65px;
   margin: 8px;
-  transition: 5s all ease;
+  border-radius: 5px;
   box-shadow: 0 10px 40px 0 rgba(62, 55, 107, 0), 0 2px 9px 0 rgba(62, 57, 107, 1);
 }
 
 .pdf-attach {
-  background: none;
   height: 90px;
-  border-radius: 5px;
   width: 75px;
-  margin: 3px 5px 2px 3px;
+  margin: 3px 0px 3px 3px;
 }
 
 .label-attach {
@@ -2549,6 +2545,7 @@ fieldset[disabled] .form-control {
   position: relative;
   top: 0%;
   height: 88%;
+  max-width: 88%;
   border: none;
   display: block;
   margin: auto;
@@ -2556,14 +2553,21 @@ fieldset[disabled] .form-control {
 
 .pdf-dialog {
   position: absolute;
-  top: 5%;
+  top: 10%;
   left: 10%;
   height: 85%;
   width: 80%;
   border: none;
 }
 
-.btn-close-modal:hover, .btn-download-attach:hover {
+.title-dialog {
+  text-align: center;
+  color: #ffff;
+  margin-top: 20px;
+}
+
+.btn-close-modal:hover,
+.btn-download-attach:hover {
   /* transition: transform 167ms;
   transition-timing-function: cubic-bezier(0, 0, .2, 1);
   display: block;
@@ -2606,10 +2610,14 @@ fieldset[disabled] .form-control {
   transition: all 0.5s ease-in-out;
 }
 
-.center {
-  text-align: center;
+.right {
+  float: right;
 }
 
-.right {
-  float: right !important;
+.filter-blur {
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
 }
