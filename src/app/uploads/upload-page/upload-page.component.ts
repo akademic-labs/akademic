@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { Attachment } from 'app/models/attachment.interface';
 import { NotifyService } from 'app/services/notify.service';
+import { MessageService } from 'primeng/components/common/messageservice';
 import { Observable, Subscription } from 'rxjs';
 
-import { MessageServicePrimeNG } from '../../services/message.service';
 import { ActivityService } from './../../services/activity.service';
 
 @Component({
@@ -37,7 +37,7 @@ export class UploadPageComponent implements OnInit {
 
   constructor(
     private _notify: NotifyService,
-    public _messageService: MessageServicePrimeNG,
+    public _messageService: MessageService,
     private _route: ActivatedRoute,
     private _storage: AngularFireStorage,
     private _activityService: ActivityService
@@ -95,7 +95,10 @@ export class UploadPageComponent implements OnInit {
 
   confirm(attach, index: number) {
     this.indexRemove = index;
-    this._messageService.messageConfirm('confirmation', true, 'warn', null, `Deseja realmente descartar o anexo '${attach.name}' ?`);
+    this._messageService.add({
+      key: 'confirmation', sticky: true, severity: 'warn', summary: 'Tem certeza?',
+      detail: `Deseja realmente descartar o anexo '${attach.name}'?`
+    });
   }
 
   renderAttach(uploads) {
@@ -129,7 +132,7 @@ export class UploadPageComponent implements OnInit {
     this.uploads.splice(this.indexRemove, 1);
     this.attachments.splice(this.indexRemove, 1);
     this.attachShow.splice(this.indexRemove, 1);
-    this._messageService.close();
+    this._messageService.clear();
   }
 
   toggleHover(event: boolean) {

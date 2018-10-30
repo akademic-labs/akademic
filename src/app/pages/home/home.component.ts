@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { Activity } from '../../models/activity.interface';
 import { User } from '../../models/user.interface';
@@ -9,7 +10,6 @@ import { ChartData } from './../../models/chart-data.interface';
 import { ActivityService } from './../../services/activity.service';
 import { AuthService } from './../../services/auth.service';
 import { RolesService } from './../../services/roles.service';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'aka-home',

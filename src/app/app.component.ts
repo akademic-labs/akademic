@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { take } from 'rxjs/operators';
+
+import { User } from './models/user.interface';
 import { AuthService } from './services/auth.service';
-import { User } from 'app/models/user.interface';
 
 @Component({
   selector: 'aka-root',
@@ -12,7 +14,7 @@ export class AppComponent implements OnInit {
 
   constructor(public _auth: AuthService) { }
 
-  ngOnInit() {
-    this._auth.user$.subscribe(user => this.user = user);
+  async ngOnInit() {
+    this.user = await this._auth.user$.pipe(take(1)).toPromise();
   }
 }

@@ -1,10 +1,10 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireStorage } from 'angularfire2/storage';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 import { Activity } from '../../../models/activity.interface';
 import { ActivityService } from '../../../services/activity.service';
-import { MessageServicePrimeNG } from '../../../services/message.service';
 
 @Component({
   selector: 'aka-validate-activity',
@@ -24,13 +24,13 @@ export class ValidateActivityComponent implements OnInit {
     private _route: ActivatedRoute,
     private _activityService: ActivityService,
     private _storage: AngularFireStorage,
-    public _messageService: MessageServicePrimeNG
+    public _messageService: MessageService
   ) { }
 
   ngOnInit() {
     this.activity = this._route.snapshot.data['activity'];
 
-    if (this.activity.attachments.length) {
+    if (this.activity.attachments) {
       this.activity.attachments.forEach(element => {
         this._storage.ref(element.url).getDownloadURL()
           .subscribe(res => {
@@ -54,8 +54,10 @@ export class ValidateActivityComponent implements OnInit {
 
   toConfirm(isApproved: boolean) {
     this.isApproved = isApproved;
-    this._messageService.messageConfirm('confirmation', true, 'warn', null,
-      `Confirma ${isApproved ? 'aprovação' : 'reprovação'} da atividade?`);
+    this._messageService.add({
+      key: 'confKey', severity: 'warn', summary: 'Tem certeza?',
+      detail: `Confirma ${isApproved ? 'aprovação' : 'reprovação'} da atividade?`
+    });
   }
 
   onAccept() {

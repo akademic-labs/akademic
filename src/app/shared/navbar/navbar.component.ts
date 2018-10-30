@@ -1,8 +1,8 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Location } from '@angular/common';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { AuthService } from 'app/services/auth.service';
 
 import { ROUTES } from '../sidebar/sidebar.component';
-import { AuthService } from 'app/services/auth.service';
 
 @Component({
     selector: 'aka-navbar',

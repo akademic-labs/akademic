@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/components/common/messageservice';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -6,7 +7,6 @@ import { Course } from '../../../models/course.interface';
 import { Institution } from '../../../models/institution.interface';
 import { CourseService } from '../../../services/course.service';
 import { InstitutionService } from '../../../services/institution.service';
-import { MessageServicePrimeNG } from '../../../services/message.service';
 
 @Component({
   selector: 'aka-course',
@@ -26,12 +26,12 @@ export class CourseComponent implements OnInit {
     private _courseFormBuilder: FormBuilder,
     private _courseService: CourseService,
     private _institutionService: InstitutionService,
-    public _messageService: MessageServicePrimeNG,
+    public _messageService: MessageService
   ) { }
 
   ngOnInit() {
-    this.courses$ = this._courseService.getWithInstitution();
-    this.institutions$ = this._institutionService.get();
+    this.courses$ = this._courseService.get();
+    this.institutions$ = this._institutionService.getInstitutionByUF('PR');
     this.buildForm();
     this.focus.nativeElement.focus();
   }
@@ -45,8 +45,6 @@ export class CourseComponent implements OnInit {
   }
 
   save() {
-    // before submit assigns only the institution uid in the course
-    this.courseForm.patchValue({ institution: this.courseForm.get('institution').value.uid });
     if (this.courseForm.get('uid').value) {
       this._courseService.put(this.course.uid, this.courseForm.value);
     } else {
@@ -56,8 +54,6 @@ export class CourseComponent implements OnInit {
   }
 
   edit(obj) {
-    const institution = { uid: obj.institution, name: obj.institution.name };
-    this.courseForm.patchValue({ uid: obj.uid, name: obj.name, institution: institution });
     this.course = obj;
     this.button = 'Atualizar';
     this.focus.nativeElement.focus();
@@ -66,7 +62,7 @@ export class CourseComponent implements OnInit {
   remove() {
     this._courseService.delete(this.course.uid);
     this.renderForm();
-    this._messageService.close();
+    this._messageService.clear();
   }
 
   renderForm() {
@@ -77,7 +73,10 @@ export class CourseComponent implements OnInit {
 
   confirm(obj) {
     this.course = obj;
-    this._messageService.messageConfirm('confirmation', true, 'warn', null, `Deseja realmente excluir '${obj.name}' ?`);
+    this._messageService.add({
+      key: 'confirmationKey', sticky: true, severity: 'warn', summary: 'Tem certeza?',
+      detail: `Deseja realmente excluir '${obj.name}'?`
+    });
   }
 
 }

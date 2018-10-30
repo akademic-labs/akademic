@@ -1,13 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Course } from 'app/models/course.interface';
+import { MessageService } from 'primeng/components/common/messageservice';
 import { Observable } from 'rxjs';
 
 import { Controller } from '../../../models/controller.interace';
 import { CourseService } from '../../../services/course.service';
 import { ControllerService } from './../../../services/controller.service';
-import { MessageServicePrimeNG } from './../../../services/message.service';
 import { UtilsService } from './../../../services/utils.service';
-import { Course } from 'app/models/course.interface';
 
 @Component({
   selector: 'aka-controller',
@@ -29,7 +29,7 @@ export class ControllerComponent implements OnInit {
     private _controllerFormBuilder: FormBuilder,
     private _controllerService: ControllerService,
     private _courseService: CourseService,
-    public _messageService: MessageServicePrimeNG,
+    public _messageService: MessageService,
     private _utilsService: UtilsService
   ) { }
 
@@ -83,7 +83,7 @@ export class ControllerComponent implements OnInit {
     this.controllerForm.reset();
     this.button = 'Adicionar';
     this.focusIn.nativeElement.focus();
-    this._messageService.close();
+    this._messageService.clear();
   }
 
   compareCourse(obj1, obj2) {
@@ -92,7 +92,10 @@ export class ControllerComponent implements OnInit {
 
   confirmRemove(obj) {
     this.controller = obj;
-    this._messageService.messageConfirm('remove', true, 'warn', '', `Deseja realmente excluir '${obj.name}' ?`);
+    this._messageService.add({
+      key: 'removeKey', sticky: true, severity: 'warn', summary: 'Tem certeza?',
+      detail: `Deseja realmente excluir '${obj.name}'?`
+    });
   }
 
 }

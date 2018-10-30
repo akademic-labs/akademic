@@ -6,24 +6,24 @@ import { map } from 'rxjs/operators';
 import { Institution } from '../models/institution.interface';
 import { ErrorService } from './error.service';
 import { NotifyService } from './notify.service';
+import { HttpClient } from '@angular/common/http';
+import { FirestoreService } from './firestore.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InstitutionService {
 
-  institutionCollection: AngularFirestoreCollection<Institution>;
-
-  constructor(private _afs: AngularFirestore, private _notify: NotifyService, private _error: ErrorService) {
-    this.institutionCollection = _afs.collection('institutions');
+  constructor(private _afs: AngularFirestore, private _notify: NotifyService,
+     private _error: ErrorService, private _http: HttpClient, private dbService: FirestoreService) {
   }
 
   get(): Observable<Institution[]> {
-    return this.institutionCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(action => ({ uid: action.payload.doc.id, ...action.payload.doc.data() }));
-      })
-    );
+    return this.dbService.colWithId$<Institution>('institutions');
+  }
+
+  getInstitutionByUF(uf: string) {
+    return this.dbService.colWithId$<Institution>('institutions', ref => ref.where('uf', '==', uf));
   }
 
   post(content: Institution) {

@@ -26,9 +26,9 @@
                         <div class="col-xs-12 col-md-4">
                             <div class="form-group">
                                 <label for="state">Instituição</label>
-                                <p-dropdown formControlName="institution" datakey="name" placeholder="Selecione"
+                                <p-dropdown formControlName="institution" datakey="instituicao" placeholder="Selecione"
                                     emptyFilterMessage="Nenhum resultado." [options]="institutions$ | async"
-                                    optionLabel="name" [showClear]="true" filter="true"></p-dropdown>
+                                    optionLabel="instituicao" [showClear]="true" filter="true"></p-dropdown>
                             </div>
                             <aka-message-control-error [control]="courseForm.get('institution')" error="required" msg="Instituição é obrigatório."></aka-message-control-error>
                         </div>
@@ -70,7 +70,7 @@
                             </td>
                             <td>
                                 <span class="ui-column-title">Instituição:</span>
-                                {{course.institution?.name}}
+                                {{course.institution.instituicao}}
                             </td>
                             <td class="td-actions">
                                 <span class="ui-column-title">Ações:</span>
@@ -99,4 +99,4 @@
     </div>
 </div>
 
-<aka-confirmation key="confirmation" (onAccept)="remove()"></aka-confirmation>
+<aka-confirmation key="confirmationKey" (onAccept)="remove()"></aka-confirmation>
