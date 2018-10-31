@@ -31,24 +31,6 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  isStudent() {
-    this.signUpForm.patchValue({
-      roles: {
-        student: true,
-        controller: false
-      }
-    });
-  }
-
-  isController() {
-    this.signUpForm.patchValue({
-      roles: {
-        student: false,
-        controller: true
-      }
-    });
-  }
-
   buildForm() {
     this.signUpForm = this.fb.group({
       email: ['', [
@@ -64,8 +46,7 @@ export class SignUpComponent implements OnInit {
       ]],
       confirmPassword: ['', Validators.required],
       roles: this.fb.group({
-        student: [null, Validators.required],
-        controller: [null, Validators.required]
+        student: [true]
       })
     }, {
         validator: this.matchPassword // validation method for password

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { take } from 'rxjs/operators';
 
 import { AuthService } from '../../services/auth.service';
 import { RolesService } from '../../services/roles.service';
@@ -13,8 +12,8 @@ declare interface RouteInfo {
 
 export const ROUTES: RouteInfo[] = [
     { path: 'dashboard', title: 'Dashboard', icon: 'fa fa-pie-chart', roles: ['student', 'controller', 'administrator'] },
-    { path: 'user', title: 'Meu perfil', icon: 'fa fa-user-circle-o', roles: ['student', 'controller', 'administrator'] },
-    { path: 'input-activity', title: 'Entrada de Atividade', icon: 'fa fa-paperclip', roles: ['student', 'administrator'] },
+    { path: 'user', title: 'Meu perfil', icon: 'fa fa-user-circle-o', roles: ['student', 'controller'] },
+    { path: 'input-activity', title: 'Entrada de Atividade', icon: 'fa fa-paperclip', roles: ['student'] },
     { path: 'institution', title: 'Instituições', icon: 'fa fa-university nav-icon', roles: ['administrator'] },
     { path: 'controller', title: 'Controladores', icon: 'fa fa-users nav-icon', roles: ['administrator'] },
     { path: 'course', title: 'Cursos', icon: 'fa fa-graduation-cap nav-icon', roles: ['administrator'] },

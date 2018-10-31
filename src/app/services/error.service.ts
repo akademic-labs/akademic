@@ -23,7 +23,8 @@ export class ErrorService {
     'popup-closed-by-user': 'Você não finalizou o acesso',
     'internal-error': 'Erro interno no servidor',
     'unauthorized-domain': 'Sua rede está bloqueando a solicitação',
-    'cancelled-popup-request': 'Você cancelou a solicitação'
+    'cancelled-popup-request': 'Você cancelou a solicitação',
+    'auth/email-already-in-use': 'Esse endereço de e-mail já está em uso'
     /* Add here the others IDs and the corresponding messages */
   } as MessagesIndex;
 

@@ -51,7 +51,7 @@ export class AuthService {
       .then(credential => {
         user.uid = credential.user.uid;
         this._userService.createUserData(user);
-      });
+      }).catch(error => this._notify.update('danger', this._error.printErrorByCode(error.code)));
   }
 
   // OAuth Methods

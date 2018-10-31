@@ -1,13 +1,13 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Course } from 'app/models/course.interface';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { Institution } from '../models/institution.interface';
 import { ErrorService } from './error.service';
-import { NotifyService } from './notify.service';
-import { HttpClient } from '@angular/common/http';
 import { FirestoreService } from './firestore.service';
+import { NotifyService } from './notify.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,10 @@ export class InstitutionService {
 
   getInstitutionByUF(uf: string) {
     return this.dbService.colWithId$<Institution>('institutions', ref => ref.where('uf', '==', uf));
+  }
+
+  getInstitutionCourses(institutionUid: string) {
+    return this.dbService.col$<Course>(`institutions/${institutionUid}/courses`);
   }
 
   post(content: Institution) {

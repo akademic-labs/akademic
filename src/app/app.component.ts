@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { take } from 'rxjs/operators';
 
 import { User } from './models/user.interface';
 import { AuthService } from './services/auth.service';

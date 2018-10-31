@@ -31,7 +31,6 @@ export class UserComponent implements OnInit {
     private _userService: UserService,
     private _notify: NotifyService,
     private _institutionService: InstitutionService,
-    private _courseService: CourseService,
     private _validatorService: ValidatorService,
     private _cepService: CepService
   ) {
@@ -69,7 +68,7 @@ export class UserComponent implements OnInit {
   }
 
   getCourses(instituition: Institution) {
-    this._courseService.getCoursesInstitution(instituition.uid)
+    this._institutionService.getInstitutionCourses(instituition.uid)
       .subscribe(res => {
         this.courses$ = res;
       });
@@ -142,6 +141,7 @@ export class UserComponent implements OnInit {
         state: [null],
         country: [null]
       }),
+      institution: [null],
       course: [null],
       about: ['']
     });

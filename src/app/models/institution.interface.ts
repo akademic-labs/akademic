@@ -1,3 +1,5 @@
+import { Course } from './course.interface';
+
 export interface Institution {
     uid: string
     codMantenedora: number;
@@ -13,4 +15,5 @@ export interface Institution {
     organizacaoAcademica: string;
     tipoCredenciamento: string;
     categoria: string;
+    courses: Course[];
 }

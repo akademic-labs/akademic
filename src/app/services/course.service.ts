@@ -24,17 +24,6 @@ export class CourseService {
     return this.dbService.colWithId$<Course>('courses');
   }
 
-  getWithInstitution(): Observable<Course[]> {
-    return this.dbService.colWithId$<Course>('courses')
-      .pipe(
-        leftJoinDocument(this._afs, 'institution', 'institutions')
-      ) as Observable<Course[]>;
-  }
-
-  getCoursesInstitution(uid: string) {
-    return this.dbService.colWithId$<Course>('courses', ref => ref.where('institution', '==', uid));
-  }
-
   post(content: Course) {
     this._afs.collection('courses').add(content)
       .then(() => this._notify.update('success', 'Curso adicionado com sucesso!'))

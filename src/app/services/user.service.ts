@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestoreDocument, AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-
-import { User } from 'app/models/user.interface';
-
+import { Router } from '@angular/router';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
+
+import { User } from '../models/user.interface';
+import { FirestoreService } from './firestore.service';
 import { NotifyService } from './notify.service';
 
 @Injectable({
@@ -13,7 +13,8 @@ import { NotifyService } from './notify.service';
 })
 export class UserService {
 
-  constructor(private afs: AngularFirestore, private _router: Router, private _notify: NotifyService) {
+  constructor(private afs: AngularFirestore, private _router: Router,
+     private _notify: NotifyService, private dbService: FirestoreService) {
   }
 
   getAllUsers(): Observable<User[]> {
