@@ -1,25 +1,26 @@
-/* VALIDATIONS */
-/* BORDER VALID */
-.ui-inputtext.ng-touched:valid,
-p-dropdown.ng-dirty.ng-touched.ng-valid .ui-dropdown,
-p-spinner.ng-touched.ng-valid .ui-spinner-input {
+/* Border Valid */
+body .ui-inputtext.ng-touched:valid,
+body p-dropdown.ng-dirty.ng-touched.ng-valid .ui-dropdown,
+body p-spinner.ng-touched.ng-valid .ui-spinner-input {
     border: var(--border-valid);
 }
 
-/* BORDER INVALID */
-.ui-inputtext.ng-touched.ng-invalid,
-z .ui-inputtext.ng-dirty.ng-invalid,
-p-dropdown.ng-touched.ng-invalid .ui-dropdown,
-p-dropdown.ng-dirty.ng-invalid .ui-dropdown,
-p-spinner.ng-touched.ng-invalid .ui-spinner-input,
-p-spinner.ng-dirty.ng-invalid .ui-spinner-input {
+
+/* Border Invalid */
+body .ui-inputtext.ng-touched.ng-invalid,
+body .ui-inputtext.ng-dirty.ng-invalid,
+body p-dropdown.ng-touched.ng-invalid .ui-dropdown,
+body p-dropdown.ng-dirty.ng-invalid .ui-dropdown,
+body p-spinner.ng-touched.ng-invalid .ui-spinner-input,
+body p-spinner.ng-dirty.ng-invalid .ui-spinner-input {
     border: var(--border-invalid);
 }
 
-/* FOCUSED - BORDER VALID */
-.ui-inputtext:focus,
-.ui-dropdown:not(.ui-state-disabled).ui-state-focus,
-p-spinner .ui-spinner-input:enabled:focus:not(.ui-state-error) {
+
+/* Focused - Border Valid */
+body .ui-inputtext:focus,
+body .ui-dropdown:not(.ui-state-disabled).ui-state-focus,
+body p-spinner .ui-spinner-input:enabled:focus:not(.ui-state-error) {
     outline: 0;
     border: var(--border-valid);
     -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.25);
@@ -27,15 +28,16 @@ p-spinner .ui-spinner-input:enabled:focus:not(.ui-state-error) {
     box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.25);
 }
 
-/* FOCUSED - BORDER INVALID */
-.ui-inputtext.ng-touched.ng-invalid:focus,
-.ui-inputtext.ng-dirty.ng-invalid:hover,
-.ui-inputtext.ng-dirty.ng-invalid:active,
-p-dropdown.ng-touched.ng-invalid .ui-dropdown:not(.ui-state-disabled).ui-state-focus,
-p-dropdown.ng-touched.ng-dirty .ui-dropdown:not(.ui-state-disabled).ui-state-hover,
-p-dropdown.ng-touched.ng-dirty .ui-dropdown:not(.ui-state-disabled).ui-state-active,
-p-spinner.ng-touched.ng-invalid .ui-spinner-input:enabled:focus:not(.ui-state-error),
-p-spinner.ng-dirty.ng-invalid .ui-spinner-input:enabled:focus:not(.ui-state-error) {
+
+/* Focused - Border Invalid */
+body .ui-inputtext.ng-touched.ng-invalid:focus,
+body .ui-inputtext.ng-dirty.ng-invalid:hover,
+body .ui-inputtext.ng-dirty.ng-invalid:active,
+body p-dropdown.ng-touched.ng-invalid .ui-dropdown:not(.ui-state-disabled).ui-state-focus,
+body p-dropdown.ng-touched.ng-dirty .ui-dropdown:not(.ui-state-disabled).ui-state-hover,
+body p-dropdown.ng-touched.ng-dirty .ui-dropdown:not(.ui-state-disabled).ui-state-active,
+body p-spinner.ng-touched.ng-invalid .ui-spinner-input:enabled:focus:not(.ui-state-error),
+body p-spinner.ng-dirty.ng-invalid .ui-spinner-input:enabled:focus:not(.ui-state-error) {
     outline: 0;
     border: var(--border-invalid);
     -webkit-box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
@@ -43,37 +45,30 @@ p-spinner.ng-dirty.ng-invalid .ui-spinner-input:enabled:focus:not(.ui-state-erro
     box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
 }
 
-/* ICON VALID */
-p-dropdown.ng-touched.ng-valid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
-p-dropdown.ng-dirty.ng-valid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
-p-dropdown.ng-touched.ng-valid .ui-dropdown .ui-dropdown-clear-icon,
-p-dropdown.ng-dirty.ng-valid .ui-dropdown .ui-dropdown-clear-icon,
-p-spinner.ng-touched.ng-valid .ui-spinner-button.ui-button,
-p-spinner.ng-dirty.ng-valid .ui-spinner-button.ui-button {
+
+/* Icon Valid */
+body p-dropdown.ng-touched.ng-valid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
+body p-dropdown.ng-dirty.ng-valid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
+body p-dropdown.ng-touched.ng-valid .ui-dropdown .ui-dropdown-clear-icon,
+body p-dropdown.ng-dirty.ng-valid .ui-dropdown .ui-dropdown-clear-icon,
+body p-spinner.ng-touched.ng-valid .ui-spinner-button.ui-button,
+body p-spinner.ng-dirty.ng-valid .ui-spinner-button.ui-button {
     color: var(--color-valid);
 }
 
-/* ICON INVALID */
-p-dropdown.ng-touched.ng-invalid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
-p-dropdown.ng-dirty.ng-invalid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
-p-spinner.ng-touched.ng-invalid .ui-spinner-button.ui-button,
-p-spinner.ng-dirty.ng-invalid .ui-spinner-button.ui-button {
+
+/* Icon Invalid */
+body p-dropdown.ng-touched.ng-invalid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
+body p-dropdown.ng-dirty.ng-invalid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
+body p-spinner.ng-touched.ng-invalid .ui-spinner-button.ui-button,
+body p-spinner.ng-dirty.ng-invalid .ui-spinner-button.ui-button {
     color: var(--color-invalid);
 }
 
-/* OTHERS */
 
-.ui-calendar {
-    width: 100%;
-}
-
-.ui-datepicker-month,
-.ui-datepicker-year {
-    border-radius: 3px;
-}
-
-body form .ui-inputtext,
-body form .ui-dropdown {
+/* Dropdown */
+body form .ui-dropdown,
+body form .ui-inputtext {
     width: 100% !important;
     border: 1px solid #e3e3e3;
     color: var(--color-label);
@@ -83,91 +78,15 @@ body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item {
     color: var(--color-label);
 }
 
-.ui-dropdown .ui-dropdown-label {
+body .ui-dropdown .ui-dropdown-label {
     text-transform: capitalize;
     height: 29px;
     text-indent: 5px;
 }
 
-.ui-table .ui-table-tbody>tr {
-    border: solid 1px #c8c8c8;
-}
-
-.ui-paginator .ui-dropdown .ui-dropdown-trigger,
-body .ui-paginator .ui-dropdown .ui-dropdown-label {
-    margin-top: 0px;
-}
-
-p-lightbox img {
-    width: 200px;
-    height: 300px;
-    margin-right: 20px;
-}
-
-.ui-lightbox .ui-lightbox-caption {
-    width: 200px;
-}
-
-p-lightbox span {
-    width: 150px;
-    word-wrap: break-word;
-}
-
-iframe {
-    margin-top: 20px;
-}
-
-.ui-fileupload .ui-fileupload-buttonbar {
-    background-color: white;
-    border: none;
-}
-
-body .ui-button {
-    margin: 0;
-    color: #ffffff;
-    background-color: #23CCEF;
-    border: 1px solid #23CCEF;
-    font-size: 14px;
-    transition: background-color 0.2s;
-}
-
-body .ui-fileupload .ui-fileupload-buttonbar {
-    background-color: white;
-    padding: 0.571em 1em;
-    border: none;
-    color: #333333;
-    border-bottom: 0 none;
-    text-align: center;
-}
-
-body .ui-fileupload .ui-fileupload-content {
-    background-color: #ffffff;
-    padding: 0.571em 1em;
-    border: 1px solid #c8c8c8;
-    color: #333333;
-    margin-bottom: 7px;
-}
-
-.ui-fileupload-row>div {
-    display: inline-block;
-}
-
-body .ui-toast .ui-toast-message.ui-toast-message-warn {
-    background-color: white;
-    border-radius: 4px;
-}
-
-p-toast i {
-    font-size: 3em !important;
-}
-
-p-toast p {
-    word-wrap: break-word;
-    width: 250px;
-}
-
-body .ui-toast .ui-toast-message {
-    max-width: 280px;
+body .ui-dropdown .ui-dropdown-label {
+    padding-right: 32px;
+    text-overflow: ellipsis;
 }
 
 body .ui-dropdown .ui-dropdown-trigger .ui-dropdown-trigger-icon:before {
@@ -178,26 +97,32 @@ body .ui-dropdown-panel .ui-dropdown-items {
     padding: 5px 5px 5px 10px;
 }
 
-body .ui-corner-all {
-    border-radius: 4px;
-}
-
 body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight {
     color: #ffffff;
-    background: linear-gradient(60deg, #b224ef, #7579ff);
+    background: var(--akademic-gradient);
     margin-right: 4px;
 }
 
-body .ui-datepicker table td>a.ui-state-active {
-    color: #ffffff;
-    background: linear-gradient(60deg, #b224ef, #7579ff);
+body .ui-inputtext:enabled:focus:not(.ui-state-error) {
+    border-color: var(--akademic-color);
 }
 
 body .ui-dropdown-panel .ui-dropdown-filter-container .ui-dropdown-filter-icon {
     top: 50%;
     margin-top: -.5em;
     right: 1.357em;
-    color: #b224ef;
+    color: var(--akademic-color);
+}
+
+body .ui-dropdown-panel .ui-dropdown-filter-container .ui-dropdown-filter {
+    text-indent: 3px;
+    margin: 5px 0px 5px 0px;
+}
+
+
+/* Table */
+body .ui-table .ui-table-tbody>tr {
+    border: solid 1px #c8c8c8;
 }
 
 body .ui-table {
@@ -205,14 +130,13 @@ body .ui-table {
     margin: -14px 0px 7px 0px;
 }
 
-.ui-table table {
+body .ui-table table {
     table-layout: auto;
 }
 
-
 body .ui-table .ui-sortable-column.ui-state-highlight,
 body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
-    background: linear-gradient(60deg, #b224ef, #7579ff);
+    background: var(--akademic-gradient);
 }
 
 body .ui-table.ui-table-hoverable-rows .ui-table-tbody>tr:not(.ui-state-highlight):not(.ui-contextmenu-selected):hover {
@@ -243,24 +167,24 @@ body .ui-table .ui-table-tbody>tr>td {
 }
 
 body .ui-table .ui-table-tbody>tr.ui-state-highlight {
-    background-color: #b224ef;
+    background-color: var(--akademic-color);
     color: #ffffff;
 }
 
 body .ui-table .ui-table-tbody>tr:nth-child(even).ui-state-highlight {
-    background-color: #b224ef;
+    background-color: var(--akademic-color);
     color: #ffffff;
 }
 
 body .ui-table .ui-table-tbody>tr:nth-child(even).ui-contextmenu-selected {
-    background-color: #b224ef;
+    background-color: var(--akademic-color);
     color: #ffffff;
 }
 
 body .ui-table.ui-table-hoverable-rows .ui-table-tbody>tr:not(.ui-state-highlight):hover {
     cursor: pointer;
     color: #ffffff;
-    background-color: #b224ef;
+    background-color: var(--akademic-color);
 }
 
 body .ui-table .ui-table-caption {
@@ -278,6 +202,17 @@ body .ui-table .ui-table-summary {
     padding-top: 10px;
 }
 
+body .ui-table.ui-table-responsive .ui-paginator-bottom {
+    border-top: 0;
+}
+
+
+/* Paginator */
+.ui-paginator .ui-dropdown .ui-dropdown-trigger,
+body .ui-paginator .ui-dropdown .ui-dropdown-label {
+    margin-top: 0px;
+}
+
 body .ui-paginator {
     background-color: #F7F7F8;
     border: 1px solid #eaeaea;
@@ -285,25 +220,107 @@ body .ui-paginator {
     padding-top: 10px;
 }
 
-body .ui-table.ui-table-responsive .ui-paginator-bottom {
-    border-top: 0;
+
+/* Lightbox */
+body p-lightbox img {
+    width: 200px;
+    height: 300px;
+    margin-right: 20px;
 }
 
-.input-filter {
+body .ui-lightbox .ui-lightbox-caption {
+    width: 200px;
+}
+
+body p-lightbox span {
+    width: 150px;
+    word-wrap: break-word;
+}
+
+
+/* Fileupload */
+body .ui-fileupload .ui-fileupload-buttonbar {
+    background-color: white;
+    border: none;
+}
+
+body .ui-fileupload .ui-fileupload-buttonbar {
+    background-color: white;
+    padding: 0.571em 1em;
+    border: none;
+    color: #333333;
+    border-bottom: 0 none;
+    text-align: center;
+}
+
+body .ui-fileupload .ui-fileupload-content {
+    background-color: #ffffff;
+    padding: 0.571em 1em;
+    border: 1px solid #c8c8c8;
+    color: #333333;
+    margin-bottom: 7px;
+}
+
+body .ui-fileupload-row>div {
+    display: inline-block;
+}
+
+
+/* Button */
+body .ui-button {
+    margin: 0;
+    color: #ffffff;
+    background-color: #23CCEF;
+    border: 1px solid #23CCEF;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+
+/* Toast */
+body .ui-toast .ui-toast-message.ui-toast-message-warn {
+    background-color: white;
+    border-radius: 4px;
+}
+
+body p-toast i {
+    font-size: 3em !important;
+}
+
+body p-toast p {
+    word-wrap: break-word;
+    width: 250px;
+}
+
+body .ui-toast .ui-toast-message {
+    max-width: 280px;
+}
+
+
+/* Input filter table */
+body .input-filter {
     position: relative;
     font-weight: normal;
     float: right;
     padding: 7px;
 }
 
-.input-filter input {
+body .input-filter input {
     text-indent: 20px;
     height: 33px;
 }
 
-.input-filter i {
+body .input-filter i {
     position: absolute;
     color: #9B9B9B;
     top: 18px;
     left: 16px;
+}
+
+/* Border akademic in components */
+body form input:hover,
+body select:hover,
+body textarea:hover,
+body .ui-dropdown:hover {
+    border-color: var(--akademic-color) !important;
 }

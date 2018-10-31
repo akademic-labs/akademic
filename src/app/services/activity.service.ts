@@ -46,12 +46,20 @@ export class ActivityService {
     ) as Observable<Activity>;
   }
 
-  async createActivity(content: Activity, attach) {
-    content.attachments = attach;
+  async createActivity(content: Activity, attachments) {
+    content.attachments = attachments;
     const user = await this.auth.user$.pipe(take(1)).toPromise();
     content.user = user.uid;
     await this.dbService.add<Activity>('activities', content);
     this.notify.update('success', 'Atividade criada com sucesso!');
+  }
+
+  async updateActivity(content: Activity, attachments) {
+    content.attachments = attachments;
+    const user = await this.auth.user$.pipe(take(1)).toPromise();
+    content.user = user.uid;
+    await this.dbService.set<Activity>(`activities/${content.uid}`, content);
+    this.notify.update('success', 'Atividade atualizada com sucesso!');
   }
 
   async onApprove(data: Activity, msg: string) {

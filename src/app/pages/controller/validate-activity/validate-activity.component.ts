@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+﻿import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { MessageService } from 'primeng/components/common/messageservice';
@@ -25,8 +24,7 @@ export class ValidateActivityComponent implements OnInit {
     private _route: ActivatedRoute,
     private _activityService: ActivityService,
     private _storage: AngularFireStorage,
-    public _messageService: MessageService,
-    public sanitizer: DomSanitizer
+    public _messageService: MessageService
   ) { }
 
   ngOnInit() {
@@ -43,8 +41,15 @@ export class ValidateActivityComponent implements OnInit {
     } else { this.loading = false; }
   }
 
+  ngAfterViewInit() {
+    // window.scrollTo(0, 0);
+    // const contentContainer = document.querySelector('div') || window;
+    // contentContainer.scrollTo(0, 0);
+  }
+
   showAttach(attach) {
     this.attachView = attach;
+    // document.getElementById('main').classList.add('filter-blur');
   }
 
   toConfirm(isApproved: boolean) {

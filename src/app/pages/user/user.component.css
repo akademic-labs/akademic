@@ -1,0 +1,9 @@
+.input-group-addon {
+    border: var(--border-valid);
+    border-left: 0;
+    padding-top: 7px;
+}
+
+.input-group input {
+    border-right: none;
+}

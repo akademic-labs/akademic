@@ -1,4 +1,13 @@
 <hr>
+<!-- <pre>
+    attachments: {{ attachments | json }}
+</pre>
+<pre>
+    attachShow: {{ attachShow | json }}
+</pre>
+<pre>
+    uploads: {{ uploads | json }}
+</pre> -->
 <div class="dropzone" akaDropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)" [class.hovering]="isHovering">
     <label class="mt-4">Arraste</label>
     <div class="file">
@@ -15,21 +24,24 @@
             </span>
         </label>
     </div>
+
     <div class="show-attach">
+        <img *ngIf="loading" class="loader-attachs" src="assets/img/loader-attachs.gif">
         <div *ngFor="let attach of attachShow; index as i" class=" card card-attach">
-            <div *ngIf="uploads[i].file.type !== 'application/pdf'; else pdf">
-                <img class="img-attach" [src]="attach" />
+            <div [ngSwitch]="attach.type" (click)="showAttach(attach)" pTooltip="Clique na imagem para abrir o anexo"
+                tooltipPosition="bottom" data-toggle="modal" data-target="#attachModal">
+                <img *ngSwitchCase="'application/pdf'" class="pdf-attach" src="assets/img/pdf.png" />
+                <img *ngSwitchCase="'video/mp4'" class="img-attach" src="assets/img/video.png" />
+                <img *ngSwitchDefault class="img-attach" [src]="attach.url" />
             </div>
-            <ng-template #pdf>
-                <img class="pdf-attach" src="assets/img/pdf.png" />
-            </ng-template>
             <div>
-                <label class="label-attach">{{ uploads[i].file.name }}<br>{{ uploads[i].file.size | fileSize }}</label>
+                <!-- <label ng class="label-attach">{{ uploads[i].file.name }}<br>{{ uploads[i].file.size | fileSize }}</label> -->
+                <label class="label-attach">{{ attach.name }}</label>
                 <div>
-                    <button type="button" class="btn-attach" (click)="confirm(uploads[i].file, i)"><i class="fa fa-trash"
+                    <button type="button" class="btn-attach" (click)="confirm(attach, i)"><i class="fa fa-trash"
                             pTooltip="Descartar" tooltipPosition="bottom"></i></button>
-                    <a [download]="uploads[i].file.name" [href]="attach" target="_blank" type="button" class="btn-attach"
-                        pTooltip="Download" tooltipPosition="bottom"><i class="fa fa-download"></i></a>
+                    <!-- <a [download]="attach.name" [href]="attach.url" target="_blank" type="button" class="btn-attach"
+                        pTooltip="Download" tooltipPosition="bottom"><i class="fa fa-download"></i></a> -->
                 </div>
             </div>
         </div>
@@ -50,3 +62,12 @@
   <button (click)="task.cancel()" class="btn btn-danger" [disabled]="!isActive(snap)">Cancelar</button>
   <button (click)="task.resume()" class="btn btn-success" [disabled]="!(snap?.state === 'paused')">Recomeçar</button>
 </div-->
+
+<div class="modal fade" id="attachModal" role="dialog" [ngSwitch]="attachView?.type">
+    <h5 class="title-dialog">{{ attachView?.name }}</h5>
+    <a class="btn-close-modal" data-dismiss="modal" pTooltip="Fechar Anexo" tooltipPosition="bottom">
+        <i class="icon-close-modal fa fa-close" style="    -webkit-text-stroke: 3px #808080;"></i></a>
+    <iframe *ngSwitchCase="'application/pdf'" class="pdf-dialog" [src]="attachView?.url | safe: 'resourceUrl'"></iframe>
+    <iframe *ngSwitchCase="'video/mp4'" class="pdf-dialog" [src]="attachView?.url | safe: 'resourceUrl'"></iframe>
+    <img *ngSwitchDefault class="img-attach" class="img-dialog" [src]="attachView?.url" />
+</div>
