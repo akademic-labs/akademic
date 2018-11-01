@@ -22,9 +22,13 @@ export class AuthService {
   user$: Observable<User | null>;
 
   constructor(
-    private _router: Router, private _notify: NotifyService,
-    private afAuth: AngularFireAuth, private afs: AngularFirestore,
-    private _error: ErrorService, private _userService: UserService) {
+    private _router: Router,
+    private _notify: NotifyService,
+    private afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
+    private _errorService: ErrorService,
+    private _userService: UserService
+  ) {
 
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -43,7 +47,7 @@ export class AuthService {
         const dataUser = this.authCredentialToUser(credential.user);
         this._userService.createUserData(dataUser);
       })
-      .catch(e => this.handleError(e));
+      .catch(error => this._errorService.handleErrorByCode(error.code));
   }
 
   createUser(user: User, password: string) {
@@ -51,7 +55,8 @@ export class AuthService {
       .then(credential => {
         user.uid = credential.user.uid;
         this._userService.createUserData(user);
-      }).catch(error => this._notify.update('danger', this._error.printErrorByCode(error.code)));
+      })
+      .catch(error => this._errorService.handleErrorByCode(error.code));
   }
 
   // OAuth Methods
@@ -81,7 +86,7 @@ export class AuthService {
   resetPassword(email: string) {
     this.afAuth.auth.sendPasswordResetEmail(email)
       .then(() => this._notify.update('info', 'Atualização de senha enviada por e-mail'))
-      .catch(error => this.handleError(error));
+      .catch(error => this._errorService.handleErrorByCode(error.code));
   }
 
   private oAuthLogin(provider: any) {
@@ -89,7 +94,7 @@ export class AuthService {
       const dataUser = this.authCredentialToUser(credential.user);
       this._userService.createUserData(dataUser);
     })
-      .catch(e => this.handleError(e));
+      .catch(error => this._errorService.handleErrorByCode(error.code));
   }
 
   private authCredentialToUser(credentialUser: UserInfo) {
@@ -104,10 +109,5 @@ export class AuthService {
     };
 
     return dataUser;
-  }
-
-  // If error, notify user
-  private handleError(error) {
-    this._notify.update('danger', this._error.printErrorByCode(error.code));
   }
 }
