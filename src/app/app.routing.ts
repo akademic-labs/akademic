@@ -3,8 +3,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { ControllerGuard } from './guards/controller.guard';
+import { InstitutionGuard } from './guards/institution.guard';
 import { IsLoggedGuard } from './guards/is-logged.guard';
+import { StudentGuard } from './guards/student.guard';
 import { ActivitypeTypeComponent } from './pages/admin/activitype-type/activitype-type.component';
 import { ControllerComponent } from './pages/admin/controller/controller.component';
 import { CourseComponent } from './pages/admin/course/course.component';
@@ -28,15 +32,15 @@ const routes: Routes = [
     ]
   },
   { path: 'dashboard', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
-  { path: 'input-activity', component: InputActivityComponent, canActivate: [AuthGuard] },
-  { path: 'input-activity/:id', component: InputActivityComponent, canActivate: [AuthGuard] },
-  { path: 'validate-activity/:id', component: ValidateActivityComponent, canActivate: [AuthGuard], resolve: { activity: ActivityResolve } },
-  { path: 'institution', component: InstitutionComponent, canActivate: [AuthGuard] },
-  { path: 'course', component: CourseComponent, canActivate: [AuthGuard] },
-  { path: 'acitivityType', component: ActivitypeTypeComponent, canActivate: [AuthGuard] },
-  { path: 'controller', component: ControllerComponent, canActivate: [AuthGuard] },
-  { path: 'rules', component: RulesComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard, StudentGuard, ControllerGuard, InstitutionGuard] },
+  { path: 'input-activity', component: InputActivityComponent, canActivate: [AuthGuard, StudentGuard] },
+  { path: 'input-activity/:id', component: InputActivityComponent, canActivate: [AuthGuard, StudentGuard] },
+  { path: 'validate-activity/:id', component: ValidateActivityComponent, canActivate: [AuthGuard, ControllerGuard], resolve: { activity: ActivityResolve } },
+  { path: 'institutions', component: InstitutionComponent, canActivate: [AuthGuard, AdminGuard] },
+  { path: 'courses', component: CourseComponent, canActivate: [AuthGuard, AdminGuard] },
+  { path: 'acitivityTypes', component: ActivitypeTypeComponent, canActivate: [AuthGuard, InstitutionGuard] },
+  { path: 'controllers', component: ControllerComponent, canActivate: [AuthGuard, InstitutionGuard] },
+  { path: 'rules', component: RulesComponent, canActivate: [AuthGuard, ControllerGuard] },
   { path: '**', component: Error404Component }
 ];
 

@@ -5,6 +5,7 @@ import { Course } from '../models/course.interface';
 import { ErrorService } from './error.service';
 import { FirestoreService } from './firestore.service';
 import { NotifyService } from './notify.service';
+import { sort } from 'app/operators/sort-by.operator';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,9 @@ export class CourseService {
   }
 
   get() {
-    return this.dbService.colWithId$<Course>('courses');
+    return this.dbService.colWithId$<Course>('courses').pipe(
+      sort('name', 'asc')
+    );
   }
 
   post(content: Course) {

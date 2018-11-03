@@ -31,6 +31,11 @@ export class RolesService {
     return this.checkAuthorization(user, allowed);
   }
 
+  isInstitution(user: User): boolean {
+    const allowed = ['institution'];
+    return this.checkAuthorization(user, allowed);
+  }
+
   isAdmin(user: User): boolean {
     const allowed = ['administrator'];
     return this.checkAuthorization(user, allowed);

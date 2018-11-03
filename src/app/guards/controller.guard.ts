@@ -19,8 +19,8 @@ export class ControllerGuard implements CanActivate {
     return this._auth.user$.pipe(
       take(1),
       map(user => user && this._rolesService.isController(user) ? true : false),
-      tap(isAdmin => {
-        if (!isAdmin) {
+      tap(isController => {
+        if (!isController) {
           this.notify.update('warning', 'Acesso somente a coordenadores!');
         }
       })
