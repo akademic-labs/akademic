@@ -41,7 +41,7 @@ export class SignInComponent implements OnInit {
   login() {
     if (this.userForm.valid) {
       this.loading = true;
-      this._auth.emailLogin(this.userForm.value['email'], this.userForm.value['password'])
+      this._auth.signInWithEmailAndPassword(this.userForm.value['email'], this.userForm.value['password'])
         .then(() => this.loading = false);
     }
   }

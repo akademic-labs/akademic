@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from '../models/user.interface';
 import { FirestoreService } from './firestore.service';
-import { NotifyService } from './notify.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private afs: AngularFirestore, private _router: Router,
-     private _notify: NotifyService, private dbService: FirestoreService) {
+  constructor(private afs: AngularFirestore, private dbService: FirestoreService) {
   }
 
   getAllUsers(): Observable<User[]> {
@@ -29,23 +26,15 @@ export class UserService {
     );
   }
 
-  getUserDocById(id: string) {
+  getUserById(id: string) {
     return this.afs.doc<User>(`users/${id}`);
   }
 
   updateUser(id: string, data: User) {
-    return this.getUserDocById(id).set(data, { merge: true });
-  }
-
-  public createUserData(user: User) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-    userRef.set(user, { merge: true });
-
-    this._router.navigate(['/dashboard']);
-    this._notify.update('success', 'Bem vindo!');
+    return this.getUserById(id).set(data, { merge: true });
   }
 
   deleteUser(id: string) {
-    return this.getUserDocById(id).delete();
+    return this.getUserById(id).delete();
   }
 }

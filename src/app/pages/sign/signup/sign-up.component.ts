@@ -27,7 +27,7 @@ export class SignUpComponent implements OnInit {
         roles: value.roles,
         createdAt: new Date()
       };
-      this._auth.createUser(dataUser, value.password);
+      this._auth.createUserWithEmailAndPassword(dataUser, value.password);
     }
   }
 
