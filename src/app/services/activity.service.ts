@@ -29,7 +29,7 @@ export class ActivityService {
     return this.dbService.colWithId$<Activity>('activities', ref => ref.where('status', '==', 'Pendente'))
       .pipe(
         leftJoinDocument(this.afs, 'user', 'users')
-      ) as Observable<Activity[]>;
+      );
   }
 
   getActivitiesStudent(uid: string) {
@@ -43,7 +43,7 @@ export class ActivityService {
   getActivityById(uid: string): Observable<Activity> {
     return this.dbService.docWithId$('activities/' + uid).pipe(
       documentJoin(this.afs, { user: 'users' })
-    ) as Observable<Activity>;
+    );
   }
 
   async createActivity(content: Activity, attachments) {

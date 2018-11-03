@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { leftJoinDocument } from 'app/utils/joinOperators';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 import { Course } from '../models/course.interface';
 import { ErrorService } from './error.service';
 import { FirestoreService } from './firestore.service';
 import { NotifyService } from './notify.service';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
