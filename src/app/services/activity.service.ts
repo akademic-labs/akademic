@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { leftJoinDocument, documentJoin } from 'app/utils/joinOperators';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { Activity } from '../models/activity.interface';
+import { documentJoin } from './../operators/document-join.operator';
+import { leftJoinDocument } from './../operators/left-join-document.operator';
 import { AuthService } from './auth.service';
 import { ErrorService } from './error.service';
 import { FirestoreService } from './firestore.service';

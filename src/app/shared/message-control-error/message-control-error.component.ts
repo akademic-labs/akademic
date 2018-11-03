@@ -15,7 +15,7 @@ import { FormControl } from '@angular/forms';
       .message-error {
         color: var(--color-invalid);
         font-size: 12px;
-        margin: -10px 0px 0px 5px;
+        margin: -10px 0px 0px 0px;
         padding: 0px 0px 5px 0px;
       }
     `
