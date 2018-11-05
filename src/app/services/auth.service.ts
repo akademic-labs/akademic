@@ -22,9 +22,13 @@ export class AuthService {
   user$: Observable<User | null>;
 
   constructor(
-    private _router: Router, private _notify: NotifyService,
-    private afAuth: AngularFireAuth, private afs: AngularFirestore,
-    private _error: ErrorService, private _userService: UserService) {
+    private _router: Router,
+    private _notify: NotifyService,
+    private afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
+    private _errorService: ErrorService,
+    private _userService: UserService
+  ) {
 
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -47,15 +51,15 @@ export class AuthService {
   resetPassword(email: string) {
     this.afAuth.auth.sendPasswordResetEmail(email)
       .then(() => this._notify.update('info', 'Atualização de senha enviada por e-mail'))
-      .catch(error => this.handleError(error));
+      .catch(error => this._errorService.handleErrorByCode(error.code));
   }
 
   async signInWithEmailAndPassword(email: string, password: string) {
     try {
       const credential = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
       if (credential) { this.successAndRedirect() };
-    } catch (e) {
-      return this.handleError(e);
+    } catch (error) {
+      return this._errorService.handleErrorByCode(error.code);
     }
   }
 
@@ -66,7 +70,7 @@ export class AuthService {
       await this._userService.updateUser(user.uid, user);
       this.successAndRedirect();
     } catch (error) {
-      return this.handleError(error);
+      return this._errorService.handleErrorByCode(error.code);
     }
   }
 
@@ -94,7 +98,7 @@ export class AuthService {
       await this._userService.updateUser(user.uid, user);
       this.successAndRedirect();
     } catch (e) {
-      return this.handleError(e);
+      return this._errorService.handleErrorByCode(e.code);
     }
   }
 
@@ -115,10 +119,5 @@ export class AuthService {
   private successAndRedirect() {
     this._router.navigate(['/dashboard']);
     this._notify.update('success', 'Bem vindo!');
-  }
-
-  // If error, notify user
-  private handleError(error) {
-    this._notify.update('danger', this._error.printErrorByCode(error.code));
   }
 }

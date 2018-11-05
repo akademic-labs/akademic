@@ -15,8 +15,12 @@ export class ControllerService {
 
   ControllerCollection: AngularFirestoreCollection<Controller>;
 
-  constructor(private _afs: AngularFirestore, private _notify: NotifyService,
-    private _message: MessageService, private _error: ErrorService) {
+  constructor(
+    private _afs: AngularFirestore,
+    private _notify: NotifyService,
+    private _message: MessageService,
+    private _errorService: ErrorService
+  ) {
     this.ControllerCollection = _afs.collection('controllers');
   }
 
@@ -31,23 +35,19 @@ export class ControllerService {
   post(content: Controller) {
     this._afs.collection('controllers').add(content)
       .then(() => this._message.add({ severity: 'success', summary: `Controlador '${content.name}' adicionado com sucesso!` }))
-      .catch (e => this.handleError(e));
+      .catch(error => this._errorService.handleErrorByCode(error.code));
   }
 
   put(uid: string, content: Controller) {
     this._afs.collection('controllers').doc(uid).set(content)
       .then(() => this._notify.update('success', 'Controlador atualizado com sucesso!'))
-      .catch(e => this.handleError(e));
+      .catch(error => this._errorService.handleErrorByCode(error.code));
   }
 
   delete(uid: string) {
     this._afs.collection('controllers').doc(uid).delete()
       .then(() => this._notify.update('success', 'Controlador removido com sucesso!'))
-      .catch(e => this.handleError(e));
-  }
-
-  private handleError(error) {
-    this._notify.update('danger', this._error.printErrorByCode(error.code));
+      .catch(error => this._errorService.handleErrorByCode(error.code));
   }
 
 }

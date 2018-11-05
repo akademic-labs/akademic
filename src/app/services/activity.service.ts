@@ -21,10 +21,9 @@ export class ActivityService {
     private auth: AuthService,
     private router: Router,
     private notify: NotifyService,
-    private error: ErrorService,
+    private errorService: ErrorService,
     private dbService: FirestoreService
-  ) {
-  }
+  ) { }
 
   getActivitiesToApprove(): Observable<Activity[]> {
     return this.dbService.colWithId$<Activity>('activities', ref => ref.where('status', '==', 'Pendente'))
@@ -68,8 +67,8 @@ export class ActivityService {
       await this.getActivityDocument(data.uid).update(data);
       this.notify.update('success', `Atividade ${msg} com sucesso!`);
       this.router.navigate(['/dashboard']);
-    } catch (e) {
-      return this.handleError(e)
+    } catch (error) {
+      return this.errorService.handleErrorByCode(error.code)
     }
   }
 
@@ -78,12 +77,8 @@ export class ActivityService {
       await this.getActivityDocument(id).delete();
       this.notify.update('success', 'Atividade deletada com sucesso!');
       this.router.navigate(['/dashboard']);
-    } catch (e) {
-      return this.handleError(e)
+    } catch (error) {
+      return this.errorService.handleErrorByCode(error.code)
     }
-  }
-
-  private handleError(error) {
-    this.notify.update('danger', this.error.printErrorByCode(error.code));
   }
 }

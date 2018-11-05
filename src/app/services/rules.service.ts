@@ -14,7 +14,11 @@ export class Ruleservice {
 
   rulesCollection: AngularFirestoreCollection<Rules>;
 
-  constructor(private _afs: AngularFirestore, private _notify: NotifyService, private _error: ErrorService) {
+  constructor(
+    private _afs: AngularFirestore,
+    private _notify: NotifyService,
+    private _errorService: ErrorService
+  ) {
     this.rulesCollection = _afs.collection('rules');
   }
 
@@ -29,22 +33,18 @@ export class Ruleservice {
   post(content: Rules) {
     this._afs.collection('rules').add(content)
       .then(() => this._notify.update('success', 'Regra adicionada com sucesso!'))
-      .catch(e => this.handleError(e));
+      .catch(error => this._errorService.handleErrorByCode(error.code));
   }
 
   put(uid: string, content: Rules) {
     this._afs.collection('rules').doc(uid).set(content)
       .then(() => this._notify.update('success', 'Regra atualizada com sucesso!'))
-      .catch(e => this.handleError(e));
+      .catch(error => this._errorService.handleErrorByCode(error.code));
   }
 
   delete(uid: string) {
     this._afs.collection('rules').doc(uid).delete()
       .then(() => this._notify.update('success', 'Regra removida com sucesso!'))
-      .catch(e => this.handleError(e));
-  }
-
-  private handleError(error) {
-    this._notify.update('danger', this._error.printErrorByCode(error.code));
+      .catch(error => this._errorService.handleErrorByCode(error.code));
   }
 }

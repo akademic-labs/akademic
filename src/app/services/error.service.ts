@@ -30,13 +30,16 @@ export class ErrorService {
 
   constructor(private _notify: NotifyService) { }
 
-  public printErrorByCode(code: string): string {
-    console.log(code);
+  public handleErrorByCode(code: string) {
     code = code.split('/')[1];
     if (this.params[code]) {
-      return (this.params[code]);
+      return this._notify.update('danger', this.params[code]);
     } else {
-      return ('Ocorreu algum erro desconhecido! \n Codigo erro: ' + code);
+      return this._notify.update('danger', `Ocorreu algum erro desconhecido! <br> Código erro: ${code}`);
     }
+  }
+
+  public handleErrorByMessage(message: string) {
+    return this._notify.update('danger', message);
   }
 }
