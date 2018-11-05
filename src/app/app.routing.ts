@@ -9,18 +9,18 @@ import { ControllerGuard } from './guards/controller.guard';
 import { InstitutionGuard } from './guards/institution.guard';
 import { IsLoggedGuard } from './guards/is-logged.guard';
 import { StudentGuard } from './guards/student.guard';
-import { ActivityTypeComponent } from './pages/admin/activity-type/activity-type.component';
-import { ControllerComponent } from './pages/admin/controller/controller.component';
+import { ActivityTypeComponent } from './pages/institution/activity-type/activity-type.component';
+import { ControllerComponent } from './pages/institution/controller/controller.component';
 import { CourseComponent } from './pages/admin/course/course.component';
 import { InstitutionComponent } from './pages/admin/institution/institution.component';
-import { RulesComponent } from './pages/admin/rules/rules.component';
+import { RulesComponent } from './pages/controller/rules/rules.component';
 import { ValidateActivityComponent } from './pages/controller/validate-activity/validate-activity.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SignComponent } from './pages/sign/sign.component';
 import { SignInComponent } from './pages/sign/signin/sign-in.component';
 import { SignUpComponent } from './pages/sign/signup/sign-up.component';
-import { InputActivityComponent } from './pages/user/input-activity/input-activity.component';
-import { UserComponent } from './pages/user/user.component';
+import { InputActivityComponent } from './pages/student/input-activity/input-activity.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { ActivityResolve } from './resolvers/activity.resolver';
 import { Error404Component } from './shared/error404/error404.component';
 
@@ -32,7 +32,7 @@ const routes: Routes = [
     ]
   },
   { path: 'dashboard', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'input-activity', component: InputActivityComponent, canActivate: [AuthGuard, StudentGuard] },
   { path: 'input-activity/:id', component: InputActivityComponent, canActivate: [AuthGuard, StudentGuard] },
   { path: 'validate-activity/:id', component: ValidateActivityComponent, canActivate: [AuthGuard, ControllerGuard], resolve: { activity: ActivityResolve } },

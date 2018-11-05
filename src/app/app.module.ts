@@ -10,7 +10,6 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
-import { UserComponent } from 'app/pages/user/user.component';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
@@ -25,15 +24,16 @@ import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { AuthGuard } from './guards/auth.guard';
-import { ActivityTypeComponent } from './pages/admin/activity-type/activity-type.component';
-import { ControllerComponent } from './pages/admin/controller/controller.component';
 import { CourseComponent } from './pages/admin/course/course.component';
 import { InstitutionComponent } from './pages/admin/institution/institution.component';
-import { RulesComponent } from './pages/admin/rules/rules.component';
+import { RulesComponent } from './pages/controller/rules/rules.component';
 import { ValidateActivityComponent } from './pages/controller/validate-activity/validate-activity.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ActivityTypeComponent } from './pages/institution/activity-type/activity-type.component';
+import { ControllerComponent } from './pages/institution/controller/controller.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { SignModule } from './pages/sign/sign.module';
-import { InputActivityComponent } from './pages/user/input-activity/input-activity.component';
+import { InputActivityComponent } from './pages/student/input-activity/input-activity.component';
 import { ToSelectIdPipe } from './pipes/to-select-id.pipe';
 import { ActivityResolve } from './resolvers/activity.resolver';
 import { ChartCardModule } from './shared/chart-card/chart-card.module';
@@ -52,7 +52,7 @@ export const firebaseConfig = environment.firebaseConfig;
   declarations: [
     AppComponent,
     HomeComponent,
-    UserComponent,
+    ProfileComponent,
     InputActivityComponent,
     ValidateActivityComponent,
     CourseComponent,

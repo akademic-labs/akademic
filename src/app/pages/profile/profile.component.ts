@@ -5,19 +5,18 @@ import { Observable } from 'rxjs';
 import { Institution } from '../../models/institution.interface';
 import { User } from '../../models/user.interface';
 import { AuthService } from '../../services/auth.service';
+import { CepService } from '../../services/cep.service';
 import { InstitutionService } from '../../services/institution.service';
 import { NotifyService } from '../../services/notify.service';
 import { UserService } from '../../services/user.service';
-import { CepService } from './../../services/cep.service';
-import { CourseService } from './../../services/course.service';
-import { ValidatorService } from './../../services/validator.service';
+import { ValidatorService } from '../../services/validator.service';
 
 @Component({
-  selector: 'aka-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  selector: 'aka-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
-export class UserComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
   user$: Observable<User>;
   form: FormGroup;
