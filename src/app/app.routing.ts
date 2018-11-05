@@ -9,7 +9,7 @@ import { ControllerGuard } from './guards/controller.guard';
 import { InstitutionGuard } from './guards/institution.guard';
 import { IsLoggedGuard } from './guards/is-logged.guard';
 import { StudentGuard } from './guards/student.guard';
-import { ActivitypeTypeComponent } from './pages/admin/activitype-type/activitype-type.component';
+import { ActivityTypeComponent } from './pages/admin/activity-type/activity-type.component';
 import { ControllerComponent } from './pages/admin/controller/controller.component';
 import { CourseComponent } from './pages/admin/course/course.component';
 import { InstitutionComponent } from './pages/admin/institution/institution.component';
@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'validate-activity/:id', component: ValidateActivityComponent, canActivate: [AuthGuard, ControllerGuard], resolve: { activity: ActivityResolve } },
   { path: 'institutions', component: InstitutionComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'courses', component: CourseComponent, canActivate: [AuthGuard, AdminGuard] },
-  { path: 'acitivityTypes', component: ActivitypeTypeComponent, canActivate: [AuthGuard, InstitutionGuard] },
+  { path: 'activity-types', component: ActivityTypeComponent, canActivate: [AuthGuard, ControllerGuard] },
   { path: 'controllers', component: ControllerComponent, canActivate: [AuthGuard, InstitutionGuard] },
   { path: 'rules', component: RulesComponent, canActivate: [AuthGuard, ControllerGuard] },
   { path: '**', component: Error404Component }

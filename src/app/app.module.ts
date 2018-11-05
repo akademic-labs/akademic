@@ -25,7 +25,7 @@ import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { AuthGuard } from './guards/auth.guard';
-import { ActivitypeTypeComponent } from './pages/admin/activitype-type/activitype-type.component';
+import { ActivityTypeComponent } from './pages/admin/activity-type/activity-type.component';
 import { ControllerComponent } from './pages/admin/controller/controller.component';
 import { CourseComponent } from './pages/admin/course/course.component';
 import { InstitutionComponent } from './pages/admin/institution/institution.component';
@@ -58,7 +58,7 @@ export const firebaseConfig = environment.firebaseConfig;
     CourseComponent,
     ControllerComponent,
     RulesComponent,
-    ActivitypeTypeComponent,
+    ActivityTypeComponent,
     InstitutionComponent,
     Error404Component,
     FormDebugComponent,
