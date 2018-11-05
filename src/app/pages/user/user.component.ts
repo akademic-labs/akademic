@@ -128,7 +128,8 @@ export class UserComponent implements OnInit {
       roles: this._fb.group({
         student: [null],
         controller: [null],
-        administrator: [null]
+        administrator: [null],
+        institution: [null]
       }),
       birthday: [null],
       address: this._fb.group({

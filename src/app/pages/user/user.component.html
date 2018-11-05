@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="content">
                     <h4 class="title">
-                        <h4 class="title">{{user.roles.student ? 'Estudante' : 'Coordenador'}}</h4>
+                        <h4 class="title">{{user.roles.student ? 'Estudante' : user.roles.controller ? 'Coordenador' : 'Instituição'}}</h4>
                         <small>E-mail: {{user.email}}</small>
                     </h4>
                 </div>

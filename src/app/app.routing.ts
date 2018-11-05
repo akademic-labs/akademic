@@ -32,7 +32,7 @@ const routes: Routes = [
     ]
   },
   { path: 'dashboard', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard, StudentGuard, ControllerGuard, InstitutionGuard] },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'input-activity', component: InputActivityComponent, canActivate: [AuthGuard, StudentGuard] },
   { path: 'input-activity/:id', component: InputActivityComponent, canActivate: [AuthGuard, StudentGuard] },
   { path: 'validate-activity/:id', component: ValidateActivityComponent, canActivate: [AuthGuard, ControllerGuard], resolve: { activity: ActivityResolve } },

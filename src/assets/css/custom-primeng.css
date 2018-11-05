@@ -145,8 +145,9 @@ body .ui-table.ui-table-hoverable-rows .ui-table-tbody>tr:not(.ui-state-highligh
 
 body .ui-table .ui-table-thead>tr>th,
 body .ui-table .ui-table-tfoot>tr>td {
-    background-color: #F7F7F8;
-    border: 1px solid #eaeaea;
+    background-color: #ffffff;
+    color: #2d353c;
+    border: 1px solid #dbe1e6;
     text-transform: uppercase;
 }
 
@@ -157,26 +158,18 @@ body .ui-table .ui-sortable-column:not(.ui-state-highlight):hover {
 
 body .ui-table .ui-table-tbody>tr {
     background: #ffffff;
-    border: 1px solid #eaeaea;
+    border: 1px solid #dbe1e6;
 }
 
 body .ui-table .ui-table-tbody>tr>td {
     background: inherit;
-    border: 1px solid #eaeaea;
-    border-right: 1px solid #eaeaea !important;
+    border: 1px solid #dbe1e6;
+    border-right: 1px solid #dbe1e6 !important;
 }
 
+body .ui-table .ui-table-tbody>tr:nth-child(even).ui-contextmenu-selected,
+body .ui-table .ui-table-tbody>tr:nth-child(even).ui-state-highlight,
 body .ui-table .ui-table-tbody>tr.ui-state-highlight {
-    background-color: var(--akademic-color);
-    color: #ffffff;
-}
-
-body .ui-table .ui-table-tbody>tr:nth-child(even).ui-state-highlight {
-    background-color: var(--akademic-color);
-    color: #ffffff;
-}
-
-body .ui-table .ui-table-tbody>tr:nth-child(even).ui-contextmenu-selected {
     background-color: var(--akademic-color);
     color: #ffffff;
 }
@@ -188,16 +181,16 @@ body .ui-table.ui-table-hoverable-rows .ui-table-tbody>tr:not(.ui-state-highligh
 }
 
 body .ui-table .ui-table-caption {
-    background-color: #F7F7F8;
-    border: 1px solid #eaeaea;
+    background-color: #f5f8f9;
+    border: 1px solid #dbe1e6;
     border-bottom: none;
     height: 50px;
     padding: 0px;
 }
 
 body .ui-table .ui-table-summary {
-    background-color: #F7F7F8;
-    border: 1px solid #eaeaea;
+    background-color: #f5f8f9;
+    border: 1px solid #dbe1e6;
     border-top: none;
     padding-top: 10px;
 }

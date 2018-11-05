@@ -612,7 +612,7 @@ input:focus {
 }
 
 .main-panel {
-  background: rgba(203, 203, 210, .15);
+  background:#eaeff2;
   position: relative;
   /* z-index: 2; */
   float: right;
@@ -974,7 +974,7 @@ fieldset[disabled] .form-control {
   text-transform: uppercase;
   color: #9A9A9A;
   font-weight: 400;
-  padding-bottom: 5px
+  padding-bottom: 5px;
 }
 
 .table .td-actions .btn {
