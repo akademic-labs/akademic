@@ -1,15 +1,16 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+
 import { ActivityType } from '../../../models/activity-type.interface';
-import { ActivityTypeService } from 'app/services/activity-type.service';
+import { ActivityTypeService } from '../../../services/activity-type.service';
 
 @Component({
-  selector: 'aka-activitype-type',
-  templateUrl: './activitype-type.component.html',
-  styleUrls: ['./activitype-type.component.css']
+  selector: 'aka-activity-type',
+  templateUrl: './activity-type.component.html',
+  styleUrls: ['./activity-type.component.css']
 })
-export class ActivitypeTypeComponent implements OnInit {
+export class ActivityTypeComponent implements OnInit {
 
   title = 'Tipos de Atividade';
   button = 'Adicionar';

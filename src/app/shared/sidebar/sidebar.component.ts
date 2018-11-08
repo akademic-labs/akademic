@@ -11,14 +11,15 @@ declare interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: 'dashboard', title: 'Dashboard', icon: 'fa fa-pie-chart', roles: ['student', 'controller', 'administrator'] },
-    { path: 'user', title: 'Meu perfil', icon: 'fa fa-user-circle-o', roles: ['student', 'controller'] },
+    { path: 'dashboard', title: 'Dashboard', icon: 'fa fa-pie-chart', roles: ['student', 'controller', 'administrator', 'institution'] },
+    { path: 'user', title: 'Meu perfil', icon: 'fa fa-user-circle-o', roles: ['student', 'controller', 'institution'] },
     { path: 'input-activity', title: 'Entrada de Atividade', icon: 'fa fa-paperclip', roles: ['student'] },
-    { path: 'institution', title: 'Instituições', icon: 'fa fa-university nav-icon', roles: ['administrator'] },
-    { path: 'controller', title: 'Controladores', icon: 'fa fa-users nav-icon', roles: ['administrator'] },
-    { path: 'course', title: 'Cursos', icon: 'fa fa-graduation-cap nav-icon', roles: ['administrator'] },
-    { path: 'acitivityType', title: 'Tipos de Atividade', icon: 'fa fa-pencil nav-icon', roles: ['controller', 'administrator'] },
-    { path: 'rules', title: 'Regras', icon: 'fa fa-exclamation-triangle nav-icon', roles: ['controller', 'administrator'] }
+    { path: 'institutions', title: 'Instituições', icon: 'fa fa-university nav-icon', roles: ['administrator'] },
+    { path: 'controllers', title: 'Controladores', icon: 'fa fa-users nav-icon', roles: ['institution'] },
+    { path: 'courses', title: 'Cursos', icon: 'fa fa-graduation-cap nav-icon', roles: ['administrator'] },
+    { path: 'courses-institution', title: 'Cursos', icon: 'fa fa-graduation-cap nav-icon', roles: ['institution'] },
+    { path: 'activity-types', title: 'Tipos de Atividade', icon: 'fa fa-pencil nav-icon', roles: ['controller'] },
+    { path: 'rules', title: 'Regras', icon: 'fa fa-exclamation-triangle nav-icon', roles: ['controller'] }
 ];
 
 @Component({

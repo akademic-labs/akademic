@@ -22,12 +22,17 @@ export class RolesService {
   }
 
   isStudent(user: User): boolean {
-    const allowed = ['student', 'administrator'];
+    const allowed = ['student'];
     return this.checkAuthorization(user, allowed);
   }
 
   isController(user: User): boolean {
-    const allowed = ['controller', 'administrator'];
+    const allowed = ['controller'];
+    return this.checkAuthorization(user, allowed);
+  }
+
+  isInstitution(user: User): boolean {
+    const allowed = ['institution'];
     return this.checkAuthorization(user, allowed);
   }
 

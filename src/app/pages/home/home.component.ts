@@ -10,6 +10,7 @@ import { ChartData } from './../../models/chart-data.interface';
 import { ActivityService } from './../../services/activity.service';
 import { AuthService } from './../../services/auth.service';
 import { RolesService } from './../../services/roles.service';
+import { groupBy } from './../../utils/utils';
 
 @Component({
   selector: 'aka-home',
@@ -63,11 +64,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
             responseData.forEach(e => {
               dataFirebaseCategory.push({ activity: e.activityType.description, hours: e.hoursDuration });
-              dataFirebaseCategory = this._utilsService.groupBy(dataFirebaseCategory, 'activity', 'hours');
+              dataFirebaseCategory = groupBy(dataFirebaseCategory, 'activity', 'hours');
               dataChartCategory = this._utilsService.preparateDataChart(dataFirebaseCategory, 'activity', 'hours');
 
               dataFirebaseStatus.push({ status: e.status, count: 1 });
-              dataFirebaseStatus = this._utilsService.groupBy(dataFirebaseStatus, 'status', 'count');
+              dataFirebaseStatus = groupBy(dataFirebaseStatus, 'status', 'count');
               dataChartStatus = this._utilsService.preparateDataChart(dataFirebaseStatus, 'status', 'count');
             });
 

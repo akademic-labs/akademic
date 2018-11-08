@@ -10,14 +10,14 @@
       <div class="content">
         <form [formGroup]="institutionForm" (ngSubmit)="save()">
           <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="col-xs-12 col-sm-12 col-md-6">
               <div class="form-group">
                 <label for="name">Nome</label>
                 <input type="text" class="form-control" formControlName="name" #inputFocus>
               </div>
               <aka-message-control-error [control]="institutionForm.get('name')" error="required" msg="Nome é obrigatório."></aka-message-control-error>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 label-block">
+            <div class="col-xs-12 col-sm-12 col-md-2 label-block">
               <label></label>
               <button [disabled]="institutionForm.invalid" type="submit" class="btn btn-action left">{{ button }}</button>
             </div>
@@ -25,48 +25,40 @@
         </form>
       </div>
       <div class="content">
-        <p-table [value]="institutions$ | async" selectionMode="single" #dt [globalFilterFields]="['name']" [paginator]="true"
-          [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]" [resizableColumns]="true"
-          [reorderableColumns]="true">
+        <p-table #dt [value]="institutions$ | async" selectionMode="single" [paginator]="true" [rows]="5" [responsive]="true"
+          [rowsPerPageOptions]="[5,10,20,50]" [resizableColumns]="true" [reorderableColumns]="true" [columns]="cols">
           <ng-template pTemplate="caption">
             <div class="input-filter">
               <i class="fa fa-search"></i>
-              <input type="text" class="form-control" placeholder="Pesquisar.." (input)="dt.filterGlobal($event.target.value, 'contains')">
+              <input type="text" class="form-control" placeholder="Filtrar" (input)="dt.filterGlobal($event.target.value, 'contains')">
             </div>
           </ng-template>
-          <ng-template pTemplate="header">
+          <ng-template pTemplate="header" let-columns>
             <tr>
-              <th [pSortableColumn]="'name'" pResizableColumn pReorderableColumn style="width: 75%">Nome
-                <p-sortIcon></p-sortIcon>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
-              <th style="width: 15%">Ações</th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-institution>
-            <tr [pSelectableRow]="institution">
-              <td>
-                <span class="ui-column-title">Nome:</span>
-                {{institution.instituicao}}
-              </td>
-              <!-- <td class="td-actions">
-                <a class="btn" (click)="edit(institution)">
-                  <i class="fa fa-edit"></i>
-                </a>
-                <a (click)="remove(institution.uid)" class="btn text-danger">
-                  <i class="fa fa-times"></i>
-                </a>
-              </td> -->
-              <td class="td-actions">
-                <span class="ui-column-title">Ações:</span>
-                <a type="button" class="btn">
-                  <i class="fa fa-edit" (click)="edit(institution)"></i>
-                </a>
-                <a type="button" (click)="remove(institution.uid)" class="btn text-danger">
-                  <i class="fa fa-times"></i>
-                </a>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+              <td *ngFor="let col of columns" [ngSwitch]="col.field">
+                <div *ngSwitchCase="'actions'">
+                  <a pTooltip="Editar" tooltipPosition="bottom" (click)="edit(rowData)" class="btn">
+                    <i class="fa fa-edit"></i>
+                  </a>
+                  <a pTooltip="Excluir" tooltipPosition="bottom" (click)="confirm(rowData)" class="btn text-danger">
+                    <i class="fa fa-times"></i>
+                  </a>
+                </div>
+                <div *ngSwitchDefault>
+                  {{rowData[col.field]}}
+                </div>
               </td>
             </tr>
           </ng-template>
+
           <ng-template pTemplate="summary">
             {{ (institutions$ | async)?.length }} registros
           </ng-template>
@@ -82,3 +74,5 @@
     </div>
   </div>
 </div>
+
+<aka-confirmation key="confirmationKey" (onAccept)="remove()"></aka-confirmation>

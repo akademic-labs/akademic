@@ -1,8 +1,11 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/components/common/messageservice';
 import { Observable } from 'rxjs';
+
 import { Institution } from '../../../models/institution.interface';
 import { InstitutionService } from '../../../services/institution.service';
+import { Cols } from './../../../models/cols.interface';
 
 @Component({
   selector: 'aka-institution',
@@ -11,22 +14,32 @@ import { InstitutionService } from '../../../services/institution.service';
 })
 export class InstitutionComponent implements OnInit {
 
+  @ViewChild('inputFocus') focusIn: ElementRef;
   title = 'Instituições';
   button = 'Adicionar';
   institutionForm: FormGroup;
   institution: Institution;
   institutions$: Observable<Institution[]>;
-  @ViewChild('inputFocus') focusIn: ElementRef;
+  cols: Cols[];
 
   constructor(
     private _institutionFormBuilder: FormBuilder,
-    private _institutionService: InstitutionService
+    private _institutionService: InstitutionService,
+    private _messageService: MessageService
   ) { }
 
   ngOnInit() {
     this.institutions$ = this._institutionService.get();
     this.buildForm();
     this.focusIn.nativeElement.focus();
+
+    this.cols = [
+      { field: 'instituicao', header: 'Nome' },
+      { field: 'cnpj', header: 'CNPJ' },
+      { field: 'sigla', header: 'Sigla'},
+      { field: 'uf', header: 'UF' },
+      { field: 'actions', header: 'Ações' }
+    ];
   }
 
   buildForm() {
@@ -54,11 +67,19 @@ export class InstitutionComponent implements OnInit {
     this.focusIn.nativeElement.focus();
   }
 
-  remove(uid) {
-    this._institutionService.delete(uid);
+  remove() {
+    this._institutionService.delete(this.institution.uid);
     this.institutionForm.reset();
     this.button = 'Adicionar';
     this.focusIn.nativeElement.focus();
+  }
+
+  confirm(obj) {
+    this.institution = obj;
+    this._messageService.add({
+      key: 'confirmationKey', sticky: true, severity: 'warn', summary: 'Tem certeza?',
+      detail: `Deseja realmente excluir '${obj.name}'?`
+    });
   }
 
 }

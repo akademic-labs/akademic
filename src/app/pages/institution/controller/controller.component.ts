@@ -39,7 +39,7 @@ export class ControllerComponent implements OnInit {
     this.buildForm();
     this.focusIn.nativeElement.focus();
 
-    this.colleges = this._utilsService.getColleges('unif');
+    // this.colleges = this._utilsService.getColleges('unif');
     this.colleges = this.colleges.items;
   }
 
@@ -56,7 +56,7 @@ export class ControllerComponent implements OnInit {
   }
 
   searchCollege(search) {
-    this.colleges = this._utilsService.getColleges(search);
+    // this.colleges = this._utilsService.getColleges(search);
     this.colleges = this.colleges.items;
   }
 

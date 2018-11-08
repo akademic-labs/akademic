@@ -1,12 +1,11 @@
-import { MessageService } from 'primeng/components/common/messageservice';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/components/common/messageservice';
 import { Observable } from 'rxjs';
 
 import { Course } from '../../../models/course.interface';
-import { Institution } from '../../../models/institution.interface';
 import { CourseService } from '../../../services/course.service';
-import { InstitutionService } from '../../../services/institution.service';
+import { Cols } from './../../../models/cols.interface';
 
 @Component({
   selector: 'aka-course',
@@ -19,19 +18,22 @@ export class CourseComponent implements OnInit {
   courseForm: FormGroup;
   course: Course;
   courses$: Observable<Course[]>;
-  institutions$: Observable<Institution[]>;
-  button = 'Adicionar';
+  buttonLabel = 'Adicionar';
+  cols: Cols[];
 
   constructor(
     private _courseFormBuilder: FormBuilder,
     private _courseService: CourseService,
-    private _institutionService: InstitutionService,
     public _messageService: MessageService
   ) { }
 
   ngOnInit() {
+    this.cols = [
+      { field: 'name', header: 'Nome' },
+      { field: 'actions', header: 'Ações' }
+    ];
+
     this.courses$ = this._courseService.get();
-    this.institutions$ = this._institutionService.getInstitutionByUF('PR');
     this.buildForm();
     this.focus.nativeElement.focus();
   }
@@ -39,8 +41,7 @@ export class CourseComponent implements OnInit {
   buildForm() {
     this.courseForm = this._courseFormBuilder.group({
       uid: new FormControl({ value: null, disabled: true }),
-      name: [null, Validators.required],
-      institution: [null, Validators.required]
+      name: [null, Validators.required]
     });
   }
 
@@ -55,7 +56,7 @@ export class CourseComponent implements OnInit {
 
   edit(obj) {
     this.course = obj;
-    this.button = 'Atualizar';
+    this.buttonLabel = 'Atualizar';
     this.focus.nativeElement.focus();
   }
 
@@ -66,7 +67,7 @@ export class CourseComponent implements OnInit {
   }
 
   renderForm() {
-    this.button = 'Adicionar';
+    this.buttonLabel = 'Adicionar';
     this.courseForm.reset();
     this.focus.nativeElement.focus();
   }

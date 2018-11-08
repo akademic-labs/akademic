@@ -18,8 +18,8 @@ export class StudentGuard implements CanActivate {
     return this._auth.user$.pipe(
       take(1),
       map(user => user && this._rolesService.isStudent(user) ? true : false),
-      tap(isAdmin => {
-        if (!isAdmin) {
+      tap(isStudent => {
+        if (!isStudent) {
           this.notify.update('warning', 'Acesso somente a estudantes!');
         }
       })

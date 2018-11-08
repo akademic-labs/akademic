@@ -1,7 +1,8 @@
 export interface Roles {
-  // user enters activity, controller validates and adm is the superuser
+  // user enters activity, controller validates, institution manage controllers and courses and adm is the superuser
   student?: boolean;
   controller?: boolean;
+  institution?: boolean;
   administrator?: boolean;
 };
 

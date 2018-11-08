@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { sort } from 'app/operators/sort-by.operator';
 
 import { Course } from '../models/course.interface';
 import { ErrorService } from './error.service';
@@ -19,7 +20,9 @@ export class CourseService {
   ) { }
 
   get() {
-    return this.dbService.colWithId$<Course>('courses');
+    return this.dbService.colWithId$<Course>('courses').pipe(
+      sort('name', 'asc')
+    );
   }
 
   post(content: Course) {

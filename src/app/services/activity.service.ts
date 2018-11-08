@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { leftJoinDocument, documentJoin } from 'app/utils/joinOperators';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { Activity } from '../models/activity.interface';
+import { documentJoin } from './../operators/document-join.operator';
+import { leftJoinDocument } from './../operators/left-join-document.operator';
 import { AuthService } from './auth.service';
 import { ErrorService } from './error.service';
 import { FirestoreService } from './firestore.service';
@@ -28,7 +29,7 @@ export class ActivityService {
     return this.dbService.colWithId$<Activity>('activities', ref => ref.where('status', '==', 'Pendente'))
       .pipe(
         leftJoinDocument(this.afs, 'user', 'users')
-      ) as Observable<Activity[]>;
+      );
   }
 
   getActivitiesStudent(uid: string) {
@@ -42,7 +43,7 @@ export class ActivityService {
   getActivityById(uid: string): Observable<Activity> {
     return this.dbService.docWithId$('activities/' + uid).pipe(
       documentJoin(this.afs, { user: 'users' })
-    ) as Observable<Activity>;
+    );
   }
 
   async createActivity(content: Activity, attachments) {

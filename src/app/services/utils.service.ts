@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { States } from '../models/states.interface';
-import { Cities } from '../models/cities.interface';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { Cities } from '../models/cities.interface';
+import { States } from '../models/states.interface';
+import { sort } from './../operators/sort-by.operator';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +16,10 @@ export class UtilsService {
     private _http: HttpClient
   ) { }
 
-  getStates() {
+  getStates(): Observable<States[]> {
     const url = 'assets/json/states.json';
     return this._http.get<States[]>(url).pipe(
-      map(states => this.sortBy(states, 'nome', 'asc'))
+      sort('nome', 'asc')
     );
   }
 
@@ -25,48 +28,18 @@ export class UtilsService {
       `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idState}/municipios`
     ).pipe(
       map(cities => {
-        const newCities = cities.map(({ id, nome }) => {
-          const city = { id, nome };
-          return city;
+        return cities.map(({ id, nome }) => {
+          return { id, nome };
         });
-        return this.sortBy(newCities, 'nome', 'asc') as Cities[];
-      })
+      }),
+      sort('nome', 'asc')
     );
-  }
-
-  getColleges(search) {
-    return this._http.get(`https://querobolsa.com.br/simple_universities_search.json?term=${search}&all_universities=true&per_page=10&page=1`);
   }
 
   getLocation() {
     return this._http.get<any[]>(
       `https://ip-api.io/api/json`
     );
-  }
-
-  sortBy(array, key, order) {
-    return array.sort(function (a, b) {
-      const x = a[key], y = b[key];
-      if (order === 'asc') {
-        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-      } else if (order === 'desc') {
-        return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-      }
-    })
-  };
-
-  groupBy(array, grouper, aggregator) {
-    return array.reduce(
-      (res, obj) => {
-        if (!(obj[grouper] in res)) {
-          res.__array.push((res[obj[grouper]] = obj));
-        } else {
-          res[obj[grouper]][aggregator] += obj[aggregator];
-        }
-        return res;
-      },
-      { __array: [] }
-    ).__array.sort((a, b) => b[aggregator] - a[aggregator]);
   }
 
   preparateDataChart(array, keyLabels, keyData) {

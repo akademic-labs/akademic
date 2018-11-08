@@ -41,22 +41,37 @@ export class AuthService {
     );
   }
 
-  emailLogin(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then(credential => {
-        const dataUser = this.authCredentialToUser(credential.user);
-        this._userService.createUserData(dataUser);
-      })
+  logOut() {
+    this.afAuth.auth.signOut().then(() => {
+      this._router.navigate(['/']);
+    });
+  }
+
+  // Sends email allowing user to reset password
+  resetPassword(email: string) {
+    this.afAuth.auth.sendPasswordResetEmail(email)
+      .then(() => this._notify.update('info', 'Atualização de senha enviada por e-mail'))
       .catch(error => this._errorService.handleErrorByCode(error.code));
   }
 
-  createUser(user: User, password: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(user.email, password)
-      .then(credential => {
-        user.uid = credential.user.uid;
-        this._userService.createUserData(user);
-      })
-      .catch(error => this._errorService.handleErrorByCode(error.code));
+  async signInWithEmailAndPassword(email: string, password: string) {
+    try {
+      const credential = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+      if (credential) { this.successAndRedirect() };
+    } catch (error) {
+      return this._errorService.handleErrorByCode(error.code);
+    }
+  }
+
+  async createUserWithEmailAndPassword(user: User, password: string) {
+    try {
+      const credential = await this.afAuth.auth.createUserWithEmailAndPassword(user.email, password);
+      user.uid = credential.user.uid;
+      await this._userService.updateUser(user.uid, user);
+      this.successAndRedirect();
+    } catch (error) {
+      return this._errorService.handleErrorByCode(error.code);
+    }
   }
 
   // OAuth Methods
@@ -76,25 +91,15 @@ export class AuthService {
     this.oAuthLogin(provider);
   }
 
-  logOut() {
-    this.afAuth.auth.signOut().then(() => {
-      this._router.navigate(['/']);
-    });
-  }
-
-  // Sends email allowing user to reset password
-  resetPassword(email: string) {
-    this.afAuth.auth.sendPasswordResetEmail(email)
-      .then(() => this._notify.update('info', 'Atualização de senha enviada por e-mail'))
-      .catch(error => this._errorService.handleErrorByCode(error.code));
-  }
-
-  private oAuthLogin(provider: any) {
-    this.afAuth.auth.signInWithPopup(provider).then(credential => {
-      const dataUser = this.authCredentialToUser(credential.user);
-      this._userService.createUserData(dataUser);
-    })
-      .catch(error => this._errorService.handleErrorByCode(error.code));
+  private async oAuthLogin(provider: any) {
+    try {
+      const credential = await this.afAuth.auth.signInWithPopup(provider);
+      const user = this.authCredentialToUser(credential.user);
+      await this._userService.updateUser(user.uid, user);
+      this.successAndRedirect();
+    } catch (e) {
+      return this._errorService.handleErrorByCode(e.code);
+    }
   }
 
   private authCredentialToUser(credentialUser: UserInfo) {
@@ -109,5 +114,10 @@ export class AuthService {
     };
 
     return dataUser;
+  }
+
+  private successAndRedirect() {
+    this._router.navigate(['/dashboard']);
+    this._notify.update('success', 'Bem vindo!');
   }
 }

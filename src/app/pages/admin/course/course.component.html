@@ -8,9 +8,7 @@
                 <hr>
             </div>
             <pre>{{ courseForm.value | json }}</pre>
-            <pre>{{ courses$ | async | json }}</pre>
             <pre>{{ course | json }}</pre>
-            <!-- <pre>{{ institutions$ | async | json }}</pre> -->
             <div class="content">
                 <form [formGroup]="courseForm" (ngSubmit)="save()">
                     <div class="row">
@@ -21,74 +19,55 @@
                             </div>
                             <aka-message-control-error [control]="courseForm.get('name')" error="required" msg="Descrição é obrigatório."></aka-message-control-error>
                         </div>
-                        <!-- <pre>{{ courseForm.get('instituitionUid').value | toSelectId }}</pre> -->
-                        <!-- <pre>{{ courseForm.get('institution').value?.uid }}</pre> -->
-                        <div class="col-xs-12 col-md-4">
-                            <div class="form-group">
-                                <label for="state">Instituição</label>
-                                <p-dropdown formControlName="institution" datakey="instituicao" placeholder="Selecione"
-                                    emptyFilterMessage="Nenhum resultado." [options]="institutions$ | async"
-                                    optionLabel="instituicao" [showClear]="true" filter="true"></p-dropdown>
-                            </div>
-                            <aka-message-control-error [control]="courseForm.get('institution')" error="required" msg="Instituição é obrigatório."></aka-message-control-error>
-                        </div>
                         <div class="col-xs-12 col-md-2 label-block mb-3">
                             <label></label>
                             <button [disabled]="courseForm.invalid" type="submit" class="btn btn-action btn-block">
-                                {{ button }}
+                                {{ buttonLabel }}
                             </button>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="content">
-                <p-table [value]="courses$ | async" #dt [globalFilterFields]="['name', 'institution']" [paginator]="true"
-                    [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]" [resizableColumns]="true"
-                    [reorderableColumns]="true">
+                <p-table #dt [value]="courses$ | async" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5,10,20,50]"
+                    [columns]="cols">
                     <ng-template pTemplate="caption">
                         <div class="input-filter">
                             <i class="fa fa-search"></i>
-                            <input type="text" class="form-control" placeholder="Pesquisar.." (input)="dt.filterGlobal($event.target.value, 'contains')">
+                            <input type="text" class="form-control" placeholder="Filtrar" (input)="dt.filterGlobal($event.target.value, 'contains')">
                         </div>
                     </ng-template>
-                    <ng-template pTemplate="header">
+                    <ng-template pTemplate="header" let-columns>
                         <tr>
-                            <th [pSortableColumn]="'name'" pResizableColumn pReorderableColumn style="width: 40%">Nome
-                                <p-sortIcon></p-sortIcon>
+                            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                                {{col.header}}
+                                <p-sortIcon [field]="col.field"></p-sortIcon>
                             </th>
-                            <th [pSortableColumn]="'institution'" pResizableColumn pReorderableColumn style="width: 35%">Instituição
-                                <p-sortIcon></p-sortIcon>
-                            </th>
-                            <th>Ações</th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-course>
-                        <tr [pSelectableRow]="course">
-                            <td>
-                                <span class="ui-column-title">Curso:</span>
-                                {{course.name}}
-                            </td>
-                            <td>
-                                <span class="ui-column-title">Instituição:</span>
-                                {{course.institution.instituicao}}
-                            </td>
-                            <td class="td-actions">
-                                <span class="ui-column-title">Ações:</span>
-                                <a pTooltip="Editar" tooltipPosition="bottom" (click)="edit(course)" class="btn">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <a pTooltip="Excluir" tooltipPosition="bottom" (click)="confirm(course)" class="btn text-danger">
-                                    <i class="fa fa-times"></i>
-                                </a>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="rowData">
+                            <td *ngFor="let col of columns" [ngSwitch]="col.field">
+                                <div *ngSwitchCase="'name'">
+                                    {{rowData[col.field]}}
+                                </div>
+                                <div *ngSwitchDefault>
+                                    <a pTooltip="Editar" tooltipPosition="bottom" (click)="edit(rowData)" class="btn">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a pTooltip="Excluir" tooltipPosition="bottom" (click)="confirm(rowData)" class="btn text-danger">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="summary">
-                        <!-- {{ (courses$ | async)?.length }} registros -->
+                        {{ (courses$ | async)?.length }} registros
                     </ng-template>
                     <ng-template pTemplate="emptymessage" let-columns>
                         <tr>
-                            <td colspan="5">
+                            <td colspan="2">
                                 Nenhum registro encontrado.
                             </td>
                         </tr>
