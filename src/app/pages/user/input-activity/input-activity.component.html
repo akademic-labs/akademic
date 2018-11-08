@@ -3,21 +3,27 @@
         <div class="card border-top">
             <div class="header">
                 <div class="title">
-                    <i class="fa fa-paperclip"></i> Atividade Complementar
+                    <i class="fa fa-paperclip"></i> Entrada de Atividade
                 </div>
                 <hr>
             </div>
             <div class="content">
-                <!-- <pre>{{ activity | json }}</pre>
-                <pre>{{ attachments | json }}</pre> -->
                 <!-- <aka-form-debug [form]="activityForm"></aka-form-debug> -->
-                <form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
+                <form [formGroup]="activityForm" (ngSubmit)="save()">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Anexos</label>
+                                <aka-upload-page></aka-upload-page>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-7">
                             <div class="form-group">
                                 <label for="description">Descrição</label>
                                 <input type="text" class="form-control" formControlName="description" placeholder="Digite a descrição.."
-                                    autofocus>
+                                    #inputFocus>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('description')" error="required" msg="Descrição é obrigatório."></aka-message-control-error>
                         </div>
@@ -96,6 +102,7 @@
                             </div>
                             <aka-message-control-error [control]="activityForm.get('state')" error="required" msg="Estado é obrigatório."></aka-message-control-error>
                         </div>
+                        <!-- {{ cities$ | async | json }} -->
                         <div class="col-xs-12 col-md-3">
                             <div class="form-group">
                                 <label for="city">Cidade</label>
@@ -108,26 +115,15 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="form-group">
-                                <!-- <aka-upload-page [attachments]="attachments"></aka-upload-page> -->
-                                <aka-upload-page></aka-upload-page>
-                                <div *ngIf="percentage | async as pct" class="text-center">
-                                    <progress class="progress-custom is-info" [value]="pct" max="100"></progress>
-                                    {{ pct | number : '1.2-2'}}%
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="form-group">
                                 <label for="observation">Observação</label>
-                                <textarea rows="4" class="form-control" formControlName="observation" placeholder="Aqui você pode colocar sua observação.."></textarea>
+                                <textarea rows="3" class="form-control" formControlName="observation" placeholder="Aqui você pode colocar sua observação.."></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-md-2 right">
-                            <button type="submit" class="btn btn-action btn-block" [disabled]="disabledSave && activityForm.invalid">Salvar</button>
+                        <div class="col-xs-12 col-md-3 right">
+                            <button type="submit" class="btn btn-action btn-block" [disabled]="disabledSave && activityForm.invalid">
+                                {{ buttonSave }}</button>
                         </div>
                     </div>
                 </form>

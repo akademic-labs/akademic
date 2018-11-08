@@ -90,9 +90,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   buildChartByCategory(dataChart) {
     this.activityCategoryChartData = {
-      labels: dataChart.labels,
+      labels: dataChart ? dataChart.labels : null,
       datasets: [{
-        data: dataChart.data,
+        data: dataChart ? dataChart.data : null,
         backgroundColor: [
           'rgba(255,99,132)',
           'rgba(54, 162, 235)',
@@ -170,9 +170,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   buildChartStatus(dataChart) {
     this.activityStatusChartData = {
-      labels: dataChart.labels,
+      labels: dataChart ? dataChart.labels : null,
       datasets: [{
-        data: dataChart.data,
+        data: dataChart ? dataChart.data : null,
         backgroundColor: [
           'rgba(153, 102, 255)',
           'rgba(75, 192, 192)',

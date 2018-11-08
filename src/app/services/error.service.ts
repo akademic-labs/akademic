@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { NotifyService } from './notify.service';
 
 interface MessagesIndex {
@@ -24,7 +25,8 @@ export class ErrorService {
     'internal-error': 'Erro interno no servidor',
     'unauthorized-domain': 'Sua rede está bloqueando a solicitação',
     'cancelled-popup-request': 'Você cancelou a solicitação',
-    'auth/email-already-in-use': 'Esse endereço de e-mail já está em uso'
+    'auth/email-already-in-use': 'Esse endereço de e-mail já está em uso',
+    'object-not-found': 'Arquivo não encontrado'
     /* Add here the others IDs and the corresponding messages */
   } as MessagesIndex;
 

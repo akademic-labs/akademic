@@ -5,6 +5,8 @@ import { MessageService } from 'primeng/components/common/messageservice';
 
 import { Activity } from '../../../models/activity.interface';
 import { ActivityService } from '../../../services/activity.service';
+import { AttachmentView } from './../../../models/attachment.interface';
+import { ErrorService } from './../../../services/error.service';
 
 @Component({
   selector: 'aka-validate-activity',
@@ -14,7 +16,7 @@ import { ActivityService } from '../../../services/activity.service';
 export class ValidateActivityComponent implements OnInit {
 
   activity: Activity;
-  attachments = [];
+  attachmentsView: AttachmentView[] = [];
   isApproved: boolean;
   display: boolean;
   attachView;
@@ -24,19 +26,39 @@ export class ValidateActivityComponent implements OnInit {
     private _route: ActivatedRoute,
     private _activityService: ActivityService,
     private _storage: AngularFireStorage,
-    public _messageService: MessageService
+    public _messageService: MessageService,
+    private _errorService: ErrorService
   ) { }
 
   ngOnInit() {
     this.activity = this._route.snapshot.data['activity'];
 
-    if (this.activity.attachments) {
-      this.activity.attachments.forEach(element => {
-        this._storage.ref(element.url).getDownloadURL()
-          .subscribe(res => {
-            this.attachments.push({ name: element.name, type: element.type, url: res }),
+    if (this.activity.attachments.length) {
+      this.activity.attachments.forEach(attachments => {
+        this._storage.ref(attachments.url).getDownloadURL()
+          .subscribe(
+            res => {
+
+              const image = true ? attachments.type.split('/')[0] === 'image' : false;
+              const pdf = true ? attachments.type.split('/')[1] === 'pdf' : false;
+              const video = true ? attachments.type.split('/')[0] === 'video' : false;
+
+              if (image) {
+                this.attachmentsView.push({ name: attachments.name, type: attachments.type, src: res, url: res, class: 'img-attach' });
+              }
+              if (pdf) {
+                this.attachmentsView.push({ name: attachments.name, type: attachments.type, src: 'assets/img/pdf.png', url: res, class: 'pdf-attach' });
+              }
+              if (video) {
+                this.attachmentsView.push({ name: attachments.name, type: attachments.type, src: 'assets/img/video.png', url: res, class: 'video-attach' });
+              }
               this.loading = false;
-          });
+            },
+            error => {
+              this._errorService.handleErrorByCode(error.code);
+              this.loading = false;
+            }
+          );
       });
     } else { this.loading = false; }
   }

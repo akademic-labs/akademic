@@ -14,10 +14,6 @@
     border: 2px solid #b224ef;
 }
 
-progress::-webkit-progress-value {
-    transition: width 0.1s ease;
-}
-
 .file-cta {
     background-color: #f5f5f5;
     color: #4a4a4a;
@@ -69,4 +65,34 @@ progress::-webkit-progress-value {
     height: 10px;
     margin-bottom: 0px;
     width: 100%;
+}
+
+progress::-webkit-progress-value {
+    transition: width 0.1s ease;
+}
+
+progress::-webkit-progress-value {
+    background: #b224ef;
+}
+
+progress::-webkit-progress-bar {
+    background: lightblue;
+}
+
+progress::-webkit-progress-bar {
+    border: 0;
+    height: 10px;
+    border-radius: 16px;
+}
+
+progress::-webkit-progress-value {
+    border: 0;
+    height: 10px;
+    border-radius: 16px;
+}
+
+progress::-moz-progress-bar {
+    border: 0;
+    height: 10px;
+    border-radius: 16px;
 }

@@ -375,7 +375,8 @@ input:focus {
 
 .fa {
   width: 18px;
-  text-align: center
+  text-align: center;
+  outline: 0;
 }
 
 .margin-top {
@@ -654,16 +655,17 @@ input:focus {
 }
 
 .btn {
-  height: 36px;
-  border-width: 2px;
+  height: 35px;
+  /* border-width: 2px; */
   font-size: 16px;
   background-color: transparent;
   font-weight: 600;
-  padding: 7px 16px;
+  /* padding: 7px 16px; */
   text-transform: uppercase;
   letter-spacing: .025em;
   -webkit-transition: all .15s ease;
   transition: all .15s ease;
+  outline: 0;
 }
 
 .btn:hover,
@@ -2511,6 +2513,14 @@ fieldset[disabled] .form-control {
   margin: 3px 0px 3px 3px;
 }
 
+.video-attach {
+  height: 80px;
+  width: 65px;
+  margin: 8px 8px 8px 8px;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px 0 rgba(62, 55, 107, 0), 0 2px 9px 0 rgba(62, 57, 107, 1);
+}
+
 .label-attach {
   width: 150px;
   overflow: hidden;
@@ -2526,7 +2536,7 @@ fieldset[disabled] .form-control {
   background: none;
   color: black;
   outline: 0;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .loader-attachs {
@@ -2551,7 +2561,7 @@ fieldset[disabled] .form-control {
   margin: auto;
 }
 
-.pdf-dialog {
+.iframe-dialog {
   position: absolute;
   top: 10%;
   left: 10%;

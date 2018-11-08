@@ -50,7 +50,7 @@ export class ActivityService {
     const user = await this.auth.user$.pipe(take(1)).toPromise();
     content.user = user.uid;
     await this.dbService.add<Activity>('activities', content);
-    this.notify.update('success', 'Atividade criada com sucesso!');
+    this.notify.update('success', 'Atividade cadastrada com sucesso!');
   }
 
   async updateActivity(content: Activity, attachments) {
