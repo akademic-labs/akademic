@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { sort } from 'app/operators/sort-by.operator';
 
 import { Course } from '../models/course.interface';
+import { sort } from '../rxjs-operators/sort-by.operator';
 import { ErrorService } from './error.service';
 import { FirestoreService } from './firestore.service';
 import { NotifyService } from './notify.service';
