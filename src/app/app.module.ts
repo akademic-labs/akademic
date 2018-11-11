@@ -20,7 +20,6 @@ import { AuthGuard } from './guards/auth.guard';
 import { ToSelectIdPipe } from './pipes/to-select-id.pipe';
 import { ActivityResolve } from './resolvers/activity.resolver';
 import { FormDebugComponent } from './shared/form-debug/form-debug.component';
-import { UploadsModule } from './shared/uploads-page/uploads.module';
 
 export const firebaseConfig = environment.firebaseConfig;
 
