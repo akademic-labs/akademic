@@ -1,7 +1,16 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { InputActivityComponent } from './input-activity/input-activity.component';
+
+const routes: Routes = [
+  {
+    path: '', children: [
+      { path: 'input-activity', component: InputActivityComponent },
+      { path: 'input-activity/:id', component: InputActivityComponent }
+    ]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../../shared/shared.module';
-import { ActivityTypeComponent } from './activity-type/activity-type.component';
 import { ControllersComponent } from './controllers/controllers.component';
 import { InstitutionRoutingModule } from './institution-routing.module';
+import { CoursesComponent } from './courses/courses.component';
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import { InstitutionRoutingModule } from './institution-routing.module';
   ],
   declarations: [
     ControllersComponent,
-    ActivityTypeComponent
+    CoursesComponent
   ]
 })
 export class InstitutionModule { }

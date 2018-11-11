@@ -19,7 +19,7 @@ export class InstitutionGuard implements CanActivate {
       map(user => user && this._rolesService.isInstitution(user) ? true : false),
       tap(isInstitution => {
         if (!isInstitution) {
-          this.notify.update('warning', 'Acesso somente a estudantes!');
+          this.notify.update('warning', 'Acesso somente a instituições!');
         }
       })
     );

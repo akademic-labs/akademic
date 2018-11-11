@@ -18,7 +18,6 @@ import { SignModule } from './features/sign/sign.module';
 import { StudentModule } from './features/student/student.module';
 import { AuthGuard } from './guards/auth.guard';
 import { ToSelectIdPipe } from './pipes/to-select-id.pipe';
-import { ActivityResolve } from './resolvers/activity.resolver';
 import { FormDebugComponent } from './shared/form-debug/form-debug.component';
 import { UploadsModule } from './uploads/uploads.module';
 
@@ -37,17 +36,13 @@ export const firebaseConfig = environment.firebaseConfig;
     RouterModule,
     AppRoutingModule,
     SignModule,
-    AdminModule,
-    ControllerModule,
     HomeModule,
-    InstitutionModule,
-    StudentModule,
     ProfileModule,
     UploadsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [AuthGuard, ActivityResolve],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
