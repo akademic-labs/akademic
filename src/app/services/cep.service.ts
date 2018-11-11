@@ -1,7 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { map } from 'rxjs/operators';
 import { of } from 'rxjs';
+
 import { NotifyService } from './notify.service';
 
 @Injectable({
@@ -9,23 +9,20 @@ import { NotifyService } from './notify.service';
 })
 export class CepService {
 
-  constructor(
-    private http: Http,
-    private _notify: NotifyService
-  ) { }
+  constructor(private http: HttpClient, private _notify: NotifyService) { }
 
-  consultaCEP(cep: string) {
+  queryCEP(cep: string) {
     cep = cep.replace(/\D/g, '');
     // verifica se campo cep possui valor informado.
     if (cep !== '') {
-      // expressão regular para validar o CEP.
+      // regex para validar o CEP.
       const validacep = /^[0-9]{8}$/;
+
       // valida o formato do CEP.
       if (validacep.test(cep)) {
-        return this.http.get(`https://viacep.com.br/ws/${cep}/json`)
-          .pipe(map(dados => dados.json()));
+        return this.http.get<any>(`https://viacep.com.br/ws/${cep}/json`);
       } else {
-        this._notify.update('warning', `Cep inválido.`);
+        this._notify.update('warning', 'CEP inválido.');
         return of({})
       }
     }

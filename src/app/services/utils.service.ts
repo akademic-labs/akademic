@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { Cities } from '../models/cities.interface';
 import { States } from '../models/states.interface';
-import { sort } from './../operators/sort-by.operator';
+import { sort } from './../rxjs-operators/sort-by.operator';
 
 @Injectable({
   providedIn: 'root'

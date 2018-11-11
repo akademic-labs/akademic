@@ -15,7 +15,7 @@ export class SafePipe implements PipeTransform {
       case 'script': return this.sanitizer.bypassSecurityTrustScript(value);
       case 'url': return this.sanitizer.bypassSecurityTrustUrl(value);
       case 'resourceUrl': return this.sanitizer.bypassSecurityTrustResourceUrl(value);
-      default: throw new Error(`Invalid safe type specified: ${type}`);
+      default: throw new Error(`Safe-Type inválido: ${type}`);
     }
   }
 

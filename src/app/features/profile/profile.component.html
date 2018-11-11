@@ -1,0 +1,157 @@
+<div *ngIf="user$ | async as user">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card card-user">
+                <div class="image background-sign">
+                </div>
+                <div class="content">
+                    <div class="author">
+                        <a href="#">
+                            <img class="avatar border-gray" [src]="user.photoURL ? user.photoURL : '../../../assets/img/default-avatar.png'"
+                                alt="Foto do perfil" />
+                            <h4 class="title">{{user.displayName}}
+                            </h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <h4 class="title">
+                        <h4 class="title">{{user.roles.student ? 'Estudante' : user.roles.controller ? 'Coordenador' : 'Instituição'}}</h4>
+                        <small>E-mail: {{user.email}}</small>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title"><i class="fa fa fa-user-circle-o"></i>Editar Perfil</h4>
+                </div>
+                <div class="content">
+                    <form [formGroup]="form" (submit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Matrícula</label>
+                                    <input type="text" class="form-control" formControlName="registration">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label>Nome completo</label>
+                                    <input type="text" class="form-control" formControlName="displayName">
+                                </div>
+                                <aka-message-control-error [control]="form.get('displayName')" error="required" msg="Nome completo é obrigatório."></aka-message-control-error>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Data de nascimento</label>
+                                    <div class="input-group">
+                                        <input type="date" class="form-control" formControlName="birthday">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div formGroupName="address">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>CEP</label>
+                                        <input type="text" maxlength="10" class="form-control" formControlName="zipCode"
+                                            (keyup)="cepMask($event.target.value)" (blur)="searchCep()">
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Endereço</label>
+                                        <input type="text" class="form-control" formControlName="street">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Número</label>
+                                        <input type="number" class="form-control" formControlName="number">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Complemento</label>
+                                        <input type="text" class="form-control" formControlName="complement">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Bairro</label>
+                                        <input type="text" class="form-control" formControlName="neighborhood">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Estado</label>
+                                        <input type="text" class="form-control" formControlName="state">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Cidade</label>
+                                        <input type="text" class="form-control" formControlName="city">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>País</label>
+                                        <input type="text" class="form-control" formControlName="country">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Vincular Instituição</label>
+                                    <p-dropdown formControlName="institution" placeholder="Selecione"
+                                        emptyFilterMessage="Nenhum resultado." [options]="instituitions$" optionLabel="instituicao"
+                                        [showClear]="true" filter="true" (onChange)="getCourses($event.value)"></p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Vincular Curso</label>
+                                    <p-dropdown formControlName="course" placeholder="Selecione" emptyFilterMessage="Nenhum resultado."
+                                        [options]="courses$" optionLabel="name" [showClear]="true" filter="true"></p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Sobre mim</label>
+                                    <textarea rows="3" class="form-control" placeholder="Aqui você pode colocar sua descrição"
+                                        formControlName="about"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4 right">
+                                <button type="submit" class="btn btn-action btn-block" [disabled]="disabledSave && form.invalid">
+                                    Atualizar Perfil
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

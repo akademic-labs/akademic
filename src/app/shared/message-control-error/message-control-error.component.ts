@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'aka-message-control-error',
   template: `
-    <div *ngIf='checkOut()'>
+    <div *ngIf='(control.hasError(error) && control.dirty) || (control.hasError(error) && control.touched)'>
       <div class='message-error'>
         {{ msg }}
       </div>
@@ -29,11 +29,4 @@ export class MessageControlErrorComponent implements OnInit {
   constructor() { }
 
   ngOnInit() { }
-
-  checkOut(): boolean {
-    return (
-      (this.control.hasError(this.error) && this.control.dirty) ||
-      (this.control.hasError(this.error) && this.control.touched)
-    );
-  }
 }
