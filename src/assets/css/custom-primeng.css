@@ -93,6 +93,15 @@ body .ui-dropdown .ui-dropdown-trigger .ui-dropdown-trigger-icon:before {
     content: "\e906";
 }
 
+body .ui-dropdown .ui-dropdown-trigger .ui-dropdown-trigger-icon {
+    font-size: 15px;
+    margin: -5px 0px 0px -12px;
+}
+
+body .ui-dropdown .ui-dropdown-clear-icon {
+    margin: -5px 5px 0px 0px;
+}
+
 body .ui-dropdown-panel .ui-dropdown-items {
     padding: 5px 5px 5px 10px;
 }

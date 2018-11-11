@@ -47,16 +47,11 @@
                             Nenhum arquivo anexado.
                         </div>
                         <div *ngFor="let attach of attachmentsView;" class=" card card-attach" (click)="showAttach(attach)"
-                            data-toggle="modal" data-target="#attachModal" pTooltip="Clique no card para abrir o anexo."
-                            tooltipPosition="bottom">
-                            <!-- <div [ngSwitch]="attach.type">
-                                <img *ngSwitchCase="'application/pdf'" class="pdf-attach" src="assets/img/pdf.png" />
-                                <img *ngSwitchCase="'video/mp4'" class="img-attach" src="assets/img/video.png" />
-                                <img *ngSwitchDefault class="img-attach" [src]="attach.url" />
-                            </div> -->
-                            <img [class]="attach.class" [src]="attach.src" />
+                            data-toggle="modal" data-target="#attachModal">
+                            <img [class]="attach.class" [src]="attach.src" pTooltip="Clique aqui para abrir o anexo."
+                                tooltipPosition="bottom" />
                             <div style="margin-top: 25px;">
-                                <label class="label-attach">{{ attach.name }}</label>
+                                <label class="label-attach">{{ attach.name }}<br>{{ attach.size | fileSize }}</label>
                             </div>
                         </div>
                     </div>
@@ -87,19 +82,19 @@
 
 <aka-confirmation key="confKey" (onAccept)="onAccept()"></aka-confirmation>
 
-<div class="modal fade" id="attachModal" role="dialog" [ngSwitch]="attachView?.type">
+<div *ngIf="attachView" [ngSwitch]="attachView?.type" class="modal fade" id="attachModal" role="dialog">
     <h5 class="title-dialog">{{ attachView?.name }}</h5>
     <a class="btn-download-modal" pTooltip="Efetuar Download" tooltipPosition="bottom" [download]="attachView?.name"
-        [href]="attachView?.url" target="_blank">
+        [href]="attachView?.path" target="_blank">
         <i class="icon-close-modal fa fa-cloud-download"></i>
     </a>
     <a class="btn-close-modal" data-dismiss="modal" pTooltip="Fechar Anexo" tooltipPosition="bottom">
         <i class="icon-close-modal fa fa-close" style="-webkit-text-stroke: 3px #808080;"></i>
     </a>
-    <iframe *ngSwitchCase="'application/pdf'" class="iframe-dialog" [src]="attachView?.url | safe: 'resourceUrl'"></iframe>
-    <iframe *ngSwitchCase="'video/mp4'" class="iframe-dialog" [src]="attachView?.url | safe: 'resourceUrl'"></iframe>
+    <iframe *ngSwitchCase="'application/pdf'" class="iframe-dialog" [src]="attachView?.path | safe: 'resourceUrl'"></iframe>
+    <iframe *ngSwitchCase="'video/mp4'" class="iframe-dialog" [src]="attachView?.path | safe: 'resourceUrl'"></iframe>
     <!-- <video *ngSwitchCase="'video/mp4'" class="iframe-dialog" controls>
-        <source [src]="attachView?.url | safe: 'resourceUrl'" type="video/mp4">
+        <source [src]="attachView?.path | safe: 'resourceUrl'" type="video/mp4">
     </video> -->
-    <img *ngSwitchDefault class="img-attach" class="img-dialog" [src]="attachView?.url" />
+    <img *ngSwitchDefault class="img-attach" class="img-dialog" [src]="attachView?.path" />
 </div>

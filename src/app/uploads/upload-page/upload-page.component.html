@@ -1,18 +1,15 @@
-<pre>
+<!-- <pre>
     attachments: {{ attachments | json }}
 </pre>
 <pre>
     attachmentsView: {{ attachmentsView | json }}
-</pre>
-<!-- <pre>
-    uploads: {{ uploads | json }}
 </pre> -->
 <div class="dropzone" akaDropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)" [class.hovering]="isHovering">
     <label class="mt-4">Arraste</label>
     <div class="file">
         <label class="file-label">
             <input class="file-input" #inputUpload multiple type="file" (change)="startUpload($event.target.files)"
-                [accept]="fileAccept" />
+                [accept]="filesAccept" [disabled]="uploadState === 'running' || uploadState === 'paused'" />
             <span class="file-cta">
                 <span class="file-icon">
                     <i class="fa fa-upload"></i>
@@ -23,61 +20,56 @@
             </span>
         </label>
     </div>
-
     <div class="show-attach">
         <img *ngIf="loading" class="loader-attachs" src="assets/img/loader-attachments.gif">
-        <div *ngFor="let attach of attachmentsView; index as i" class=" card card-attach" (click)="showAttach(attach)"
-            data-toggle="modal" data-target="#attachModal" pTooltip="Clique no card para abrir o anexo."
-            tooltipPosition="bottom">
-            <img [class]="attach.class" [src]="attach.src" />
+        <div *ngFor="let attach of attachmentsView; index as i" class=" card card-attach">
+            <img [class]="attach.class" [src]="attach.src" pTooltip="Clique aqui para abrir o anexo." tooltipPosition="bottom"
+                (click)="showAttach(attach)" data-toggle="modal" data-target="#attachModal" />
             <div>
-                <!-- <label ng class="label-attach">{{ uploads[i].file.name }}<br>{{ uploads[i].file.size | fileSize }}</label> -->
-                <label class="label-attach">{{ attach.name }}</label>
+                <label class="label-attach">{{ attach.name }}<br>{{ attach.size | fileSize }}</label>
                 <div>
-                    <a type="button" class="btn btn-attach text-danger" pTooltip="Descartar" tooltipPosition="bottom"
-                        (click)="confirm(attach, i)">
+                    <button type="button" (click)="confirm(attach, i)" class="btn btn-attach text-action" pTooltip="Descartar"
+                        tooltipPosition="bottom" [disabled]="uploadState === 'running' || uploadState === 'paused'">
                         <i class="fa fa-trash"></i>
-                    </a>
-                    <a type="button" class="btn btn-attach" pTooltip="Download" tooltipPosition="bottom" [download]="attach.name"
-                        [href]="attach.url" target="_blank">
-                        <i class="fa fa-download"></i>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
-    <div *ngIf="uploadState$ | async; let state" style="width: 90%;" class="text-center">
-        <hr>
-        <div *ngIf="percentage$ | async as pct" class="text-center mb-3" style="width: 95%;">
-            <button (click)="cancelUpload()" class="btn btn-attach text-danger" pTooltip="Cancelar" tooltipPosition="bottom"
-                [disabled]="!(state === 'paused' || state === 'running') || pct === 100">
-                <i class="fa fa-times"></i>
-            </button>
-            <button (click)="task.pause()" class="btn btn-attach text-info" pTooltip="Pausar" tooltipPosition="bottom"
-                [disabled]="state === 'paused' || pct === 100">
-                <i class="fa fa-pause"></i>
-            </button>
-            <button (click)="task.resume()" class="btn btn-attach text-success" pTooltip="Retomar" tooltipPosition="bottom"
-                [disabled]="state === 'running'">
-                <i class="fa fa-cloud-upload"></i>
-            </button>
+        <div *ngIf="snapshot$ | async as snap">
+            <div *ngIf="percentage$ | async as pct" class="mb-5">
+                <hr class="mb-5">
+                <button type="button" (click)="cancelUpload()" class="btn btn-attach text-danger" pTooltip="Cancelar"
+                    tooltipPosition="bottom" [disabled]="!(snap.state === 'paused' || snap.state === 'running') || pct === 100">
+                    <i class="fa fa-times"></i>
+                </button>
+                <button type="button" (click)="task.pause()" class="btn btn-attach text-info" pTooltip="Pausar"
+                    tooltipPosition="bottom" [disabled]="snap.state === 'paused' || pct === 100">
+                    <i class="fa fa-pause"></i>
+                </button>
+                <button type="button" (click)="task.resume()" class="btn btn-attach text-success" pTooltip="Retomar"
+                    tooltipPosition="bottom" [disabled]="snap.state === 'running'">
+                    <i class="fa fa-cloud-upload"></i>
+                </button>
+                <progress class="progress progress-custom is-info" [value]="pct" max="100"></progress>
+                {{ snap.bytesTransferred | fileSize }} de {{ snap.totalBytes | fileSize }} |
+                {{ (snap.bytesTransferred / snap.totalBytes) * 100 | number : '1.2-2' }}%
+            </div>
         </div>
-    </div>
-    <div *ngIf="snapshot$ | async as snap" class="text-center mb-3" style="width: 90%;">
-        <progress class="progress progress-custom is-info" [value]="(snap.bytesTransferred/snap.totalBytes) * 100" max="100"></progress>
-        {{ snap.bytesTransferred | fileSize }} de {{ snap.totalBytes | fileSize }} |
-        {{ (snap.bytesTransferred / snap.totalBytes) * 100 | number : '1.2-2' }}%
     </div>
 </div>
 
 <aka-confirmation key="confirmation" (onAccept)="deleteAttach()"></aka-confirmation>
 
-<div class="modal fade" id="attachModal" role="dialog" [ngSwitch]="attachView?.type">
+<div *ngIf="attachView" [ngSwitch]="attachView?.type" class="modal fade" id="attachModal" role="dialog">
     <h5 class="title-dialog">{{ attachView?.name }}</h5>
+    <a class="btn-download-modal" pTooltip="Efetuar Download" tooltipPosition="bottom" [download]="attachView?.name"
+        [href]="attachView?.path" target="_blank">
+        <i class="icon-close-modal fa fa-cloud-download"></i>
+    </a>
     <a class="btn-close-modal" data-dismiss="modal" pTooltip="Fechar Anexo" tooltipPosition="bottom">
         <i class="icon-close-modal fa fa-close" style="-webkit-text-stroke: 3px #808080;"></i>
     </a>
-    <iframe *ngSwitchCase="'application/pdf'" class="iframe-dialog" [src]="attachView?.url | safe: 'resourceUrl'"></iframe>
-    <iframe *ngSwitchCase="'video/mp4'" class="iframe-dialog" [src]="attachView?.url | safe: 'resourceUrl'"></iframe>
-    <img *ngSwitchDefault class="img-attach" class="img-dialog" [src]="attachView?.url" />
+    <iframe *ngSwitchCase="'application/pdf'" class="iframe-dialog" [src]="attachView?.path | safe: 'resourceUrl'"></iframe>
+    <iframe *ngSwitchCase="'video/mp4'" class="iframe-dialog" [src]="attachView?.path | safe: 'resourceUrl'"></iframe>
+    <img *ngSwitchDefault class="img-attach" class="img-dialog" [src]="attachView?.path" />
 </div>

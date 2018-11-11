@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
-import { Attachment } from 'app/models/attachment.interface';
-import { NotifyService } from 'app/services/notify.service';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Observable, Subscription } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
-import { AttachmentView } from './../../models/attachment.interface';
+import { NotifyService } from '../../services/notify.service';
+import { Attachment, AttachmentView } from './../../models/attachment.interface';
 import { ActivityService } from './../../services/activity.service';
 import { ErrorService } from './../../services/error.service';
 
@@ -18,9 +17,9 @@ import { ErrorService } from './../../services/error.service';
 })
 export class UploadPageComponent implements OnInit {
 
-  folderStorage = 'dev';
-  fileAccept = ['image/jpeg', 'image/png', 'application/pdf', 'image/x-eps', 'video/mp4'];
-  fileSize = 50; // MB
+  folderStorage = 'dev/';
+  filesAccept = ['image/jpeg', 'image/png', 'application/pdf', 'image/x-eps', 'video/mp4'];
+  maxfileSize = 50; // MB
 
   attachments: Attachment[] = [];
   attachmentsView: AttachmentView[] = [];
@@ -32,11 +31,14 @@ export class UploadPageComponent implements OnInit {
   task: AngularFireUploadTask;
   snapshot$: Observable<any>;
   percentage$: Observable<number>;
-  uploadState$: Observable<any>;
-  downloadURL;
+  // uploadState$: Observable<string>;
+  uploadState: string;
+  downloadURL$: Observable<string>;
 
   // State for dropzone CSS toggling
   isHovering: boolean;
+
+  @Output() saveEvent = new EventEmitter();
 
   constructor(
     private _notify: NotifyService,
@@ -56,27 +58,40 @@ export class UploadPageComponent implements OnInit {
             activity => {
               if (activity.attachments.length) {
                 activity.attachments.forEach(attachments => {
-                  this._storage.ref(attachments.url).getDownloadURL()
+                  this._storage.ref(attachments.path).getDownloadURL()
                     .subscribe(
-                      res => {
-                        this.attachments.push({ name: attachments.name, type: attachments.type, url: attachments.url });
-
-                        const image = true ? attachments.type.split('/')[0] === 'image' : false;
-                        const pdf = true ? attachments.type.split('/')[1] === 'pdf' : false;
-                        const video = true ? attachments.type.split('/')[0] === 'video' : false;
-
-                        if (image) {
-                          this.attachmentsView.push({ name: attachments.name, type: attachments.type, src: res, url: res, class: 'img-attach' });
-                        }
-                        if (pdf) {
-                          this.attachmentsView.push({ name: attachments.name, type: attachments.type, src: 'assets/img/pdf.png', url: res, class: 'pdf-attach' });
-                        }
-                        if (video) {
-                          this.attachmentsView.push({ name: attachments.name, type: attachments.type, src: 'assets/img/video.png', url: res, class: 'video-attach' });
-                        }
-                        this.loading = false;
+                      resDonwloadURL => {
+                        this._storage.ref(attachments.path).getMetadata()
+                          .subscribe(
+                            resMetaData => {
+                              let src;
+                              let classCss;
+                              const image = true ? attachments.type.split('/')[0] === 'image' : false;
+                              const pdf = true ? attachments.type.split('/')[1] === 'pdf' : false;
+                              const video = true ? attachments.type.split('/')[0] === 'video' : false;
+                              if (image) {
+                                src = resDonwloadURL;
+                                classCss = 'img-attach'
+                              }
+                              if (pdf) {
+                                src = 'assets/img/pdf.png';
+                                classCss = 'pdf-attach'
+                              }
+                              if (video) {
+                                src = 'assets/img/video.png';
+                                classCss = 'video-attach'
+                              }
+                              this.attachments.push({ name: attachments.name, type: attachments.type, path: attachments.path });
+                              this.attachmentsView.push({ name: attachments.name, type: attachments.type, path: resDonwloadURL, size: resMetaData.size, src: src, class: classCss });
+                              this.loading = false;
+                            },
+                            error => { // error getMetaData
+                              this.loading = false;
+                              this._errorService.handleErrorByCode(error.code);
+                            }
+                          );
                       },
-                      error => { // error attachments
+                      error => { // error getDownloadURL
                         this.loading = false;
                         this._errorService.handleErrorByCode(error.code);
                       }
@@ -96,87 +111,67 @@ export class UploadPageComponent implements OnInit {
   startUpload(event: FileList) {
     for (let i = 0; i < event.length; i++) {
       const file = event[i];
-      // const date = new Date().toLocaleString().replace(/\//g, '-');
-      // const date = new Date().toISOString().replace('T', ' ').slice(0, 19);
-      const date = new Date().toLocaleDateString().split('/').reverse().toString().replace(',', '-').replace(',', '-');
+      const date = new Date().toLocaleDateString().split('/').reverse().join().replace(/,/g, '-');
       const time = new Date().toLocaleTimeString();
       const name = file.name;
       // The storage path
-      const path = `${this.folderStorage}/${date} ${time} ${name}`;
+      const path = `${this.folderStorage}${date} ${time} ${name}`;
       // Totally optional metadata
       const metadata = {
         customMetadata: {
           'location': 'Araucária, PR, Brazil',
-          'activity': 'complementary-activity'
+          'activity': 'complementary-activity',
+          'user': 'user'
         }
       }
-      // Validation if file is image, pdf or video, otherwise display message format not supported
+      // Validation if file is imagpe, pdf or video, otherwise display message format not supported
       const image = true ? file.type.split('/')[0] === 'image' : false;
       const pdf = true ? file.type.split('/')[1] === 'pdf' : false;
       const video = true ? file.type.split('/')[0] === 'video' : false;
 
       if (image || pdf || video) {
-        if (file.size < 1024 * 1024 * this.fileSize) {
-          this.attachments.push({ name: file.name, type: file.type, url: path });
+        if (file.size < 1024 * 1024 * this.maxfileSize) {
+          this.attachments.push({ name: file.name, type: file.type, path: path });
           this.task = this._storage.upload(path, file, metadata);
           this.percentage$ = this.task.percentageChanges();
-          this.uploadState$ = this.task.snapshotChanges().pipe(map(s => s.state));
+          // this.uploadState$ = this.task.snapshotChanges().pipe(map(s => s.state));
+          this.task.snapshotChanges().subscribe(res => { this.uploadState = res.state });
           this.snapshot$ = this.task.snapshotChanges();
           this.task.snapshotChanges()
             .pipe(
               finalize(() => {
                 this._notify.update('success', `Upload efetuado com sucesso.`);
-                this._storage.ref(path).getDownloadURL()
-                  .subscribe(
-                    res => {
-                      // console.log(res);
-                      this.downloadURL = res;
-                    }
-                  );
+                this.downloadURL$ = this._storage.ref(path).getDownloadURL();
+                this.uploadState = null;
+                // this.saveEvent.emit(true);
               })).subscribe();
-          this.renderAttach(file, this.downloadURL);
+          this.renderAttach(file, this.downloadURL$, file.size);
         } else {
-          this._notify.update('warning', `O tamanho do arquivo deve ser inferior a ${this.fileSize}MB.`);
+          this._notify.update('warning', `O tamanho do arquivo deve ser inferior a ${this.maxfileSize}MB.`);
         }
       } else {
-        this._notify.update('warning', `Arquivo '${file.name}' não suportado. <br> Apenas arquivos com extensão: jpeg, png, pdf ou mp4.`);
+        this._notify.update('warning', `Arquivo '${file.name}' não suportado. <br> Apenas arquivos com extensão: <br> ${this.filesAccept}.`.replace(/,/g, ', '));
       }
     }
   }
 
-  renderAttach(file, downloadURL) {
-
+  renderAttach(file, downloadURL, size) {
     const image = true ? file.type.split('/')[0] === 'image' : false;
     const pdf = true ? file.type.split('/')[1] === 'pdf' : false;
     const video = true ? file.type.split('/')[0] === 'video' : false;
-
     if (image) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        this.attachmentsView.push({ name: file.name, type: file.type, src: reader.result, url: downloadURL, class: 'img-attach' });
+        this.attachmentsView.push({ name: file.name, type: file.type, path: reader.result, size: size, src: reader.result, class: 'img-attach' });
       };
       reader.readAsDataURL(file);
     }
     if (pdf) {
-      this.attachmentsView.push({ name: file.name, type: file.type, src: 'assets/img/pdf.png', url: downloadURL, class: 'pdf-attach' });
+      this.attachmentsView.push({ name: file.name, type: file.type, path: downloadURL, size: size, src: 'assets/img/pdf.png', class: 'pdf-attach' });
     }
     if (video) {
-      this.attachmentsView.push({ name: file.name, type: file.type, src: 'assets/img/video.png', url: downloadURL, class: 'video-attach' });
+      this.attachmentsView.push({ name: file.name, type: file.type, path: downloadURL, size: size, src: 'assets/img/video.png', class: 'video-attach' });
     }
-  }
-
-  deleteAttach() {
-    this._messageService.clear();
-    const path = this.attachments[this.indexDelete].url;
-    this._storage.ref(path).delete().toPromise()
-      .then(() => {
-        this._notify.update('success', `Anexo: '${this.attachments[this.indexDelete].name}' deletado com sucesso.`);
-        this.attachments.splice(this.indexDelete, 1);
-        this.attachmentsView.splice(this.indexDelete, 1);
-      })
-      .catch((error) => {
-        this._errorService.handleErrorByCode(error.code);
-      })
   }
 
   confirm(attach, index: number) {
@@ -187,20 +182,52 @@ export class UploadPageComponent implements OnInit {
     });
   }
 
+  deleteAttach() {
+    this._messageService.clear();
+    const path = this.attachments[this.indexDelete].path;
+    this._storage.ref(path).delete().toPromise()
+      .then(() => {
+        this._notify.update('success', `Anexo: '${this.attachments[this.indexDelete].name}' deletado com sucesso.`);
+        this.attachments.splice(this.indexDelete, 1);
+        this.attachmentsView.splice(this.indexDelete, 1);
+        this.resetProgress();
+        // this.saveEvent.emit(true);
+      })
+      .catch((error) => {
+        this._errorService.handleErrorByCode(error.code);
+      });
+  }
+
   showAttach(attach) {
     this.attachView = attach;
     // document.getElementById('main').classList.add('filter-blur');
   }
 
   cancelUpload() {
+    const indexDelete = this.attachments.length - 1;
     this.task.cancel();
     this.percentage$ = null;
-    this.uploadState$ = null;
+    this.uploadState = null;
     this.snapshot$ = null;
+    this._notify.update('success', `Anexo: '${this.attachments[indexDelete].name}' cancelado com sucesso.`);
+    this.attachments.splice(indexDelete, 1);
+    this.attachmentsView.splice(indexDelete, 1);
   }
 
   toggleHover(event) {
     this.isHovering = event;
+  }
+
+  resetAttachments() {
+    this.attachmentsView = [];
+    this.attachments = [];
+    this.ngOnDestroy();
+  }
+
+  resetProgress() {
+    this.percentage$ = null;
+    this.uploadState = null;
+    this.snapshot$ = null;
   }
 
   ngOnDestroy() {

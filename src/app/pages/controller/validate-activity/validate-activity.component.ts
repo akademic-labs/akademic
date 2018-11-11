@@ -18,7 +18,6 @@ export class ValidateActivityComponent implements OnInit {
   activity: Activity;
   attachmentsView: AttachmentView[] = [];
   isApproved: boolean;
-  display: boolean;
   attachView;
   loading = true;
 
@@ -32,29 +31,41 @@ export class ValidateActivityComponent implements OnInit {
 
   ngOnInit() {
     this.activity = this._route.snapshot.data['activity'];
-
     if (this.activity.attachments.length) {
       this.activity.attachments.forEach(attachments => {
-        this._storage.ref(attachments.url).getDownloadURL()
+        this._storage.ref(attachments.path).getDownloadURL()
           .subscribe(
-            res => {
-
-              const image = true ? attachments.type.split('/')[0] === 'image' : false;
-              const pdf = true ? attachments.type.split('/')[1] === 'pdf' : false;
-              const video = true ? attachments.type.split('/')[0] === 'video' : false;
-
-              if (image) {
-                this.attachmentsView.push({ name: attachments.name, type: attachments.type, src: res, url: res, class: 'img-attach' });
-              }
-              if (pdf) {
-                this.attachmentsView.push({ name: attachments.name, type: attachments.type, src: 'assets/img/pdf.png', url: res, class: 'pdf-attach' });
-              }
-              if (video) {
-                this.attachmentsView.push({ name: attachments.name, type: attachments.type, src: 'assets/img/video.png', url: res, class: 'video-attach' });
-              }
-              this.loading = false;
+            resDonwloadURL => {
+              this._storage.ref(attachments.path).getMetadata()
+                .subscribe(
+                  resMetaData => {
+                    let src;
+                    let classCss;
+                    const image = true ? attachments.type.split('/')[0] === 'image' : false;
+                    const pdf = true ? attachments.type.split('/')[1] === 'pdf' : false;
+                    const video = true ? attachments.type.split('/')[0] === 'video' : false;
+                    if (image) {
+                      src = resDonwloadURL;
+                      classCss = 'img-attach'
+                    }
+                    if (pdf) {
+                      src = 'assets/img/pdf.png';
+                      classCss = 'pdf-attach'
+                    }
+                    if (video) {
+                      src = 'assets/img/video.png';
+                      classCss = 'video-attach'
+                    }
+                    this.attachmentsView.push({ name: attachments.name, type: attachments.type, path: resDonwloadURL, size: resMetaData.size, src: src, class: classCss });
+                    this.loading = false;
+                  },
+                  error => { // error getMetaData
+                    this._errorService.handleErrorByCode(error.code);
+                    this.loading = false;
+                  }
+                );
             },
-            error => {
+            error => { // error getDownloadURL
               this._errorService.handleErrorByCode(error.code);
               this.loading = false;
             }

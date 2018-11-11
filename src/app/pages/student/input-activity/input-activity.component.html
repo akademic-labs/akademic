@@ -14,7 +14,7 @@
                         <div class="col-xs-12">
                             <div class="form-group">
                                 <label>Anexos</label>
-                                <aka-upload-page></aka-upload-page>
+                                <aka-upload-page (saveEvent)="save()"></aka-upload-page>
                             </div>
                         </div>
                     </div>
@@ -116,13 +116,14 @@
                         <div class="col-xs-12">
                             <div class="form-group">
                                 <label for="observation">Observação</label>
-                                <textarea rows="3" class="form-control" formControlName="observation" placeholder="Aqui você pode colocar sua observação.."></textarea>
+                                <textarea rows="3" maxlength="500" class="form-control" formControlName="observation"
+                                    placeholder="Aqui você pode colocar sua observação.."></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-3 right">
-                            <button type="submit" class="btn btn-action btn-block" [disabled]="disabledSave && activityForm.invalid">
+                            <button type="submit" class="btn btn-action btn-block" [disabled]="(disabledSave && activityForm.invalid) || uploadPage.uploadState === 'running'">
                                 {{ buttonSave }}</button>
                         </div>
                     </div>
@@ -131,3 +132,5 @@
         </div>
     </div>
 </div>
+
+<!-- <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog> -->

@@ -54,11 +54,11 @@ export class ActivityService {
     this.notify.update('success', 'Atividade cadastrada com sucesso!');
   }
 
-  async updateActivity(content: Activity, attachments) {
+  async updateActivity(content: Activity, uid: string, attachments) {
     content.attachments = attachments;
     const user = await this.auth.user$.pipe(take(1)).toPromise();
     content.user = user.uid;
-    await this.dbService.set<Activity>(`activities/${content.uid}`, content);
+    await this.dbService.set<Activity>(`activities/${uid}`, content);
     this.notify.update('success', 'Atividade atualizada com sucesso!');
   }
 
