@@ -4,14 +4,14 @@
     justify-content: center;
     flex-direction: column;
     font-weight: 200;
-    border: 2px dashed #b224ef;
+    border: 2px dashed var(--akademic-color2);
     border-radius: 5px;
     background: white;
     margin: 10px 0;
 }
 
 .dropzone:hover {
-    border: 2px solid #b224ef;
+    border: 2px solid var(--akademic-color2);
 }
 
 .file-cta {
@@ -63,36 +63,14 @@
 
 .progress-custom {
     height: 10px;
-    margin-bottom: 0px;
     width: 100%;
-}
-
-progress::-webkit-progress-value {
-    transition: width 0.1s ease;
-}
-
-progress::-webkit-progress-value {
-    background: #b224ef;
+    margin: 10px 0px 5px 0px;
 }
 
 progress::-webkit-progress-bar {
-    background: lightblue;
-}
-
-progress::-webkit-progress-bar {
-    border: 0;
-    height: 10px;
-    border-radius: 16px;
+    background: #d5b3e5;
 }
 
 progress::-webkit-progress-value {
-    border: 0;
-    height: 10px;
-    border-radius: 16px;
-}
-
-progress::-moz-progress-bar {
-    border: 0;
-    height: 10px;
-    border-radius: 16px;
+    background: var(--akademic-color2);
 }

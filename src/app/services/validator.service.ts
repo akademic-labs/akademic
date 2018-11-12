@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+
 import { NotifyService } from './notify.service';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { NotifyService } from './notify.service';
 })
 export class ValidatorService {
 
-  constructor(private _notify: NotifyService) {}
+  constructor(private _notify: NotifyService) { }
 
   markAllFieldsAsDirty(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {

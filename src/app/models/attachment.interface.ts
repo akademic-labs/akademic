@@ -1,13 +1,14 @@
 export interface Attachment {
   name: string;
   type: string;
-  url: string;
+  path: string;
 }
 
 export interface AttachmentView {
   name: string;
   type: string;
+  path: any;
+  size: number;
   src: any;
   class: string;
-  url: string;
 }

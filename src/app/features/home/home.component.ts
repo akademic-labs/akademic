@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/components/common/messageservice';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { Activity } from '../../models/activity.interface';
 import { User } from '../../models/user.interface';
 import { UtilsService } from '../../services/utils.service';
+import { Activity } from './../../models/activity.interface';
 import { ChartData } from './../../models/chart-data.interface';
 import { ActivityService } from './../../services/activity.service';
 import { AuthService } from './../../services/auth.service';
@@ -37,13 +38,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   activitiesToAnalyze$: Observable<Activity[]>;
   activitiesStudent: Activity[];
   user: User;
+  activity: Activity;
 
   constructor(
     private _auth: AuthService,
     private _activityService: ActivityService,
     private _router: Router,
     public _rolesService: RolesService,
-    private _utilsService: UtilsService
+    private _utilsService: UtilsService,
+    private _messageService: MessageService
   ) { }
 
   ngOnInit() {
@@ -189,6 +192,19 @@ export class HomeComponent implements OnInit, OnDestroy {
         maintainAspectRatio: false
       }
     };
+  }
+
+  confirm(activity) {
+    this.activity = activity;
+    this._messageService.add({
+      key: 'confirmation', sticky: true, severity: 'warn', summary: 'Tem certeza?',
+      detail: `Deseja realmente excluir '${activity.description}'?`
+    });
+  }
+
+  deleteActivity() {
+    this._messageService.clear();
+    this._activityService.deleteActivity(this.activity.uid);
   }
 
   ngOnDestroy() {

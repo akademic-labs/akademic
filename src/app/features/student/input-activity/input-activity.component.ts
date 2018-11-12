@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UploadsPageComponent } from 'app/shared/uploads-page/uplodas-page/uploads-page.component';
 import { Observable, Subscription } from 'rxjs';
 
 import { UtilsService } from '../../../services/utils.service';
-import { UploadPageComponent } from '../../../uploads/upload-page/upload-page.component';
 import { ActivityType } from './../../../models/activity-type.interface';
 import { Cities } from './../../../models/cities.interface';
 import { States } from './../../../models/states.interface';
@@ -20,7 +20,7 @@ import { ValidatorService } from './../../../services/validator.service';
 })
 export class InputActivityComponent implements OnInit, OnDestroy {
 
-  @ViewChild(UploadPageComponent) uploadPage: UploadPageComponent;
+  @ViewChild(UploadsPageComponent) uploadPage: UploadsPageComponent;
   @ViewChild('inputFocus') focus: ElementRef;
   activityForm: FormGroup;
   activityTypes$: Observable<ActivityType[]>;
@@ -38,13 +38,15 @@ export class InputActivityComponent implements OnInit, OnDestroy {
     private _actTypesService: ActivityTypeService,
     private _validatorService: ValidatorService,
     private _utilsService: UtilsService,
+    private _errorService: ErrorService,
     private _route: ActivatedRoute,
-    private _errorService: ErrorService
+    private _router: Router
   ) { }
 
   ngOnInit() {
     // window.scrollTo(0, 0);
     this.buildForm();
+    setTimeout(() => { this.focus.nativeElement.focus() }, 100);
     this.activityTypes$ = this._actTypesService.get();
     this.states$ = this._utilsService.getStates();
     this.subscribe = this._route.paramMap.subscribe(params => {
@@ -83,17 +85,22 @@ export class InputActivityComponent implements OnInit, OnDestroy {
   }
 
   getCities() {
-    this.cities$ = this._utilsService.getCities(this.activityForm.get('state').value.id);
+    if (this.activityForm.get('state').value) {
+      this.cities$ = this._utilsService.getCities(this.activityForm.get('state').value.id);
+    } else {
+      this.activityForm.get('city').setValue(null);
+      this.cities$ = null;
+    }
   }
 
   save() {
     if (this.activityForm.valid) {
       if (this.activityForm.get('uid').value) {
-        this._activityService.updateActivity(this.activityForm.getRawValue(), this.uploadPage.attachments);
-        this.renderForm();
+        this._activityService.updateActivity(this.activityForm.value, this.activityForm.get('uid').value, this.uploadPage.attachments);
+        this.resetForm();
       } else {
         this._activityService.createActivity(this.activityForm.value, this.uploadPage.attachments);
-        this.renderForm();
+        this.resetForm();
       }
     } else {
       this._validatorService.markAllFieldsAsDirty(this.activityForm);
@@ -101,13 +108,12 @@ export class InputActivityComponent implements OnInit, OnDestroy {
     }
   }
 
-  renderForm() {
+  resetForm() {
     this.activityForm.reset();
-    setTimeout(() => { this.focus.nativeElement.focus() }, 100);
-    // this.uploadPage.attachments = [];
-    // this.uploadPage.attachmentsView = [];
-    // this.uploadPage.ngOnDestroy();
-    // this.uploadPage.ngOnInit();
+    this.uploadPage.resetProgress();
+    this.uploadPage.resetAttachments();
+    this.ngOnDestroy();
+    this._router.navigate(['/input-activity']);
   }
 
   ngOnDestroy() {
