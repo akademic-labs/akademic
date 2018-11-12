@@ -17,9 +17,9 @@
       <i class="fa fa-user-circle-o"></i>
     </span>
     <div class="form-group">
-      <label class="control-label">E-mail</label>
+      <label for="email" class="control-label">E-mail</label>
       <small *ngIf="isReseting" class="show">Será enviado um link para troca de senha no seu e-mail.</small>
-      <input type="email" class="form-control" formControlName="email" required autofocus>
+      <input type="email" class="form-control" id="email" formControlName="email" required autofocus>
     </div>
   </div>
 
@@ -28,8 +28,8 @@
       <i class="fa fa-unlock-alt"></i>
     </span>
     <div class="form-group">
-      <label class="control-label">Senha</label>
-      <input type="password" class="form-control" formControlName="password" required>
+      <label for="senha" class="control-label">Senha</label>
+      <input type="password" class="form-control" id="senha" formControlName="password" required>
     </div>
   </div>
 

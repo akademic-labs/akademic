@@ -213,24 +213,6 @@ body .ui-paginator {
     padding-top: 10px;
 }
 
-
-/* Lightbox */
-body p-lightbox img {
-    width: 200px;
-    height: 300px;
-    margin-right: 20px;
-}
-
-body .ui-lightbox .ui-lightbox-caption {
-    width: 200px;
-}
-
-body p-lightbox span {
-    width: 150px;
-    word-wrap: break-word;
-}
-
-
 /* Fileupload */
 body .ui-fileupload .ui-fileupload-buttonbar {
     background-color: white;

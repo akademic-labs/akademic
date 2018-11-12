@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFVZ0b.woff2) format('woff2');
+ }
+
 /* akademic custom css */
 
 :root {
@@ -7,7 +15,7 @@
   /* COLOR BORDER - VALIDATION */
   --border-valid: 1px solid var(--color-valid);
   --border-invalid: 1px solid var(--color-invalid);
-  --color-label: #848484;
+  --color-label: #585858;
   --akademic-color: #9c27b0;
   --akademic-gradient: linear-gradient(60deg, #b224ef, #7579ff);
 }
@@ -177,7 +185,7 @@
 body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
 h1,
@@ -750,7 +758,7 @@ input:focus {
   background-color: #FFF;
   border: 1px solid #E3E3E3;
   border-radius: 4px;
-  color: #848484;
+  color: #585858;
   padding: 8px 12px;
   height: 35px;
   -webkit-box-shadow: none;
@@ -1542,7 +1550,7 @@ fieldset[disabled] .form-control {
 .card label {
   font-size: 14px;
   font-weight: 400;
-  color: #848484;
+  color: #585858;
   margin-bottom: 0;
 }
 
