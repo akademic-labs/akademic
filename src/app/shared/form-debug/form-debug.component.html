@@ -1,8 +1,8 @@
 <div *ngIf="form">
-  <hr>
   <h5> Detalhes do Formulário</h5>
-  <pre>Válido: {{ form.valid }}</pre>
-  <pre>Submetido: {{ form.submitted }}</pre>
-  <pre>Valores:{{ form.value | json }}</pre>
+  <pre>
+    Válido: {{ form.valid }}
+    Valores: {{ form.value | json }}
+  </pre>
   <hr>
 </div>

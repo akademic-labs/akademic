@@ -30,7 +30,7 @@ export class InputActivityComponent implements OnInit, OnDestroy {
   subscribe: Subscription;
   years = ['2018', '2017', '2016', '2015'];
   semesters = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  buttonSave = 'Salvar';
+  labelButton = 'Salvar';
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -47,15 +47,18 @@ export class InputActivityComponent implements OnInit, OnDestroy {
     // window.scrollTo(0, 0);
     this.buildForm();
     setTimeout(() => { this.focus.nativeElement.focus() }, 100);
+
     this.activityTypes$ = this._actTypesService.get();
+
     this.states$ = this._utilsService.getStates();
+
     this.subscribe = this._route.paramMap.subscribe(params => {
       if (params.get('id')) {
         this._activityService.getActivityById(params.get('id'))
-          .subscribe(
-            activity => {
-              this.buttonSave = 'Atualizar';
+          .subscribe(activity => {
+              this.labelButton = 'Atualizar';
               this.activityForm.patchValue(activity);
+              this.getCities();
             },
             error => {
               this._errorService.handleErrorByCode(error.code);
@@ -114,6 +117,10 @@ export class InputActivityComponent implements OnInit, OnDestroy {
     this.uploadPage.resetAttachments();
     this.ngOnDestroy();
     this._router.navigate(['/input-activity']);
+  }
+
+  compareActivityType(activityType: ActivityType, activityType2: ActivityType) {
+    return activityType && activityType2 ? activityType.uid === activityType2.uid : activityType === activityType2;
   }
 
   ngOnDestroy() {

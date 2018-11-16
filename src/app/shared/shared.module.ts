@@ -13,22 +13,15 @@ import { ChartCardModule } from './chart-card/chart-card.module';
 import { ConfirmationModule } from './confirmation/confirmation.module';
 import { MessageControlErrorComponent } from './message-control-error/message-control-error.component';
 import { UploadsModule } from './uploads-page/uploads.module';
+import { FormDebugComponent } from './form-debug/form-debug.component';
 
 @NgModule({
     imports: [
-        CommonModule,
-        // PrimeNG
-        ToastModule,
-        TooltipModule,
-        TableModule,
-        DropdownModule,
-        // Pipes
-        PipesModule,
-        // Directives
-        DirectivesModule
+        CommonModule
     ],
     declarations: [
-        MessageControlErrorComponent
+        MessageControlErrorComponent,
+        FormDebugComponent
     ],
     exports: [
         CommonModule,
@@ -36,6 +29,7 @@ import { UploadsModule } from './uploads-page/uploads.module';
         // Components
         ConfirmationModule,
         MessageControlErrorComponent,
+        FormDebugComponent,
         ChartCardModule,
         UploadsModule,
         // PrimeNG

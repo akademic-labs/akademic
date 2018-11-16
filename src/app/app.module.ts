@@ -13,16 +13,12 @@ import { HomeModule } from './features/home/home.module';
 import { ProfileModule } from './features/profile/profile.module';
 import { SignModule } from './features/sign/sign.module';
 import { AuthGuard } from './guards/auth.guard';
-import { ToSelectIdPipe } from './pipes/to-select-id.pipe';
-import { FormDebugComponent } from './shared/form-debug/form-debug.component';
 
 export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
   declarations: [
-    AppComponent,
-    FormDebugComponent,
-    ToSelectIdPipe
+    AppComponent
   ],
   imports: [
     BrowserModule,

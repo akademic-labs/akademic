@@ -41,7 +41,7 @@ export class ActivityService {
   }
 
   getActivityById(uid: string): Observable<Activity> {
-    return this.dbService.docWithId$('activities/' + uid).pipe(
+    return this.dbService.docWithId$<Activity>('activities/' + uid).pipe(
       documentJoin(this.afs, { user: 'users' })
     );
   }
