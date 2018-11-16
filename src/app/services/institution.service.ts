@@ -28,8 +28,21 @@ export class InstitutionService {
     return this.dbService.colWithId$<Institution>('institutions', ref => ref.where('uf', '==', uf));
   }
 
+  getInstitutionById(institutionUid: string) {
+    return this.dbService.docWithId$<Institution>(`institutions/${institutionUid}`);
+  }
+
   getInstitutionCourses(institutionUid: string) {
     return this.dbService.col$<Course>(`institutions/${institutionUid}/courses`);
+  }
+
+  async setCourse(institutionUid: string, course: Course) {
+    try {
+      await this._afs.collection<Course>(`institutions/${institutionUid}/courses`).doc(course.uid).set(course);
+      return this._notify.update('success', `Curso ${course.name} adicionado com sucesso!`);
+    } catch (error) {
+      return this._errorService.handleErrorByCode(error.code);
+    }
   }
 
   post(content: Institution) {

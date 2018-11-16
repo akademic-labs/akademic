@@ -1,22 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { AuthService } from 'app/services/auth.service';
-import { User } from 'app/models/user.interface';
+import { Component, Input, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
+
+import { Course } from './../../../models/course.interface';
+import { User } from './../../../models/user.interface';
+import { AuthService } from './../../../services/auth.service';
+import { CourseService } from './../../../services/course.service';
+import { InstitutionService } from './../../../services/institution.service';
 
 @Component({
   selector: 'aka-sign-up',
   templateUrl: './sign-up.component.html'
 })
 export class SignUpComponent implements OnInit {
+  @Input() hasAccountLink = true;
+
+  courses$: Observable<Course[]>;
   signUpForm: FormGroup;
 
-  constructor(private fb: FormBuilder, public _auth: AuthService) { }
+  constructor(private fb: FormBuilder, public _auth: AuthService,
+    private _institutionService: InstitutionService, private _coursesService: CourseService) { }
 
   ngOnInit() {
     this.buildForm();
+
+    this.courses$ = this._auth.user$.pipe(
+      take(1),
+      switchMap(user => {
+        if (user) {
+          return this._institutionService.getInstitutionCourses(user.institution);
+        } else {
+          return this._coursesService.get();
+        }
+      }));
   }
 
-  onSubmit({ value, valid }: { value, valid: boolean }) {
+  onSubmit({ value, valid }: { value: User, valid: boolean }) {
     if (valid) {
       const dataUser: User = {
         uid: null,
@@ -25,7 +45,8 @@ export class SignUpComponent implements OnInit {
         photoURL: null,
         status: 'A',
         roles: value.roles,
-        createdAt: new Date()
+        createdAt: new Date(),
+        course: value.course
       };
       this._auth.createUserWithEmailAndPassword(dataUser, value.password);
     }
@@ -37,7 +58,10 @@ export class SignUpComponent implements OnInit {
         Validators.required,
         Validators.email
       ]],
-      displayName: ['', Validators.required],
+      displayName: ['', [
+        Validators.required,
+        Validators.pattern('[a-zA-ZÀ-ú ]*')
+      ]],
       password: ['', [
         Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
         Validators.minLength(8),
@@ -47,7 +71,8 @@ export class SignUpComponent implements OnInit {
       confirmPassword: ['', Validators.required],
       roles: this.fb.group({
         student: [true]
-      })
+      }),
+      course: [null, Validators.required]
     }, {
         validator: this.matchPassword // validation method for password
       }

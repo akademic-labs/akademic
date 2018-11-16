@@ -30,6 +30,7 @@ export interface User {
   providerId?: string;
   roles: Roles;
   course?: string;
+  institution?: string;
   address?: Address;
   about?: string;
 }

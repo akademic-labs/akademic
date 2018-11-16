@@ -43,8 +43,19 @@
     </div>
   </div>
 
-  <div class="flex-space">
-    <label type="button" class="text-primary pointer left" [routerLink]="['/']">Já tem uma conta?</label>
-    <button type="submit" class="btn btn-action right" [disabled]="!signUpForm.valid">Criar conta</button>
+  <div class="row">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <label for="course">Curso</label>
+          <p-dropdown formControlName="course" placeholder="Selecione" emptyFilterMessage="Nenhum resultado."
+            [options]="courses$ | async" optionLabel="name" optionValue="uid" [showClear]="true" filter="true"></p-dropdown>
+        </div>
+        <aka-message-control-error [control]="signUpForm.get('course')" error="required" msg="Curso é obrigatório."></aka-message-control-error>
+      </div>
+    </div>
+
+  <div class="clearfix">
+    <label *ngIf="hasAccountLink" type="button" class="text-primary pointer pull-left" [routerLink]="['/']">Já tem uma conta?</label>
+    <button type="submit" class="btn btn-action pull-right" [disabled]="!signUpForm.valid">Criar conta</button>
   </div>
 </form>

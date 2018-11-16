@@ -9,8 +9,7 @@
                         <a href="#">
                             <img class="avatar border-gray" [src]="user.photoURL ? user.photoURL : '../../../assets/img/default-avatar.png'"
                                 alt="Foto do perfil" />
-                            <h4 class="title">{{user.displayName}}
-                            </h4>
+                            <h4 class="title">{{user.displayName}}</h4>
                         </a>
                     </div>
                 </div>
@@ -18,7 +17,9 @@
             <div class="card">
                 <div class="content">
                     <h4 class="title">
-                        <h4 class="title">{{user.roles.student ? 'Estudante' : user.roles.controller ? 'Coordenador' : 'Instituição'}}</h4>
+                        <h4 class="title">
+                            {{user.roles.student ? 'Estudante' : user.roles.controller ? 'Coordenador' : 'Instituição'}}
+                        </h4>
                         <small>E-mail: {{user.email}}</small>
                     </h4>
                 </div>
@@ -47,14 +48,11 @@
                                 </div>
                                 <aka-message-control-error [control]="form.get('displayName')" error="required" msg="Nome completo é obrigatório."></aka-message-control-error>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-5" *ngIf="user.roles.student || user.roles.controller">
                                 <div class="form-group">
                                     <label>Data de nascimento</label>
                                     <div class="input-group">
                                         <input type="date" class="form-control" formControlName="birthday">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +114,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" *ngIf="user.roles.student">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Vincular Instituição</label>
@@ -136,7 +134,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Sobre mim</label>
+                                    <label>Sobre</label>
                                     <textarea rows="3" class="form-control" placeholder="Aqui você pode colocar sua descrição"
                                         formControlName="about"></textarea>
                                 </div>

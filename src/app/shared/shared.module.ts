@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
+import { PickListModule } from 'primeng/picklist';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
@@ -42,6 +43,7 @@ import { UploadsModule } from './uploads-page/uploads.module';
         TooltipModule,
         TableModule,
         DropdownModule,
+        PickListModule,
         // Pipes
         PipesModule,
         // Directives
