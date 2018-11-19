@@ -18,30 +18,26 @@ import { ErrorService } from './../../../services/error.service';
 export class UploadsPageComponent implements OnInit {
 
   folderStorage = 'dev/';
-  filesAccept = ['image/jpeg', 'image/png', 'application/pdf', 'image/x-eps', 'video/mp4'];
+  filesAccept = ['image/jpeg', 'image/png', 'application/pdf', 'video/mp4'];
   maxfileSize = 50; // MB
-
   attachments: Attachment[] = [];
   attachmentsView: AttachmentView[] = [];
   subscribe: Subscription;
-  indexDelete;
-  attachView;
-  loading;
-
+  indexDelete: number;
+  attachView: AttachmentView;
+  loading: boolean;
   task: AngularFireUploadTask;
   snapshot$: Observable<any>;
   percentage$: Observable<number>;
-  // uploadState$: Observable<string>;
   uploadState: string;
   downloadURL$: Observable<string>;
+  @Output() saveEvent = new EventEmitter();
 
   // State for dropzone CSS toggling
   isHovering: boolean;
 
-  @Output() saveEvent = new EventEmitter();
-
   constructor(
-    private _notify: NotifyService,
+    private _notifyService: NotifyService,
     public _messageService: MessageService,
     private _route: ActivatedRoute,
     private _storage: AngularFireStorage,
@@ -124,7 +120,7 @@ export class UploadsPageComponent implements OnInit {
           'user': 'user'
         }
       }
-      // Validation if file is imagpe, pdf or video, otherwise display message format not supported
+      // Validation if file is image, pdf or video, otherwise display message format not supported
       const image = true ? file.type.split('/')[0] === 'image' : false;
       const pdf = true ? file.type.split('/')[1] === 'pdf' : false;
       const video = true ? file.type.split('/')[0] === 'video' : false;
@@ -134,23 +130,22 @@ export class UploadsPageComponent implements OnInit {
           this.attachments.push({ name: file.name, type: file.type, path: path });
           this.task = this._storage.upload(path, file, metadata);
           this.percentage$ = this.task.percentageChanges();
-          // this.uploadState$ = this.task.snapshotChanges().pipe(map(s => s.state));
           this.task.snapshotChanges().subscribe(res => { this.uploadState = res.state });
           this.snapshot$ = this.task.snapshotChanges();
           this.task.snapshotChanges()
             .pipe(
               finalize(() => {
-                this._notify.update('success', `Upload efetuado com sucesso.`);
+                this._notifyService.update('success', `Upload efetuado com sucesso.`);
                 this.downloadURL$ = this._storage.ref(path).getDownloadURL();
                 this.uploadState = null;
                 // this.saveEvent.emit(true);
               })).subscribe();
           this.renderAttach(file, this.downloadURL$, file.size);
         } else {
-          this._notify.update('warning', `O tamanho do arquivo deve ser inferior a ${this.maxfileSize}MB.`);
+          this._notifyService.update('warning', `O tamanho do arquivo deve ser inferior a ${this.maxfileSize}MB.`);
         }
       } else {
-        this._notify.update('warning', `Arquivo '${file.name}' não suportado. <br> Apenas arquivos com extensão: <br> ${this.filesAccept}.`.replace(/,/g, ', '));
+        this._notifyService.update('warning', `Arquivo '${file.name}' não suportado. <br> Apenas arquivos com extensão: <br> ${this.filesAccept}.`.replace(/,/g, ', '));
       }
     }
   }
@@ -187,7 +182,7 @@ export class UploadsPageComponent implements OnInit {
     const path = this.attachments[this.indexDelete].path;
     this._storage.ref(path).delete().toPromise()
       .then(() => {
-        this._notify.update('success', `Anexo: '${this.attachments[this.indexDelete].name}' deletado com sucesso.`);
+        this._notifyService.update('success', `Anexo: '${this.attachments[this.indexDelete].name}' deletado com sucesso.`);
         this.attachments.splice(this.indexDelete, 1);
         this.attachmentsView.splice(this.indexDelete, 1);
         this.resetProgress();
@@ -209,7 +204,7 @@ export class UploadsPageComponent implements OnInit {
     this.percentage$ = null;
     this.uploadState = null;
     this.snapshot$ = null;
-    this._notify.update('success', `Anexo: '${this.attachments[indexDelete].name}' cancelado com sucesso.`);
+    this._notifyService.update('success', `Anexo: '${this.attachments[indexDelete].name}' cancelado com sucesso.`);
     this.attachments.splice(indexDelete, 1);
     this.attachmentsView.splice(indexDelete, 1);
   }

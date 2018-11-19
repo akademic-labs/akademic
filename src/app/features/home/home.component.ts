@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   toAnalyze(data) {
-    this._router.navigate(['validate-activity/', data.uid]);
+    this._router.navigate(['/controller/validate-activity/', data.uid]);
   }
 
   buildChartByCategory(dataChart) {

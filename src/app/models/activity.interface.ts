@@ -16,6 +16,7 @@ export interface Activity {
   semester: number;
   link: string;
   hoursDuration: number;
+  feedback?: string;
 
   city: Cities;
   state: States;

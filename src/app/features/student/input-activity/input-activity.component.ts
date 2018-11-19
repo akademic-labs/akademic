@@ -1,9 +1,11 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, HostListener } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UploadsPageComponent } from 'app/shared/uploads-page/uplodas-page/uploads-page.component';
-import { Observable, Subscription } from 'rxjs';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { Observable, Subscription, Subject } from 'rxjs';
 
+import { FormCanDeactivate } from '../../../guards/deactivate.interface';
 import { UtilsService } from '../../../services/utils.service';
 import { ActivityType } from './../../../models/activity-type.interface';
 import { Cities } from './../../../models/cities.interface';
@@ -18,7 +20,7 @@ import { ValidatorService } from './../../../services/validator.service';
   templateUrl: './input-activity.component.html',
   styleUrls: ['./input-activity.component.css']
 })
-export class InputActivityComponent implements OnInit, OnDestroy {
+export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactivate {
 
   @ViewChild(UploadsPageComponent) uploadPage: UploadsPageComponent;
   @ViewChild('inputFocus') focus: ElementRef;
@@ -32,6 +34,15 @@ export class InputActivityComponent implements OnInit, OnDestroy {
   semesters = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   buttonSave = 'Salvar';
 
+  navigateAwaySelection$: Subject<boolean> = new Subject<boolean>();
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    if (!this.checkForm()) {
+      $event.returnValue = true;
+    }
+  }
+
   constructor(
     private _formBuilder: FormBuilder,
     private _activityService: ActivityService,
@@ -40,11 +51,11 @@ export class InputActivityComponent implements OnInit, OnDestroy {
     private _utilsService: UtilsService,
     private _errorService: ErrorService,
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _messageService: MessageService
   ) { }
 
   ngOnInit() {
-    // window.scrollTo(0, 0);
     this.buildForm();
     setTimeout(() => { this.focus.nativeElement.focus() }, 100);
     this.activityTypes$ = this._actTypesService.get();
@@ -79,8 +90,9 @@ export class InputActivityComponent implements OnInit, OnDestroy {
       local: ['', Validators.required],
       state: ['', Validators.required],
       city: ['', Validators.required],
-      observation: [''],
-      status: ['Pendente']
+      observation: ['', Validators.maxLength(500)],
+      status: ['Pendente'],
+      feedback: new FormControl({ value: null, disabled: true })
     });
   }
 
@@ -119,4 +131,82 @@ export class InputActivityComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscribe.unsubscribe();
   }
+
+  canDeactivate() {
+    // if (value) {
+    //   this._messageService.clear();
+    //   return true;
+    // } else
+    if (this.activityForm.dirty && this.activityForm.invalid && !this.disabledSave) {
+      this._messageService.add({
+        key: 'deactivate', sticky: true, severity: 'warn', summary: 'Tem certeza?',
+        detail: `Houve alterações no formulário, deseja realmente descartá-lo e mudar de tela'?`
+      });
+      // this._router.navigate(['/student/input-activity']);
+      return false;
+    } else {
+      this._messageService.clear();
+      return true;
+    }
+  }
+
+  checkForm() {
+    if (this.activityForm.dirty && this.activityForm.invalid && !this.disabledSave) {
+      // this._router.navigate(['/student/input-activity']);
+      // return false;
+      // this.canDeactivate2(false)
+      return false;
+    } else {
+      // this.canDeactivate2(true)
+      return true;
+    }
+    // else {
+    // this._messageService.clear();
+    // return true;
+    // }
+  }
+
+  canDeactivateDialog() {
+    if (this.checkForm() === false) {
+      this._messageService.add({
+        key: 'deactivate', sticky: true, severity: 'warn', summary: 'Tem certeza?',
+        detail: `Houve alterações no formulário, deseja realmente descartá-lo e mudar de tela'?`
+      });
+      // return false;
+    }
+    if (this.checkForm() === true) {
+      // this.canDeactivateFinal(true);
+      return true;
+    }
+    // if (value) {
+    // return this.checkForm();
+    // }
+    // return true;
+    // if (value) {
+    // this._messageService.clear();
+    // return value;
+    // } else if (this.activityForm.dirty && this.activityForm.invalid && !this.disabledSave) {
+    //   this._messageService.add({
+    //     key: 'deactivate', sticky: true, severity: 'warn', summary: 'Tem certeza?',
+    //     detail: `Houve alterações no formulário, deseja realmente descartá-lo e mudar de tela'?`
+    //   });
+    //   // this._router.navigate(['/student/input-activity']);
+    //   return false;
+    // } else {
+    //   this._messageService.clear();
+    //   return true;
+    // }
+    // return true;
+  }
+
+  canDeactivateFinal(choice?: boolean) {
+    if (choice) {
+      return this.navigateAwaySelection$.next(true);
+    } else {
+      // return this.canDeactivateDialog();
+      return this.navigateAwaySelection$.next(false);
+    }
+    // return value;
+  }
+
 }

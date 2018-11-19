@@ -1,4 +1,5 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { MessageService } from 'primeng/components/common/messageservice';
@@ -20,16 +21,21 @@ export class ValidateActivityComponent implements OnInit {
   isApproved: boolean;
   attachView;
   loading = true;
+  form: FormGroup;
+  @ViewChild('focus') focus: ElementRef;
 
   constructor(
     private _route: ActivatedRoute,
     private _activityService: ActivityService,
     private _storage: AngularFireStorage,
     public _messageService: MessageService,
-    private _errorService: ErrorService
+    private _errorService: ErrorService,
+    private _formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.buildForm();
+    document.getElementsByClassName('main-panel').item(0).scrollTop = 0;
     this.activity = this._route.snapshot.data['activity'];
     if (this.activity.attachments.length) {
       this.activity.attachments.forEach(attachments => {
@@ -58,6 +64,7 @@ export class ValidateActivityComponent implements OnInit {
                     }
                     this.attachmentsView.push({ name: attachments.name, type: attachments.type, path: resDonwloadURL, size: resMetaData.size, src: src, class: classCss });
                     this.loading = false;
+                    this.attachmentsView.sort()
                   },
                   error => { // error getMetaData
                     this._errorService.handleErrorByCode(error.code);
@@ -74,10 +81,10 @@ export class ValidateActivityComponent implements OnInit {
     } else { this.loading = false; }
   }
 
-  ngAfterViewInit() {
-    // window.scrollTo(0, 0);
-    // const contentContainer = document.querySelector('div') || window;
-    // contentContainer.scrollTo(0, 0);
+  buildForm() {
+    this.form = this._formBuilder.group({
+      feedback: ['', Validators.maxLength(500)],
+    });
   }
 
   showAttach(attach) {
@@ -88,13 +95,26 @@ export class ValidateActivityComponent implements OnInit {
   toConfirm(isApproved: boolean) {
     this.isApproved = isApproved;
     this._messageService.add({
-      key: 'confKey', severity: 'warn', summary: 'Tem certeza?',
+      key: 'confKey', sticky: true, severity: 'warn', summary: 'Tem certeza?',
       detail: `Confirma ${isApproved ? 'aprovação' : 'reprovação'} da atividade?`
     });
   }
 
   onAccept() {
     this.activity.status = this.isApproved ? 'Aprovada' : 'Reprovação';
+    this.activity.feedback = this.form.get('feedback').value;
     this._activityService.onApprove(this.activity, this.isApproved ? 'aprovada' : 'reprovada');
   }
+
+  // toFeedback() {
+  //   this.isFeedback = true;
+  //   this._messageService.clear();
+  //   setTimeout(() => { this.focus.nativeElement.focus(); }, 100);
+  // }
+
+  // onSend() {
+  //   this.activity.status = this.isApproved ? 'Aprovada' : 'Reprovação';
+  //   this.activity.feedback = this.form.get('feedback').value;
+  //   // this._activityService.onApprove(this.activity, this.isApproved ? 'aprovada' : 'reprovada');
+  // }
 }
