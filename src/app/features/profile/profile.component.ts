@@ -38,7 +38,15 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.user$.subscribe(user => {
-      this.form.patchValue(user);
+      // verify if user is institution and if it already has a user updated
+      if (user.roles.institution && !user.registration) {
+        this._institutionService.getInstitutionById(user.institution)
+          .subscribe(institution => {
+            this.setInstitutionToUser(institution);
+          })
+      } else {
+        this.form.patchValue(user);
+      }
     });
     this.buildForm();
   }
@@ -90,6 +98,18 @@ export class ProfileComponent implements OnInit {
     } else {
       this._notify.update('warning', 'CEP inválido.');
     }
+  }
+
+  setInstitutionToUser(data: Institution) {
+    this.form.patchValue({
+      displayName: data.instituicao,
+      registration: data.cnpj,
+      address: {
+        street: data.endereco,
+        city: data.municipio,
+        state: data.uf
+      }
+    })
   }
 
   setAddressForm(data) {

@@ -1,3 +1,17 @@
-<p>
-  courses works!
-</p>
+<div class="card">
+  <div class="header">
+    <div class="title">
+      <i class="fa fa-graduation-cap"></i>Cursos da Instituição
+    </div>
+    <hr>
+  </div>
+  <div class="content">
+    <p-pickList [source]="sourceCourses" [target]="targetCourses" sourceHeader="Disponíveis" targetHeader="Incluídos"
+      [responsive]="true" filterBy="name" sourceFilterPlaceholder="Filtre pela descrição" targetFilterPlaceholder="Filtre pela descrição"
+      [sourceStyle]="{'height':'500px'}" [targetStyle]="{'height':'500px'}" (onMoveToTarget)="onMoveToTarget($event)">
+      <ng-template let-course pTemplate="item">
+        <div class="mx-1 my-1">{{course.name}}</div>
+      </ng-template>
+    </p-pickList>
+  </div>
+</div>
