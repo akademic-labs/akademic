@@ -7,6 +7,9 @@ import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+
 import { DirectivesModule } from './../directives/directives.module';
 import { PipesModule } from './../pipes/pipes.module';
 import { ChartCardModule } from './chart-card/chart-card.module';
@@ -17,7 +20,17 @@ import { FormDebugComponent } from './form-debug/form-debug.component';
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        // PrimeNG
+        ToastModule,
+        TooltipModule,
+        TableModule,
+        DropdownModule,
+        ConfirmDialogModule,
+        // Pipes
+        PipesModule,
+        // Directives
+        DirectivesModule
     ],
     declarations: [
         MessageControlErrorComponent,
@@ -42,6 +55,7 @@ import { FormDebugComponent } from './form-debug/form-debug.component';
         PipesModule,
         // Directives
         DirectivesModule
-    ]
+    ],
+    providers: [ConfirmationService]
 })
 export class SharedModule { }

@@ -67,3 +67,7 @@ body.modal-is-open .nav-main-container {
     filter: blur(2px);
 }
 
+div:first-child {
+    opacity: .99 !important;
+    z-index: 99999999 !important;
+}

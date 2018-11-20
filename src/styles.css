@@ -4,7 +4,7 @@
   font-weight: 400;
   font-display: swap;
   src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFVZ0b.woff2) format('woff2');
- }
+}
 
 /* akademic custom css */
 
@@ -633,7 +633,7 @@ input:focus {
   float: right;
   width: calc(100% - 260px);
   min-height: 100%;
-  overflow: auto
+  overflow: auto;
 }
 
 .main-panel .main-content {
@@ -2481,7 +2481,6 @@ fieldset[disabled] .form-control {
 .show-attach {
   text-align: center;
   margin: 5px;
-  width: 90%;
 }
 
 .card-attach {
@@ -2554,6 +2553,10 @@ fieldset[disabled] .form-control {
   margin-top: -30px;
 }
 
+.status-attach {
+  margin: 0px 25px 10px 25px;
+}
+
 @media (max-width: 991px) {
   .main-panel {
     -webkit-transform: inherit;
@@ -2571,13 +2574,23 @@ fieldset[disabled] .form-control {
   margin: auto;
 }
 
-.iframe-dialog {
+.pdf-dialog {
   position: absolute;
   top: 10%;
   left: 10%;
   height: 85%;
   width: 80%;
   border: none;
+}
+
+.video-dialog {
+  position: absolute;
+  margin: auto;
+  top: 20%;
+  left: 0;
+  right: 0;
+  bottom: 15%;
+  width: 70%;
 }
 
 .title-dialog {
@@ -2691,3 +2704,8 @@ select {
       calc(100% - 20px) 1em,
       calc(100% - 2.5em) 0.5em;
 } */
+
+.iframe-loading {
+  /* background-image: url('/assets/img/loader-example.gif') center center no-repeat; */
+  /* background-color: blue; */
+}

@@ -36,7 +36,7 @@
             </div>
         </div>
         <div *ngIf="snapshot$ | async as snap">
-            <div *ngIf="percentage$ | async as pct" class="mb-5">
+            <div *ngIf="percentage$ | async as pct" class="status-attach">
                 <hr class="mb-5">
                 <button type="button" (click)="cancelUpload()" class="btn btn-attach text-danger" pTooltip="Cancelar"
                     tooltipPosition="bottom" [disabled]="!(snap.state === 'paused' || snap.state === 'running') || pct === 100">
@@ -52,7 +52,7 @@
                 </button>
                 <progress class="progress progress-custom is-info" [value]="pct" max="100"></progress>
                 {{ snap.bytesTransferred | fileSize }} de {{ snap.totalBytes | fileSize }} |
-                {{ (snap.bytesTransferred / snap.totalBytes) * 100 | number : '1.2-2' }}%
+                {{ pct | number : '1.2-2' }}%
             </div>
         </div>
     </div>

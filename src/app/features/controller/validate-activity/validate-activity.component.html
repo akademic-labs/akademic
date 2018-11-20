@@ -8,7 +8,10 @@
                 <hr>
             </div>
             <div class="content">
-                <!-- <form> -->
+                <!-- <pre>
+                    attachmentsView: {{ attachmentsView | json }}
+                </pre> -->
+                <form [formGroup]="form">
                     <div class="uppercase" style="color: #9A9A9A;text-align: center;font-size: 16px;">
                         {{activity.activityType.description}}
                     </div>
@@ -59,28 +62,39 @@
                     <div class="author">
                         <div>Solicitante</div>
                         <div style="padding:20px 0px">
-                            <img [src]="activity.user.photoURL ? activity.user.photoURL : 'assets/img/default-avatar.png'"
+                            <img [src]="activity.user?.photoURL ? activity.user.photoURL : 'assets/img/default-avatar.png'"
                                 alt="Foto do Usuário" width="80" height="80" style="border-radius: 50%; margin-right: 10px" />
                             <h5 style="display: inline-grid;">
-                                {{activity.user.displayName}}
+                                {{activity.user?.displayName}}
                                 <br />
                                 <small style="text-transform: lowercase">
-                                    {{activity.user.email}}
+                                    {{activity.user?.email}}
                                 </small>
                             </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="observation">Feedback</label>
+                                <textarea #focus rows="3" class="form-control" formControlName="feedback" placeholder="Aqui você pode colocar seu feedback sobre esta atividade.."></textarea>
+                            </div>
                         </div>
                     </div>
                     <div class="clearfix">
                         <button type="button" class="btn btn-action pull-right" (click)="toConfirm(true)">Aprovar</button>
                         <button type="button" class="btn btn-secondary pull-right mr-2" (click)="toConfirm(false)">Reprovar</button>
+                        <!-- <button  *ngIf="isFeedback"type="button" class="btn btn-action pull-right" (click)="toConfirm(true)">Enviar</button> -->
                     </div>
-                <!-- </form> -->
+                    {{ form.value | json }}
+                </form>
             </div>
         </div>
     </div>
 </div>
 
-<aka-confirmation key="confKey" (onAccept)="onAccept()"></aka-confirmation>
+<aka-confirmation key="confKey" (onAccept)="onAccept(true)"></aka-confirmation>
+<aka-confirmation key="feedKey" (onAccept)="toFeedback()"></aka-confirmation>
 
 <div *ngIf="attachView" [ngSwitch]="attachView?.type" class="modal fade" id="attachModal" role="dialog">
     <h5 class="title-dialog">{{ attachView?.name }}</h5>
@@ -91,10 +105,10 @@
     <a class="btn-close-modal" data-dismiss="modal" pTooltip="Fechar Anexo" tooltipPosition="bottom">
         <i class="icon-close-modal fa fa-close" style="-webkit-text-stroke: 3px #808080;"></i>
     </a>
-    <iframe *ngSwitchCase="'application/pdf'" class="iframe-dialog" [src]="attachView?.path | safe: 'resourceUrl'"></iframe>
-    <iframe *ngSwitchCase="'video/mp4'" class="iframe-dialog" [src]="attachView?.path | safe: 'resourceUrl'"></iframe>
-    <!-- <video *ngSwitchCase="'video/mp4'" class="iframe-dialog" controls>
-            <source [src]="attachView?.path | safe: 'resourceUrl'" type="video/mp4">
-        </video> -->
+    <iframe *ngSwitchCase="'application/pdf'" class="pdf-dialog iframe-placeholder" [src]="attachView?.path | safe: 'resourceUrl'"></iframe>
+    <!-- <iframe *ngSwitchCase="'video/mp4'" class="iframe-dialog" [src]="attachView?.path | safe: 'resourceUrl'"></iframe> -->
+    <video *ngSwitchCase="'video/mp4'" class="video-dialog" autoplay controls>
+        <source [src]="attachView?.path | safe: 'resourceUrl'" type="video/mp4">
+    </video>
     <img *ngSwitchDefault class="img-attach" class="img-dialog" [src]="attachView?.path" />
 </div>
