@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { User } from '../../../models/user.interface';
 
 @Component({
   selector: 'aka-institution-view',
@@ -6,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./institution-view.component.css']
 })
 export class InstitutionViewComponent implements OnInit {
+  @Input() user: User;
 
   constructor() { }
 

@@ -1,3 +1,92 @@
-<p>
-  controller-view works!
-</p>
+<div class="col-xs-12 col-md-6">
+  <aka-chart-card title="Atividades último semestre" subtitle="Número de atividades dos últimos 6 meses" chartType="line"
+    [chartData]="lastSemesterChartData">
+  </aka-chart-card>
+</div>
+
+<div class="col-xs-12 col-md-6">
+  <aka-chart-card title="Ranking" subtitle="Atividades dos alunos do curso" chartType="bar" [chartData]="rankStudentsChartData">
+  </aka-chart-card>
+</div>
+ 
+<div class="col-xs-12">
+  <div *ngIf="activitiesToAnalyze$  | async as actsToAnalyze">
+    <div class="card border-top">
+      <div class="header text-center">
+        <h4 class="title">Tarefas</h4>
+        <p class="category">Atividades a serem analisadas</p>
+        <hr>
+      </div>
+      <div class="content">
+        <p-table [value]="actsToAnalyze" selectionMode="single" #dt [globalFilterFields]="['description','hoursDuration','activityType.description', 'user.displayName','createdAt']"
+          [paginator]="true" [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]" [resizableColumns]="true"
+          [reorderableColumns]="true">
+          <ng-template pTemplate="caption">
+            <div class="input-filter">
+              <i class="fa fa-search"></i>
+              <input type="text" class="form-control" placeholder="Pesquisar" (input)="dt.filterGlobal($event.target.value, 'contains')">
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th [pSortableColumn]="'user.displayName'" pResizableColumn pReorderableColumn>
+                Solicitante
+                <p-sortIcon></p-sortIcon>
+              </th>
+              <th [pSortableColumn]="'description'" pResizableColumn pReorderableColumn>
+                Atividade
+                <p-sortIcon></p-sortIcon>
+              </th>
+              <th [pSortableColumn]="'activityType.description'" pResizableColumn pReorderableColumn>
+                Tipo
+                <p-sortIcon></p-sortIcon>
+              </th>
+              <th [pSortableColumn]="'activity.createdAt'" pResizableColumn pReorderableColumn>
+                Cadastro
+                <p-sortIcon></p-sortIcon>
+              </th>
+              <th [pSortableColumn]="'hoursDuration'" pResizableColumn pReorderableColumn>
+                Duração
+                <p-sortIcon></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-activity>
+            <tr (click)="toAnalyze(activity)">
+              <td>
+                <span class="ui-column-title">Solicitante:</span>
+                {{ activity.user?.displayName }}
+              </td>
+              <td>
+                <span class="ui-column-title">Atividade:</span>
+                {{ activity.description }}
+              </td>
+              <td>
+                <span class="ui-column-title">Tipo:</span>
+                {{ activity.activityType?.description }}
+              </td>
+              <td>
+                <span class="ui-column-title">Cadastro:</span>
+                {{ activity.createdAt?.toDate() | date:'dd/MM/yyyy HH:mm' }}
+              </td>
+              <td>
+                <span class="ui-column-title">Duração:</span>
+                {{ activity.hoursDuration }} horas
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+            {{ actsToAnalyze.length }} registros
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+              <td colspan="5">
+                Nenhum registro encontrado.
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
