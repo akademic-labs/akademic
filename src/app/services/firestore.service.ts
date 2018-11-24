@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, QueryFn } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import * as firebase from 'firebase/app';
@@ -23,7 +23,7 @@ export class FirestoreService {
     Get a reference
   * **************/
 
-  col<T>(ref: CollectionPredicate<T>, queryFn?): AngularFirestoreCollection<T> {
+  col<T>(ref: CollectionPredicate<T>, queryFn?: QueryFn): AngularFirestoreCollection<T> {
     return typeof ref === 'string' ? this.afs.collection<T>(ref, queryFn) : ref;
   }
 
@@ -43,14 +43,14 @@ export class FirestoreService {
       }));
   }
 
-  col$<T>(ref: CollectionPredicate<T>, queryFn?): Observable<T[]> {
+  col$<T>(ref: CollectionPredicate<T>, queryFn?: QueryFn): Observable<T[]> {
     return this.col(ref, queryFn).snapshotChanges().pipe(
       map(docs => {
         return docs.map(a => a.payload.doc.data()) as T[];
       }));
   }
 
-  colWithId$<T>(ref: CollectionPredicate<T>, queryFn?): Observable<T[]> {
+  colWithId$<T>(ref: CollectionPredicate<T>, queryFn?: QueryFn): Observable<T[]> {
     return this.col(ref, queryFn).snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {

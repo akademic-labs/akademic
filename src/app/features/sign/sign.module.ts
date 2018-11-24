@@ -13,6 +13,6 @@ import { SignUpFormComponent } from './signup/sign-up-form/sign-up-form.componen
     SharedModule
   ],
   declarations: [SignComponent, SignInComponent, SignUpComponent, SignUpFormComponent],
-  exports: [SignUpComponent]
+  exports: [SignUpFormComponent]
 })
 export class SignModule { }
