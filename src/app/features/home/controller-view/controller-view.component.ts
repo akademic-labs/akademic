@@ -16,18 +16,17 @@ export class ControllerViewComponent implements OnInit {
   @Input() user: User;
 
   private lastSemester = [];
-  activitiesToAnalyze$: Observable<Activity[]>;
   private monthNames = [
     'Janeiro', 'Fevereiro', 'Março', 'Abril',
     'Maio', 'Junho', 'Julho', 'Agosto',
     'Setembro', 'Outubro', 'Novembro', 'Dezembro'
   ];
 
+  activitiesToAnalyze$: Observable<Activity[]>;
   lastSemesterChartData: ChartData;
   rankStudentsChartData: ChartData;
 
-  constructor(private _activityService: ActivityService,
-    private _router: Router) { }
+  constructor(private _activityService: ActivityService, private _router: Router) { }
 
   ngOnInit() {
     this.activitiesToAnalyze$ = this._activityService.getActivitiesToApprove();
@@ -43,6 +42,7 @@ export class ControllerViewComponent implements OnInit {
       const d = new Date(new Date().getFullYear(), new Date().getMonth() - i, 1);
       this.lastSemester.push(this.monthNames[d.getMonth()]);
     }
+
     this.lastSemesterChartData = {
       labels: this.lastSemester,
       datasets: [{

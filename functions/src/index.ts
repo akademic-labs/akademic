@@ -1,9 +1,10 @@
-import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import * as functions from 'firebase-functions';
 
 admin.initializeApp();
+admin.firestore().settings({ timestampsInSnapshots: true });
 
-// on save a temp user with password create a new account and after create a new user with extra fields and delete the old one
+// save a temp user with password then create a new auth account and after a new user with extra fields and delete the old one
 export const createUser = functions.firestore
     .document('newUsers/{userId}')
     .onCreate(async (snap, context) => {
