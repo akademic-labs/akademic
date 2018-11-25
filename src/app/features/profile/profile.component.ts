@@ -57,7 +57,7 @@ export class ProfileComponent implements OnInit {
       if (this.form.get('course').value) {
         this.form.patchValue({ course: this.form.get('course').value.uid });
       }
-      this._userService.updateUser(this.form.get('uid').value, this.form.value)
+      this._userService.update(this.form.get('uid').value, this.form.value)
         .then(_ => {
           this._notify.update('success', 'Perfil atualizado!');
         });

@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "akademic-labs"
+    "default": "akademic-labs",
+    "dev": "akademic-dev"
   }
 }
