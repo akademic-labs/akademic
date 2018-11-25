@@ -1,9 +1,8 @@
 import { Cities } from 'app/models/cities.interface';
-import { States } from './states.interface';
-import { User } from './user.interface';
-import { ActivityType } from './activity-type.interface';
-import { Attachment } from './attachment.interface';
+
 import { ActMessages } from './act-messages.interface';
+import { ActivityType } from './activity-type.interface';
+import { States } from './states.interface';
 
 export interface Activity {
   uid: string;
@@ -16,7 +15,6 @@ export interface Activity {
   semester: number;
   link: string;
   hoursDuration: number;
-  feedback?: string;
 
   city: Cities;
   state: States;
@@ -24,7 +22,6 @@ export interface Activity {
   observation: string;
   validatedHours: number;
   status: string;
-  controllerId: string;
 
   // subcollection
   messages: ActMessages;
@@ -38,4 +35,7 @@ export interface Activity {
 
   // could be the uid or the object
   user: any;
+
+  controller?: any;
+  feedback?: string;
 }

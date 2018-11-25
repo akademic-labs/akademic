@@ -8,7 +8,35 @@
                 <hr>
             </div>
             <div class="content">
-                <form [formGroup]="activityForm" (ngSubmit)="save()">
+                <img *ngIf="loading" class="loading" src="assets/img/loading.gif">
+                <form *ngIf="!loading" [formGroup]="activityForm" (ngSubmit)="save()">
+                    <div class="row status-activity">
+                        <div [ngSwitch]="activityForm.get('status').value">
+                            <img *ngSwitchCase="'Aprovada'" src="assets/img/approved.png" alt="Icone Aprovada" />
+                            <img *ngSwitchCase="'Reprovada'" src="assets/img/repproved.png" alt="Icone Reprovada" />
+                            <img *ngSwitchDefault src="assets/img/pending.png" alt="Icone Pendente" />
+                            <span style="font-size: 25px">{{ activityForm.get('status').value }}</span>
+                        </div>
+                        <div *ngIf="activityForm.get('feedback').value">
+                            <span style="font-size: 16px">{{ activityForm.get('feedback').value }}</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div *ngIf="activity?.controller" class="author">
+                        <label>Avaliador</label>
+                        <div style="padding:20px 0px">
+                            <img [src]="activity.controller?.photoURL ? activity.controller.photoURL : 'assets/img/default-avatar.png'"
+                                alt="Foto do Usuário" width="80" height="80" style="border-radius: 50%; margin-right: 10px" />
+                            <h5 style="display: inline-grid;">
+                                {{activity.controller?.displayName}}
+                                <br />
+                                <small style="text-transform: lowercase">
+                                    {{activity.controller?.email}}
+                                </small>
+                            </h5>
+                        </div>
+                        <hr>
+                    </div>
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="form-group">
@@ -30,7 +58,7 @@
                             <div class="form-group">
                                 <label for="activityType">Tipo de Atividade</label>
                                 <select class="form-control" formControlName="activityType" [compareWith]="compareActivityType">
-                                    <option value="null">Selecione</option>
+                                    <option disabled value="">Selecione</option>
                                     <option *ngFor="let activityType of activityTypes$ | async" [ngValue]="activityType">
                                         {{ activityType.description }}
                                     </option>
@@ -102,7 +130,6 @@
                             </div>
                             <aka-message-control-error [control]="activityForm.get('state')" error="required" msg="Estado é obrigatório."></aka-message-control-error>
                         </div>
-                        <!-- {{ cities$ | async | json }} -->
                         <div class="col-xs-12 col-md-3">
                             <div class="form-group">
                                 <label for="city">Cidade</label>
@@ -122,17 +149,9 @@
                                 msg="Observação no máximo 500 caracteres."></aka-message-control-error>
                         </div>
                     </div>
-                    <div class="row" *ngIf="activityForm.get('feedback').value">
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label for="feedback">Feedback</label>
-                                <textarea rows="3" maxlength="500" class="form-control" formControlName="feedback"></textarea>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-3 right">
-                            <button type="submit" class="btn btn-action btn-block" [disabled]="(disabledSave && activityForm.invalid) || uploadPage.uploadState === 'running'">
+                            <button type="submit" class="btn btn-action btn-block" [disabled]="(disabledSave && activityForm.invalid) || activityForm.get('status').value !== 'Pendente' || uploadPage?.uploadState === 'running'">
                                 {{ labelButton }}
                             </button>
                         </div>
