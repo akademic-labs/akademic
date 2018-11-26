@@ -45,7 +45,7 @@
                     <hr>
                     <div>Anexos:</div>
                     <div class="show-attach">
-                        <img *ngIf="loading" class="loader-attachs" src="assets/img/loader-attachments.gif">
+                        <img *ngIf="loading" class="loading" src="assets/img/loading.gif">
                         <div *ngIf="!activity.attachments.length" style="margin: -15px 0px 30px 0px;">
                             Nenhum arquivo anexado.
                         </div>
@@ -73,20 +73,23 @@
                             </h5>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" *ngIf="isFeedback">
                         <div class="col-xs-12">
                             <div class="form-group">
                                 <label for="observation">Feedback</label>
-                                <textarea #focus rows="3" class="form-control" formControlName="feedback" placeholder="Aqui você pode colocar seu feedback sobre esta atividade.."></textarea>
+                                <textarea #inputFeedback rows="3" class="form-control" formControlName="feedback"
+                                    placeholder="Coloque aqui seu feedback sobre o motivo da reprovação desta atividade.."></textarea>
                             </div>
+                            <aka-message-control-error [control]="form.get('feedback')" error="required" msg="Feedback é obrigatório."></aka-message-control-error>
+                            <aka-message-control-error [control]="form.get('feedback')" error="maxlength" msg="Feedback não pode ser maior que 500 caracteres."></aka-message-control-error>
                         </div>
                     </div>
                     <div class="clearfix">
-                        <button type="button" class="btn btn-action pull-right" (click)="toConfirm(true)">Aprovar</button>
-                        <button type="button" class="btn btn-secondary pull-right mr-2" (click)="toConfirm(false)">Reprovar</button>
-                        <!-- <button  *ngIf="isFeedback"type="button" class="btn btn-action pull-right" (click)="toConfirm(true)">Enviar</button> -->
+                        <button *ngIf="!isFeedback" type="button" class="btn btn-action pull-right" (click)="toConfirm(true)">Aprovar</button>
+                        <button *ngIf="!isFeedback" type="button" class="btn btn-secondary pull-right mr-2" (click)="toConfirm(false)">Reprovar</button>
+                        <button *ngIf="isFeedback" type="button" class="btn btn-action pull-right" (click)="onDisapprove()"
+                            [disabled]="form.invalid">Enviar</button>
                     </div>
-                    {{ form.value | json }}
                 </form>
             </div>
         </div>
@@ -94,7 +97,6 @@
 </div>
 
 <aka-confirmation key="confKey" (onAccept)="onAccept(true)"></aka-confirmation>
-<aka-confirmation key="feedKey" (onAccept)="toFeedback()"></aka-confirmation>
 
 <div *ngIf="attachView" [ngSwitch]="attachView?.type" class="modal fade" id="attachModal" role="dialog">
     <h5 class="title-dialog">{{ attachView?.name }}</h5>
@@ -105,7 +107,7 @@
     <a class="btn-close-modal" data-dismiss="modal" pTooltip="Fechar Anexo" tooltipPosition="bottom">
         <i class="icon-close-modal fa fa-close" style="-webkit-text-stroke: 3px #808080;"></i>
     </a>
-    <iframe *ngSwitchCase="'application/pdf'" class="pdf-dialog iframe-placeholder" [src]="attachView?.path | safe: 'resourceUrl'"></iframe>
+    <iframe *ngSwitchCase="'application/pdf'" class="pdf-dialog" [src]="attachView?.path | safe: 'resourceUrl'"></iframe>
     <!-- <iframe *ngSwitchCase="'video/mp4'" class="iframe-dialog" [src]="attachView?.path | safe: 'resourceUrl'"></iframe> -->
     <video *ngSwitchCase="'video/mp4'" class="video-dialog" autoplay controls>
         <source [src]="attachView?.path | safe: 'resourceUrl'" type="video/mp4">

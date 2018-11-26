@@ -13,6 +13,7 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
     { path: 'dashboard', title: 'Dashboard', icon: 'fa fa-pie-chart', roles: ['student', 'controller', 'administrator', 'institution'] },
     { path: 'profile', title: 'Meu perfil', icon: 'fa fa-user-circle-o', roles: ['student', 'controller', 'institution'] },
+    { path: 'forum', title: 'Fórum', icon: 'fa fa-comments', roles: ['student', 'controller', 'institution'] },
     { path: 'student/input-activity', title: 'Entrada de Atividade', icon: 'fa fa-paperclip', roles: ['student'] },
     { path: 'admin/institutions', title: 'Instituições', icon: 'fa fa-university nav-icon', roles: ['administrator'] },
     { path: 'admin/courses', title: 'Cursos', icon: 'fa fa-graduation-cap nav-icon', roles: ['administrator'] },
