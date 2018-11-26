@@ -1,3 +1,4 @@
+import { Activity } from './../../../models/activity.interface';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, HostListener } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -33,6 +34,8 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
   years = ['2018', '2017', '2016', '2015'];
   semesters = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   labelButton = 'Salvar';
+  loading: boolean;
+  activity: Activity;
 
   navigateAwaySelection$: Subject<boolean> = new Subject<boolean>();
 
@@ -56,25 +59,32 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.buildForm();
-    setTimeout(() => { this.focus.nativeElement.focus() }, 100);
-
     this.activityTypes$ = this._actTypesService.get();
-
     this.states$ = this._utilsService.getStates();
-
     this.subscribe = this._route.paramMap.subscribe(params => {
       if (params.get('id')) {
         this._activityService.getActivityById(params.get('id'))
-          .subscribe(activity => {
+          .subscribe(
+            activity => {
+              this.activity = activity;
+              setTimeout(() => { this.focus.nativeElement.focus() }, 100);
               this.labelButton = 'Atualizar';
               this.activityForm.patchValue(activity);
               this.getCities();
+              activity.status === 'Pendente' ? this.activityForm.enable() : this.activityForm.disable();
+              // block buttons upload and delete attach (variable ref uploads)
+              // activity.status === 'Pendente' ? this.uploadPage.uploadState = '' : this.uploadPage.uploadState = 'running';
+              this.loading = false;
             },
             error => {
               this._errorService.handleErrorByCode(error.code);
+              this.loading = false;
             }
           );
+      } else {
+        this.loading = false;
       }
     });
   }
@@ -128,7 +138,7 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
     this.uploadPage.resetProgress();
     this.uploadPage.resetAttachments();
     this.ngOnDestroy();
-    this._router.navigate(['/input-activity']);
+    this._router.navigate(['/student/input-activity']);
   }
 
   compareActivityType(activityType: ActivityType, activityType2: ActivityType) {

@@ -20,9 +20,10 @@ export class ValidateActivityComponent implements OnInit {
   attachmentsView: AttachmentView[] = [];
   isApproved: boolean;
   attachView;
-  loading = true;
+  loading;
   form: FormGroup;
-  @ViewChild('focus') focus: ElementRef;
+  @ViewChild('inputFeedback') inputFeedback: ElementRef;
+  isFeedback: boolean;
 
   constructor(
     private _route: ActivatedRoute,
@@ -35,6 +36,7 @@ export class ValidateActivityComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
+    this.loading = true;
     document.getElementsByClassName('main-panel').item(0).scrollTop = 0;
     this.activity = this._route.snapshot.data['activity'];
     if (this.activity.attachments.length) {
@@ -83,7 +85,7 @@ export class ValidateActivityComponent implements OnInit {
 
   buildForm() {
     this.form = this._formBuilder.group({
-      feedback: ['', Validators.maxLength(500)],
+      feedback: ['', Validators.compose([Validators.required, Validators.maxLength(500)])],
     });
   }
 
@@ -101,20 +103,21 @@ export class ValidateActivityComponent implements OnInit {
   }
 
   onAccept() {
-    this.activity.status = this.isApproved ? 'Aprovada' : 'Reprovação';
-    this.activity.feedback = this.form.get('feedback').value;
-    this._activityService.onApprove(this.activity, this.isApproved ? 'aprovada' : 'reprovada');
+    this.activity.status = this.isApproved ? 'Aprovada' : 'Reprovada';
+    this._messageService.clear();
+    if (!this.isApproved) {
+      this.isFeedback = true;
+      this.form.get('feedback').markAsTouched();
+      this.form.get('feedback').setErrors({ required: true });
+      setTimeout(() => { this.inputFeedback.nativeElement.focus(); }, 100);
+    } else {
+      this._activityService.onApprove(this.activity, 'aprovada');
+    }
   }
 
-  // toFeedback() {
-  //   this.isFeedback = true;
-  //   this._messageService.clear();
-  //   setTimeout(() => { this.focus.nativeElement.focus(); }, 100);
-  // }
+  onDisapprove() {
+    this.activity.feedback = this.form.get('feedback').value;
+    this._activityService.onApprove(this.activity, 'reprovada');
+  }
 
-  // onSend() {
-  //   this.activity.status = this.isApproved ? 'Aprovada' : 'Reprovação';
-  //   this.activity.feedback = this.form.get('feedback').value;
-  //   // this._activityService.onApprove(this.activity, this.isApproved ? 'aprovada' : 'reprovada');
-  // }
 }

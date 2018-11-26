@@ -21,7 +21,7 @@
         </label>
     </div>
     <div class="show-attach">
-        <img *ngIf="loading" class="loader-attachs" src="assets/img/loader-attachments.gif">
+        <img *ngIf="loading" class="loading" src="assets/img/loading.gif">
         <div *ngFor="let attach of attachmentsView; index as i" class=" card card-attach">
             <img [class]="attach.class" [src]="attach.src" pTooltip="Clique aqui para abrir o anexo." tooltipPosition="bottom"
                 (click)="showAttach(attach)" data-toggle="modal" data-target="#attachModal" />

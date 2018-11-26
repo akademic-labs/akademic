@@ -14,8 +14,7 @@ export class UserService {
   constructor(private afs: AngularFirestore, private dbService: FirestoreService) {
   }
 
-  getAllUsers(): Observable<User[]> {
-    // ['added', 'modified', 'removed']
+  getAll(): Observable<User[]> {
     return this.afs.collection<User>('users').snapshotChanges().pipe(
       map((actions) => {
         return actions.map((a) => {
@@ -26,15 +25,28 @@ export class UserService {
     );
   }
 
-  getUserById(id: string) {
+  getById(id: string) {
     return this.afs.doc<User>(`users/${id}`);
   }
 
-  updateUser(id: string, data: User) {
-    return this.getUserById(id).set(data, { merge: true });
+  getByRole(role: 'student' | 'controller' | 'institution') {
+    return this.dbService.colWithId$<User>('users', ref => ref.where(`roles.${role}`, '==', true));
   }
 
-  deleteUser(id: string) {
-    return this.getUserById(id).delete();
+  getControllerByInstitution(institutionUid: string) {
+    return this.dbService.colWithId$<User>('users', ref => ref.where('roles.controller', '==', true).where('institution', '==', institutionUid));
+  }
+
+  // fires new user cloud function
+  addNew(data: User) {
+    return this.dbService.add<User>('newUsers', data);
+  }
+
+  update(id: string, data: User) {
+    return this.getById(id).set(data, { merge: true });
+  }
+
+  delete(id: string) {
+    return this.getById(id).delete();
   }
 }

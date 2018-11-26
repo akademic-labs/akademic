@@ -15,7 +15,6 @@ export interface Activity {
   semester: number;
   link: string;
   hoursDuration: number;
-  feedback?: string;
 
   city: Cities;
   state: States;
@@ -23,7 +22,6 @@ export interface Activity {
   observation: string;
   validatedHours: number;
   status: string;
-  controllerId: string;
 
   // subcollection
   messages: ActMessages;
@@ -37,4 +35,7 @@ export interface Activity {
 
   // could be the uid or the object
   user: any;
+
+  controller?: any;
+  feedback?: string;
 }

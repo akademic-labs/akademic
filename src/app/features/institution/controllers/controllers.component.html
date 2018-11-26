@@ -8,29 +8,55 @@
         <hr>
       </div>
       <div class="content">
-        <aka-sign-up [hasAccountLink]="false"></aka-sign-up>
+        <aka-sign-up-form (submitted)="onSubmit($event)" [courses$]="courses$" [hasAccountLink]="false" [loading]="loading"></aka-sign-up-form>
       </div>
       <div class="content">
-        <div class="table-full-width">
-          <table class="table">
-            <tbody>
-              <tr *ngFor="let controller of controllers$ | async">
-                <td>{{ controller.name }} | {{ controller.course.name }}</td>
-                <td class="td-actions text-right">
-                  <a class="btn" (click)="edit(controller)">
-                    <i class="fa fa-edit"></i>
-                  </a>
-                  <a (click)="confirmRemove(controller)" class="btn text-danger">
-                    <i class="fa fa-times"></i>
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="footer">
-          <hr> {{ (controllers$ | async)?.length }} registros
-        </div>
+        <p-table #dt [value]="controllers$ | async" selectionMode="single" [paginator]="true" [rows]="5" [responsive]="true"
+          [rowsPerPageOptions]="[5,10,20,50]" [resizableColumns]="true" [reorderableColumns]="true" [columns]="cols">
+          <ng-template pTemplate="caption">
+            <div class="input-filter">
+              <i class="fa fa-search"></i>
+              <input type="text" class="form-control" placeholder="Filtrar" (input)="dt.filterGlobal($event.target.value, 'contains')">
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngSwitch]="col.field">
+                <div *ngSwitchCase="'actions'"></div>
+                <div *ngSwitchDefault>
+                  {{col.header}}
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
+                </div>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData>
+            <tr [pSelectableRow]="rowData">
+              <td>{{rowData.uid}}</td>
+              <td>{{rowData.displayName}}</td>
+              <td>{{rowData.course.name}}</td>
+              <td>
+                <a pTooltip="Editar" tooltipPosition="bottom" (click)="edit(rowData)" class="btn">
+                  <i class="fa fa-edit"></i>
+                </a>
+                <a pTooltip="Excluir" tooltipPosition="bottom" (click)="confirmRemove(rowData)" class="btn text-danger">
+                  <i class="fa fa-times"></i>
+                </a>
+              </td>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="summary">
+            {{ (controllers$ | async)?.length }} registros
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+              <td colspan="3">
+                Nenhum registro encontrado.
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
       </div>
     </div>
   </div>

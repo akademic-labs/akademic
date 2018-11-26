@@ -42,7 +42,8 @@ export class ActivityService {
 
   getActivityById(uid: string): Observable<Activity> {
     return this.dbService.docWithId$<Activity>('activities/' + uid).pipe(
-      documentJoin(this.afs, { user: 'users' })
+      documentJoin(this.afs, { user: 'users' }),
+      documentJoin(this.afs, { controller: 'users' })
     );
   }
 
@@ -63,6 +64,9 @@ export class ActivityService {
   }
 
   async onApprove(data: Activity, msg: string) {
+    data.user = data.user.uid;
+    const controller = await this.auth.user$.pipe(take(1)).toPromise();
+    data.controller = controller.uid;
     try {
       await this.getActivityDocument(data.uid).update(data);
       this.notify.update('success', `Atividade ${msg} com sucesso!`);
