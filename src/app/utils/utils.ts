@@ -1,4 +1,4 @@
-export const sortBy = (array, key, order) =>
+export const sortBy = (array, key, order: 'asc' | 'desc') =>
     array.sort((a, b) => {
         const x = a[key], y = b[key];
         if (order === 'asc') {

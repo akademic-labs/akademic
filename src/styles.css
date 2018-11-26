@@ -2417,12 +2417,20 @@ fieldset[disabled] .form-control {
   -moz-box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
 }
 
+.flex {
+  display: flex;
+}
+
 .left {
   justify-content: flex-start;
 }
 
 .right {
   justify-content: flex-end;
+}
+
+.ai-start {
+  align-items: flex-start !important;
 }
 
 .radius {

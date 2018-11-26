@@ -29,6 +29,7 @@ const routes: Routes = [
   { path: 'admin', loadChildren: './features/admin/admin.module#AdminModule', canActivate: [AuthGuard, AdminGuard] },
   { path: 'institution', loadChildren: './features/institution/institution.module#InstitutionModule', canActivate: [AuthGuard, InstitutionGuard] },
   { path: 'controller', loadChildren: './features/controller/controller.module#ControllerModule', canActivate: [AuthGuard, ControllerGuard] },
+  { path: 'forum', loadChildren: './features/forum/forum.module#ForumModule', canActivate: [AuthGuard] },
   { path: '**', component: Error404Component }
 ];
 

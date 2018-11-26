@@ -1,9 +1,8 @@
 import { Cities } from 'app/models/cities.interface';
-import { States } from './states.interface';
-import { User } from './user.interface';
-import { ActivityType } from './activity-type.interface';
-import { Attachment } from './attachment.interface';
+
 import { ActMessages } from './act-messages.interface';
+import { ActivityType } from './activity-type.interface';
+import { States } from './states.interface';
 
 export interface Activity {
   uid: string;
