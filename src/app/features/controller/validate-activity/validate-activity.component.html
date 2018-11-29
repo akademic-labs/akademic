@@ -46,7 +46,7 @@
                     <div>Anexos:</div>
                     <div class="show-attach">
                         <img *ngIf="loading" class="loading" src="assets/img/loading.gif">
-                        <div *ngIf="!activity.attachments.length" style="margin: -15px 0px 30px 0px;">
+                        <div *ngIf="!activity.attachments.length" class="nothing-attach">
                             Nenhum arquivo anexado.
                         </div>
                         <div *ngFor="let attach of attachmentsView;" class=" card card-attach" (click)="showAttach(attach)"
@@ -60,18 +60,19 @@
                     </div>
                     <hr>
                     <div class="author">
-                        <div>Solicitante</div>
-                        <div style="padding:20px 0px">
+                        <label>Solicitante</label>
+                        <div>
                             <img [src]="activity.user?.photoURL ? activity.user.photoURL : 'assets/img/default-avatar.png'"
-                                alt="Foto do Usuário" width="80" height="80" style="border-radius: 50%; margin-right: 10px" />
-                            <h5 style="display: inline-grid;">
-                                {{activity.user?.displayName}}
+                                alt="Foto do Aluno" />
+                            <h5>
+                                {{ activity.user?.displayName }}
                                 <br />
-                                <small style="text-transform: lowercase">
-                                    {{activity.user?.email}}
+                                <small>
+                                    {{ activity.user?.email }}
                                 </small>
                             </h5>
                         </div>
+                        <hr>
                     </div>
                     <div class="row" *ngIf="isFeedback">
                         <div class="col-xs-12">

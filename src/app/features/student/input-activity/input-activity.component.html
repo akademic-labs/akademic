@@ -10,28 +10,28 @@
             <div class="content">
                 <img *ngIf="loading" class="loading" src="assets/img/loading.gif">
                 <form *ngIf="!loading" [formGroup]="activityForm" (ngSubmit)="save()">
-                    <div class="row status-activity">
-                        <div [ngSwitch]="activityForm.get('status').value">
+                    <div *ngIf="activity?.status" class="row status-activity">
+                        <div [ngSwitch]="activity?.status">
                             <img *ngSwitchCase="'Aprovada'" src="assets/img/approved.png" alt="Icone Aprovada" />
                             <img *ngSwitchCase="'Reprovada'" src="assets/img/repproved.png" alt="Icone Reprovada" />
                             <img *ngSwitchDefault src="assets/img/pending.png" alt="Icone Pendente" />
-                            <span style="font-size: 25px">{{ activityForm.get('status').value }}</span>
+                            <span style="font-size: 25px">{{ activity?.status }}</span>
                         </div>
-                        <div *ngIf="activityForm.get('feedback').value">
-                            <span style="font-size: 16px">{{ activityForm.get('feedback').value }}</span>
+                        <div *ngIf="activity?.feedback">
+                            <span style="font-size: 16px">{{ activity?.feedback }}</span>
                         </div>
+                        <hr>
                     </div>
-                    <hr>
                     <div *ngIf="activity?.controller" class="author">
                         <label>Avaliador</label>
-                        <div style="padding:20px 0px">
+                        <div>
                             <img [src]="activity.controller?.photoURL ? activity.controller.photoURL : 'assets/img/default-avatar.png'"
-                                alt="Foto do Usuário" width="80" height="80" style="border-radius: 50%; margin-right: 10px" />
-                            <h5 style="display: inline-grid;">
-                                {{activity.controller?.displayName}}
+                                alt="Foto do Avaliador" />
+                            <h5>
+                                {{ activity.controller?.displayName }}
                                 <br />
-                                <small style="text-transform: lowercase">
-                                    {{activity.controller?.email}}
+                                <small>
+                                    {{ activity.controller?.email }}
                                 </small>
                             </h5>
                         </div>
