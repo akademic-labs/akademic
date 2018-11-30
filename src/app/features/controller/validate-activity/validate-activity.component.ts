@@ -1,6 +1,6 @@
-﻿import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+﻿import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { MessageService } from 'primeng/components/common/messageservice';
 
@@ -8,6 +8,8 @@ import { Activity } from '../../../models/activity.interface';
 import { ActivityService } from '../../../services/activity.service';
 import { AttachmentView } from './../../../models/attachment.interface';
 import { ErrorService } from './../../../services/error.service';
+import { sortBy } from './../../../utils/utils';
+import { NotifyService } from 'app/services/notify.service';
 
 @Component({
   selector: 'aka-validate-activity',
@@ -18,9 +20,9 @@ export class ValidateActivityComponent implements OnInit {
 
   activity: Activity;
   attachmentsView: AttachmentView[] = [];
+  attachView: AttachmentView;
   isApproved: boolean;
-  attachView;
-  loading;
+  loading: boolean;
   form: FormGroup;
   @ViewChild('inputFeedback') inputFeedback: ElementRef;
   isFeedback: boolean;
@@ -31,7 +33,9 @@ export class ValidateActivityComponent implements OnInit {
     private _storage: AngularFireStorage,
     public _messageService: MessageService,
     private _errorService: ErrorService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _router: Router,
+    private _notifyService: NotifyService
   ) { }
 
   ngOnInit() {
@@ -64,9 +68,10 @@ export class ValidateActivityComponent implements OnInit {
                       src = 'assets/img/video.png';
                       classCss = 'video-attach'
                     }
-                    this.attachmentsView.push({ name: attachments.name, type: attachments.type, path: resDonwloadURL, size: resMetaData.size, src: src, class: classCss });
+                    this.attachmentsView.push({ name: attachments.name, type: attachments.type, path: resDonwloadURL, createdAt: resMetaData.timeCreated, size: resMetaData.size, src: src, class: classCss });
                     this.loading = false;
-                    this.attachmentsView.sort()
+                    // sort attachments by createdAt, because data coming in disorder
+                    this.attachmentsView = sortBy(this.attachmentsView, 'createdAt', 'asc');
                   },
                   error => { // error getMetaData
                     this._errorService.handleErrorByCode(error.code);
@@ -105,19 +110,26 @@ export class ValidateActivityComponent implements OnInit {
   onAccept() {
     this.activity.status = this.isApproved ? 'Aprovada' : 'Reprovada';
     this._messageService.clear();
-    if (!this.isApproved) {
+    if (this.isApproved) {
+      this._activityService.onApprove(this.activity)
+        .then(() => {
+          this._notifyService.update('success', `Atividade aprovada com sucesso!`);
+          this._router.navigate(['/dashboard']);
+        });
+    } else {
       this.isFeedback = true;
       this.form.get('feedback').markAsTouched();
-      this.form.get('feedback').setErrors({ required: true });
       setTimeout(() => { this.inputFeedback.nativeElement.focus(); }, 100);
-    } else {
-      this._activityService.onApprove(this.activity, 'aprovada');
     }
   }
 
   onDisapprove() {
     this.activity.feedback = this.form.get('feedback').value;
-    this._activityService.onApprove(this.activity, 'reprovada');
+    this._activityService.onApprove(this.activity)
+      .then(() => {
+        this._notifyService.update('success', `Atividade reprovada com sucesso!`);
+        this._router.navigate(['/dashboard']);
+      });
   }
 
 }

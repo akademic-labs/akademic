@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { NotifyService } from 'app/services/notify.service';
+import { sortBy } from 'app/utils/utils';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Observable, Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -77,9 +78,12 @@ export class UploadsPageComponent implements OnInit {
                                 src = 'assets/img/video.png';
                                 classCss = 'video-attach'
                               }
-                              this.attachments.push({ name: attachments.name, type: attachments.type, path: attachments.path });
-                              this.attachmentsView.push({ name: attachments.name, type: attachments.type, path: resDonwloadURL, size: resMetaData.size, src: src, class: classCss });
+                              this.attachments.push({ name: attachments.name, type: attachments.type, path: attachments.path, createdAt: resMetaData.timeCreated });
+                              this.attachmentsView.push({ name: attachments.name, type: attachments.type, path: resDonwloadURL, createdAt: resMetaData.timeCreated, size: resMetaData.size, src: src, class: classCss });
                               this.loading = false;
+                              // sort attachments by createdAt, because data coming in disorder
+                              this.attachments = sortBy(this.attachments, 'createdAt', 'asc');
+                              this.attachmentsView = sortBy(this.attachmentsView, 'createdAt', 'asc');
                             },
                             error => { // error getMetaData
                               this.loading = false;

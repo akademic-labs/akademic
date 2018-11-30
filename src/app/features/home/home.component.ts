@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { User } from '../../models/user.interface';
-import { Activity } from './../../models/activity.interface';
 import { AuthService } from './../../services/auth.service';
 import { RolesService } from './../../services/roles.service';
 
@@ -14,7 +13,6 @@ import { RolesService } from './../../services/roles.service';
 export class HomeComponent implements OnInit {
 
   user: User;
-  activity: Activity;
 
   constructor(private _auth: AuthService, public _rolesService: RolesService) { }
 

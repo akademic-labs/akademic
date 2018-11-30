@@ -36,6 +36,16 @@
             right: 0;
             bottom: 0;
         }
+
+        .noscript {
+            position: absolute;
+            top: 40%;
+            left: 20%;
+            right: 20%;
+            font-size: 30px;
+            color: #555;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -43,7 +53,13 @@
     <aka-root>
         <img src="assets/img/loader.gif" alt="loading" class="loader">
     </aka-root>
-    <noscript>
+    <noscript class="noscript">
+        <style>
+            /* hide loader */
+            img {
+                display: none;
+            }
+        </style>
         <p>
             Javascript precisa estar habilitado para usar esta aplicação.
         </p>

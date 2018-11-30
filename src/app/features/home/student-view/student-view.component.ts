@@ -1,12 +1,16 @@
-import { UtilsService } from './../../../services/utils.service';
 import { Component, Input, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/components/common/api';
 
 import { User } from '../../../models/user.interface';
 import { Activity } from './../../../models/activity.interface';
 import { ChartData } from './../../../models/chart-data.interface';
 import { ActivityService } from './../../../services/activity.service';
+import { UtilsService } from './../../../services/utils.service';
 import { groupBy } from './../../../utils/utils';
-import { MessageService } from 'primeng/components/common/api';
+import { NotifyService } from 'app/services/notify.service';
+import { Router } from '@angular/router';
+
+declare var palette: any;
 
 @Component({
   selector: 'aka-student-view',
@@ -21,9 +25,8 @@ export class StudentViewComponent implements OnInit {
   activityStatusChartData: ChartData;
   activity: Activity;
 
-
   constructor(private _activityService: ActivityService, private _utilsService: UtilsService,
-    private _messageService: MessageService) { }
+    private _messageService: MessageService, private _notify: NotifyService, private _router: Router) { }
 
   ngOnInit() {
     this._activityService.getActivitiesStudent(this.user.uid)
@@ -63,16 +66,8 @@ export class StudentViewComponent implements OnInit {
       labels: dataChart ? dataChart.labels : null,
       datasets: [{
         data: dataChart ? dataChart.data : null,
-        backgroundColor: [
-          'rgba(255,99,132)',
-          'rgba(54, 162, 235)',
-          'rgba(255, 206, 86)'
-        ],
-        borderColor: [
-          'rgba(255,99,132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)'
-        ],
+        backgroundColor: palette('cb-Pastel1', dataChart.data.length).map(hex => '#' + hex),
+        borderColor: palette('cb-Pastel1', dataChart.data.length).map(hex => '#' + hex),
         borderWidth: 1,
         hoverBorderWidth: 2
       }],
@@ -88,16 +83,8 @@ export class StudentViewComponent implements OnInit {
       labels: dataChart ? dataChart.labels : null,
       datasets: [{
         data: dataChart ? dataChart.data : null,
-        backgroundColor: [
-          'rgba(153, 102, 255)',
-          'rgba(75, 192, 192)',
-          'rgba(255,99,132)'
-        ],
-        borderColor: [
-          'rgba(153, 102, 255, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(255,99,132, 1)'
-        ],
+        backgroundColor: palette('cb-Set2', dataChart.data.length).map(hex => '#' + hex),
+        borderColor: palette('cb-Set2', dataChart.data.length).map(hex => '#' + hex),
       }],
       options: {
         maintainAspectRatio: false
@@ -107,6 +94,10 @@ export class StudentViewComponent implements OnInit {
 
   deleteActivity() {
     this._messageService.clear();
-    this._activityService.deleteActivity(this.activity.uid);
+    this._activityService.deleteActivity(this.activity.uid)
+      .then(() => {
+        this._notify.update('success', 'Atividade deletada com sucesso!');
+        this._router.navigate(['/dashboard']);
+      });
   }
 }
