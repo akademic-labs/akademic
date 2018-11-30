@@ -7,6 +7,8 @@ import { ChartData } from './../../../models/chart-data.interface';
 import { ActivityService } from './../../../services/activity.service';
 import { UtilsService } from './../../../services/utils.service';
 import { groupBy } from './../../../utils/utils';
+import { NotifyService } from 'app/services/notify.service';
+import { Router } from '@angular/router';
 
 declare var palette: any;
 
@@ -24,7 +26,7 @@ export class StudentViewComponent implements OnInit {
   activity: Activity;
 
   constructor(private _activityService: ActivityService, private _utilsService: UtilsService,
-    private _messageService: MessageService) { }
+    private _messageService: MessageService, private _notify: NotifyService, private _router: Router) { }
 
   ngOnInit() {
     this._activityService.getActivitiesStudent(this.user.uid)
@@ -91,6 +93,10 @@ export class StudentViewComponent implements OnInit {
 
   deleteActivity() {
     this._messageService.clear();
-    this._activityService.deleteActivity(this.activity.uid);
+    this._activityService.deleteActivity(this.activity.uid)
+      .then(() => {
+        this._notify.update('success', 'Atividade deletada com sucesso!');
+        this._router.navigate(['/dashboard']);
+      });
   }
 }

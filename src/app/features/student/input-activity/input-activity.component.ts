@@ -1,19 +1,22 @@
-import { Activity } from './../../../models/activity.interface';
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UploadsPageComponent } from 'app/shared/uploads-page/uplodas-page/uploads-page.component';
 import { MessageService } from 'primeng/components/common/messageservice';
-import { Observable, Subscription, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { FormCanDeactivate } from '../../../guards/deactivate.interface';
 import { UtilsService } from '../../../services/utils.service';
 import { ActivityType } from './../../../models/activity-type.interface';
+import { Activity } from './../../../models/activity.interface';
 import { Cities } from './../../../models/cities.interface';
 import { States } from './../../../models/states.interface';
 import { ActivityTypeService } from './../../../services/activity-type.service';
 import { ActivityService } from './../../../services/activity.service';
+import { AuthService } from './../../../services/auth.service';
 import { ErrorService } from './../../../services/error.service';
+import { NotifyService } from './../../../services/notify.service';
 import { ValidatorService } from './../../../services/validator.service';
 
 @Component({
@@ -55,7 +58,9 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
     private _errorService: ErrorService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _messageService: MessageService
+    private _messageService: MessageService,
+    private _notifyService: NotifyService,
+    private _auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -118,14 +123,23 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
     }
   }
 
-  save() {
-    if (this.activityForm.valid) {
-      if (this.activityForm.get('uid').value) {
-        this._activityService.updateActivity(this.activityForm.value, this.activityForm.get('uid').value, this.uploadPage.attachments);
-        this.resetForm();
+  async save({ value, valid }: { value: Activity, valid: boolean }) {
+    if (valid) {
+      const user = await this._auth.user$.pipe(take(1)).toPromise();
+      value.user = user;
+
+      if (value.uid) {
+        this._activityService.update(value, value.uid, this.uploadPage.attachments)
+          .then(() => {
+            this._notifyService.update('success', 'Atividade atualizada com sucesso!');
+            this.resetForm();
+          });
       } else {
-        this._activityService.createActivity(this.activityForm.value, this.uploadPage.attachments);
-        this.resetForm();
+        this._activityService.create(value, this.uploadPage.attachments)
+          .then(() => {
+            this._notifyService.update('success', 'Atividade cadastrada com sucesso!');
+            this.resetForm();
+          });
       }
     } else {
       this._validatorService.markAllFieldsAsDirty(this.activityForm);
