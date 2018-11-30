@@ -9,16 +9,23 @@
 /* akademic custom css */
 
 :root {
-  /* COLORS PATTERNS - VALIDATIONS COMPONENTS */
   --color-valid: #28a745;
   --color-invalid: #dc3545;
-  /* COLOR BORDER - VALIDATION */
   --border-valid: 1px solid var(--color-valid);
   --border-invalid: 1px solid var(--color-invalid);
   --color-label: #585858;
   --akademic-color: #9c27b0;
   --akademic-color2: #b224ef;
-  --akademic-gradient: linear-gradient(60deg, #b224ef, #7579ff);
+  --primary-100: #F9F4FE;
+  --primary-200: #D4DEF8;
+  --primary-300: #95AEED;
+  --primary-400: #758CE0;
+  --primary-500: #6175DE;
+  --primary-600: #495DC6;
+  --primary-700: #3547A4;
+  --primary-800: #253585;
+  --primary-900: #1F2C6D;
+  --akademic-gradient: linear-gradient(60deg, #6175DE, #758CE0);
 }
 
 /* margins top */
@@ -174,7 +181,7 @@
 }
 
 .background-sign {
-  background-color: #6772e5;
+  background-color: var(--akademic-color);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%237d86e9' points='800 100 0 200 0 800 1600 800 1600 200'/%3E%3Cpolygon fill='%23929aec' points='800 200 0 400 0 800 1600 800 1600 400'/%3E%3Cpolygon fill='%23a8aef0' points='800 300 0 600 0 800 1600 800 1600 600'/%3E%3Cpolygon fill='%23bec3f4' points='1600 800 800 400 0 800'/%3E%3Cpolygon fill='%23d4d7f8' points='1280 800 800 500 320 800'/%3E%3Cpolygon fill='%23e9ebfb' points='533.3 800 1066.7 800 800 600'/%3E%3Cpolygon fill='%23ffffff' points='684.1 800 914.3 800 800 700'/%3E%3C/g%3E%3C/svg%3E");
   background-attachment: fixed;
   background-size: cover;
@@ -241,44 +248,6 @@ p {
   line-height: 1.5
 }
 
-h1 small,
-h2 small,
-h3 small,
-h4 small,
-h5 small,
-h6 small,
-.h1 small,
-.h2 small,
-.h3 small,
-.h4 small,
-.h5 small,
-.h6 small,
-h1 .small,
-h2 .small,
-h3 .small,
-h4 .small,
-h5 .small,
-h6 .small,
-.h1 .small,
-.h2 .small,
-.h3 .small,
-.h4 .small,
-.h5 .small,
-.h6 .small {
-  color: #9A9A9A;
-  font-weight: 300;
-  line-height: 1.5
-}
-
-h1 small,
-h2 small,
-h3 small,
-h1 .small,
-h2 .small,
-h3 .small {
-  font-size: 60%
-}
-
 h1 .subtitle {
   display: block;
   margin: 0 0 30px
@@ -332,7 +301,7 @@ h1 .subtitle {
 
 .text-action,
 .text-action:hover {
-  color: #6772e5 !important
+  color: var(--primary-500) !important
 }
 
 .pointer {
@@ -554,7 +523,6 @@ input:focus {
 .sidebar[data-color="blue"]:after {
   background: #1F77D0;
   background: -moz-linear-gradient(top, #1F77D0 0%, #533ce1 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1F77D0), color-stop(100%, #533ce1));
   background: -webkit-linear-gradient(top, #1F77D0 0%, #533ce1 100%);
   background: -o-linear-gradient(top, #1F77D0 0%, #533ce1 100%);
   background: -ms-linear-gradient(top, #1F77D0 0%, #533ce1 100%);
@@ -565,7 +533,6 @@ input:focus {
 .sidebar[data-color="azure"]:after {
   background: #1DC7EA;
   background: -moz-linear-gradient(top, #1DC7EA 0%, #4091ff 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1DC7EA), color-stop(100%, #4091ff));
   background: -webkit-linear-gradient(top, #1DC7EA 0%, #4091ff 100%);
   background: -o-linear-gradient(top, #1DC7EA 0%, #4091ff 100%);
   background: -ms-linear-gradient(top, #1DC7EA 0%, #4091ff 100%);
@@ -584,7 +551,6 @@ input:focus {
 .sidebar[data-color="orange"]:after {
   background: #FFA534;
   background: -moz-linear-gradient(top, #FFA534 0%, #ff5221 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFA534), color-stop(100%, #ff5221));
   background: -webkit-linear-gradient(top, #FFA534 0%, #ff5221 100%);
   background: -o-linear-gradient(top, #FFA534 0%, #ff5221 100%);
   background: -ms-linear-gradient(top, #FFA534 0%, #ff5221 100%);
@@ -595,7 +561,6 @@ input:focus {
 .sidebar[data-color="red"]:after {
   background: #FB404B;
   background: -moz-linear-gradient(top, #FB404B 0%, #bb0502 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FB404B), color-stop(100%, #bb0502));
   background: -webkit-linear-gradient(top, #FB404B 0%, #bb0502 100%);
   background: -o-linear-gradient(top, #FB404B 0%, #bb0502 100%);
   background: -ms-linear-gradient(top, #FB404B 0%, #bb0502 100%);
@@ -613,7 +578,6 @@ input:focus {
   background: linear-gradient(to bottom, #b224ef 0%, #7579ff 100%);
   background-size: 150% 150%
 }
-
 .sidebar .nav>li.active-pro {
   position: absolute;
   width: 100%;
@@ -704,14 +668,14 @@ input:focus {
 }
 
 .btn-secondary {
-  color: #6772e5;
+  color: var(--primary-500);
   background: #fff;
   border: 1px solid #ddd;
   outline: 0;
 }
 
 .btn-secondary:hover {
-  color: #7795f8;
+  color: var(--primary-300);
 }
 
 .btn-secondary.active {
@@ -723,14 +687,14 @@ input:focus {
 
 .btn-action {
   color: #fff;
-  background: #6772e5;
+  background: var(--primary-500);
 }
 
 .btn-action:focus,
 .btn-action:hover,
 .btn-action:active {
   color: #fff;
-  background-color: #7795f8;
+  background-color: var(--primary-300);
   -webkit-transform: translateY(-1px);
   transform: translateY(-1px);
   box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
@@ -2458,7 +2422,7 @@ fieldset[disabled] .form-control {
 }
 
 .border-top {
-  border-top: 5px solid #b224ef;
+  border-top: 5px solid var(--akademic-color);
 }
 
 .table {

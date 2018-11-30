@@ -11,6 +11,7 @@ export interface ChartData {
     }[];
 
     options: {
+        cutoutPercentage?: number,
         title?: {
             display: boolean;
             text: string;

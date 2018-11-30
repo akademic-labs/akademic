@@ -77,7 +77,8 @@ export class StudentViewComponent implements OnInit {
         hoverBorderWidth: 2
       }],
       options: {
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        cutoutPercentage: 85,
       }
     }
   }
