@@ -1,14 +1,35 @@
-<div class="col-xs-12 col-md-6">
+<div *ngIf="activityCategoryChartData; else firstActivity" class="col-xs-12 col-md-6">
   <aka-chart-card title="Atividades" subtitle="Atividades por categoria" chartType="pie" [chartData]="activityCategoryChartData">
   </aka-chart-card>
 </div>
 
-<div class="col-xs-12 col-md-6">
+<div *ngIf="activityCategoryChartData" class="col-xs-12 col-md-6">
   <aka-chart-card title="Atividades" subtitle="Atividades por status" chartType="doughnut" [chartData]="activityStatusChartData">
   </aka-chart-card>
 </div>
 
-<div class="col-xs-12">
+<ng-template #firstActivity>
+  <div class="col-xs-12">
+    <div class="card border-top">
+      <div class="header text-center">
+        <h4 class="title">Atividades</h4>
+        <hr>
+      </div>
+      <div class="text-center" style="display: block;">
+        <span class="none-activity" style="font-size: 20px;">Olá {{ user.displayName}}</span>
+        <span class="none-activity">Você ainda não possui nenhuma atividade cadastrada</span>
+        <span class="none-activity">Clique no botão abaixo para cadastrar sua primeira atividade :)</span>
+        <div class="row text-center">
+          <div class="mt-5 mb-5">
+            <button class="btn btn-action" [routerLink]="['/student/input-activity']">Nova Atividade</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<div *ngIf="activityCategoryChartData" class="col-xs-12">
   <div *ngIf="activitiesStudent">
     <div class="card border-top">
       <div class="header text-center">
@@ -89,7 +110,7 @@
           <ng-template pTemplate="emptymessage" let-columns>
             <tr>
               <td colspan="6">
-                Nenhum registro encontrado.
+                Nenhuma atividade encontrada.
               </td>
             </tr>
           </ng-template>
