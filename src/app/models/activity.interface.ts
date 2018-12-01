@@ -36,6 +36,7 @@ export interface Activity {
   // could be the uid or the object
   user: any;
 
+  // controller id that approved the activity
   controller?: any;
   feedback?: string;
 }

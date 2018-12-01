@@ -1,0 +1,31 @@
+
+  <div class="comments">
+    <ul class="comments-list" *ngFor="let comment of comments">
+      <li class="comment">
+        <div class="comment-text">
+          <div class="comment-body show">
+            <span class="comment-copy">{{comment.description}}</span>
+            <a href="#" class="comment-user">
+              {{comment.user.displayName}}
+            </a>
+            <span class="comment-date">
+              <a class="comment-link" href="#">
+                <span>3 horas atras</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <div class="col-lg-9">
+        <textarea rows="2" class="form-control" placeholder="Aqui você pode colocar seus comentários."
+          [(ngModel)]="newComment" required></textarea>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <button class="btn btn-action" (click)="addComment()" [disabled]="!newComment">Comentar</button>
+    </div>
+  </div>

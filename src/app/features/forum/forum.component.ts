@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Post } from './../../models/post.interface';
+import { User } from './../../models/user.interface';
+import { AuthService } from './../../services/auth.service';
+import { ForumService } from './../../services/forum.service';
 
 @Component({
   selector: 'aka-forum',
@@ -8,40 +11,17 @@ import { Post } from './../../models/post.interface';
   styleUrls: ['./forum.component.css']
 })
 export class ForumComponent implements OnInit {
-
   posts: Post[];
+  user: User;
 
-  constructor() { }
+  constructor(private _forumService: ForumService, private _auth: AuthService) { }
 
   ngOnInit() {
-    this.posts = [{
-      title: 'Titulo qualquer',
-      description: 'Descrição nada a ver só para ocupar espaço e tudo mais',
-      address: {
-        city: 'Araucária',
-        state: 'Paraná',
-        country: 'Brasil'
-      },
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      votes: 10,
-      owner: {
-        displayName: 'Patrick'
-      },
-      comments: [
-        {
-          description: 'Comentário qualquer de exemplo somente para teste e tudo mais ok',
-          created: new Date,
-          user: {
-            displayName: 'Luiz Henrique'
-          }
-        }
-      ]
-    }];
+    this._auth.user$.subscribe(user => this.user = user);
+    // TODO: get the comments subcolletcion too
+    this._forumService.get().subscribe(posts => {
+      this.posts = posts;
+      console.log(this.posts);
+    })
   }
-
-  addPost() {
-
-  }
-
 }

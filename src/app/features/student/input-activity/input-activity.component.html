@@ -9,7 +9,7 @@
             </div>
             <div class="content">
                 <img *ngIf="loading" class="loading" src="assets/img/loading.gif">
-                <form *ngIf="!loading" [formGroup]="activityForm" (ngSubmit)="save()">
+                <form *ngIf="!loading" [formGroup]="activityForm" (ngSubmit)="save(activityForm)">
                     <div *ngIf="activity?.status" class="row status-activity">
                         <div [ngSwitch]="activity?.status">
                             <img *ngSwitchCase="'Aprovada'" src="assets/img/approved.png" alt="Icone Aprovada" />
