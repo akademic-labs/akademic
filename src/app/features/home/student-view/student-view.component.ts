@@ -72,8 +72,7 @@ export class StudentViewComponent implements OnInit {
         hoverBorderWidth: 2
       }],
       options: {
-        maintainAspectRatio: false,
-        cutoutPercentage: 85,
+        maintainAspectRatio: false
       }
     }
   }
@@ -87,6 +86,11 @@ export class StudentViewComponent implements OnInit {
         borderColor: palette('cb-Set2', dataChart.data.length).map(hex => '#' + hex),
       }],
       options: {
+        cutoutPercentage: 95,
+        animation: {
+          animateRotate: true,
+          animateScale: true
+        },
         maintainAspectRatio: false
       }
     };

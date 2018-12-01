@@ -11,6 +11,10 @@ export interface ChartData {
     }[];
 
     options: {
+        animation?: {
+            animateRotate: boolean,
+            animateScale: boolean
+        },
         cutoutPercentage?: number,
         title?: {
             display: boolean;
