@@ -6,7 +6,6 @@
       </div>
       <hr>
     </div>
-    <pre>{{form.value | json}}</pre>
     <div class="content">
       <div class="row">
         <div class="col-xs-12">
@@ -21,7 +20,7 @@
         <div class="col-xs-12 col-md-6">
           <div class="form-group">
             <label for="local">Local</label>
-            <input type="text" class="form-control" formControlName="local" placeholder="Informe o local...">
+            <input type="text" class="form-control" formControlName="local" placeholder="Informe o local..." maxlength="15">
           </div>
           <aka-message-control-error [control]="form.get('local')" error="required" msg="Local é obrigatório."></aka-message-control-error>
           <aka-message-control-error [control]="form.get('local')" error="maxlength" msg="Local não pode ser maior que 15 caracteres."></aka-message-control-error>

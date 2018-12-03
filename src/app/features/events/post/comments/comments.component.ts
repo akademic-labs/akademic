@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { take } from 'rxjs/operators';
 
+import { EventService } from '../../../../services/events.service';
 import { Comment } from './../../../../models/comment.interface';
 import { AuthService } from './../../../../services/auth.service';
-import { EventService } from '../../../../services/events.service';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'aka-comments',
