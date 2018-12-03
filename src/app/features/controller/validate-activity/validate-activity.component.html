@@ -97,7 +97,7 @@
     </div>
 </div>
 
-<aka-confirmation key="confKey" (onAccept)="onAccept(true)"></aka-confirmation>
+<aka-confirmation key="confKey" (onAccept)="onAccept()"></aka-confirmation>
 
 <div *ngIf="attachView" [ngSwitch]="attachView?.type" class="modal fade" id="attachModal" role="dialog">
     <h5 class="title-dialog">{{ attachView?.name }}</h5>

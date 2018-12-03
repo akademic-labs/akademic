@@ -3,10 +3,10 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable, combineLatest } from 'rxjs';
 import { take, switchMap, map } from 'rxjs/operators';
 
-import { Comment } from './../models/comment.interface';
-import { Post } from './../models/post.interface';
-import { documentJoin } from './../rxjs-operators/document-join.operator';
-import { leftJoinDocument } from './../rxjs-operators/left-join-document.operator';
+import { Comment } from '../models/comment.interface';
+import { Post } from '../models/post.interface';
+import { documentJoin } from '../rxjs-operators/document-join.operator';
+import { leftJoinDocument } from '../rxjs-operators/left-join-document.operator';
 import { AuthService } from './auth.service';
 import { ErrorService } from './error.service';
 import { FirestoreService } from './firestore.service';
@@ -14,7 +14,7 @@ import { FirestoreService } from './firestore.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ForumService {
+export class EventService {
   constructor(
     private _afs: AngularFirestore,
     private _errorService: ErrorService,
@@ -63,10 +63,8 @@ export class ForumService {
     }
   }
 
-  async create(post: Post) {
-    const user = await this._authService.user$.pipe(take(1)).toPromise();
-    post.owner = user.uid;
-    await this._dbService.add<Post>('posts', post);
+  create(post: Post) {
+    return this._dbService.add<Post>('posts', post);
   }
 
   async update(post: Post, uid: string) {

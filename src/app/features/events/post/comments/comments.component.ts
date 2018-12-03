@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { Comment } from './../../../../models/comment.interface';
 import { AuthService } from './../../../../services/auth.service';
-import { ForumService } from './../../../../services/forum.service';
+import { EventService } from '../../../../services/events.service';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -15,14 +15,14 @@ export class CommentsComponent implements OnInit {
   @Input() postUid: string;
   newComment: string;
 
-  constructor(private _forumService: ForumService, private _authService: AuthService) { }
+  constructor(private _eventService: EventService, private _authService: AuthService) { }
 
   ngOnInit() {
   }
 
   async addComment() {
     const user = await this._authService.user$.pipe(take(1)).toPromise();
-    this._forumService.addComment(this.postUid, { description: this.newComment, createdAt: new Date, user: user.uid });
+    this._eventService.addComment(this.postUid, { description: this.newComment, createdAt: new Date, user: user.uid });
     this.newComment = '';
   }
 

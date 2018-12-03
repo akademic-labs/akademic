@@ -1,25 +1,24 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from 'app/shared/shared.module';
 
-import { ForumRoutingModule } from './forum-routing.module';
-import { ForumComponent } from './forum.component';
-import { PostComponent } from './post/post.component';
+import { EventsRoutingModule } from './events-routing.module';
+import { EventsComponent } from './events.component';
 import { FormComponent } from './form/form.component';
 import { CommentsComponent } from './post/comments/comments.component';
-import { SharedModule } from 'app/shared/shared.module';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   imports: [
-    ForumRoutingModule,
+    EventsRoutingModule,
     FormsModule,
     SharedModule
   ],
   declarations: [
-    ForumComponent,
+    EventsComponent,
     PostComponent,
     FormComponent,
     CommentsComponent
   ]
 })
-export class ForumModule { }
+export class EventsModule { }

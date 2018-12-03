@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { FormComponent } from './form/form.component';
-import { ForumComponent } from './forum.component';
+import { EventsComponent } from './events.component';
 
 const routes: Routes = [
-  { path: '', component: ForumComponent },
+  { path: '', component: EventsComponent },
   { path: 'create', component: FormComponent }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ForumRoutingModule { }
+export class EventsRoutingModule { }

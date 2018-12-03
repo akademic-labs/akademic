@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
+import { EventService } from '../../../services/events.service';
 import { Cities } from './../../../models/cities.interface';
 import { Post } from './../../../models/post.interface';
 import { States } from './../../../models/states.interface';
 import { AuthService } from './../../../services/auth.service';
-import { ForumService } from './../../../services/forum.service';
 import { NotifyService } from './../../../services/notify.service';
 import { UtilsService } from './../../../services/utils.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'aka-form',
@@ -20,7 +21,7 @@ export class FormComponent implements OnInit {
   states$: Observable<States[]>;
   cities$: Observable<Cities[]>;
 
-  constructor(private _formBuilder: FormBuilder, private _forumService: ForumService,
+  constructor(private _formBuilder: FormBuilder, private _eventService: EventService,
     private _auth: AuthService, private _notify: NotifyService, private _utilsService: UtilsService) { }
 
   ngOnInit() {
@@ -43,9 +44,11 @@ export class FormComponent implements OnInit {
     });
   }
 
-  onSubmit({ value, valid }: { value: Post, valid: boolean }) {
+  async onSubmit({ value, valid }: { value: Post, valid: boolean }) {
     if (valid) {
-      this._forumService.create(value).then(() => {
+      const user = await this._auth.user$.pipe(take(1)).toPromise();
+      value.uid = user.uid;
+      this._eventService.create(value).then(() => {
         this.buildForm();
         this._notify.update('success', 'Evento adicionado com sucesso!');
       });
