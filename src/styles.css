@@ -2720,3 +2720,9 @@ select {
   max-height: 50px;
   margin: 0px 10px 10px 0px;
 }
+
+.none-activity {
+  color: #9A9A9A;
+  display: block;
+  font-size: 15px;
+}

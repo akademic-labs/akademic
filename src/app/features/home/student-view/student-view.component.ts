@@ -62,10 +62,10 @@ export class StudentViewComponent implements OnInit {
   }
 
   buildChartByCategory(dataChart) {
-    this.activityCategoryChartData = {
-      labels: dataChart ? dataChart.labels : null,
+    dataChart ? this.activityCategoryChartData = {
+      labels: dataChart.labels,
       datasets: [{
-        data: dataChart ? dataChart.data : null,
+        data: dataChart.data,
         backgroundColor: palette('cb-Pastel1', dataChart.data.length).map(hex => '#' + hex),
         borderColor: palette('cb-Pastel1', dataChart.data.length).map(hex => '#' + hex),
         borderWidth: 1,
@@ -74,14 +74,14 @@ export class StudentViewComponent implements OnInit {
       options: {
         maintainAspectRatio: false
       }
-    }
+    } : this.activityCategoryChartData = null;
   }
 
   buildChartStatus(dataChart) {
-    this.activityStatusChartData = {
-      labels: dataChart ? dataChart.labels : null,
+    dataChart ? this.activityStatusChartData = {
+      labels: dataChart.labels,
       datasets: [{
-        data: dataChart ? dataChart.data : null,
+        data: dataChart.data,
         backgroundColor: palette('cb-Set2', dataChart.data.length).map(hex => '#' + hex),
         borderColor: palette('cb-Set2', dataChart.data.length).map(hex => '#' + hex),
       }],
@@ -93,7 +93,7 @@ export class StudentViewComponent implements OnInit {
         },
         maintainAspectRatio: false
       }
-    };
+    } : this.activityStatusChartData = null;
   }
 
   deleteActivity() {
