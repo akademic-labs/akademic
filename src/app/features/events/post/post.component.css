@@ -1,13 +1,3 @@
-.fd-column {
-    flex-direction: column !important;
-}
-
-.post-layout--right {
-    flex-shrink: 1;
-    width: calc(100% - 70px - 16px - 2px);
-    min-width: 0;
-}
-
 .post-tag {
     position: relative;
     display: inline-block;
@@ -29,7 +19,7 @@
 }
 
 .post-tag {
-    color:#39739d;
+    color: #39739d;
     background-color: #F9F4FE;
     border-color: #F9F4FE;
 }
@@ -40,83 +30,10 @@
     border-color: #D4DEF8;
 }
 
-p {
-    clear: both;
-    margin-bottom: 1em;
-    margin-top: 0;
-}
-
 .avatar-wrapper,
 .avatar-wrapper img {
     width: 32px;
     height: 32px;
-}
-
-.vote-up-off,
-.vote-down-off {
-    background-image: url(https://cdn.sstatic.net/Sites/br/Img/sprites.png?v=ac3b12b459b8);
-    background-image: url(https://cdn.sstatic.net/Sites/br/Img/sprites.svg?v=9a80d5fa584d), none;
-    background-size: initial;
-    background-repeat: no-repeat;
-    overflow: hidden;
-}
-
-.vote-up-off,
-.vote-down-off {
-    display: block;
-    width: 40px;
-    height: 40px;
-    margin-bottom: 2px;
-}
-
-.vote-up-off {
-    background-position: 0 -170px;
-}
-
-.vote-down-off {
-    background-position: 0 -220px;
-    margin-bottom: 8px;
-}
-
-.post-layout {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    box-sizing: border-box;
-}
-
-.post-layout--left,
-.post-layout--left.votecell {
-    flex-grow: 0;
-    width: 70px;
-    padding: 0;
-}
-
-.vote-count-post {
-    display: block;
-    font-size: 20px;
-    margin: 0 0 3px;
-}
-
-.question {
-    clear: both;
-}
-
-.question .postcell {
-    vertical-align: top;
-}
-
-.votecell {
-    vertical-align: top;
-    padding-right: 15px;
-}
-
-.votecell .vote-count-post {
-    padding-right: 30px;
-}
-
-.votecell .vote {
-    min-width: 46px;
 }
 
 .post-signature {
@@ -136,11 +53,9 @@ p {
 
 .post-taglist {
     margin-bottom: 10px;
-    clear: both;
 }
 
 .user-info {
-    box-sizing: border-box;
     padding: 5px 6px 7px 7px;
     width: 200px;
     color: #6a737c;
@@ -199,20 +114,10 @@ p {
 }
 
 .post-text {
-    width: 660px;
     margin-top: 10px;
-}
-
-.post-text {
     margin-bottom: 5px;
-    word-wrap: break-word;
     font-size: 15px;
     line-height: 1.3;
-}
-
-.vote-up-off,
-.vote-down-off {
-    height: 30px;
 }
 
 .post-tag {

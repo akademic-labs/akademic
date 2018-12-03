@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Post } from './../../../models/post.interface';
-import { EventService } from '../../../services/events.service';
 
 @Component({
   selector: 'aka-post',
@@ -11,18 +10,8 @@ import { EventService } from '../../../services/events.service';
 export class PostComponent implements OnInit {
   @Input() post: Post;
 
-  constructor(private _eventService: EventService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  vote(isUp: boolean) {
-    if (isUp) {
-      this.post.votes++;
-      this._eventService.vote(this.post);
-    } else {
-      this.post.votes--;
-      this._eventService.vote(this.post);
-    }
   }
 }

@@ -10,7 +10,7 @@
             </a>
             <span class="comment-date">
               <a class="comment-link" href="#">
-                <span>3 horas atras</span>
+                <span>{{comment.createdAt.toDate() | date: 'dd/MM/yyyy hh:mm a'}}</span>
               </a>
             </span>
           </div>

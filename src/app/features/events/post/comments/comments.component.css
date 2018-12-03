@@ -5,8 +5,7 @@ li {
     padding: 0;
 }
 
-.post-layout--right .post-text,
-.post-layout--right .comments {
+.post-text, .comments {
     width: 100%;
 }
 
@@ -14,7 +13,6 @@ a.comment-user {
     white-space: nowrap;
     padding: 0;
 }
-
 
 .comments {
     width: 660px;

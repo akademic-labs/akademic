@@ -1,55 +1,46 @@
 <div class="card">
   <div class="content">
-    <div class="question">
-      <div class="post-layout">
-        <div class="votecell post-layout--left">
-          <div class="vote">
-            <a class="vote-up-off pointer" (click)="vote(true)"></a>
-            <span class="vote-count-post">{{post.votes}}</span>
-            <a class="vote-down-off pointer" (click)="vote(false)"></a>
+    <div class="row">
+      <div class="col-lg-12">
+        <h4 class="title">
+          {{post.title}}
+        </h4>
+        <div class="post-text">
+          <p>
+            {{post.description}}
+          </p>
+        </div>
+
+        <div class="post-taglist flex">
+          <div class="flex show">
+            <a class="post-tag pointer">{{post.city.nome}}</a>
+            <a class="post-tag pointer">{{post.state.nome}}</a>
           </div>
         </div>
-        <div class="postcell post-layout--right">
-          <h4 class="title">
-            {{post.title}}
-          </h4>
-          <div class="post-text">
-            <p>
-              {{post.description}}
-            </p>
-          </div>
-
-          <div class="post-taglist flex fd-column">
-            <div class="flex show">
-              <a class="post-tag pointer">{{post.city.nome}}</a>
-              <a class="post-tag pointer">{{post.state.nome}}</a>
-            </div>
-          </div>
-
-          <div class="flex fw-wrap right">
-            <div class="post-signature owner grid--cell">
-              <div class="user-info">
-                <div class="user-action-time">
-                  há <span>4 horas atras</span>
-                </div>
-                <div class="user-avatar">
-                  <a href="#">
-                    <div class="avatar-wrapper">
-                      <img [src]="post.owner.photoURL" [alt]="post.owner.displayName" width="32"
-                        height="32">
-                    </div>
-                  </a>
-                </div>
-                <div class="user-details">
-                  <a>{{post.owner.displayName}}</a>
-                </div>
+      </div>
+      <div class="col-lg-12 clearfix">
+        <div class="flex fw-wrap right">
+          <div class="post-signature owner grid--cell">
+            <div class="user-info">
+              <div class="user-action-time">
+               Criado em <span>{{post.createdAt.toDate() | date: 'dd/MM/yyyy'}}</span>
+              </div>
+              <div class="user-avatar">
+                <a href="#">
+                  <div class="avatar-wrapper">
+                    <img [src]="post.owner.photoURL" [alt]="post.owner.displayName" width="32" height="32">
+                  </div>
+                </a>
+              </div>
+              <div class="user-details">
+                <a>{{post.owner.displayName}}</a>
               </div>
             </div>
           </div>
         </div>
-        <div class="post-layout--right">
-          <aka-comments [comments]="post.comments" [postUid]="post.uid"></aka-comments>
-        </div>
+      </div>
+      <div class="col-lg-12">
+        <aka-comments [comments]="post.comments" [postUid]="post.uid"></aka-comments>
       </div>
     </div>
   </div>

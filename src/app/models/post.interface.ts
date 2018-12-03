@@ -11,7 +11,7 @@ export interface Post {
     city: Cities;
     state: States;
 
-    createdAt: Date;
+    createdAt: any;
     updatedAt: Date;
     votes: number;
 
