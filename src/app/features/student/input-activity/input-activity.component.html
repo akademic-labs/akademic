@@ -26,7 +26,7 @@
                         <label>Avaliador</label>
                         <div>
                             <img [src]="activity.controller?.photoURL ? activity.controller.photoURL : 'assets/img/default-avatar.png'"
-                                alt="Foto do Avaliador" />
+                                alt="Foto do Avaliador" width="80" />
                             <h5>
                                 {{ activity.controller?.displayName }}
                                 <br />
@@ -101,16 +101,26 @@
                         <div class="col-xs-12 col-md-3">
                             <div class="form-group">
                                 <label for="initialDate">Data Inicial</label>
-                                <input type="date" class="form-control" formControlName="initialDate">
+                                <input type="date" class="form-control" formControlName="initialDate" [max]="today"
+                                    (input)="validatorDate('initialDate', $event.target.value)">
                             </div>
                             <aka-message-control-error [control]="activityForm.get('initialDate')" error="required" msg="Data inicial é obrigatório."></aka-message-control-error>
+                            <aka-message-control-error [control]="activityForm.get('initialDate')" error="dateGreaterToday"
+                                msg="Data inicial maior que data atual."></aka-message-control-error>
+                            <aka-message-control-error [control]="activityForm.get('initialDate')" error="dateGreaterFinal"
+                                msg="Data inicial é maior que data final."></aka-message-control-error>
                         </div>
                         <div class="col-xs-12 col-md-3">
                             <div class="form-group">
                                 <label for="finalDate">Data Final</label>
-                                <input type="date" class="form-control" formControlName="finalDate">
+                                <input type="date" class="form-control" formControlName="finalDate" [max]="today"
+                                    (input)="validatorDate('finalDate', $event.target.value)">
                             </div>
                             <aka-message-control-error [control]="activityForm.get('finalDate')" error="required" msg="Data final é obrigatório."></aka-message-control-error>
+                            <aka-message-control-error [control]="activityForm.get('finalDate')" error="dateGreaterToday"
+                                msg="Data final maior que data atual."></aka-message-control-error>
+                            <aka-message-control-error [control]="activityForm.get('finalDate')" error="dateGreaterInitial"
+                                msg="Data final é menor que data inicial."></aka-message-control-error>
                         </div>
                     </div>
                     <div class="row">

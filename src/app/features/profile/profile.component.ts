@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   instituitions$: Observable<Institution[]>;
   courses$: any;
   disabledSave;
+  today = new Date().toJSON().split('T')[0];
 
   constructor(
     private _auth: AuthService,
@@ -81,7 +82,7 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  searchCep() {
+  queryCEP() {
     this.clearAddressForm();
     const cep = this.form.get('address.zipCode').value;
     if (cep) {
@@ -165,6 +166,10 @@ export class ProfileComponent implements OnInit {
       course: [null],
       about: ['']
     });
+  }
+
+  validatorDate(input, date) {
+    date > this.today ? this.form.get(input).setErrors({ invalid: true }) : this.form.get(input).setValue(date);
   }
 
 }

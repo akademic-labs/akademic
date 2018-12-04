@@ -423,6 +423,7 @@ input:focus {
 .sidebar .user {
   border-bottom: 1px solid hsla(0, 0%, 100%, .2);
   padding-bottom: 15px;
+  outline: 0;
 }
 
 .sidebar .user .photo {
@@ -578,6 +579,7 @@ input:focus {
   background: linear-gradient(to bottom, #b224ef 0%, #7579ff 100%);
   background-size: 150% 150%
 }
+
 .sidebar .nav>li.active-pro {
   position: absolute;
   width: 100%;
@@ -1590,10 +1592,10 @@ fieldset[disabled] .form-control {
 }
 
 .card .author img {
-  border-radius: 50%;
+  border-radius: 100%;
   margin-right: 10px;
-  max-width: 80px;
-  max-height: 80px;
+  max-width: 150px;
+  max-height: 150px;
 }
 
 .card .author h5 {
@@ -2667,7 +2669,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[type="date"]:before {
   position: absolute;
   font-family: 'FontAwesome';
-  content: '\f073';
+  content: '\f0dd';
   right: 15px;
   color: #555;
 }
@@ -2725,4 +2727,13 @@ select {
   color: #9A9A9A;
   display: block;
   font-size: 15px;
+}
+
+.label-overflow,
+.label-overflow h4,
+.label-overflow h5 {
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: normal;
 }

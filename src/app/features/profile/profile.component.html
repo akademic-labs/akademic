@@ -1,60 +1,53 @@
 <div *ngIf="user$ | async as user">
     <div class="row">
-        <div class="col-lg-4">
-            <div class="card card-user">
-                <div class="image background-sign">
-                </div>
-                <div class="content">
-                    <div class="author">
-                        <a href="#">
-                            <img class="avatar border-gray" [src]="user.photoURL ? user.photoURL : '../../../assets/img/default-avatar.png'"
-                                alt="Foto do perfil" />
-                            <h4 class="title">{{user.displayName}}</h4>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="card border-top">
-                <div class="content">
-                    <h4 class="title">
-                        <h4 class="title">
-                            {{user.roles.student ? 'Estudante' : user.roles.controller ? 'Coordenador' : 'Instituição'}}
-                        </h4>
-                        <small>e: {{user.email}}</small>
-                    </h4>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-8">
+        <div class="col-md-12">
             <div class="card border-top">
                 <div class="header">
-                    <h4 class="title"><i class="fa fa fa-user-circle-o"></i>Editar Perfil</h4>
+                    <h4 class="title"><i class="fa fa fa-user-circle-o"></i>Meu Perfil</h4>
                 </div>
                 <div class="content">
+                    <div class="card card-user">
+                        <div class="image background-sign">
+                        </div>
+                        <div class="content">
+                            <div class="author">
+                                <a href="#">
+                                    <img class="avatar border-gray" [src]="user.photoURL ? user.photoURL : '../../../assets/img/default-avatar.png'"
+                                        alt="Foto do perfil" />
+                                    <h4 class="title label-overflow">{{user.displayName}}</h4>
+                                </a>
+                            </div>
+                            <div class="label-overflow">
+                                <h4>
+                                    {{ user.roles.student ? 'Estudante' : user.roles.controller ? 'Controlador' :
+                                    user.roles.institution ? 'Instituição' : 'Administrador' }}
+                                </h4>
+                                <h5>{{user.email}}</h5>
+                            </div>
+                        </div>
+                    </div>
                     <form [formGroup]="form" (submit)="onSubmit()">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Matrícula</label>
                                     <input type="text" class="form-control" formControlName="registration">
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nome completo</label>
                                     <input type="text" class="form-control" formControlName="displayName">
                                 </div>
                                 <aka-message-control-error [control]="form.get('displayName')" error="required" msg="Nome completo é obrigatório."></aka-message-control-error>
                             </div>
-                            <div class="col-md-5" *ngIf="user.roles.student || user.roles.controller">
+                            <div class="col-md-3" *ngIf="user.roles.student || user.roles.controller">
                                 <div class="form-group">
                                     <label>Data de nascimento</label>
-                                    <div class="input-group">
-                                        <input type="date" class="form-control" formControlName="birthday">
-                                    </div>
+                                    <input type="date" class="form-control" formControlName="birthday" [max]="today"
+                                        (input)="validatorDate('birthday', $event.target.value)">
                                 </div>
+                                <aka-message-control-error [control]="form.get('birthday')" error="invalid" msg="Data é maior que data atual."></aka-message-control-error>
                             </div>
                         </div>
                         <div formGroupName="address">
@@ -63,7 +56,7 @@
                                     <div class="form-group">
                                         <label>CEP</label>
                                         <input type="text" maxlength="10" class="form-control" formControlName="zipCode"
-                                            (keyup)="cepMask($event.target.value)" (blur)="searchCep()">
+                                            (keyup)="cepMask($event.target.value)" (blur)="queryCEP()">
                                     </div>
                                 </div>
                                 <div class="col-md-8">

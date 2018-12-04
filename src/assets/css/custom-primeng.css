@@ -226,16 +226,20 @@ body .ui-table.ui-table-responsive .ui-paginator-bottom {
 
 
 /* Paginator */
-.ui-paginator .ui-dropdown .ui-dropdown-trigger,
-body .ui-paginator .ui-dropdown .ui-dropdown-label {
-    margin-top: 0px;
-}
 
 body .ui-paginator {
     background-color: #F7F7F8;
     border: 1px solid #eaeaea;
     border-bottom: none;
     padding-top: 10px;
+}
+
+body .ui-paginator .ui-paginator-pages .ui-paginator-page,
+body .ui-paginator .ui-paginator-first,
+body .ui-paginator .ui-paginator-prev,
+body .ui-paginator .ui-paginator-next,
+body .ui-paginator .ui-paginator-last {
+    border-radius: 4px;
 }
 
 /* Fileupload */
