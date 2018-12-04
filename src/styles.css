@@ -426,6 +426,11 @@ input:focus {
   outline: 0;
 }
 
+.sidebar .user a {
+  cursor: none;
+  background: transparent !important;
+}
+
 .sidebar .user .photo {
   overflow: hidden;
   border-radius: 50%;
@@ -1594,8 +1599,8 @@ fieldset[disabled] .form-control {
 .card .author img {
   border-radius: 100%;
   margin-right: 10px;
-  max-width: 150px;
-  max-height: 150px;
+  max-width: 80px;
+  max-height: 80px;
 }
 
 .card .author h5 {
@@ -2592,10 +2597,15 @@ fieldset[disabled] .form-control {
   width: 70%;
 }
 
+.audio-dialog {
+  display: block;
+  margin: auto;
+}
+
 .title-dialog {
   text-align: center;
   color: #ffff;
-  margin-top: 20px;
+  margin: 17px 70px;
 }
 
 .btn-close-modal:hover,
@@ -2623,8 +2633,8 @@ fieldset[disabled] .form-control {
   color: white;
   border: 0;
   position: absolute;
-  top: 2%;
-  right: 6%;
+  top: 8%;
+  right: 2%;
   margin-right: 20px;
   outline: 0;
   transition: all 0.5s ease-in-out;
@@ -2736,4 +2746,9 @@ select {
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: normal;
+}
+
+/* remove background yellow chrome autofill input */
+input:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;
 }

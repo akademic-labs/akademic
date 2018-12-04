@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { Course } from './../../../../models/course.interface';
@@ -9,11 +9,11 @@ import { Course } from './../../../../models/course.interface';
   templateUrl: './sign-up-form.component.html'
 })
 export class SignUpFormComponent implements OnInit {
+
   @Input() hasAccountLink = true;
   @Input() courses$: Observable<Course[]>;
   @Input() loading = false;
   @Output() submitted: EventEmitter<FormGroup> = new EventEmitter();
-
   signUpForm: FormGroup;
 
   constructor(private fb: FormBuilder) { }
@@ -60,4 +60,5 @@ export class SignUpFormComponent implements OnInit {
       return null
     }
   }
+
 }

@@ -8,6 +8,7 @@
                 <hr>
             </div>
             <div class="content">
+                <!-- <aka-form-debug [form]="activityForm"></aka-form-debug> -->
                 <img *ngIf="loading" class="loading" src="assets/img/loading.gif">
                 <form *ngIf="!loading" [formGroup]="activityForm" (ngSubmit)="save(activityForm)">
                     <div *ngIf="activity?.status" class="row status-activity">
@@ -45,8 +46,19 @@
                             </div>
                         </div>
                     </div>
+                    <!-- <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group">
+                                <label>Tipo de Atividade</label>
+                                <div class="form-group">
+                                    <label class="radio-inline"><input type="radio" name="optradio" checked>Online</label>
+                                    <label class="radio-inline"><input type="radio" name="optradio">Presencial</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
                     <div class="row">
-                        <div class="col-xs-12 col-md-7">
+                        <div class="col-xs-12 col-md-6">
                             <div class="form-group">
                                 <label for="description">Descrição</label>
                                 <input type="text" class="form-control" formControlName="description" placeholder="Digite a descrição.."
@@ -54,7 +66,7 @@
                             </div>
                             <aka-message-control-error [control]="activityForm.get('description')" error="required" msg="Descrição é obrigatório."></aka-message-control-error>
                         </div>
-                        <div class="col-xs-12 col-md-3">
+                        <div class="col-xs-12 col-md-4">
                             <div class="form-group">
                                 <label for="activityType">Tipo de Atividade</label>
                                 <select class="form-control" formControlName="activityType" [compareWith]="compareActivityType">
@@ -70,8 +82,8 @@
                         <div class="col-xs-12 col-md-2">
                             <div class="form-group">
                                 <label for="hoursDuration">Carga Horária</label>
-                                <input type="number" min="0" oninput="validity.valid||(value='');" class="form-control"
-                                    formControlName="hoursDuration" placeholder="Digite a carga horária..">
+                                <input type="number" min="1" max="999" oninput="if(this.value.length>=3) { this.value = this.value.slice(0,3) } validity.valid||(value='');"
+                                    class="form-control" formControlName="hoursDuration" placeholder="Digite as horas..">
                             </div>
                             <aka-message-control-error [control]="activityForm.get('hoursDuration')" error="required"
                                 msg="Carga horária é obrigatório."></aka-message-control-error>

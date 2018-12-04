@@ -42,8 +42,3 @@
   line-height: 0px;
   margin: 0px 8px;
 }
-
-/* remove background yellow chrome autofill input */
-input:-webkit-autofill {
-  transition: background-color 5000s ease-in-out 0s;
-}

@@ -13,7 +13,7 @@
                             <div class="author">
                                 <a href="#">
                                     <img class="avatar border-gray" [src]="user.photoURL ? user.photoURL : '../../../assets/img/default-avatar.png'"
-                                        alt="Foto do perfil" />
+                                        alt="Foto do perfil" style="max-width: 150px; max-height: 150px;" />
                                     <h4 class="title label-overflow">{{user.displayName}}</h4>
                                 </a>
                             </div>
@@ -47,7 +47,8 @@
                                     <input type="date" class="form-control" formControlName="birthday" [max]="today"
                                         (input)="validatorDate('birthday', $event.target.value)">
                                 </div>
-                                <aka-message-control-error [control]="form.get('birthday')" error="invalid" msg="Data é maior que data atual."></aka-message-control-error>
+                                <aka-message-control-error [control]="form.get('birthday')" error="dateGreaterToday"
+                                    msg="Data é maior que data atual."></aka-message-control-error>
                             </div>
                         </div>
                         <div formGroupName="address">
