@@ -32,45 +32,40 @@ export const createUser = functions.firestore
     });
 
 export const aggregateActivities = functions.firestore.document('activitiesUser/{userId}/activities/{activityId}')
-    .onWrite((event, context) => {
-        const activityId = context.params.activityId;
+    .onWrite(async (_event, context) => {
         const userId = context.params.userId;
+        const activityId = context.params.activityId;
 
         // ref to the parent document
         const docRef = admin.firestore().collection('activitiesUser').doc(userId)
 
         // get all activities and aggregate
-        return docRef.collection('activities').orderBy('createdAt', 'desc')
-            .get()
-            .then(querySnapshot => {
+        try {
+            const querySnapshot = await docRef.collection('activities').orderBy('createdAt', 'desc').get();
+            // get the total activity count
+            const activityCount = querySnapshot.size;
+            const activityArray = [];
+            // Snapshot to array
+            querySnapshot.forEach(doc => {
+                activityArray.push(doc.data());
+            });
+            const approveds = activityArray.filter(activity => activity.status === 'Aprovada');
+            const approvedCount = approveds.length;
 
-                // get the total activity count
-                const activityCount = querySnapshot.size;
+            const rejecteds = activityArray.filter(activity => activity.status === 'Reprovada');
+            const rejectedCount = rejecteds.length;
 
-                const activityArray = []
-
-                // Snapshot to array
-                querySnapshot.forEach(doc => {
-                    activityArray.push(doc.data());
-                });
-
-                const approveds = activityArray.filter(activity => activity.status === 'Aprovada');
-                const approvedCount = approveds.length;
-
-                const rejecteds = activityArray.filter(activity => activity.status === 'Reprovada');
-                const rejectedCount = approveds.length;
-
-                const pendings = activityArray.filter(activity => activity.status === 'Pendente');
-                const pendingCount = approveds.length;
-
-                // record last activity timestamp
-                const lastActivity = activityArray[0].createdAt;
-
-                // data to update on the documemnt
-                const data = { activityCount, approvedCount, rejectedCount, pendingCount, lastActivity }
-
-                // run update
-                return docRef.update(data)
-            })
-            .catch(err => console.log(err))
+            const pendings = activityArray.filter(activity => activity.status === 'Pendente');
+            const pendingCount = pendings.length;
+            
+            // record last activity timestamp
+            const lastActivity = activityArray[0].createdAt;
+            // data to update on the documemnt
+            const data = { activityCount, approvedCount, rejectedCount, pendingCount, lastActivity };
+            // run update
+            return docRef.update(data);
+        }
+        catch (err) {
+            return console.log(err);
+        }
     })

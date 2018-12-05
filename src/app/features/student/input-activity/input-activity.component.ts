@@ -71,18 +71,17 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
     this.subscribe = this._route.paramMap.subscribe(params => {
       if (params.get('id')) {
         this._activityService.getActivityById(params.get('id'))
-          .subscribe(
-            activity => {
-              this.activity = activity;
-              setTimeout(() => { this.focus.nativeElement.focus() }, 100);
-              this.labelButton = 'Atualizar';
-              this.activityForm.patchValue(activity);
-              this.getCities();
-              activity.status === 'Pendente' ? this.activityForm.enable() : this.activityForm.disable();
-              // block buttons upload and delete attach (variable ref uploads)
-              // activity.status === 'Pendente' ? this.uploadPage.uploadState = '' : this.uploadPage.uploadState = 'running';
-              this.loading = false;
-            },
+          .subscribe(activity => {
+            this.activity = activity;
+            setTimeout(() => { this.focus.nativeElement.focus() }, 100);
+            this.labelButton = 'Atualizar';
+            this.activityForm.patchValue(activity);
+            this.getCities();
+            activity.status === 'Pendente' ? this.activityForm.enable() : this.activityForm.disable();
+            // block buttons upload and delete attach (variable ref uploads)
+            // activity.status === 'Pendente' ? this.uploadPage.uploadState = '' : this.uploadPage.uploadState = 'running';
+            this.loading = false;
+          },
             error => {
               this._errorService.handleErrorByCode(error.code);
               this.loading = false;
