@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } fro
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UploadsPageComponent } from 'app/shared/uploads-page/uplodas-page/uploads-page.component';
+import { AutoComplete } from 'primeng/autocomplete';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -19,6 +20,7 @@ import { ErrorService } from './../../../services/error.service';
 import { NotifyService } from './../../../services/notify.service';
 import { ValidatorService } from './../../../services/validator.service';
 
+
 @Component({
   selector: 'aka-input-activity',
   templateUrl: './input-activity.component.html',
@@ -27,7 +29,8 @@ import { ValidatorService } from './../../../services/validator.service';
 export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactivate {
 
   @ViewChild(UploadsPageComponent) uploadPage: UploadsPageComponent;
-  @ViewChild('inputFocus') focus: ElementRef;
+  @ViewChild('inputDescription') inputDescription: ElementRef;
+  @ViewChild('inputCity') inputCity: AutoComplete;
   activityForm: FormGroup;
   activityTypes$: Observable<ActivityType[]>;
   states$: Observable<States[]>;
@@ -74,12 +77,12 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
         this._activityService.getActivityById(params.get('id'))
           .subscribe(activity => {
             this.activity = activity;
-            setTimeout(() => { this.focus.nativeElement.focus() }, 100);
+            setTimeout(() => { this.inputDescription.nativeElement.focus() }, 100);
             this.labelButton = 'Atualizar';
             this.activityForm.patchValue(activity);
             this.getCities();
             activity.status === 'Pendente' ? this.activityForm.enable() : this.activityForm.disable();
-            // block buttons upload and delete attach (variable ref uploads)
+            // disable buttons upload and delete attach (variable ref uploads)
             // activity.status === 'Pendente' ? this.uploadPage.uploadState = '' : this.uploadPage.uploadState = 'running';
             this.loading = false;
           },
@@ -107,7 +110,7 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
       finalDate: ['', Validators.required],
       local: ['', Validators.required],
       state: ['', Validators.required],
-      city: ['', Validators.required],
+      city: new FormControl({ value: '', disabled: true }, Validators.required),
       observation: ['', Validators.maxLength(500)],
       status: ['Pendente'],
       feedback: new FormControl({ value: null, disabled: true })
@@ -115,15 +118,23 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
   }
 
   getCities(event?) {
-    if (this.activityForm.get('state').value && event) {
-      this.cities$ = this._utilsService.getCities(this.activityForm.get('state').value.id, event.query);
+    const state = this.activityForm.get('state').value;
+    if (state) {
+      this.activityForm.get('city').enable();
+      setTimeout(() => { this.inputCity.inputEL.nativeElement.focus(); }, 100);
+      if (state && event) {
+        this.cities$ = this._utilsService.getCities(state.id, event.query);
+      }
     } else {
-      this.activityForm.get('city').setValue(null);
       this.cities$ = null;
+      this.activityForm.get('city').setValue('');
+      this.activityForm.get('city').disable();
+      this.activityForm.get('city').setErrors(null);
     }
   }
 
   async save({ value, valid }: { value: Activity, valid: boolean }) {
+    this.activityForm.get('city').value instanceof Object ? this.activityForm.get('city').setErrors(null) : this.activityForm.get('city').setErrors({ invalid: true });
     if (valid) {
       const user = await this._auth.user$.pipe(take(1)).toPromise();
       value.user = user.uid;

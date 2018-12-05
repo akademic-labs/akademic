@@ -62,7 +62,7 @@
                             <div class="form-group">
                                 <label for="description">Descrição</label>
                                 <input type="text" class="form-control" formControlName="description" placeholder="Digite a descrição.."
-                                    #inputFocus>
+                                    #inputDescription>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('description')" error="required" msg="Descrição é obrigatório."></aka-message-control-error>
                         </div>
@@ -147,26 +147,28 @@
                             <div class="form-group">
                                 <label for="state">Estado</label>
                                 <p-dropdown formControlName="state" [options]="states$ | async" optionLabel="nome"
-                                    placeholder="Selecione" filter="true" [showClear]="true" emptyFilterMessage="Nenhum resultado."></p-dropdown>
+                                    (onChange)="getCities()" placeholder="Selecione" filter="true" [showClear]="true"
+                                    emptyFilterMessage="Nenhum resultado."></p-dropdown>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('state')" error="required" msg="Estado é obrigatório."></aka-message-control-error>
                         </div>
                         <div class="col-xs-12 col-md-3">
                             <div class="form-group">
                                 <label for="city">Cidade</label>
-                                <p-autoComplete formControlName="city" [suggestions]="cities$ | async" (completeMethod)="getCities($event)"
-                                    [disabled]="!activityForm.get('state').value" field="nome" [size]="30"
-                                    [placeholder]="activityForm.get('state').value ? 'Digite a cidade..' : 'Selecione o estado..'"
-                                    [minLength]="1" maxlength="15" emptyMessage="Nenhum resultado."></p-autoComplete>
+                                <p-autoComplete #inputCity formControlName="city" [suggestions]="cities$ | async" (completeMethod)="getCities($event)"
+                                    field="nome" [placeholder]="activityForm.get('state').value ? 'Digite a cidade..' : 'Selecione o estado..'"
+                                    [minLength]="1" maxlength="30" emptyMessage="Nenhum resultado."></p-autoComplete>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('city')" error="required" msg="Cidade é obrigatório."></aka-message-control-error>
+                            <aka-message-control-error [control]="activityForm.get('city')" error="invalid" msg="Cidade inválida."></aka-message-control-error>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="form-group">
                                 <label for="observation">Observação</label>
-                                <textarea rows="3" class="form-control" formControlName="observation" placeholder="Aqui você pode colocar sua observação.."></textarea>
+                                <textarea rows="3" class="form-control" formControlName="observation"
+                                    placeholder="Aqui você pode colocar sua observação.."></textarea>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('observation')" error="maxlength"
                                 msg="Observação no máximo 500 caracteres."></aka-message-control-error>

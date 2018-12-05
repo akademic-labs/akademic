@@ -2,7 +2,8 @@
 body .ui-inputtext.ng-touched:valid,
 body p-dropdown.ng-dirty.ng-touched.ng-valid .ui-dropdown,
 body p-dropdown.ng-pristine.ng-valid .ui-dropdown,
-body p-spinner.ng-touched.ng-valid .ui-spinner-input {
+body p-spinner.ng-touched.ng-valid .ui-spinner-input,
+body p-autocomplete.ng-touched.ng-valid .ui-autocomplete-input {
     border: var(--border-valid);
 }
 
@@ -13,7 +14,8 @@ body .ui-inputtext.ng-dirty.ng-invalid,
 body p-dropdown.ng-touched.ng-invalid .ui-dropdown,
 body p-dropdown.ng-dirty.ng-invalid .ui-dropdown,
 body p-spinner.ng-touched.ng-invalid .ui-spinner-input,
-body p-spinner.ng-dirty.ng-invalid .ui-spinner-input {
+body p-spinner.ng-dirty.ng-invalid .ui-spinner-input,
+body p-autocomplete.ng-dirty.ng-invalid .ui-autocomplete-input {
     border: var(--border-invalid);
 }
 
@@ -73,6 +75,7 @@ body form .ui-inputtext {
     width: 100% !important;
     border: 1px solid #e3e3e3;
     color: var(--color-label);
+    height: 35px;
 }
 
 body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item {
@@ -109,8 +112,8 @@ body .ui-dropdown-panel .ui-dropdown-items {
 
 body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight {
     color: #ffffff;
-    background: var(--akademic-gradient);
-    margin-right: 4px;
+    background: var(--akademic-color);
+    margin-right: 5px;
     border-radius: 4px;
 }
 
@@ -136,7 +139,8 @@ body .ui-dropdown-panel .ui-dropdown-filter-container .ui-dropdown-filter {
 }
 
 body .ui-dropdown.ui-state-disabled .ui-dropdown-trigger,
-.ui-dropdown.ui-state-disabled .ui-dropdown-label {
+body .ui-dropdown.ui-state-disabled .ui-dropdown-label,
+body .ui-widget:disabled {
     background-color: #ededed;
     color: #000000;
     margin: 0;
@@ -334,4 +338,13 @@ body .ui-autocomplete-panel .ui-autocomplete-items .ui-autocomplete-list-item.ui
     background-color: var(--akademic-color);
     margin: 5px;
     border-radius: 4px;
+}
+
+body .ui-autocomplete .ui-autocomplete-input {
+    height: 35px;
+    text-indent: 5px;
+}
+
+body .ui-autocomplete {
+    width: 100% !important;
 }
