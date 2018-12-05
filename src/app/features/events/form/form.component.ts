@@ -57,7 +57,7 @@ export class FormComponent implements OnInit {
 
   getCities() {
     if (this.form.get('state').value) {
-      this.cities$ = this._utilsService.getCities(this.form.get('state').value.id);
+      this.cities$ = this._utilsService.getCities(this.form.get('state').value.id, '');
     } else {
       this.form.get('city').setValue(null);
       this.cities$ = null;

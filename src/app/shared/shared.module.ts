@@ -6,6 +6,7 @@ import { PickListModule } from 'primeng/picklist';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
@@ -27,6 +28,7 @@ import { FormDebugComponent } from './form-debug/form-debug.component';
         TableModule,
         DropdownModule,
         ConfirmDialogModule,
+        AutoCompleteModule,
         // Pipes
         PipesModule,
         // Directives
@@ -51,6 +53,7 @@ import { FormDebugComponent } from './form-debug/form-debug.component';
         TableModule,
         DropdownModule,
         PickListModule,
+        AutoCompleteModule,
         // Pipes
         PipesModule,
         // Directives

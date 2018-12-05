@@ -23,14 +23,16 @@ export class UtilsService {
     );
   }
 
-  getCities(idState) {
+  getCities(idState, nameCity) {
     return this._http.get<Cities[]>(
       `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idState}/municipios`
     ).pipe(
       map(cities => {
-        return cities.map(({ id, nome }) => {
-          return { id, nome };
-        });
+        return cities
+          .filter(city => city.nome.toLowerCase().indexOf(nameCity.toLowerCase()) === 0)
+          .map(({ id, nome }) => {
+            return { id, nome };
+          });
       }),
       sort('nome', 'asc')
     );

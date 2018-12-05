@@ -328,3 +328,10 @@ body textarea:hover,
 body .ui-dropdown:hover {
     border-color: var(--akademic-color) !important;
 }
+
+/* Autocomplete */
+body .ui-autocomplete-panel .ui-autocomplete-items .ui-autocomplete-list-item.ui-state-highlight {
+    background-color: var(--akademic-color);
+    margin: 5px;
+    border-radius: 4px;
+}

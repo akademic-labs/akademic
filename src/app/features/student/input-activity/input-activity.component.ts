@@ -114,9 +114,9 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
     });
   }
 
-  getCities() {
-    if (this.activityForm.get('state').value) {
-      this.cities$ = this._utilsService.getCities(this.activityForm.get('state').value.id);
+  getCities(event?) {
+    if (this.activityForm.get('state').value && event) {
+      this.cities$ = this._utilsService.getCities(this.activityForm.get('state').value.id, event.query);
     } else {
       this.activityForm.get('city').setValue(null);
       this.cities$ = null;

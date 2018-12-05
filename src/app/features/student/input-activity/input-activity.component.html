@@ -147,16 +147,17 @@
                             <div class="form-group">
                                 <label for="state">Estado</label>
                                 <p-dropdown formControlName="state" [options]="states$ | async" optionLabel="nome"
-                                    (onChange)="getCities()" placeholder="Selecione" filter="true" [showClear]="true"
-                                    emptyFilterMessage="Nenhum resultado."></p-dropdown>
+                                    placeholder="Selecione" filter="true" [showClear]="true" emptyFilterMessage="Nenhum resultado."></p-dropdown>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('state')" error="required" msg="Estado é obrigatório."></aka-message-control-error>
                         </div>
                         <div class="col-xs-12 col-md-3">
                             <div class="form-group">
                                 <label for="city">Cidade</label>
-                                <p-dropdown formControlName="city" [options]="cities$ | async" optionLabel="nome"
-                                    placeholder="Selecione" filter="true" [showClear]="true" emptyFilterMessage="Nenhum resultado."></p-dropdown>
+                                <p-autoComplete formControlName="city" [suggestions]="cities$ | async" (completeMethod)="getCities($event)"
+                                    [disabled]="!activityForm.get('state').value" field="nome" [size]="30"
+                                    [placeholder]="activityForm.get('state').value ? 'Digite a cidade..' : 'Selecione o estado..'"
+                                    [minLength]="1" maxlength="15" emptyMessage="Nenhum resultado."></p-autoComplete>
                             </div>
                             <aka-message-control-error [control]="activityForm.get('city')" error="required" msg="Cidade é obrigatório."></aka-message-control-error>
                         </div>
