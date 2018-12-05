@@ -1,0 +1,63 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+  <div class="card border-top">
+    <div class="header">
+      <div class="title">
+        <i class="fa fa-comments"></i> Criar publicação de Evento
+      </div>
+      <hr>
+    </div>
+    <div class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="activityType">Título</label>
+            <input type="text" class="form-control" formControlName="title">
+          </div>
+          <aka-message-control-error [control]="form.get('title')" error="required" msg="Título é obrigatório."></aka-message-control-error>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div class="form-group">
+            <label for="local">Local</label>
+            <input type="text" class="form-control" formControlName="local" placeholder="Informe o local..." maxlength="15">
+          </div>
+          <aka-message-control-error [control]="form.get('local')" error="required" msg="Local é obrigatório."></aka-message-control-error>
+          <aka-message-control-error [control]="form.get('local')" error="maxlength" msg="Local não pode ser maior que 15 caracteres."></aka-message-control-error>
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <div class="form-group">
+            <label for="state">Estado</label>
+            <p-dropdown formControlName="state" [options]="states$ | async" optionLabel="nome" (onChange)="getCities()"
+              placeholder="Selecione" filter="true" [showClear]="true" emptyFilterMessage="Nenhum resultado."></p-dropdown>
+          </div>
+          <aka-message-control-error [control]="form.get('state')" error="required" msg="Estado é obrigatório."></aka-message-control-error>
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <div class="form-group">
+            <label for="city">Cidade</label>
+            <p-dropdown formControlName="city" [options]="cities$ | async" optionLabel="nome" placeholder="Selecione"
+              filter="true" [showClear]="true" emptyFilterMessage="Nenhum resultado."></p-dropdown>
+          </div>
+          <aka-message-control-error [control]="form.get('city')" error="required" msg="Cidade é obrigatório."></aka-message-control-error>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="hoursDuration">Descrição do Evento</label>
+            <textarea rows="3" class="form-control" placeholder="Aqui você pode colocar sua descrição" formControlName="description"></textarea>
+          </div>
+          <aka-message-control-error [control]="form.get('description')" error="required" msg="Descrição é obrigatório."></aka-message-control-error>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-md-3 right">
+          <button type="submit" class="btn btn-action btn-block" [disabled]="form.invalid">
+            Criar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -19,7 +19,7 @@ import { ErrorService } from './../../../services/error.service';
 export class UploadsPageComponent implements OnInit {
 
   folderStorage = 'dev/';
-  filesAccept = ['image/jpeg', 'image/png', 'application/pdf', 'video/mp4'];
+  filesAccept = ['image/jpeg', 'image/png', 'application/pdf', 'video/mp4', 'audio/mp3'];
   maxfileSize = 50; // MB
   attachments: Attachment[] = [];
   attachmentsView: AttachmentView[] = [];
@@ -66,6 +66,7 @@ export class UploadsPageComponent implements OnInit {
                               const image = true ? attachments.type.split('/')[0] === 'image' : false;
                               const pdf = true ? attachments.type.split('/')[1] === 'pdf' : false;
                               const video = true ? attachments.type.split('/')[0] === 'video' : false;
+                              const audio = true ? attachments.type.split('/')[0] === 'audio' : false;
                               if (image) {
                                 src = resDonwloadURL;
                                 classCss = 'img-attach'
@@ -76,6 +77,10 @@ export class UploadsPageComponent implements OnInit {
                               }
                               if (video) {
                                 src = 'assets/img/video.png';
+                                classCss = 'video-attach'
+                              }
+                              if (audio) {
+                                src = 'assets/img/audio.png';
                                 classCss = 'video-attach'
                               }
                               this.attachments.push({ name: attachments.name, type: attachments.type, path: attachments.path, createdAt: resMetaData.timeCreated });
@@ -128,8 +133,9 @@ export class UploadsPageComponent implements OnInit {
       const image = true ? file.type.split('/')[0] === 'image' : false;
       const pdf = true ? file.type.split('/')[1] === 'pdf' : false;
       const video = true ? file.type.split('/')[0] === 'video' : false;
+      const audio = true ? file.type.split('/')[0] === 'audio' : false;
 
-      if (image || pdf || video) {
+      if (image || pdf || video || audio) {
         if (file.size < 1024 * 1024 * this.maxfileSize) {
           this.attachments.push({ name: file.name, type: file.type, path: path });
           this.task = this._storage.upload(path, file, metadata);
@@ -158,6 +164,8 @@ export class UploadsPageComponent implements OnInit {
     const image = true ? file.type.split('/')[0] === 'image' : false;
     const pdf = true ? file.type.split('/')[1] === 'pdf' : false;
     const video = true ? file.type.split('/')[0] === 'video' : false;
+    const audio = true ? file.type.split('/')[0] === 'audio' : false;
+
     if (image) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -170,6 +178,9 @@ export class UploadsPageComponent implements OnInit {
     }
     if (video) {
       this.attachmentsView.push({ name: file.name, type: file.type, path: downloadURL, size: size, src: 'assets/img/video.png', class: 'video-attach' });
+    }
+    if (audio) {
+      this.attachmentsView.push({ name: file.name, type: file.type, path: downloadURL, size: size, src: 'assets/img/audio.png', class: 'video-attach' });
     }
   }
 

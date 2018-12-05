@@ -18,6 +18,6 @@ export class ValidatorService {
         this.markAllFieldsAsDirty(control);
       }
     });
-    this._notify.update('danger', 'Campos obrigatórios não preenchidos!');
+    this._notify.update('danger', 'Verificar campos obrigatórios e/ou inválidos!');
   }
 }

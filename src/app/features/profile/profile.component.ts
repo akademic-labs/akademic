@@ -10,6 +10,7 @@ import { InstitutionService } from '../../services/institution.service';
 import { NotifyService } from '../../services/notify.service';
 import { UserService } from '../../services/user.service';
 import { ValidatorService } from '../../services/validator.service';
+import { maskCEP } from './../../utils/masks';
 
 @Component({
   selector: 'aka-profile',
@@ -23,6 +24,7 @@ export class ProfileComponent implements OnInit {
   instituitions$: Observable<Institution[]>;
   courses$: any;
   disabledSave;
+  today = new Date().toJSON().split('T')[0];
 
   constructor(
     private _auth: AuthService,
@@ -68,10 +70,7 @@ export class ProfileComponent implements OnInit {
   }
 
   cepMask(cep) {
-    cep = cep.replace(/\D/g, ''); // digitar apenas números
-    cep = cep.replace(/^(\d{2})(\d)/, '$1.$2'); // após dois valores colocar o ponto (.)
-    cep = cep.replace(/\.(\d{3})(\d)/, '.$1-$2'); // após três valores colocar o hífen (-)
-    this.form.patchValue({ address: { zipCode: cep } });
+    this.form.get('address.zipCode').setValue(maskCEP(cep));
   }
 
   getCourses(instituition: Institution) {
@@ -81,20 +80,21 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  searchCep() {
+  queryCEP() {
     this.clearAddressForm();
     const cep = this.form.get('address.zipCode').value;
     if (cep) {
-      this._cepService.queryCEP(cep).subscribe(dados => {
-        if (dados.erro) {
-          this._notify.update('warning', 'CEP não encontrado.');
-        } else {
-          this.setAddressForm(dados);
-          this.instituitions$ = this._institutionService.getInstitutionByUF(dados.uf);
-        }
-      }, error => {
-        this._notify.update('danger', `Houve um erro na requisição! ==> ${error}`);
-      });
+      this._cepService.queryCEP(cep)
+        .subscribe(data => {
+          if (data.erro) {
+            this._notify.update('warning', 'CEP não encontrado.');
+          } else {
+            this.setAddressForm(data);
+            this.instituitions$ = this._institutionService.getInstitutionByUF(data.uf);
+          }
+        }, error => {
+          this._notify.update('danger', `Houve um erro na requisição! ==> ${error}`);
+        });
     } else {
       this._notify.update('warning', 'CEP inválido.');
     }
@@ -165,6 +165,10 @@ export class ProfileComponent implements OnInit {
       course: [null],
       about: ['']
     });
+  }
+
+  validatorDate(input, date) {
+    date > this.today ? this.form.get(input).setErrors({ dateGreaterToday: true }) : this.form.get(input).setValue(date);
   }
 
 }

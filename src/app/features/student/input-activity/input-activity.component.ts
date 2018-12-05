@@ -39,6 +39,7 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
   labelButton = 'Salvar';
   loading: boolean;
   activity: Activity;
+  today = new Date().toJSON().split('T')[0];
 
   navigateAwaySelection$: Subject<boolean> = new Subject<boolean>();
 
@@ -125,7 +126,7 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
   async save({ value, valid }: { value: Activity, valid: boolean }) {
     if (valid) {
       const user = await this._auth.user$.pipe(take(1)).toPromise();
-      value.user = user;
+      value.user = user.uid;
 
       if (value.uid) {
         this._activityService.update(value, value.uid, this.uploadPage.attachments)
@@ -237,6 +238,22 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
       return this.navigateAwaySelection$.next(false);
     }
     // return value;
+  }
+
+  validatorDate(input, date) {
+    if (date > this.today) {
+      this.activityForm.get(input).setErrors({ dateGreaterToday: true });
+    }
+    if (input === 'initialDate' && this.activityForm.get('finalDate').value) {
+      if (date > this.activityForm.get('finalDate').value) {
+        this.activityForm.get(input).setErrors({ dateGreaterFinal: true });
+      }
+    }
+    if (input === 'finalDate') {
+      if (date < this.activityForm.get('initialDate').value) {
+        this.activityForm.get(input).setErrors({ dateGreaterInitial: true });
+      }
+    }
   }
 
 }

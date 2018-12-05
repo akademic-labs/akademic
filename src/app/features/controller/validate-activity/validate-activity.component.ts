@@ -56,6 +56,7 @@ export class ValidateActivityComponent implements OnInit {
                     const image = true ? attachments.type.split('/')[0] === 'image' : false;
                     const pdf = true ? attachments.type.split('/')[1] === 'pdf' : false;
                     const video = true ? attachments.type.split('/')[0] === 'video' : false;
+                    const audio = true ? attachments.type.split('/')[0] === 'audio' : false;
                     if (image) {
                       src = resDonwloadURL;
                       classCss = 'img-attach'
@@ -66,6 +67,10 @@ export class ValidateActivityComponent implements OnInit {
                     }
                     if (video) {
                       src = 'assets/img/video.png';
+                      classCss = 'video-attach'
+                    }
+                    if (audio) {
+                      src = 'assets/img/audio.png';
                       classCss = 'video-attach'
                     }
                     this.attachmentsView.push({ name: attachments.name, type: attachments.type, path: resDonwloadURL, createdAt: resMetaData.timeCreated, size: resMetaData.size, src: src, class: classCss });

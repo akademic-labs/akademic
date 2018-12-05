@@ -1,0 +1,7 @@
+<div class="clearfix" style="padding-bottom: 10px;">
+  <button class="btn btn-action pull-right" [routerLink]="['./create']">Faça uma postagem</button>
+</div>
+
+<ng-container *ngFor="let post of posts">
+  <aka-post [post]="post"></aka-post>
+</ng-container>

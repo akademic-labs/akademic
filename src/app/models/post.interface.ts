@@ -1,11 +1,17 @@
-import { Address } from './address.interface';
+import { Cities } from './cities.interface';
 import { Comment } from './comment.interface';
+import { States } from './states.interface';
 
 export interface Post {
+    uid?: string;
     title: string;
     description: string;
-    address: Address;
-    createdAt: Date;
+
+    local: string;
+    city: Cities;
+    state: States;
+
+    createdAt: any;
     updatedAt: Date;
     votes: number;
 

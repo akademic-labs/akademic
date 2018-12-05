@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NotifyService } from 'app/services/notify.service';
 import { MessageService } from 'primeng/components/common/api';
 
 import { User } from '../../../models/user.interface';
@@ -7,8 +9,6 @@ import { ChartData } from './../../../models/chart-data.interface';
 import { ActivityService } from './../../../services/activity.service';
 import { UtilsService } from './../../../services/utils.service';
 import { groupBy } from './../../../utils/utils';
-import { NotifyService } from 'app/services/notify.service';
-import { Router } from '@angular/router';
 
 declare var palette: any;
 
@@ -62,10 +62,10 @@ export class StudentViewComponent implements OnInit {
   }
 
   buildChartByCategory(dataChart) {
-    this.activityCategoryChartData = {
-      labels: dataChart ? dataChart.labels : null,
+    dataChart ? this.activityCategoryChartData = {
+      labels: dataChart.labels,
       datasets: [{
-        data: dataChart ? dataChart.data : null,
+        data: dataChart.data,
         backgroundColor: palette('cb-Pastel1', dataChart.data.length).map(hex => '#' + hex),
         borderColor: palette('cb-Pastel1', dataChart.data.length).map(hex => '#' + hex),
         borderWidth: 1,
@@ -74,28 +74,33 @@ export class StudentViewComponent implements OnInit {
       options: {
         maintainAspectRatio: false
       }
-    }
+    } : this.activityCategoryChartData = null;
   }
 
   buildChartStatus(dataChart) {
-    this.activityStatusChartData = {
-      labels: dataChart ? dataChart.labels : null,
+    dataChart ? this.activityStatusChartData = {
+      labels: dataChart.labels,
       datasets: [{
-        data: dataChart ? dataChart.data : null,
+        data: dataChart.data,
         backgroundColor: palette('cb-Set2', dataChart.data.length).map(hex => '#' + hex),
         borderColor: palette('cb-Set2', dataChart.data.length).map(hex => '#' + hex),
       }],
       options: {
+        cutoutPercentage: 95,
+        animation: {
+          animateRotate: true,
+          animateScale: true
+        },
         maintainAspectRatio: false
       }
-    };
+    } : this.activityStatusChartData = null;
   }
 
   deleteActivity() {
     this._messageService.clear();
     this._activityService.deleteActivity(this.activity.uid)
       .then(() => {
-        this._notify.update('success', 'Atividade deletada com sucesso!');
+        this._notify.update('success', 'Atividade excluída com sucesso!');
         this._router.navigate(['/dashboard']);
       });
   }
