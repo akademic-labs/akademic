@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Dropdown } from 'primeng/dropdown';
 import { Observable } from 'rxjs';
 
 import { Institution } from '../../models/institution.interface';
@@ -21,10 +22,11 @@ export class ProfileComponent implements OnInit {
 
   user$: Observable<User>;
   form: FormGroup;
-  instituitions$: Observable<Institution[]>;
+  institutions$: Observable<Institution[]>;
   courses$: any;
   disabledSave;
   today = new Date().toJSON().split('T')[0];
+  @ViewChild('dropdownCourses') dropdownCourses: Dropdown;
 
   constructor(
     private _auth: AuthService,
@@ -39,6 +41,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.buildForm();
     this.user$.subscribe(user => {
       // verify if user is institution and if it already has a user updated
       if (user.roles.institution && !user.registration) {
@@ -48,17 +51,49 @@ export class ProfileComponent implements OnInit {
           })
       } else {
         this.form.patchValue(user);
+        this.getInstitutions();
       }
     });
-    this.buildForm();
+  }
+
+  buildForm() {
+    this.form = this._fb.group({
+      uid: [null],
+      email: ['', [Validators.required, Validators.email]],
+      displayName: ['', Validators.required],
+      registration: [''],
+      roles: this._fb.group({
+        student: [null],
+        controller: [null],
+        administrator: [null],
+        institution: [null]
+      }),
+      birthday: [null],
+      address: this._fb.group({
+        zipCode: [null],
+        street: [null],
+        complement: [null],
+        number: [null],
+        neighborhood: [null],
+        city: [null],
+        state: [null],
+        country: [null]
+      }),
+      institution: [null],
+      // course: [null],
+      course: new FormControl({ value: null, disabled: true }),
+      about: ['']
+    });
   }
 
   onSubmit() {
+    // before submit assigns only set uid institution and course in the user
+    const course = this.form.get('course').value;
+    course instanceof Object ? this.form.get('course').setValue(course.uid) : this.form.get('course').setErrors({ invalid: true });
+    const institution = this.form.get('institution').value;
+    institution instanceof Object ? this.form.get('institution').setValue(institution.uid) : this.form.get('institution').setErrors({ invalid: true });
+
     if (this.form.valid) {
-      // before submit assigns only the course uid in the user
-      if (this.form.get('course').value) {
-        this.form.patchValue({ course: this.form.get('course').value.uid });
-      }
       this._userService.update(this.form.get('uid').value, this.form.value)
         .then(_ => {
           this._notify.update('success', 'Perfil atualizado!');
@@ -73,11 +108,42 @@ export class ProfileComponent implements OnInit {
     this.form.get('address.zipCode').setValue(maskCEP(cep));
   }
 
-  getCourses(instituition: Institution) {
-    this._institutionService.getInstitutionCourses(instituition.uid)
+  getInstitutions(event?) {
+    const uf = this.form.get('address.state').value;
+    const institution = this.form.get('institution').value;
+    let search;
+
+    if (event) {
+      search = event.query
+    } else {
+      if (institution instanceof Object) { } else {
+        this._institutionService.getInstitutionById(institution)
+          .subscribe(res => {
+            this.form.get('institution').setValue(res);
+          })
+      }
+    }
+
+    if (search) {
+      // setTimeout(() => { this.dropdownCourses.el.nativeElement.focus(); }, 100);
+      if (uf && search) {
+        this.institutions$ = this._institutionService.getInstitutionByName(uf, search.toUpperCase());
+      }
+    } else {
+      this.institutions$ = null;
+      this.courses$ = null;
+      this.form.get('course').setValue(null);
+      this.form.get('course').disable();
+      this.form.get('course').setErrors(null);
+    }
+  }
+
+  getCourses() {
+    this._institutionService.getInstitutionCourses(this.form.get('institution').value.uid)
       .subscribe(res => {
         this.courses$ = res;
       });
+    this.courses$ ? this.form.get('course').enable() : this.form.get('course').disable();
   }
 
   queryCEP() {
@@ -90,7 +156,6 @@ export class ProfileComponent implements OnInit {
             this._notify.update('warning', 'CEP não encontrado.');
           } else {
             this.setAddressForm(data);
-            this.instituitions$ = this._institutionService.getInstitutionByUF(data.uf);
           }
         }, error => {
           this._notify.update('danger', `Houve um erro na requisição! ==> ${error}`);
@@ -137,35 +202,6 @@ export class ProfileComponent implements OnInit {
       }
     })
   };
-
-  buildForm() {
-    this.form = this._fb.group({
-      uid: [null],
-      email: ['', [Validators.required, Validators.email]],
-      displayName: ['', Validators.required],
-      registration: [''],
-      roles: this._fb.group({
-        student: [null],
-        controller: [null],
-        administrator: [null],
-        institution: [null]
-      }),
-      birthday: [null],
-      address: this._fb.group({
-        zipCode: [null],
-        street: [null],
-        complement: [null],
-        number: [null],
-        neighborhood: [null],
-        city: [null],
-        state: [null],
-        country: [null]
-      }),
-      institution: [null],
-      course: [null],
-      about: ['']
-    });
-  }
 
   validatorDate(input, date) {
     date > this.today ? this.form.get(input).setErrors({ dateGreaterToday: true }) : this.form.get(input).setValue(date);

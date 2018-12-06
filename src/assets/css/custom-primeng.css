@@ -83,7 +83,7 @@ body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item {
 }
 
 body .ui-dropdown .ui-dropdown-label {
-    text-transform: capitalize;
+    text-transform: inherit;
     height: 29px;
     text-indent: 5px;
 }
@@ -125,7 +125,8 @@ body .ui-inputtext:enabled:focus:not(.ui-state-error) {
     border-color: var(--akademic-color);
 }
 
-body .ui-dropdown-panel .ui-dropdown-filter-container .ui-dropdown-filter-icon {
+body .ui-dropdown-panel .ui-dropdown-filter-container .ui-dropdown-filter-icon,
+body .ui-picklist .ui-picklist-filter-container .ui-picklist-filter-icon {
     top: 50%;
     margin-top: -.5em;
     right: 1.357em;
@@ -334,7 +335,8 @@ body .ui-dropdown:hover {
 }
 
 /* Autocomplete */
-body .ui-autocomplete-panel .ui-autocomplete-items .ui-autocomplete-list-item.ui-state-highlight {
+body .ui-autocomplete-panel .ui-autocomplete-items .ui-autocomplete-list-item.ui-state-highlight,
+body .ui-picklist .ui-picklist-list .ui-picklist-item.ui-state-highlight {
     background-color: var(--akademic-color);
     margin: 5px;
     border-radius: 4px;
@@ -347,4 +349,10 @@ body .ui-autocomplete .ui-autocomplete-input {
 
 body .ui-autocomplete {
     width: 100% !important;
+}
+
+/* Picklist */
+body .ui-picklist-buttons-cell button {
+    background-color: var(--primary-500);
+    border: none;
 }

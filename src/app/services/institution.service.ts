@@ -28,6 +28,16 @@ export class InstitutionService {
     return this.dbService.colWithId$<Institution>('institutions', ref => ref.where('uf', '==', uf));
   }
 
+  getInstitutionByName(uf: string, name: string) {
+    // return this.dbService.colWithId$<Institution>('institutions', ref => ref.where('instituicao', '>=', name));
+    // return this.dbService.colWithId$<Institution>('institutions', ref => ref.where('instituicao', '>=', name).where('instituicao', '<=', name));
+    // return this.dbService.colWithId$<Institution>('institutions', ref => ref.orderBy('instituicao').startAt(name).endAt(name + '\uf8ff').once);
+    // return this.dbService.colWithId$<Institution>('institutions', ref => ref.orderBy('instituicao').startAt('[a-zA-Z0-9]*').endAt(name));
+    // return this.dbService.colWithId$<Institution>('institutions', ref => ref.where('institutions.instituicao', 'array-contains', name));
+    // return this.dbService.colWithId$<Institution>('institutions', ref => ref.where('uf', '==', uf).where('instituicao', '>=', name).where('instituicao', '<=', name));
+    return this.dbService.colWithId$<Institution>('institutions', ref => ref.where('uf', '==', uf).orderBy('instituicao').startAt(name).endAt(name + '\uf8ff'));
+  }
+
   getInstitutionById(institutionUid: string) {
     return this.dbService.docWithId$<Institution>(`institutions/${institutionUid}`);
   }

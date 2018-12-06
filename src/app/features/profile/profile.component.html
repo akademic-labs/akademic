@@ -6,6 +6,7 @@
                     <h4 class="title"><i class="fa fa fa-user-circle-o"></i>Meu Perfil</h4>
                 </div>
                 <div class="content">
+                    <!-- <aka-form-debug [form]="form"></aka-form-debug> -->
                     <div class="card card-user">
                         <div class="image background-sign">
                         </div>
@@ -112,16 +113,19 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Vincular Instituição</label>
-                                    <p-dropdown formControlName="institution" placeholder="Selecione"
-                                        emptyFilterMessage="Nenhum resultado." [options]="instituitions$" optionLabel="instituicao"
-                                        [showClear]="true" filter="true" (onChange)="getCourses($event.value)"></p-dropdown>
+                                    <p-autoComplete formControlName="institution" [suggestions]="institutions$ | async"
+                                        (onSelect)="getCourses()" (completeMethod)="getInstitutions($event)" field="instituicao"
+                                        [placeholder]="form.get('address.state').value ? 'Digite a instituição..' : 'Digite o cep primeiro..'"
+                                        [minLength]="1" maxlength="30" emptyMessage="Nenhum resultado."></p-autoComplete>
                                 </div>
+                                <aka-message-control-error [control]="form.get('institution')" error="invalid" msg="Instituição inválida."></aka-message-control-error>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Vincular Curso</label>
-                                    <p-dropdown formControlName="course" placeholder="Selecione" emptyFilterMessage="Nenhum resultado."
-                                        [options]="courses$" optionLabel="name" [showClear]="true" filter="true"></p-dropdown>
+                                    <p-dropdown #dropdownCourses formControlName="course" [options]="courses$"
+                                        optionLabel="name" [placeholder]="form.get('institution')?.value.id ? 'Selecione o curso..' : 'Selecione uma instituição..'"
+                                        filter="true" [showClear]="true" emptyFilterMessage="Nenhum resultado."></p-dropdown>
                                 </div>
                             </div>
                         </div>
