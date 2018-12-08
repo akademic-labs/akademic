@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'aka-form-debug',
-  templateUrl: './form-debug.component.html',
-  styleUrls: ['./form-debug.component.css']
+  templateUrl: './form-debug.component.html'
 })
 export class FormDebugComponent implements OnInit {
 
@@ -11,7 +10,6 @@ export class FormDebugComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

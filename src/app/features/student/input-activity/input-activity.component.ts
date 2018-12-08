@@ -7,8 +7,8 @@ import { MessageService } from 'primeng/components/common/messageservice';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { FormCanDeactivate } from '../../../guards/deactivate.interface';
 import { UtilsService } from '../../../services/utils.service';
+import { CanDeactivateInterface } from './../../../guards/can-deactivate.guard';
 import { ActivityType } from './../../../models/activity-type.interface';
 import { Activity } from './../../../models/activity.interface';
 import { Cities } from './../../../models/cities.interface';
@@ -20,13 +20,12 @@ import { ErrorService } from './../../../services/error.service';
 import { NotifyService } from './../../../services/notify.service';
 import { ValidatorService } from './../../../services/validator.service';
 
-
 @Component({
   selector: 'aka-input-activity',
   templateUrl: './input-activity.component.html',
   styleUrls: ['./input-activity.component.css']
 })
-export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactivate {
+export class InputActivityComponent implements OnInit, OnDestroy, CanDeactivateInterface {
 
   @ViewChild(UploadsPageComponent) uploadPage: UploadsPageComponent;
   @ViewChild('inputDescription') inputDescription: ElementRef;
@@ -44,13 +43,17 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
   activity: Activity;
   today = new Date().toJSON().split('T')[0];
 
-  navigateAwaySelection$: Subject<boolean> = new Subject<boolean>();
+  wasChanged: Subject<boolean> = new Subject<boolean>();
+  withoutChanged: boolean;
 
   @HostListener('window:beforeunload', ['$event'])
-  unloadNotification($event: any) {
-    if (!this.checkForm()) {
-      $event.returnValue = true;
-    }
+  doSomething($event) {
+    this._messageService.add({
+      key: 'reload', sticky: true,
+      detail: `Houve alterações no formulário. Deseja realmente descartar e atualizar a página?`
+    })
+    console.log($event);
+    $event.returnValue = true;
   }
 
   constructor(
@@ -80,7 +83,6 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
             setTimeout(() => { this.inputDescription.nativeElement.focus() }, 100);
             this.labelButton = 'Atualizar';
             this.activityForm.patchValue(activity);
-            this.getCities();
             activity.status === 'Pendente' ? this.activityForm.enable() : this.activityForm.disable();
             // disable buttons upload and delete attach (variable ref uploads)
             // activity.status === 'Pendente' ? this.uploadPage.uploadState = '' : this.uploadPage.uploadState = 'running';
@@ -95,6 +97,10 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
         this.loading = false;
       }
     });
+  }
+
+  reload() {
+    window.location.reload(true);
   }
 
   buildForm() {
@@ -122,7 +128,7 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
     if (state) {
       this.activityForm.get('city').enable();
       setTimeout(() => { this.inputCity.inputEL.nativeElement.focus(); }, 100);
-      if (state && event) {
+      if (event) {
         this.cities$ = this._utilsService.getCities(state.id, event.query);
       }
     } else {
@@ -170,87 +176,6 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
     return activityType && activityType2 ? activityType.uid === activityType2.uid : activityType === activityType2;
   }
 
-  ngOnDestroy() {
-    this.subscribe.unsubscribe();
-  }
-
-  canDeactivate() {
-    // if (value) {
-    //   this._messageService.clear();
-    //   return true;
-    // } else
-    if (this.activityForm.dirty && this.activityForm.invalid && !this.disabledSave) {
-      this._messageService.add({
-        key: 'deactivate', sticky: true, severity: 'warn', summary: 'Tem certeza?',
-        detail: `Houve alterações no formulário, deseja realmente descartá-lo e mudar de tela'?`
-      });
-      // this._router.navigate(['/student/input-activity']);
-      return false;
-    } else {
-      this._messageService.clear();
-      return true;
-    }
-  }
-
-  checkForm() {
-    if (this.activityForm.dirty && this.activityForm.invalid && !this.disabledSave) {
-      // this._router.navigate(['/student/input-activity']);
-      // return false;
-      // this.canDeactivate2(false)
-      return false;
-    } else {
-      // this.canDeactivate2(true)
-      return true;
-    }
-    // else {
-    // this._messageService.clear();
-    // return true;
-    // }
-  }
-
-  canDeactivateDialog() {
-    if (this.checkForm() === false) {
-      this._messageService.add({
-        key: 'deactivate', sticky: true, severity: 'warn', summary: 'Tem certeza?',
-        detail: `Houve alterações no formulário, deseja realmente descartá-lo e mudar de tela'?`
-      });
-      // return false;
-    }
-    if (this.checkForm() === true) {
-      // this.canDeactivateFinal(true);
-      return true;
-    }
-    // if (value) {
-    // return this.checkForm();
-    // }
-    // return true;
-    // if (value) {
-    // this._messageService.clear();
-    // return value;
-    // } else if (this.activityForm.dirty && this.activityForm.invalid && !this.disabledSave) {
-    //   this._messageService.add({
-    //     key: 'deactivate', sticky: true, severity: 'warn', summary: 'Tem certeza?',
-    //     detail: `Houve alterações no formulário, deseja realmente descartá-lo e mudar de tela'?`
-    //   });
-    //   // this._router.navigate(['/student/input-activity']);
-    //   return false;
-    // } else {
-    //   this._messageService.clear();
-    //   return true;
-    // }
-    // return true;
-  }
-
-  canDeactivateFinal(choice?: boolean) {
-    if (choice) {
-      return this.navigateAwaySelection$.next(true);
-    } else {
-      // return this.canDeactivateDialog();
-      return this.navigateAwaySelection$.next(false);
-    }
-    // return value;
-  }
-
   validatorDate(input, date) {
     if (date > this.today) {
       this.activityForm.get(input).setErrors({ dateGreaterToday: true });
@@ -265,6 +190,22 @@ export class InputActivityComponent implements OnInit, OnDestroy, FormCanDeactiv
         this.activityForm.get(input).setErrors({ dateGreaterInitial: true });
       }
     }
+  }
+
+  ngOnDestroy() {
+    this.subscribe.unsubscribe();
+  }
+
+  check() {
+    this.activityForm.dirty ? this._messageService.add({
+      key: 'deactivate', sticky: true,
+      detail: `Houve alterações no formulário. Deseja realmente descartar e mudar de página?`
+    }) : this.withoutChanged = true;
+  }
+
+  choose(choice: boolean) {
+    this.wasChanged.next(choice);
+    this._messageService.clear('deactivate');
   }
 
 }

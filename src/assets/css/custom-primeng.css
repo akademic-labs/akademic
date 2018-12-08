@@ -3,7 +3,7 @@ body .ui-inputtext.ng-touched:valid,
 body p-dropdown.ng-dirty.ng-touched.ng-valid .ui-dropdown,
 body p-dropdown.ng-pristine.ng-valid .ui-dropdown,
 body p-spinner.ng-touched.ng-valid .ui-spinner-input,
-body p-autocomplete.ng-touched.ng-valid .ui-autocomplete-input {
+body p-autocomplete.ng-pristine.ng-valid .ui-autocomplete-input {
     border: var(--border-valid);
 }
 
@@ -303,6 +303,8 @@ body p-toast p {
 
 body .ui-toast .ui-toast-message {
     max-width: 280px;
+    background: #ffffff;
+    border-radius: 4px;
 }
 
 

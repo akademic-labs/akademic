@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 
-import { ChartCardComponent } from './chart-card/chart-card.component';
+import { ChartCardComponent } from './chart-card.component';
 
 @NgModule({
   imports: [

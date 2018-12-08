@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Course } from 'app/models/course.interface';
 import { Dropdown } from 'primeng/dropdown';
 import { Observable } from 'rxjs';
 
@@ -23,7 +24,7 @@ export class ProfileComponent implements OnInit {
   user$: Observable<User>;
   form: FormGroup;
   institutions$: Observable<Institution[]>;
-  courses$: any;
+  courses$: Observable<Course[]>;
   disabledSave;
   today = new Date().toJSON().split('T')[0];
   @ViewChild('dropdownCourses') dropdownCourses: Dropdown;
@@ -80,7 +81,6 @@ export class ProfileComponent implements OnInit {
         country: [null]
       }),
       institution: [null],
-      // course: [null],
       course: new FormControl({ value: null, disabled: true }),
       about: ['']
     });
@@ -109,26 +109,18 @@ export class ProfileComponent implements OnInit {
   }
 
   getInstitutions(event?) {
-    const uf = this.form.get('address.state').value;
     const institution = this.form.get('institution').value;
-    let search;
-
-    if (event) {
-      search = event.query
-    } else {
-      if (institution instanceof Object) { } else {
-        this._institutionService.getInstitutionById(institution)
-          .subscribe(res => {
-            this.form.get('institution').setValue(res);
-          })
+    const uf = this.form.get('address.state').value;
+    if (institution && uf) {
+      if (event) {
+        this.institutions$ = this._institutionService.getInstitutionByName(uf, event.query.toUpperCase());
+      } else {
+        typeof institution === 'string' ? this._institutionService.getInstitutionById(institution).subscribe(res => {
+          this.form.get('institution').setValue(res);
+        }) : this.form.get('institution').setValue(institution);
       }
-    }
-
-    if (search) {
-      // setTimeout(() => { this.dropdownCourses.el.nativeElement.focus(); }, 100);
-      if (uf && search) {
-        this.institutions$ = this._institutionService.getInstitutionByName(uf, search.toUpperCase());
-      }
+      this.form.get('course').enable();
+      // setTimeout(() => { this.dropdownCourses.focus() }, 100);
     } else {
       this.institutions$ = null;
       this.courses$ = null;
@@ -139,10 +131,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getCourses() {
-    this._institutionService.getInstitutionCourses(this.form.get('institution').value.uid)
-      .subscribe(res => {
-        this.courses$ = res;
-      });
+    this.courses$ = this._institutionService.getInstitutionCourses(this.form.get('institution').value.uid);
     this.courses$ ? this.form.get('course').enable() : this.form.get('course').disable();
   }
 
@@ -204,7 +193,7 @@ export class ProfileComponent implements OnInit {
   };
 
   validatorDate(input, date) {
-    date > this.today ? this.form.get(input).setErrors({ dateGreaterToday: true }) : this.form.get(input).setValue(date);
+    date > this.today ? this.form.get(input).setErrors({ dateGreaterToday: true }) : this.form.get(input).setErrors(null);
   }
 
 }

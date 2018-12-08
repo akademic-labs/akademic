@@ -29,8 +29,9 @@ export class StudentViewComponent implements OnInit {
     private _messageService: MessageService, private _notify: NotifyService, private _router: Router) { }
 
   ngOnInit() {
-    this._activityService.getActivitiesStudent(this.user.uid)
+    this._activityService.getActivitiesStudent(this.user.uid, 0, 'createdAt', 50)
       .subscribe(responseData => {
+        console.log(responseData);
         this.activitiesStudent = responseData;
 
         let dataFirebaseCategory = [];

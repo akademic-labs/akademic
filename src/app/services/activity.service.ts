@@ -28,8 +28,27 @@ export class ActivityService {
       );
   }
 
-  getActivitiesStudent(uid: string) {
-    return this._dbService.colWithId$<Activity>('activities', ref => ref.where('user', '==', uid));
+  getActivitiesStudent(uid: string, page: number, sort: string, size: number) {
+    return this._dbService.colWithId$<Activity>('activities', ref => ref
+      .where('user', '==', uid)
+      // .endAt(4)
+      .orderBy(sort, 'asc')
+      // .startAt('asd')
+      .limit(size)
+    );
+  }
+
+  getCount(uid: string, page: number, sort: string, size: number) {
+    // this._afs.collection('activities').get().toPromise().then(snap => {
+    //   console.log(snap.size);
+    // });
+
+    // this._afs.collection('activities').get().then(function (querySnapshot) {
+    //   querySnapshot.forEach(function (doc) {
+    //     // doc.data() is never undefined for query doc snapshots
+    //     console.log(doc.id, ' => ', doc.data());
+    //   });
+    // });
   }
 
   getActivityDocument(uid: string): AngularFirestoreDocument<Activity> {

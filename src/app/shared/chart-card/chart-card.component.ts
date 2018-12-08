@@ -15,9 +15,7 @@ export class ChartCardComponent implements OnInit {
 
   @Input() chartData: any;
 
-  constructor() {
-  }
+  constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 }
