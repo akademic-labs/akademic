@@ -20,6 +20,7 @@ export class EventsComponent implements OnInit {
     this._auth.user$.subscribe(user => this.user = user);
     this._eventsService.get().subscribe(posts => {
       this.posts = posts;
+      console.log(this.posts);
     })
   }
 }

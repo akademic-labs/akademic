@@ -1662,7 +1662,7 @@ fieldset[disabled] .form-control {
 }
 
 .card-user .title {
-  line-height: 24px
+  line-height: 40px;
 }
 
 .chart-size {

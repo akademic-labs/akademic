@@ -29,7 +29,7 @@
               <div class="user-avatar">
                 <a href="#">
                   <div class="avatar-wrapper">
-                    <img [src]="post.owner.photoURL" [alt]="post.owner.displayName" width="32" height="32">
+                    <img [src]="post.owner.photoURL ? post.owner.photoURL : '../../../../assets/img/default-avatar.png'" [alt]="post.owner.displayName" width="32" height="32">
                   </div>
                 </a>
               </div>
