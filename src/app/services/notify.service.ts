@@ -16,7 +16,8 @@ export class NotifyService {
         placement: {
           from: 'top',
           align: 'right'
-        }
+        },
+        auto_hide: true
       }
     );
   }

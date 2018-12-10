@@ -1,5 +1,6 @@
 .card {
     width: 400px;
+    border-radius: 0;
 }
 
 .sign-content {

@@ -47,7 +47,7 @@ export class FormComponent implements OnInit {
   async onSubmit({ value, valid }: { value: Post, valid: boolean }) {
     if (valid) {
       const user = await this._auth.user$.pipe(take(1)).toPromise();
-      value.uid = user.uid;
+      value.owner = user.uid;
       this._eventService.create(value).then(() => {
         this.buildForm();
         this._notify.update('success', 'Evento adicionado com sucesso!');

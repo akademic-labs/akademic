@@ -53,6 +53,7 @@ export class ProfileComponent implements OnInit {
       } else {
         this.form.patchValue(user);
         this.getInstitutions();
+        // this.getCourses();
       }
     });
   }
@@ -111,12 +112,16 @@ export class ProfileComponent implements OnInit {
   getInstitutions(event?) {
     const institution = this.form.get('institution').value;
     const uf = this.form.get('address.state').value;
+    const course = this.form.get('course').value;
+    // this.buscaCursos();
     if (institution && uf) {
+      this.getCourses(institution, course);
       if (event) {
-        this.institutions$ = this._institutionService.getInstitutionByName(uf, event.query.toUpperCase());
+        this.institutions$ = this._institutionService.getInstitutionByName(uf, event.query);
       } else {
         typeof institution === 'string' ? this._institutionService.getInstitutionById(institution).subscribe(res => {
           this.form.get('institution').setValue(res);
+          this.courses$ = this._institutionService.getInstitutionCourses(this.form.get('institution').value.uid);
         }) : this.form.get('institution').setValue(institution);
       }
       this.form.get('course').enable();
@@ -130,9 +135,17 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  getCourses() {
-    this.courses$ = this._institutionService.getInstitutionCourses(this.form.get('institution').value.uid);
-    this.courses$ ? this.form.get('course').enable() : this.form.get('course').disable();
+  getCourses(institution?, course?) {
+    if (this.form.get('institution').value) {
+      this.courses$ = this._institutionService.getInstitutionCourses(this.form.get('institution').value.uid);
+      const courseValid = this.form.get('course').value;
+      if (typeof courseValid === 'string') {
+        this._institutionService.getCoursesInstitutionByUid(this.form.get('institution').value, courseValid).valueChanges().subscribe(res => {
+          this.form.get('course').setValue(res);
+          this.courses$ = this._institutionService.getInstitutionCourses(this.form.get('institution').value.uid);
+        })
+      };
+    }
   }
 
   queryCEP() {
@@ -152,6 +165,7 @@ export class ProfileComponent implements OnInit {
     } else {
       this._notify.update('warning', 'CEP inválido.');
     }
+    // this.institutions$ ? this.form.get('institution').enable() : this.form.get('institution').disable();
   }
 
   setInstitutionToUser(data: Institution) {

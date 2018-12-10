@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UploadsPageComponent } from 'app/shared/uploads-page/uplodas-page/uploads-page.component';
@@ -45,16 +45,6 @@ export class InputActivityComponent implements OnInit, OnDestroy, CanDeactivateI
 
   wasChanged: Subject<boolean> = new Subject<boolean>();
   withoutChanged: boolean;
-
-  @HostListener('window:beforeunload', ['$event'])
-  doSomething($event) {
-    this._messageService.add({
-      key: 'reload', sticky: true,
-      detail: `Houve alterações no formulário. Deseja realmente descartar e atualizar a página?`
-    })
-    console.log($event);
-    $event.returnValue = true;
-  }
 
   constructor(
     private _formBuilder: FormBuilder,

@@ -124,7 +124,7 @@
                                 <div class="form-group">
                                     <label>Vincular Curso</label>
                                     <p-dropdown #dropdownCourses formControlName="course" [options]="courses$ | async"
-                                        optionLabel="name" [placeholder]="form.get('institution')?.value.id ? 'Selecione o curso..' : 'Selecione uma instituição..'"
+                                        optionLabel="name" [placeholder]="form.get('institution').value?.id ? 'Selecione o curso..' : 'Selecione uma instituição..'"
                                         filter="true" [showClear]="true" emptyFilterMessage="Nenhum resultado."></p-dropdown>
                                 </div>
                             </div>
