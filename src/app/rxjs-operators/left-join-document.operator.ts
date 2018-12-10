@@ -45,10 +45,10 @@ export const leftJoinDocument = (afs: AngularFirestore, fieldToJoin, collection)
                     return { ...v, [fieldToJoin]: joins[joinIndex] || null };
                 });
             }),
-            tap(final =>
-                console.log(
-                    `Queried ${(final as any).length}, Joined ${cache.size} docs`
-                )
-            )
+            // tap(final =>
+            //     console.log(
+            //         `Queried ${(final as any).length}, Joined ${cache.size} docs`
+            //     )
+            // )
         );
     });

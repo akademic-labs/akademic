@@ -39,7 +39,7 @@ export class EventService {
   }
 
   getComments(postUid: string): Observable<Comment[]> {
-    return this._dbService.colWithId$<Comment>(`posts/${postUid}/comments`, r => r.orderBy('createdAt', 'desc'))
+    return this._dbService.colWithId$<Comment>(`posts/${postUid}/comments`, r => r.orderBy('createdAt', 'asc'))
       .pipe(
         leftJoinDocument(this._afs, 'user', 'users')
       );

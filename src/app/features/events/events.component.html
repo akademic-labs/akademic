@@ -1,7 +1,16 @@
-<div class="clearfix" style="padding-bottom: 10px;">
-  <button class="btn btn-action pull-right" [routerLink]="['./create']">Faça uma postagem</button>
+<div class="card border-top">
+  <div class="header">
+    <div class="title">
+      <i class="fa fa-comments"></i> Eventos
+    </div>
+    <hr>
+  </div>
+  <div class="content">
+    <div class="clearfix mb-5">
+      <button class="btn btn-action pull-right" [routerLink]="['./create']">Faça uma postagem</button>
+    </div>
+    <ng-container *ngFor="let post of posts">
+      <aka-post [post]="post"></aka-post>
+    </ng-container>
+  </div>
 </div>
-
-<ng-container *ngFor="let post of posts">
-  <aka-post [post]="post"></aka-post>
-</ng-container>

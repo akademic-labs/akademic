@@ -53,7 +53,6 @@ export class ProfileComponent implements OnInit {
       } else {
         this.form.patchValue(user);
         this.getInstitutions();
-        // this.getCourses();
       }
     });
   }
@@ -88,11 +87,14 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    // before submit assigns only set uid institution and course in the user
-    const course = this.form.get('course').value;
-    course instanceof Object ? this.form.get('course').setValue(course.uid) : this.form.get('course').setErrors({ invalid: true });
-    const institution = this.form.get('institution').value;
-    institution instanceof Object ? this.form.get('institution').setValue(institution.uid) : this.form.get('institution').setErrors({ invalid: true });
+
+    if (this.form.get('roles').value.student) {
+      // before submit assigns only set uid institution and course in the student
+      const course = this.form.get('course').value;
+      course instanceof Object ? this.form.get('course').setValue(course.uid) : this.form.get('course').setErrors({ invalid: true });
+      const institution = this.form.get('institution').value;
+      institution instanceof Object ? this.form.get('institution').setValue(institution.uid) : this.form.get('institution').setErrors({ invalid: true });
+    }
 
     if (this.form.valid) {
       this._userService.update(this.form.get('uid').value, this.form.value)
@@ -113,7 +115,6 @@ export class ProfileComponent implements OnInit {
     const institution = this.form.get('institution').value;
     const uf = this.form.get('address.state').value;
     const course = this.form.get('course').value;
-    // this.buscaCursos();
     if (institution && uf) {
       this.getCourses(institution, course);
       if (event) {

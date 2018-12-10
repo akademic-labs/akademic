@@ -31,7 +31,7 @@ export class StudentViewComponent implements OnInit {
   ngOnInit() {
     this._activityService.getActivitiesStudent(this.user.uid, 0, 'createdAt', 50)
       .subscribe(responseData => {
-        console.log(responseData);
+        // console.log(responseData);
         this.activitiesStudent = responseData;
 
         let dataFirebaseCategory = [];

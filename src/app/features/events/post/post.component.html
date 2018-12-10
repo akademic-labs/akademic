@@ -10,12 +10,14 @@
             {{post.description}}
           </p>
         </div>
-
         <div class="post-taglist flex">
           <div class="flex show">
-            <a class="post-tag pointer">{{post.local}}</a>
-            <a class="post-tag pointer">{{post.city.nome}}</a>
-            <a class="post-tag pointer">{{post.state.nome}}</a>
+            <a class="post-tag pointer" pTooltip="Data Inicio e Fim" tooltipPosition="bottom">
+              {{post.initialDate | date: 'dd/MM/yyyy'}} - {{post.finalDate | date: 'dd/MM/yyyy' }}
+            </a>
+            <a class="post-tag pointer" pTooltip="Local" tooltipPosition="bottom">{{post.local}}</a>
+            <a class="post-tag pointer" pTooltip="Cidade" tooltipPosition="bottom">{{post.city.nome}}</a>
+            <a class="post-tag pointer" pTooltip="Estado" tooltipPosition="bottom">{{post.state.nome}}</a>
           </div>
         </div>
       </div>
@@ -24,12 +26,13 @@
           <div class="post-signature owner grid--cell">
             <div class="user-info">
               <div class="user-action-time">
-               Criado em <span>{{post.createdAt.toDate() | date: 'dd/MM/yyyy'}}</span>
+                Criado em <span>{{post.createdAt.toDate() | date: 'dd/MM/yyyy'}}</span>
               </div>
               <div class="user-avatar">
                 <a href="#">
                   <div class="avatar-wrapper">
-                    <img [src]="post.owner.photoURL ? post.owner.photoURL : '../../../../assets/img/default-avatar.png'" [alt]="post.owner.displayName" width="32" height="32">
+                    <img [src]="post.owner.photoURL ? post.owner.photoURL : '../../../../assets/img/default-avatar.png'"
+                      [alt]="post.owner.displayName" width="32" height="32">
                   </div>
                 </a>
               </div>

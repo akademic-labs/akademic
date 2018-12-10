@@ -40,9 +40,9 @@ export const leftJoin = (afs: AngularFirestore, field, collection, limit = 100) 
                 });
             }),
             tap(final => {
-                console.log(
-                    `Queried ${(final as any).length}, Joined ${totalJoins} docs`
-                );
+                // console.log(
+                //     `Queried ${(final as any).length}, Joined ${totalJoins} docs`
+                // );
                 totalJoins = 0;
             })
         );

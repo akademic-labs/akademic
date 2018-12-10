@@ -70,11 +70,10 @@
         <i class="icon-close-modal fa fa-cloud-download"></i>
     </a>
     <iframe *ngSwitchCase="'application/pdf'" class="pdf-dialog" [src]="attachView?.path | safe: 'resourceUrl'"></iframe>
-    <!-- <iframe *ngSwitchCase="'video/mp4'" class="iframe-dialog" [src]="attachView?.path | safe: 'resourceUrl'"></iframe> -->
     <video *ngSwitchCase="'video/mp4'" class="video-dialog" autoplay controls>
         <source [src]="attachView?.path | safe: 'resourceUrl'" type="video/mp4">
     </video>
-    <audio *ngSwitchCase="'audio/mp3'" class="audio-dialog" controls>
+    <audio *ngSwitchCase="'audio/mp3' || 'audio/x-m4a'" class="audio-dialog" controls>
         <source [src]="attachView?.path" type="audio/mp3">
     </audio>
     <img *ngSwitchDefault class="img-attach" class="img-dialog" [src]="attachView?.path" />

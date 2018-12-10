@@ -18,7 +18,7 @@
       <div class="text-center" style="display: block;">
         <span class="none-activity" style="font-size: 20px;">Olá, {{ user.displayName}}</span>
         <span class="none-activity">Você ainda não possui nenhuma atividade cadastrada</span>
-        <span class="none-activity">Clique no botão abaixo para cadastrar sua primeira atividade :)</span>
+        <span class="none-activity">Clique no botão abaixo para cadastrar sua primeira atividade</span>
         <div class="row text-center">
           <div class="mt-5 mb-5">
             <button class="btn btn-action" [routerLink]="['/student/input-activity']">Nova Atividade</button>
@@ -95,12 +95,13 @@
               </td>
               <td class="td-actions">
                 <span class="ui-column-title">Ações:</span>
-                <a type="button" class="btn">
-                  <i class="fa fa-edit" [routerLink]="['/student/input-activity/' + activity.uid]"></i>
-                </a>
-                <a type="button" class="btn text-danger" (click)="confirm(activity)">
+                <button type="button" class="btn text-info" [routerLink]="['/student/input-activity/' + activity.uid]"
+                  pTooltip="Editar" tooltipPosition="bottom">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button type="button" class="btn text-danger" (click)="confirm(activity)" [disabled]="activity.status !== 'Pendente'">
                   <i class="fa fa-times"></i>
-                </a>
+                </button>
               </td>
             </tr>
           </ng-template>

@@ -5,6 +5,8 @@ import { States } from './states.interface';
 export interface Post {
     uid?: string;
     title: string;
+    initialDate: Date;
+    finalDate: Date;
     description: string;
 
     local: string;

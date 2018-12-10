@@ -159,7 +159,7 @@ export class InputActivityComponent implements OnInit, OnDestroy, CanDeactivateI
     this.uploadPage.resetProgress();
     this.uploadPage.resetAttachments();
     this.ngOnDestroy();
-    this._router.navigate(['/student/input-activity']);
+    this._router.navigate(['/dashboard']);
   }
 
   compareActivityType(activityType: ActivityType, activityType2: ActivityType) {

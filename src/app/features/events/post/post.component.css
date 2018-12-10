@@ -79,11 +79,11 @@
 }
 
 .user-info .avatar-wrapper img {
-    border-radius: 1px;
+    border-radius: 50%;
 }
 
 .user-info .user-avatar+.user-details {
-    margin-left: 8px;
+    margin: 7px 0px 0px 7px;
     width: calc(100% - 40px);
 }
 
