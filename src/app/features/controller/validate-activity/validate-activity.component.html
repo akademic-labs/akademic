@@ -101,18 +101,21 @@
 <div *ngIf="attachView" [ngSwitch]="attachView?.type" class="modal fade" id="attachModal" role="dialog">
     <h5 class="title-dialog">{{ attachView?.name }}</h5>
     <a class="btn-close-modal" data-dismiss="modal" pTooltip="Fechar Anexo" tooltipPosition="left">
-        <i class="icon-close-modal fa fa-close" style="-webkit-text-stroke: 3px #808080;"></i>
+        <i class="icon-close-modal fa fa-close"></i>
     </a>
-    <a class="btn-download-modal" pTooltip="Efetuar Download" tooltipPosition="bottom" [download]="attachView?.name"
-        [href]="attachView?.path" target="_blank">
+    <!-- <a [hidden]="!attachView?.createdAt" class="btn-download-modal" pTooltip="Efetuar Download" tooltipPosition="bottom"
+        [download]="attachView?.name" [href]="attachView?.path" target="_blank">
         <i class="icon-close-modal fa fa-cloud-download"></i>
-    </a>
+    </a> -->
     <iframe *ngSwitchCase="'application/pdf'" class="pdf-dialog" [src]="attachView?.path | safe: 'resourceUrl'"></iframe>
     <video *ngSwitchCase="'video/mp4'" class="video-dialog" autoplay controls>
         <source [src]="attachView?.path | safe: 'resourceUrl'" type="video/mp4">
     </video>
-    <audio *ngSwitchCase="'audio/mp3' || 'audio/x-m4a'" class="audio-dialog" controls>
-        <source [src]="attachView?.path" type="audio/mp3">
+    <audio *ngSwitchCase="'audio/mp3'" class="audio-dialog" preload="auto" controls="controls" autoplay="autoplay">
+        <source [src]="attachView?.path">
+    </audio>
+    <audio *ngSwitchCase="'audio/x-m4a'" class="audio-dialog" preload="auto" controls="controls" autoplay="autoplay">
+        <source [src]="attachView?.path">
     </audio>
     <img *ngSwitchDefault class="img-attach" class="img-dialog" [src]="attachView?.path" />
 </div>

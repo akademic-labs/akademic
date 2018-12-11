@@ -5,7 +5,8 @@
     </div>
     <hr>
   </div>
-  <div class="content">
+  <img *ngIf="loading" class="loading" src="assets/img/loading.gif">
+  <div *ngIf="!loading" class="content">
     <div class="clearfix mb-5">
       <button class="btn btn-action pull-right" [routerLink]="['./create']">Faça uma postagem</button>
     </div>

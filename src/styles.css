@@ -2641,6 +2641,14 @@ fieldset[disabled] .form-control {
   transition: all 0.5s ease-in-out;
 }
 
+.btn-close-modal i {
+  -webkit-text-stroke: 3px #808080;
+}
+
+.btn-close-modal i:hover {
+  color: var(--akademic-color);
+}
+
 .right {
   float: right;
 }

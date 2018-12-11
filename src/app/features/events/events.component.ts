@@ -14,6 +14,7 @@ export class EventsComponent implements OnInit {
 
   posts: Post[];
   user: User;
+  loading: boolean;
 
   constructor(
     private _eventsService: EventService,
@@ -21,9 +22,11 @@ export class EventsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this._auth.user$.subscribe(user => this.user = user);
     this._eventsService.get().subscribe(posts => {
       this.posts = posts;
+      this.loading = false;
     })
   }
 }
