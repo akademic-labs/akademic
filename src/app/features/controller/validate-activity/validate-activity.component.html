@@ -13,40 +13,42 @@
                 </pre> -->
                 <form [formGroup]="form">
                     <div class="uppercase" style="color: #9A9A9A;text-align: center;font-size: 16px;">
-                        {{activity.activityType.description}}
+                        {{activity?.activityType?.description}}
                     </div>
                     <div style="font-size: 50px;text-align: center;">
-                        {{activity.hoursDuration}}
+                        {{activity?.hoursDuration}}
                         <span style="font-size: 25px;text-align: center;">horas</span>
                     </div>
                     <div class="uppercase" style="color: #9A9A9A;text-align: center;">
-                        {{activity.local}}
+                        {{activity?.local}}
                     </div>
                     <hr>
                     <span class="icon-report">
                         <i class="fa fa-clock-o"></i>
-                        {{ activity.initialDate | date: 'dd/MM/yyyy'}} - {{ activity.finalDate | date: 'dd/MM/yyyy' }}
+                        {{ activity?.initialDate | date: 'dd/MM/yyyy'}} - {{ activity?.finalDate | date: 'dd/MM/yyyy' }}
                     </span>
                     <hr>
                     <span class="icon-report">
-                        <i class="fa fa-calendar"></i>Semestre: {{ activity.semester }} | </span>
+                        <i class="fa fa-calendar"></i>Semestre: {{ activity?.semester }} | </span>
                     <span>
-                        Ano: {{ activity.schoolYear }}
+                        Ano: {{ activity?.schoolYear }}
                     </span>
                     <hr>
                     <span class="icon-report">
-                        <i class="fa fa-home"></i>{{ activity.city.nome }} / {{ activity.state.sigla }}
+                        <i class="fa fa-home"></i>{{ activity?.city?.nome }} / {{ activity?.state?.sigla }}
                     </span>
                     <hr>
-                    <div>Descrição: {{ activity.description }}</div>
+                    <div>Descrição: {{ activity?.description }}</div>
                     <hr>
-                    <div>Observação: {{ activity.observation }}</div>
+                    <div>Observação: {{ activity?.observation }}</div>
                     <hr>
                     <div>Anexos:</div>
                     <div class="show-attach">
                         <img *ngIf="loading" class="loading" src="assets/img/loading.gif">
-                        <div *ngIf="!activity.attachments.length" class="nothing-attach">
-                            Nenhum arquivo anexado.
+                        <div *ngIf="activity?.attachments">
+                            <div *ngIf="!activity.attachments?.length" class="nothing-attach">
+                                Nenhum arquivo anexado.
+                            </div>
                         </div>
                         <div *ngFor="let attach of attachmentsView;" class=" card card-attach" (click)="showAttach(attach)"
                             data-toggle="modal" data-target="#attachModal">
@@ -61,13 +63,13 @@
                     <div class="author">
                         <label>Solicitante</label>
                         <div>
-                            <img [src]="activity.user?.photoURL ? activity.user.photoURL : 'assets/img/default-avatar.png'"
+                            <img [src]="activity?.user?.photoURL ? activity?.user.photoURL : 'assets/img/default-avatar.png'"
                                 alt="Foto do Aluno" />
                             <h5>
-                                {{ activity.user?.displayName }}
+                                {{ activity?.user?.displayName }}
                                 <br />
                                 <small>
-                                    {{ activity.user?.email }}
+                                    {{ activity?.user?.email }}
                                 </small>
                             </h5>
                         </div>

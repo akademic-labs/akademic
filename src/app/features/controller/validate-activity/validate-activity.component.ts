@@ -10,6 +10,7 @@ import { AttachmentView } from './../../../models/attachment.interface';
 import { ErrorService } from './../../../services/error.service';
 import { sortBy } from './../../../utils/utils';
 import { NotifyService } from 'app/services/notify.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'aka-validate-activity',
@@ -26,6 +27,7 @@ export class ValidateActivityComponent implements OnInit {
   form: FormGroup;
   @ViewChild('inputFeedback') inputFeedback: ElementRef;
   isFeedback: boolean;
+  subscription: Subscription;
 
   constructor(
     private _route: ActivatedRoute,
@@ -42,56 +44,72 @@ export class ValidateActivityComponent implements OnInit {
     this.buildForm();
     this.loading = true;
     document.getElementsByClassName('main-panel').item(0).scrollTop = 0;
-    this.activity = this._route.snapshot.data['activity'];
-    if (this.activity.attachments.length) {
-      this.activity.attachments.forEach(attachments => {
-        this.attachmentsView = [];
-        this._storage.ref(attachments.path).getDownloadURL()
-          .subscribe(
-            resDonwloadURL => {
-              this._storage.ref(attachments.path).getMetadata()
-                .subscribe(
-                  resMetaData => {
-                    let src;
-                    let classCss;
-                    const image = true ? attachments.type.split('/')[0] === 'image' : false;
-                    const pdf = true ? attachments.type.split('/')[1] === 'pdf' : false;
-                    const video = true ? attachments.type.split('/')[0] === 'video' : false;
-                    const audio = true ? attachments.type.split('/')[0] === 'audio' : false;
-                    if (image) {
-                      src = resDonwloadURL;
-                      classCss = 'img-attach'
-                    }
-                    if (pdf) {
-                      src = 'assets/img/pdf.png';
-                      classCss = 'pdf-attach'
-                    }
-                    if (video) {
-                      src = 'assets/img/video.png';
-                      classCss = 'video-attach'
-                    }
-                    if (audio) {
-                      src = 'assets/img/audio.png';
-                      classCss = 'video-attach'
-                    }
-                    this.attachmentsView.push({ name: attachments.name, type: attachments.type, path: resDonwloadURL, createdAt: resMetaData.timeCreated, size: resMetaData.size, src: src, class: classCss });
-                    this.loading = false;
-                    // sort attachments by createdAt, because data coming in disorder
-                    this.attachmentsView = sortBy(this.attachmentsView, 'createdAt', 'asc');
-                  },
-                  error => { // error getMetaData
-                    this._errorService.handleErrorByCode(error.code);
-                    this.loading = false;
-                  }
-                );
-            },
-            error => { // error getDownloadURL
-              this._errorService.handleErrorByCode(error.code);
-              this.loading = false;
-            }
-          );
+    // this.activity = this._route.snapshot.data['activity'];
+    this.subscription = this._route.params
+      .subscribe(params => {
+        if (params.id) {
+          this._activityService.getActivityById(params.id)
+            .subscribe(
+              res => {
+                this.activity = res;
+                if (res.attachments) {
+                  if (res.attachments.length) {
+                    res.attachments.forEach(attachments => {
+                      this.attachmentsView = [];
+                      this._storage.ref(attachments.path).getDownloadURL()
+                        .subscribe(
+                          resDonwloadURL => {
+                            this._storage.ref(attachments.path).getMetadata()
+                              .subscribe(
+                                resMetaData => {
+                                  let src;
+                                  let classCss;
+                                  const image = true ? attachments.type.split('/')[0] === 'image' : false;
+                                  const pdf = true ? attachments.type.split('/')[1] === 'pdf' : false;
+                                  const video = true ? attachments.type.split('/')[0] === 'video' : false;
+                                  const audio = true ? attachments.type.split('/')[0] === 'audio' : false;
+                                  if (image) {
+                                    src = resDonwloadURL;
+                                    classCss = 'img-attach'
+                                  }
+                                  if (pdf) {
+                                    src = 'assets/img/pdf.png';
+                                    classCss = 'pdf-attach'
+                                  }
+                                  if (video) {
+                                    src = 'assets/img/video.png';
+                                    classCss = 'video-attach'
+                                  }
+                                  if (audio) {
+                                    src = 'assets/img/audio.png';
+                                    classCss = 'video-attach'
+                                  }
+                                  this.attachmentsView.push({ name: attachments.name, type: attachments.type, path: resDonwloadURL, createdAt: resMetaData.timeCreated, size: resMetaData.size, src: src, class: classCss });
+                                  this.loading = false;
+                                  // sort attachments by createdAt, because data coming in disorder
+                                  this.attachmentsView = sortBy(this.attachmentsView, 'createdAt', 'asc');
+                                },
+                                error => { // error getMetaData
+                                  this._errorService.handleErrorByCode(error.code);
+                                  this.loading = false;
+                                }
+                              );
+                          },
+                          error => { // error getDownloadURL
+                            this._errorService.handleErrorByCode(error.code);
+                            this.loading = false;
+                          }
+                        );
+                    });
+                  } else { this.loading = false; }
+                }
+              },
+              error => {
+                this._errorService.handleErrorByCode(error);
+              }
+            );
+        }
       });
-    } else { this.loading = false; }
   }
 
   buildForm() {
@@ -136,6 +154,10 @@ export class ValidateActivityComponent implements OnInit {
         this._notifyService.update('success', `Atividade reprovada com sucesso!`);
         this._router.navigate(['/dashboard']);
       });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
