@@ -4,11 +4,12 @@
       <div class="comment-text">
         <div class="comment-body show">
           <span class="comment-copy">{{comment.description}}</span>
-          <a href="#" class="comment-user">
+          <a class="comment-user">
             {{comment.user.displayName}}
           </a>
+          <br>
           <span class="comment-date">
-            <a class="comment-link" href="#">
+            <a class="comment-link">
               <span>{{comment.createdAt.toDate() | date: 'dd/MM/yyyy hh:mm a'}}</span>
             </a>
           </span>

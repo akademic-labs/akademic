@@ -55,6 +55,8 @@ export class UploadsPageComponent implements OnInit {
             activity => {
               if (activity.attachments.length) {
                 activity.attachments.forEach(attachments => {
+                  this.attachmentsView = [];
+                  this.attachments = [];
                   this._storage.ref(attachments.path).getDownloadURL()
                     .subscribe(
                       resDonwloadURL => {

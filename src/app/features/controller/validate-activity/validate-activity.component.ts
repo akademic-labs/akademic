@@ -45,6 +45,7 @@ export class ValidateActivityComponent implements OnInit {
     this.activity = this._route.snapshot.data['activity'];
     if (this.activity.attachments.length) {
       this.activity.attachments.forEach(attachments => {
+        this.attachmentsView = [];
         this._storage.ref(attachments.path).getDownloadURL()
           .subscribe(
             resDonwloadURL => {
