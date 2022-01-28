@@ -5,47 +5,47 @@ import { map } from 'rxjs/operators';
 
 import { Cities } from '../models/cities.interface';
 import { States } from '../models/states.interface';
-import { sort } from './../rxjs-operators/sort-by.operator';
+import { sort } from '../operators/sort-by.operator';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UtilsService {
-
-  constructor(
-    private _http: HttpClient
-  ) { }
+  constructor(private _http: HttpClient) {}
 
   getStates(): Observable<States[]> {
     const url = 'assets/json/states.json';
-    return this._http.get<States[]>(url).pipe(
-      sort('nome', 'asc')
-    );
+    return this._http.get<States[]>(url).pipe(sort('nome', 'asc'));
   }
 
   getCities(idState, nameCity) {
-    return this._http.get<Cities[]>(
-      `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idState}/municipios`
-    ).pipe(
-      map(cities => {
-        return cities
-          .filter(city => city.nome.toLowerCase().indexOf(nameCity.toLowerCase()) === 0)
-          .map(({ id, nome }) => {
-            return { id, nome };
-          });
-      }),
-      sort('nome', 'asc')
-    );
+    return this._http
+      .get<Cities[]>(
+        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idState}/municipios`
+      )
+      .pipe(
+        map((cities) => {
+          return cities
+            .filter(
+              (city) =>
+                city.nome.toLowerCase().indexOf(nameCity.toLowerCase()) === 0
+            )
+            .map(({ id, nome }) => {
+              return { id, nome };
+            });
+        }),
+        sort('nome', 'asc')
+      );
   }
 
   getLocation() {
-    return this._http.get<any[]>(
-      `https://ip-api.io/api/json`
-    );
+    return this._http.get<any[]>(`https://ip-api.io/api/json`);
   }
 
   preparateDataChart(array, keyLabels, keyData) {
-    const labels = [], data = []; let result;
+    const labels = [],
+      data = [];
+    let result;
     for (let index = 0; index < array.length; index++) {
       labels.push(array[index][keyLabels]);
       data.push(array[index][keyData]);
@@ -53,5 +53,4 @@ export class UtilsService {
     result = { labels: labels, data: data };
     return result;
   }
-
 }
