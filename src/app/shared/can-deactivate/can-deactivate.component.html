@@ -1,4 +1,4 @@
-<p-toast position="center" key="deactivate" [modal]="true">
+<p-toast position="center" key="deactivate">
   <ng-template let-message pTemplate="message">
     <div class="ui-g ui-fluid">
       <div class="text-center mt-3">
@@ -7,12 +7,20 @@
         <p>{{ message.detail }}</p>
       </div>
       <div class="ui-g-6">
-        <button type="button" (click)="choose(true)" class="btn btn-action btn-block">
+        <button
+          type="button"
+          (click)="choose(true)"
+          class="btn btn-action btn-block"
+        >
           Sim
         </button>
       </div>
       <div class="ui-g-6">
-        <button type="button" (click)="choose(false)" class="btn btn-secondary btn-block">
+        <button
+          type="button"
+          (click)="choose(false)"
+          class="btn btn-secondary btn-block"
+        >
           Não
         </button>
       </div>
