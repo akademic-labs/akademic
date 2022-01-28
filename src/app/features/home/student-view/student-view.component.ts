@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NotifyService } from 'app/services/notify.service';
-import { MessageService } from 'primeng/components/common/api';
+import { NotifyService } from '../../../services/notify.service';
+import { MessageService } from 'primeng/api';
 
 import { User } from '../../../models/user.interface';
 import { Activity } from './../../../models/activity.interface';
@@ -15,7 +15,7 @@ declare var palette: any;
 @Component({
   selector: 'aka-student-view',
   templateUrl: './student-view.component.html',
-  styleUrls: ['./student-view.component.css']
+  styleUrls: ['./student-view.component.css'],
 })
 export class StudentViewComponent implements OnInit {
   @Input() user: User;
@@ -25,12 +25,18 @@ export class StudentViewComponent implements OnInit {
   activityStatusChartData: ChartData;
   activity: Activity;
 
-  constructor(private _activityService: ActivityService, private _utilsService: UtilsService,
-    private _messageService: MessageService, private _notify: NotifyService, private _router: Router) { }
+  constructor(
+    private _activityService: ActivityService,
+    private _utilsService: UtilsService,
+    private _messageService: MessageService,
+    private _notify: NotifyService,
+    private _router: Router
+  ) {}
 
   ngOnInit() {
-    this._activityService.getActivitiesStudent(this.user.uid, 0, 'createdAt', 50)
-      .subscribe(responseData => {
+    this._activityService
+      .getActivitiesStudent(this.user.uid, 0, 'createdAt', 50)
+      .subscribe((responseData) => {
         // console.log(responseData);
         this.activitiesStudent = responseData;
 
@@ -39,14 +45,29 @@ export class StudentViewComponent implements OnInit {
         let dataFirebaseStatus = [];
         let dataChartStatus;
 
-        responseData.forEach(e => {
-          dataFirebaseCategory.push({ activity: e.activityType.description, hours: e.hoursDuration });
-          dataFirebaseCategory = groupBy(dataFirebaseCategory, 'activity', 'hours');
-          dataChartCategory = this._utilsService.preparateDataChart(dataFirebaseCategory, 'activity', 'hours');
+        responseData.forEach((e) => {
+          dataFirebaseCategory.push({
+            activity: e.activityType.description,
+            hours: e.hoursDuration,
+          });
+          dataFirebaseCategory = groupBy(
+            dataFirebaseCategory,
+            'activity',
+            'hours'
+          );
+          dataChartCategory = this._utilsService.preparateDataChart(
+            dataFirebaseCategory,
+            'activity',
+            'hours'
+          );
 
           dataFirebaseStatus.push({ status: e.status, count: 1 });
           dataFirebaseStatus = groupBy(dataFirebaseStatus, 'status', 'count');
-          dataChartStatus = this._utilsService.preparateDataChart(dataFirebaseStatus, 'status', 'count');
+          dataChartStatus = this._utilsService.preparateDataChart(
+            dataFirebaseStatus,
+            'status',
+            'count'
+          );
         });
 
         this.buildChartByCategory(dataChartCategory);
@@ -57,52 +78,70 @@ export class StudentViewComponent implements OnInit {
   confirm(activity: Activity) {
     this.activity = activity;
     this._messageService.add({
-      key: 'confirmation', sticky: true, severity: 'warn', summary: 'Tem certeza?',
-      detail: `Deseja realmente excluir '${activity.description}'?`
+      key: 'confirmation',
+      sticky: true,
+      severity: 'warn',
+      summary: 'Tem certeza?',
+      detail: `Deseja realmente excluir '${activity.description}'?`,
     });
   }
 
   buildChartByCategory(dataChart) {
-    dataChart ? this.activityCategoryChartData = {
-      labels: dataChart.labels,
-      datasets: [{
-        data: dataChart.data,
-        backgroundColor: palette('cb-Pastel1', dataChart.data.length).map(hex => '#' + hex),
-        borderColor: palette('cb-Pastel1', dataChart.data.length).map(hex => '#' + hex),
-        borderWidth: 1,
-        hoverBorderWidth: 2
-      }],
-      options: {
-        maintainAspectRatio: false
-      }
-    } : this.activityCategoryChartData = null;
+    dataChart
+      ? (this.activityCategoryChartData = {
+          labels: dataChart.labels,
+          datasets: [
+            {
+              data: dataChart.data,
+              backgroundColor: palette('cb-Pastel1', dataChart.data.length).map(
+                (hex) => '#' + hex
+              ),
+              borderColor: palette('cb-Pastel1', dataChart.data.length).map(
+                (hex) => '#' + hex
+              ),
+              borderWidth: 1,
+              hoverBorderWidth: 2,
+            },
+          ],
+          options: {
+            maintainAspectRatio: false,
+          },
+        })
+      : (this.activityCategoryChartData = null);
   }
 
   buildChartStatus(dataChart) {
-    dataChart ? this.activityStatusChartData = {
-      labels: dataChart.labels,
-      datasets: [{
-        data: dataChart.data,
-        backgroundColor: palette('cb-Set2', dataChart.data.length).map(hex => '#' + hex),
-        borderColor: palette('cb-Set2', dataChart.data.length).map(hex => '#' + hex),
-      }],
-      options: {
-        cutoutPercentage: 95,
-        animation: {
-          animateRotate: true,
-          animateScale: true
-        },
-        maintainAspectRatio: false
-      }
-    } : this.activityStatusChartData = null;
+    dataChart
+      ? (this.activityStatusChartData = {
+          labels: dataChart.labels,
+          datasets: [
+            {
+              data: dataChart.data,
+              backgroundColor: palette('cb-Set2', dataChart.data.length).map(
+                (hex) => '#' + hex
+              ),
+              borderColor: palette('cb-Set2', dataChart.data.length).map(
+                (hex) => '#' + hex
+              ),
+            },
+          ],
+          options: {
+            cutoutPercentage: 95,
+            animation: {
+              animateRotate: true,
+              animateScale: true,
+            },
+            maintainAspectRatio: false,
+          },
+        })
+      : (this.activityStatusChartData = null);
   }
 
   deleteActivity() {
     this._messageService.clear();
-    this._activityService.deleteActivity(this.activity.uid)
-      .then(() => {
-        this._notify.update('success', 'Atividade excluída com sucesso!');
-        this._router.navigate(['/dashboard']);
-      });
+    this._activityService.deleteActivity(this.activity.uid).then(() => {
+      this._notify.update('success', 'Atividade excluída com sucesso!');
+      this._router.navigate(['/dashboard']);
+    });
   }
 }

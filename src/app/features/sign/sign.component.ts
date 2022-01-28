@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'app/services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'aka-sign',
   templateUrl: './sign.component.html',
-  styleUrls: ['./sign.component.css']
+  styleUrls: ['./sign.component.css'],
 })
 export class SignComponent implements OnInit {
+  constructor(public _auth: AuthService) {}
 
-  constructor(public _auth: AuthService) { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

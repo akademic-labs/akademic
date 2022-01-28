@@ -1,6 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Course } from 'app/models/course.interface';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Course } from '../../models/course.interface';
 import { Dropdown } from 'primeng/dropdown';
 import { Observable } from 'rxjs';
 
@@ -17,10 +22,9 @@ import { maskCEP } from './../../utils/masks';
 @Component({
   selector: 'aka-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-
   user$: Observable<User>;
   form: FormGroup;
   institutions$: Observable<Institution[]>;
@@ -43,13 +47,14 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
-    this.user$.subscribe(user => {
+    this.user$.subscribe((user) => {
       // verify if user is institution and if it already has a user updated
       if (user.roles.institution && !user.registration) {
-        this._institutionService.getInstitutionById(user.institution)
-          .subscribe(institution => {
+        this._institutionService
+          .getInstitutionById(user.institution)
+          .subscribe((institution) => {
             this.setInstitutionToUser(institution);
-          })
+          });
       } else {
         this.form.patchValue(user);
         this.getInstitutions();
@@ -67,7 +72,7 @@ export class ProfileComponent implements OnInit {
         student: [null],
         controller: [null],
         administrator: [null],
-        institution: [null]
+        institution: [null],
       }),
       birthday: [null],
       address: this._fb.group({
@@ -78,27 +83,31 @@ export class ProfileComponent implements OnInit {
         neighborhood: [null],
         city: [null],
         state: [null],
-        country: [null]
+        country: [null],
       }),
       institution: [null],
       course: new FormControl({ value: null, disabled: true }),
-      about: ['']
+      about: [''],
     });
   }
 
   onSubmit() {
-
     if (this.form.get('roles').value.student) {
       // before submit assigns only set uid institution and course in the student
       const course = this.form.get('course').value;
-      course instanceof Object ? this.form.get('course').setValue(course.uid) : this.form.get('course').setErrors({ invalid: true });
+      course instanceof Object
+        ? this.form.get('course').setValue(course.uid)
+        : this.form.get('course').setErrors({ invalid: true });
       const institution = this.form.get('institution').value;
-      institution instanceof Object ? this.form.get('institution').setValue(institution.uid) : this.form.get('institution').setErrors({ invalid: true });
+      institution instanceof Object
+        ? this.form.get('institution').setValue(institution.uid)
+        : this.form.get('institution').setErrors({ invalid: true });
     }
 
     if (this.form.valid) {
-      this._userService.update(this.form.get('uid').value, this.form.value)
-        .then(_ => {
+      this._userService
+        .update(this.form.get('uid').value, this.form.value)
+        .then((_) => {
           this._notify.update('success', 'Perfil atualizado!');
         });
     } else {
@@ -118,12 +127,21 @@ export class ProfileComponent implements OnInit {
     if (institution && uf) {
       this.getCourses(institution, course);
       if (event) {
-        this.institutions$ = this._institutionService.getInstitutionByName(uf, event.query);
+        this.institutions$ = this._institutionService.getInstitutionByName(
+          uf,
+          event.query
+        );
       } else {
-        typeof institution === 'string' ? this._institutionService.getInstitutionById(institution).subscribe(res => {
-          this.form.get('institution').setValue(res);
-          this.courses$ = this._institutionService.getInstitutionCourses(this.form.get('institution').value.uid);
-        }) : this.form.get('institution').setValue(institution);
+        typeof institution === 'string'
+          ? this._institutionService
+              .getInstitutionById(institution)
+              .subscribe((res) => {
+                this.form.get('institution').setValue(res);
+                this.courses$ = this._institutionService.getInstitutionCourses(
+                  this.form.get('institution').value.uid
+                );
+              })
+          : this.form.get('institution').setValue(institution);
       }
       this.form.get('course').enable();
       // setTimeout(() => { this.dropdownCourses.focus() }, 100);
@@ -138,14 +156,24 @@ export class ProfileComponent implements OnInit {
 
   getCourses(institution?, course?) {
     if (this.form.get('institution').value) {
-      this.courses$ = this._institutionService.getInstitutionCourses(this.form.get('institution').value.uid);
+      this.courses$ = this._institutionService.getInstitutionCourses(
+        this.form.get('institution').value.uid
+      );
       const courseValid = this.form.get('course').value;
       if (typeof courseValid === 'string') {
-        this._institutionService.getCoursesInstitutionByUid(this.form.get('institution').value, courseValid).valueChanges().subscribe(res => {
-          this.form.get('course').setValue(res);
-          this.courses$ = this._institutionService.getInstitutionCourses(this.form.get('institution').value.uid);
-        })
-      };
+        this._institutionService
+          .getCoursesInstitutionByUid(
+            this.form.get('institution').value,
+            courseValid
+          )
+          .valueChanges()
+          .subscribe((res) => {
+            this.form.get('course').setValue(res);
+            this.courses$ = this._institutionService.getInstitutionCourses(
+              this.form.get('institution').value.uid
+            );
+          });
+      }
     }
   }
 
@@ -153,16 +181,21 @@ export class ProfileComponent implements OnInit {
     this.clearAddressForm();
     const cep = this.form.get('address.zipCode').value;
     if (cep) {
-      this._cepService.queryCEP(cep)
-        .subscribe(data => {
+      this._cepService.queryCEP(cep).subscribe(
+        (data) => {
           if (data.erro) {
             this._notify.update('warning', 'CEP não encontrado.');
           } else {
             this.setAddressForm(data);
           }
-        }, error => {
-          this._notify.update('danger', `Houve um erro na requisição! ==> ${error}`);
-        });
+        },
+        (error) => {
+          this._notify.update(
+            'danger',
+            `Houve um erro na requisição! ==> ${error}`
+          );
+        }
+      );
     } else {
       this._notify.update('warning', 'CEP inválido.');
     }
@@ -176,9 +209,9 @@ export class ProfileComponent implements OnInit {
       address: {
         street: data.endereco,
         city: data.municipio,
-        state: data.uf
-      }
-    })
+        state: data.uf,
+      },
+    });
   }
 
   setAddressForm(data) {
@@ -189,10 +222,10 @@ export class ProfileComponent implements OnInit {
         neighborhood: data.bairro,
         city: data.localidade,
         state: data.uf,
-        country: 'Brasil'
-      }
-    })
-  };
+        country: 'Brasil',
+      },
+    });
+  }
 
   clearAddressForm() {
     this.form.patchValue({
@@ -202,13 +235,14 @@ export class ProfileComponent implements OnInit {
         neighborhood: null,
         city: null,
         state: null,
-        country: null
-      }
-    })
-  };
-
-  validatorDate(input, date) {
-    date > this.today ? this.form.get(input).setErrors({ dateGreaterToday: true }) : this.form.get(input).setErrors(null);
+        country: null,
+      },
+    });
   }
 
+  validatorDate(input, date) {
+    date > this.today
+      ? this.form.get(input).setErrors({ dateGreaterToday: true })
+      : this.form.get(input).setErrors(null);
+  }
 }

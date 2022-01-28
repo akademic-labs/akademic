@@ -1,6 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/components/common/messageservice';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 
 import { Institution } from '../../../models/institution.interface';
@@ -9,10 +14,9 @@ import { Cols } from '../../../models/cols.interface';
 
 @Component({
   selector: 'aka-institutions',
-  templateUrl: './institutions.component.html'
+  templateUrl: './institutions.component.html',
 })
 export class InstitutionsComponent implements OnInit {
-
   @ViewChild('inputFocus') focusIn: ElementRef;
   title = 'Instituições';
   button = 'Adicionar';
@@ -25,7 +29,7 @@ export class InstitutionsComponent implements OnInit {
     private _institutionFormBuilder: FormBuilder,
     private _institutionService: InstitutionService,
     private _messageService: MessageService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.institutions$ = this._institutionService.get();
@@ -35,16 +39,16 @@ export class InstitutionsComponent implements OnInit {
     this.cols = [
       { field: 'instituicao', header: 'Nome' },
       { field: 'cnpj', header: 'CNPJ' },
-      { field: 'sigla', header: 'Sigla'},
+      { field: 'sigla', header: 'Sigla' },
       { field: 'uf', header: 'UF' },
-      { field: 'actions', header: 'Ações' }
+      { field: 'actions', header: 'Ações' },
     ];
   }
 
   buildForm() {
     this.institutionForm = this._institutionFormBuilder.group({
       uid: new FormControl({ value: null, disabled: true }),
-      name: [null, Validators.required]
+      name: [null, Validators.required],
     });
   }
 
@@ -52,7 +56,10 @@ export class InstitutionsComponent implements OnInit {
     if (!this.institutionForm.get('uid').value) {
       this._institutionService.post(this.institutionForm.value);
     } else {
-      this._institutionService.put(this.institution.uid, this.institutionForm.value);
+      this._institutionService.put(
+        this.institution.uid,
+        this.institutionForm.value
+      );
     }
     this.institutionForm.reset();
     this.button = 'Adicionar';
@@ -76,9 +83,11 @@ export class InstitutionsComponent implements OnInit {
   confirm(obj) {
     this.institution = obj;
     this._messageService.add({
-      key: 'confirmationKey', sticky: true, severity: 'warn', summary: 'Tem certeza?',
-      detail: `Deseja realmente excluir '${obj.name}'?`
+      key: 'confirmationKey',
+      sticky: true,
+      severity: 'warn',
+      summary: 'Tem certeza?',
+      detail: `Deseja realmente excluir '${obj.name}'?`,
     });
   }
-
 }

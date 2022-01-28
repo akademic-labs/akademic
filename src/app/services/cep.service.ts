@@ -1,15 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { NotifyService } from './notify.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CepService {
-
-  constructor(private http: HttpClient, private _notify: NotifyService) { }
+  constructor(private http: HttpClient, private _notify: NotifyService) {}
 
   queryCEP(cep: string) {
     cep = cep.replace(/\D/g, '');
@@ -23,8 +22,10 @@ export class CepService {
         return this.http.get<any>(`https://viacep.com.br/ws/${cep}/json`);
       } else {
         this._notify.update('warning', 'CEP inválido.');
-        return of({})
+        return of({});
       }
     }
+
+    return of({});
   }
 }

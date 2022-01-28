@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { Course } from '../models/course.interface';
 import { sort } from '../operators/sort-by.operator';

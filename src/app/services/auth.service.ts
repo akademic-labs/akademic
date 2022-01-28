@@ -4,36 +4,34 @@ import { Router } from '@angular/router';
 import { UserService } from './user.service';
 import { ErrorService } from './error.service';
 import { NotifyService } from './notify.service';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { of, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 
-import { User } from 'app/models/user.interface';
-import { UserInfo } from 'firebase/app';
+import { User } from '../models/user.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   user$: Observable<User | null>;
 
   constructor(
-    private _router: Router,
-    private _notify: NotifyService,
-    private _afAuth: AngularFireAuth,
-    private _afs: AngularFirestore,
-    private _errorService: ErrorService,
-    private _userService: UserService
+    private router: Router,
+    private notify: NotifyService,
+    private fireAuth: AngularFireAuth,
+    private firestore: AngularFirestore,
+    private errorService: ErrorService,
+    private userService: UserService
   ) {
-
-    this.user$ = this._afAuth.authState.pipe(
-      switchMap(user => {
+    this.user$ = this.fireAuth.authState.pipe(
+      switchMap((user) => {
         if (user) {
-          return this._afs.doc<User>(`users/${user.uid}`).valueChanges();
+          return this.firestore.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }
@@ -41,40 +39,54 @@ export class AuthService {
     );
   }
 
-  logOut() {
-    this._afAuth.auth.signOut().then(() => {
-      this._router.navigate(['/']);
-    });
+  async logOut() {
+    await this.fireAuth.signOut();
+
+    this.router.navigate(['/']);
   }
 
   // Sends email allowing user to reset password
-  resetPassword(email: string) {
-    this._afAuth.auth.sendPasswordResetEmail(email)
-      .then(() => this._notify.update('info', 'Atualização de senha enviada por e-mail'))
-      .catch(error => this._errorService.handleErrorByCode(error.code));
+  async resetPassword(email: string) {
+    try {
+      await this.fireAuth.sendPasswordResetEmail(email);
+
+      this.notify.update('info', 'Atualização de senha enviada por e-mail');
+    } catch (error) {
+      return this.errorService.handleErrorByCode(error.code);
+    }
   }
 
   async signInWithEmailAndPassword(email: string, password: string) {
     try {
-      const credential = await this._afAuth.auth.signInWithEmailAndPassword(email, password);
-      if (credential) { this.successAndRedirect() };
+      const credential = await this.fireAuth.signInWithEmailAndPassword(
+        email,
+        password
+      );
+
+      if (credential) {
+        this.successAndRedirect();
+      }
     } catch (error) {
-      return this._errorService.handleErrorByCode(error.code);
+      return this.errorService.handleErrorByCode(error.code);
     }
   }
 
   async createUserWithEmailAndPassword(user: User, password: string) {
     try {
-      const credential = await this._afAuth.auth.createUserWithEmailAndPassword(user.email, password);
+      const credential = await this.fireAuth.createUserWithEmailAndPassword(
+        user.email,
+        password
+      );
+
       user.uid = credential.user.uid;
-      return this._userService.update(user.uid, user);
+
+      return this.userService.update(user.uid, user);
     } catch (error) {
-      return this._errorService.handleErrorByCode(error.code);
+      return this.errorService.handleErrorByCode(error.code);
     }
   }
 
   // OAuth Methods
-
   googleLogin() {
     const provider = new firebase.auth.GoogleAuthProvider();
     this.oAuthLogin(provider);
@@ -92,16 +104,16 @@ export class AuthService {
 
   private async oAuthLogin(provider: any) {
     try {
-      const credential = await this._afAuth.auth.signInWithPopup(provider);
+      const credential = await this.fireAuth.signInWithPopup(provider);
       const user = this.authCredentialToUser(credential.user);
-      await this._userService.update(user.uid, user);
+      await this.userService.update(user.uid, user);
       this.successAndRedirect();
     } catch (e) {
-      return this._errorService.handleErrorByCode(e.code);
+      return this.errorService.handleErrorByCode(e.code);
     }
   }
 
-  private authCredentialToUser(credentialUser: UserInfo) {
+  private authCredentialToUser(credentialUser: firebase.UserInfo) {
     const dataUser: User = {
       uid: credentialUser.uid,
       email: credentialUser.email,
@@ -109,14 +121,14 @@ export class AuthService {
       photoURL: credentialUser.photoURL,
       status: 'A',
       roles: { student: true },
-      createdAt: new Date()
+      createdAt: new Date(),
     };
 
     return dataUser;
   }
 
   private successAndRedirect() {
-    this._router.navigate(['/dashboard']);
-    this._notify.update('success', 'Bem vindo!');
+    this.router.navigate(['/dashboard']);
+    this.notify.update('success', 'Bem vindo!');
   }
 }

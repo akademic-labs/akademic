@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, QueryFn } from 'angularfire2/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument,
+  QueryFn,
+} from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 
 type CollectionPredicate<T> = string | AngularFirestoreCollection<T>;
 type DocPredicate<T> = string | AngularFirestoreDocument<T>;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FirestoreService {
-
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore) {}
 
   // firebase server timestamp
   get timestamp() {
@@ -23,7 +27,10 @@ export class FirestoreService {
     Get a reference
   * **************/
 
-  col<T>(ref: CollectionPredicate<T>, queryFn?: QueryFn): AngularFirestoreCollection<T> {
+  col<T>(
+    ref: CollectionPredicate<T>,
+    queryFn?: QueryFn
+  ): AngularFirestoreCollection<T> {
     return typeof ref === 'string' ? this.afs.collection<T>(ref, queryFn) : ref;
   }
 
@@ -37,37 +44,52 @@ export class FirestoreService {
       this.db.col$('notes', ref => ref.where('user', '==', 'Patrick'))
   * **************/
   doc$<T>(ref: DocPredicate<T>): Observable<T> {
-    return this.doc(ref).snapshotChanges().pipe(
-      map(doc => {
-        return doc.payload.data() as T;
-      }));
+    return this.doc(ref)
+      .snapshotChanges()
+      .pipe(
+        map((doc) => {
+          return doc.payload.data() as T;
+        })
+      );
   }
 
   col$<T>(ref: CollectionPredicate<T>, queryFn?: QueryFn): Observable<T[]> {
-    return this.col(ref, queryFn).snapshotChanges().pipe(
-      map(docs => {
-        return docs.map(a => a.payload.doc.data()) as T[];
-      }));
+    return this.col(ref, queryFn)
+      .snapshotChanges()
+      .pipe(
+        map((docs) => {
+          return docs.map((a) => a.payload.doc.data()) as T[];
+        })
+      );
   }
 
-  colWithId$<T>(ref: CollectionPredicate<T>, queryFn?: QueryFn): Observable<T[]> {
-    return this.col(ref, queryFn).snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data();
-          const uid = a.payload.doc.id;
-          return { uid, ...<any>data };
-        });
-      }));
+  colWithId$<T>(
+    ref: CollectionPredicate<T>,
+    queryFn?: QueryFn
+  ): Observable<T[]> {
+    return this.col(ref, queryFn)
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((a) => {
+            const data = a.payload.doc.data();
+            const uid = a.payload.doc.id;
+            return { uid, ...(<any>data) };
+          });
+        })
+      );
   }
 
   public docWithId$<T>(ref: DocPredicate<T>): Observable<T> {
-    return this.doc(ref).snapshotChanges().pipe(
-      map(a => {
-        const data = a.payload.data();
-        const uid = a.payload.id;
-        return { uid, ...<any>data };
-      }));
+    return this.doc(ref)
+      .snapshotChanges()
+      .pipe(
+        map((a) => {
+          const data = a.payload.data();
+          const uid = a.payload.id;
+          return { uid, ...(<any>data) };
+        })
+      );
   }
 
   // this.db.upsert('notes/xyz', { content: 'hello world'})
@@ -87,7 +109,7 @@ export class FirestoreService {
   update<T>(ref: DocPredicate<T>, data: any) {
     return this.doc(ref).update({
       ...data,
-      updatedAt: this.timestamp
+      updatedAt: this.timestamp,
     });
   }
 
@@ -100,7 +122,7 @@ export class FirestoreService {
     return this.doc(ref).set({
       ...data,
       updatedAt: timestamp,
-      createdAt: timestamp
+      createdAt: timestamp,
     });
   }
 
@@ -109,7 +131,7 @@ export class FirestoreService {
     return this.col(ref).add({
       ...data,
       updatedAt: timestamp,
-      createdAt: timestamp
+      createdAt: timestamp,
     });
   }
 
@@ -119,36 +141,44 @@ export class FirestoreService {
   * **************/
   inspectDoc(ref: DocPredicate<any>): void {
     const tick = new Date().getTime();
-    this.doc(ref).snapshotChanges().pipe(
-      take(1),
-      tap(d => {
-        const tock = new Date().getTime() - tick;
-        console.log(`Loaded Document in ${tock}ms`, d);
-      }))
+    this.doc(ref)
+      .snapshotChanges()
+      .pipe(
+        take(1),
+        tap((d) => {
+          const tock = new Date().getTime() - tick;
+          console.log(`Loaded Document in ${tock}ms`, d);
+        })
+      )
       .subscribe();
   }
 
   inspectCol(ref: CollectionPredicate<any>): void {
     const tick = new Date().getTime();
-    this.col(ref).snapshotChanges().pipe(
-      take(1),
-      tap(c => {
-        const tock = new Date().getTime() - tick;
-        console.log(`Loaded Collection in ${tock}ms`, c);
-      }))
+    this.col(ref)
+      .snapshotChanges()
+      .pipe(
+        take(1),
+        tap((c) => {
+          const tock = new Date().getTime() - tick;
+          console.log(`Loaded Collection in ${tock}ms`, c);
+        })
+      )
       .subscribe();
   }
 
   // returns a document references mapped to AngularFirestoreDocument
   docWithRefs$<T>(ref: DocPredicate<T>) {
-    return this.doc$(ref).pipe(map(doc => {
-      for (const k of Object.keys(doc)) {
-        if (doc[k] instanceof firebase.firestore.DocumentReference) {
-          doc[k] = this.doc(doc[k].path);
+    return this.doc$(ref).pipe(
+      map((doc) => {
+        for (const k of Object.keys(doc)) {
+          if (doc[k] instanceof firebase.firestore.DocumentReference) {
+            doc[k] = this.doc(doc[k].path);
+          }
         }
-      }
-      return doc;
-    }));
+        return doc;
+      })
+    );
   }
 
   // batch
@@ -162,7 +192,7 @@ export class FirestoreService {
         switch (type) {
           case 'set':
             batch.set(ref, {
-              ...data
+              ...data,
             });
             console.log('batch set: ' + path);
             break;

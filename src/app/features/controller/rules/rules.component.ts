@@ -1,9 +1,13 @@
-import { FormGroup,  FormBuilder, Validators, FormControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Rules } from '../../../models/rules.interface';
-import { Course } from '../../../models/course.interface';
-import { ActivityType } from 'app/models/activity-type.interface';
+import { ActivityType } from '../../../models/activity-type.interface';
 import { Ruleservice } from '../../../services/rules.service';
 import { CourseService } from '../../../services/course.service';
 import { ActivityTypeService } from './../../../services/activity-type.service';
@@ -11,10 +15,9 @@ import { ActivityTypeService } from './../../../services/activity-type.service';
 @Component({
   selector: 'aka-rules',
   templateUrl: './rules.component.html',
-  styleUrls: ['./rules.component.css']
+  styleUrls: ['./rules.component.css'],
 })
 export class RulesComponent implements OnInit {
-
   title = 'Regras';
   button = 'Adicionar';
   ruleForm: FormGroup;
@@ -32,13 +35,13 @@ export class RulesComponent implements OnInit {
     private _activityTypeService: ActivityTypeService
   ) {}
 
-   ngOnInit() {
+  ngOnInit() {
     this.rules$ = this._rulesService.get();
     this.activityTypes$ = this._activityTypeService.get();
     this.courses$ = this._courseService.get();
     this.buildForm();
     this.focusIn.nativeElement.focus();
-   }
+  }
 
   buildForm() {
     this.ruleForm = this._rulesFormBuilder.group({
@@ -46,7 +49,7 @@ export class RulesComponent implements OnInit {
       name: [null, Validators.required],
       hours: [null, Validators.required],
       course: [null, Validators.required],
-      activityType: [null, Validators.required]
+      activityType: [null, Validators.required],
     });
   }
 
@@ -64,14 +67,13 @@ export class RulesComponent implements OnInit {
 
   edit(obj) {
     console.log(obj);
-    this.ruleForm
-      .patchValue({
-        uid: obj.uid,
-        name: obj.name,
-        hours: obj.hours,
-        course: obj.course,
-        activityType: obj.activityType
-      });
+    this.ruleForm.patchValue({
+      uid: obj.uid,
+      name: obj.name,
+      hours: obj.hours,
+      course: obj.course,
+      activityType: obj.activityType,
+    });
     this.rule = obj;
     this.button = 'Atualizar';
     this.focusIn.nativeElement.focus();
@@ -86,7 +88,8 @@ export class RulesComponent implements OnInit {
   }
 
   compare(obj1, obj2) {
-    return obj1 && obj2 ? (obj1.uid === obj2.uid && obj1.description === obj2.description) : obj1 === obj2;
+    return obj1 && obj2
+      ? obj1.uid === obj2.uid && obj1.description === obj2.description
+      : obj1 === obj2;
   }
-
 }
