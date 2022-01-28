@@ -18,28 +18,54 @@ import { StudentGuard } from './guards/student.guard';
 
 const routes: Routes = [
   {
-    path: '', component: SignComponent, canActivate: [IsLoggedGuard], children: [
+    path: '',
+    component: SignComponent,
+    canActivate: [IsLoggedGuard],
+    children: [
       { path: '', component: SignInComponent },
-      { path: 'signup', component: SignUpComponent }
-    ]
+      { path: 'signup', component: SignUpComponent },
+    ],
   },
   { path: 'dashboard', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'student', loadChildren: './features/student/student.module#StudentModule', canActivate: [AuthGuard, StudentGuard] },
-  { path: 'admin', loadChildren: './features/admin/admin.module#AdminModule', canActivate: [AuthGuard, AdminGuard] },
-  { path: 'institution', loadChildren: './features/institution/institution.module#InstitutionModule', canActivate: [AuthGuard, InstitutionGuard] },
-  { path: 'controller', loadChildren: './features/controller/controller.module#ControllerModule', canActivate: [AuthGuard, ControllerGuard] },
-  { path: 'events', loadChildren: './features/events/events.module#EventsModule', canActivate: [AuthGuard] },
-  { path: '**', component: Error404Component }
+  {
+    path: 'student',
+    loadChildren: './features/student/student.module#StudentModule',
+    canActivate: [AuthGuard, StudentGuard],
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./features/admin/admin.module').then((m) => m.AdminModule),
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'institution',
+    loadChildren: () =>
+      import('./features/institution/institution.module').then(
+        (m) => m.InstitutionModule
+      ),
+    canActivate: [AuthGuard, InstitutionGuard],
+  },
+  {
+    path: 'controller',
+    loadChildren: () =>
+      import('./features/controller/controller.module').then(
+        (m) => m.ControllerModule
+      ),
+    canActivate: [AuthGuard, ControllerGuard],
+  },
+  {
+    path: 'events',
+    loadChildren: () =>
+      import('./features/events/events.module').then((m) => m.EventsModule),
+    canActivate: [AuthGuard],
+  },
+  { path: '**', component: Error404Component },
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    BrowserModule,
-    RouterModule.forRoot(routes)
-  ],
-  exports: [
-  ],
+  imports: [CommonModule, BrowserModule, RouterModule.forRoot(routes)],
+  exports: [],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
