@@ -30,7 +30,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   {
     path: 'student',
-    loadChildren: './features/student/student.module#StudentModule',
+    loadChildren: () =>
+      import('./features/student/student.module').then((m) => m.StudentModule),
     canActivate: [AuthGuard, StudentGuard],
   },
   {
