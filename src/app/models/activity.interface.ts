@@ -1,4 +1,4 @@
-import { Cities } from 'app/models/cities.interface';
+import { Cities } from '../models/cities.interface';
 
 import { ActMessages } from './act-messages.interface';
 import { ActivityType } from './activity-type.interface';

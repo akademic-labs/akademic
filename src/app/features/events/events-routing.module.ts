@@ -5,12 +5,17 @@ import { FormComponent } from './form/form.component';
 import { EventsComponent } from './events.component';
 
 const routes: Routes = [
-  { path: '', component: EventsComponent },
-  { path: 'create', component: FormComponent }
+  {
+    path: '',
+    children: [
+      { path: '', component: EventsComponent },
+      { path: 'create', component: FormComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class EventsRoutingModule { }
+export class EventsRoutingModule {}

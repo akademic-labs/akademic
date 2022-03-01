@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -8,10 +11,9 @@ import { ErrorService } from './error.service';
 import { NotifyService } from './notify.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ActivityTypeService {
-
   actTypeCollection: AngularFirestoreCollection<ActivityType>;
 
   constructor(
@@ -34,20 +36,43 @@ export class ActivityTypeService {
   }
 
   post(content: ActivityType) {
-    this._afs.collection('activityTypes').add(content)
-      .then(() => this._notify.update('success', 'Tipo de atividade adicionada com sucesso!'))
-      .catch(error => this._errorService.handleErrorByCode(error.code));
+    this._afs
+      .collection('activityTypes')
+      .add(content)
+      .then(() =>
+        this._notify.update(
+          'success',
+          'Tipo de atividade adicionada com sucesso!'
+        )
+      )
+      .catch((error) => this._errorService.handleErrorByCode(error.code));
   }
 
   put(uid: string, content: ActivityType) {
-    this._afs.collection('activityTypes').doc(uid).set(content)
-      .then(() => this._notify.update('success', 'Tipo de atividade atualizada com sucesso!'))
-      .catch(error => this._errorService.handleErrorByCode(error.code));
+    this._afs
+      .collection('activityTypes')
+      .doc(uid)
+      .set(content)
+      .then(() =>
+        this._notify.update(
+          'success',
+          'Tipo de atividade atualizada com sucesso!'
+        )
+      )
+      .catch((error) => this._errorService.handleErrorByCode(error.code));
   }
 
   delete(uid: string) {
-    this._afs.collection('activityTypes').doc(uid).delete()
-      .then(() => this._notify.update('success', 'Tipo de atividade removida com sucesso!'))
-      .catch(error => this._errorService.handleErrorByCode(error.code));
+    this._afs
+      .collection('activityTypes')
+      .doc(uid)
+      .delete()
+      .then(() =>
+        this._notify.update(
+          'success',
+          'Tipo de atividade removida com sucesso!'
+        )
+      )
+      .catch((error) => this._errorService.handleErrorByCode(error.code));
   }
 }

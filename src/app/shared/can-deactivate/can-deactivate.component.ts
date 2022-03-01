@@ -1,27 +1,30 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CanDeactivateInterface } from 'app/guards/can-deactivate.guard';
-import { MessageService } from 'primeng/components/common/api';
+import { CanDeactivateInterface } from '../../guards/can-deactivate.guard';
+import { MessageService } from 'primeng/api';
 import { Subject } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'aka-can-deactivate',
-  templateUrl: './can-deactivate.component.html'
+  templateUrl: './can-deactivate.component.html',
 })
 export class CanDeactivateComponent implements OnInit, CanDeactivateInterface {
-
   wasChanged: Subject<boolean> = new Subject<boolean>();
   withoutChanged: boolean;
-  @Input() form;
+  @Input() form: FormGroup;
 
-  constructor(private _messageService: MessageService) { }
+  constructor(private _messageService: MessageService) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   check() {
-    this.form.dirty ? this._messageService.add({
-      key: 'deactivate', sticky: true,
-      detail: `Houve alterações no formulário. Deseja realmente descartar e mudar de página?`
-    }) : this.withoutChanged = true;
+    this.form.dirty
+      ? this._messageService.add({
+          key: 'deactivate',
+          sticky: true,
+          detail: `Houve alterações no formulário. Deseja realmente descartar e mudar de página?`,
+        })
+      : (this.withoutChanged = true);
     // this.chooseCanDeactivate(true);
   }
 
@@ -29,5 +32,4 @@ export class CanDeactivateComponent implements OnInit, CanDeactivateInterface {
     this.wasChanged.next(choice);
     this._messageService.clear('deactivate');
   }
-
 }

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { PipesModule } from 'app/pipes/pipes.module';
+import { PipesModule } from '../../pipes/pipes.module';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 
@@ -15,11 +15,9 @@ import { UploadsPageComponent } from './uplodas-page/uploads-page.component';
     ToastModule,
     PipesModule,
     DirectivesModule,
-    ConfirmationModule
+    ConfirmationModule,
   ],
-  declarations: [
-    UploadsPageComponent
-  ],
-  exports: [UploadsPageComponent]
+  declarations: [UploadsPageComponent],
+  exports: [UploadsPageComponent],
 })
-export class UploadsModule { }
+export class UploadsModule {}

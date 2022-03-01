@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule } from '@angular/fire/compat';
 
 import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
@@ -17,9 +17,7 @@ import { AuthGuard } from './guards/auth.guard';
 export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     CoreModule,
@@ -30,9 +28,11 @@ export const firebaseConfig = environment.firebaseConfig;
     HomeModule,
     ProfileModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('/ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

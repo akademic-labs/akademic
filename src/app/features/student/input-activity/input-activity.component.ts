@@ -1,9 +1,20 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UploadsPageComponent } from 'app/shared/uploads-page/uplodas-page/uploads-page.component';
+import { UploadsPageComponent } from '../../../shared/uploads-page/uplodas-page/uploads-page.component';
 import { AutoComplete } from 'primeng/autocomplete';
-import { MessageService } from 'primeng/components/common/messageservice';
+import { MessageService } from 'primeng/api';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -23,10 +34,11 @@ import { ValidatorService } from './../../../services/validator.service';
 @Component({
   selector: 'aka-input-activity',
   templateUrl: './input-activity.component.html',
-  styleUrls: ['./input-activity.component.css']
+  styleUrls: ['./input-activity.component.css'],
 })
-export class InputActivityComponent implements OnInit, OnDestroy, CanDeactivateInterface {
-
+export class InputActivityComponent
+  implements OnInit, OnDestroy, CanDeactivateInterface
+{
   @ViewChild(UploadsPageComponent) uploadPage: UploadsPageComponent;
   @ViewChild('inputDescription') inputDescription: ElementRef;
   @ViewChild('inputCity') inputCity: AutoComplete;
@@ -58,31 +70,35 @@ export class InputActivityComponent implements OnInit, OnDestroy, CanDeactivateI
     private _messageService: MessageService,
     private _notifyService: NotifyService,
     private _auth: AuthService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.loading = true;
     this.buildForm();
     this.activityTypes$ = this._actTypesService.get();
     this.states$ = this._utilsService.getStates();
-    this.subscribe = this._route.paramMap.subscribe(params => {
+    this.subscribe = this._route.paramMap.subscribe((params) => {
       if (params.get('id')) {
-        this._activityService.getActivityById(params.get('id'))
-          .subscribe(activity => {
+        this._activityService.getActivityById(params.get('id')).subscribe(
+          (activity) => {
             this.activity = activity;
-            setTimeout(() => { this.inputDescription.nativeElement.focus() }, 100);
+            setTimeout(() => {
+              this.inputDescription.nativeElement.focus();
+            }, 100);
             this.labelButton = 'Atualizar';
             this.activityForm.patchValue(activity);
-            activity.status === 'Pendente' ? this.activityForm.enable() : this.activityForm.disable();
+            activity.status === 'Pendente'
+              ? this.activityForm.enable()
+              : this.activityForm.disable();
             // disable buttons upload and delete attach (variable ref uploads)
             // activity.status === 'Pendente' ? this.uploadPage.uploadState = '' : this.uploadPage.uploadState = 'running';
             this.loading = false;
           },
-            error => {
-              this._errorService.handleErrorByCode(error.code);
-              this.loading = false;
-            }
-          );
+          (error) => {
+            this._errorService.handleErrorByCode(error.code);
+            this.loading = false;
+          }
+        );
       } else {
         this.loading = false;
       }
@@ -109,7 +125,7 @@ export class InputActivityComponent implements OnInit, OnDestroy, CanDeactivateI
       city: new FormControl({ value: '', disabled: true }, Validators.required),
       observation: ['', Validators.maxLength(500)],
       status: ['Pendente'],
-      feedback: new FormControl({ value: null, disabled: true })
+      feedback: new FormControl({ value: null, disabled: true }),
     });
   }
 
@@ -117,7 +133,9 @@ export class InputActivityComponent implements OnInit, OnDestroy, CanDeactivateI
     const state = this.activityForm.get('state').value;
     if (state) {
       this.activityForm.get('city').enable();
-      setTimeout(() => { this.inputCity.inputEL.nativeElement.focus(); }, 100);
+      setTimeout(() => {
+        this.inputCity.inputEL.nativeElement.focus();
+      }, 100);
       if (event) {
         this.cities$ = this._utilsService.getCities(state.id, event.query);
       }
@@ -129,22 +147,32 @@ export class InputActivityComponent implements OnInit, OnDestroy, CanDeactivateI
     }
   }
 
-  async save({ value, valid }: { value: Activity, valid: boolean }) {
-    this.activityForm.get('city').value instanceof Object ? this.activityForm.get('city').setErrors(null) : this.activityForm.get('city').setErrors({ invalid: true });
+  async save({ value, valid }: { value: Activity; valid: boolean }) {
+    this.activityForm.get('city').value instanceof Object
+      ? this.activityForm.get('city').setErrors(null)
+      : this.activityForm.get('city').setErrors({ invalid: true });
     if (valid) {
       const user = await this._auth.user$.pipe(take(1)).toPromise();
       value.user = user.uid;
 
       if (value.uid) {
-        this._activityService.update(value, value.uid, this.uploadPage.attachments)
+        this._activityService
+          .update(value, value.uid, this.uploadPage.attachments)
           .then(() => {
-            this._notifyService.update('success', 'Atividade atualizada com sucesso!');
+            this._notifyService.update(
+              'success',
+              'Atividade atualizada com sucesso!'
+            );
             this.resetForm();
           });
       } else {
-        this._activityService.create(value, this.uploadPage.attachments)
+        this._activityService
+          .create(value, this.uploadPage.attachments)
           .then(() => {
-            this._notifyService.update('success', 'Atividade cadastrada com sucesso!');
+            this._notifyService.update(
+              'success',
+              'Atividade cadastrada com sucesso!'
+            );
             this.resetForm();
           });
       }
@@ -163,7 +191,9 @@ export class InputActivityComponent implements OnInit, OnDestroy, CanDeactivateI
   }
 
   compareActivityType(activityType: ActivityType, activityType2: ActivityType) {
-    return activityType && activityType2 ? activityType.uid === activityType2.uid : activityType === activityType2;
+    return activityType && activityType2
+      ? activityType.uid === activityType2.uid
+      : activityType === activityType2;
   }
 
   validatorDate(input, date) {
@@ -187,15 +217,17 @@ export class InputActivityComponent implements OnInit, OnDestroy, CanDeactivateI
   }
 
   check() {
-    this.activityForm.dirty ? this._messageService.add({
-      key: 'deactivate', sticky: true,
-      detail: `Houve alterações no formulário. Deseja realmente descartar e mudar de página?`
-    }) : this.withoutChanged = true;
+    this.activityForm.dirty
+      ? this._messageService.add({
+          key: 'deactivate',
+          sticky: true,
+          detail: `Houve alterações no formulário. Deseja realmente descartar e mudar de página?`,
+        })
+      : (this.withoutChanged = true);
   }
 
   choose(choice: boolean) {
     this.wasChanged.next(choice);
     this._messageService.clear('deactivate');
   }
-
 }

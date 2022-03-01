@@ -1,24 +1,22 @@
-import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import {
+  AngularFireStorage,
+  AngularFireUploadTask,
+} from '@angular/fire/compat/storage';
 
 import { ErrorService } from './error.service';
-import { NotifyService } from './notify.service';
-import { reject } from 'q';
-
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageService {
-
   task: AngularFireUploadTask;
   percentage: number;
 
   constructor(
     private _storage: AngularFireStorage,
     private _errorService: ErrorService
-  ) { }
+  ) {}
 
   // upload(array): Observable<any> {
   upload(array) {
@@ -28,26 +26,29 @@ export class StorageService {
       // return Observable.of(
       for (let i = 0; i < array.length; i++) {
         // main task
-        this.task = this._storage.upload(array[i].path, array[i].file, array[i].metadata);
-        this.task.percentageChanges()
-          .subscribe(
-            res => {
-              this.percentage = res;
-              console.log('service');
-              console.log(res);
-              return resolve(res);
-            },
-            error => {
-              this._errorService.handleErrorByCode(error.code);
-              return reject(error);
-            },
-            () => {
-              // this._notifyService.update('success', 'Upload efetuado com sucesso!');
-              console.log('termnei service');
-              // observer.complete();
-              // this._router.navigate(['/dashboard']);
-            }
-          );
+        this.task = this._storage.upload(
+          array[i].path,
+          array[i].file,
+          array[i].metadata
+        );
+        this.task.percentageChanges().subscribe(
+          (res) => {
+            this.percentage = res;
+            console.log('service');
+            console.log(res);
+            return resolve(res);
+          },
+          (error) => {
+            this._errorService.handleErrorByCode(error.code);
+            return reject(error);
+          },
+          () => {
+            // this._notifyService.update('success', 'Upload efetuado com sucesso!');
+            console.log('termnei service');
+            // observer.complete();
+            // this._router.navigate(['/dashboard']);
+          }
+        );
       }
       // )
     });

@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, combineLatest } from 'rxjs';
 import { take, switchMap, map } from 'rxjs/operators';
 
 import { Comment } from '../models/comment.interface';
 import { Post } from '../models/post.interface';
-import { documentJoin } from '../rxjs-operators/document-join.operator';
-import { leftJoinDocument } from '../rxjs-operators/left-join-document.operator';
+import { documentJoin } from '../operators/document-join.operator';
+import { leftJoinDocument } from '../operators/left-join-document.operator';
 import { AuthService } from './auth.service';
 import { ErrorService } from './error.service';
 import { FirestoreService } from './firestore.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventService {
   constructor(
@@ -20,44 +20,49 @@ export class EventService {
     private _errorService: ErrorService,
     private _dbService: FirestoreService,
     private _authService: AuthService
-  ) { }
+  ) {}
 
   get(): Observable<Post[]> {
-    return this._dbService.colWithId$<Post>('posts')
-      .pipe(
-        leftJoinDocument(this._afs, 'owner', 'users'),
-        switchMap((posts: Post[]) => {
-          const result = posts.map(post => {
-            return this.getComments(post.uid)
-              .pipe(
-                map(comments => Object.assign(post, { comments }))
-              );
-          });
-          return combineLatest(...result);
-        })
-      );
+    return this._dbService.colWithId$<Post>('posts').pipe(
+      leftJoinDocument(this._afs, 'owner', 'users'),
+      switchMap((posts: Post[]) => {
+        const result = posts.map((post) => {
+          return this.getComments(post.uid).pipe(
+            map((comments) => Object.assign(post, { comments }))
+          );
+        });
+        return combineLatest(...result);
+      })
+    );
   }
 
   getComments(postUid: string): Observable<Comment[]> {
-    return this._dbService.colWithId$<Comment>(`posts/${postUid}/comments`, r => r.orderBy('createdAt', 'asc'))
-      .pipe(
-        leftJoinDocument(this._afs, 'user', 'users')
-      );
+    return this._dbService
+      .colWithId$<Comment>(`posts/${postUid}/comments`, (r) =>
+        r.orderBy('createdAt', 'asc')
+      )
+      .pipe(leftJoinDocument(this._afs, 'user', 'users'));
   }
 
   getByOwner(uid: string) {
-    return this._dbService.colWithId$<Post>('posts', ref => ref.where('owner', '==', uid));
+    return this._dbService.colWithId$<Post>('posts', (ref) =>
+      ref.where('owner', '==', uid)
+    );
   }
 
   getById(uid: string): Observable<Post> {
-    return this._dbService.docWithId$<Post>('posts/' + uid).pipe(
-      documentJoin(this._afs, { user: 'users' })
-    );
+    return this._dbService
+      .docWithId$<Post>('posts/' + uid)
+      .pipe(documentJoin(this._afs, { user: 'users' }));
   }
 
   async addComment(postUid: string, comment: Comment) {
     try {
-      return this._afs.collection('posts').doc(postUid).collection('comments').add(comment);
+      return this._afs
+        .collection('posts')
+        .doc(postUid)
+        .collection('comments')
+        .add(comment);
     } catch (error) {
       return this._errorService.handleErrorByCode(error.code);
     }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from 'app/shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 import { EventsRoutingModule } from './events-routing.module';
 import { EventsComponent } from './events.component';
@@ -9,16 +9,12 @@ import { CommentsComponent } from './post/comments/comments.component';
 import { PostComponent } from './post/post.component';
 
 @NgModule({
-  imports: [
-    EventsRoutingModule,
-    FormsModule,
-    SharedModule
-  ],
+  imports: [EventsRoutingModule, FormsModule, SharedModule],
   declarations: [
     EventsComponent,
     PostComponent,
     FormComponent,
-    CommentsComponent
-  ]
+    CommentsComponent,
+  ],
 })
-export class EventsModule { }
+export class EventsModule {}

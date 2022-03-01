@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { Activity } from '../models/activity.interface';
-import { documentJoin } from './../rxjs-operators/document-join.operator';
-import { leftJoinDocument } from './../rxjs-operators/left-join-document.operator';
+import { documentJoin } from '../operators/document-join.operator';
+import { leftJoinDocument } from '../operators/left-join-document.operator';
 import { AuthService } from './auth.service';
 import { ErrorService } from './error.service';
 import { FirestoreService } from './firestore.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ActivityService {
   constructor(
@@ -19,22 +22,24 @@ export class ActivityService {
     private _auth: AuthService,
     private _errorService: ErrorService,
     private _dbService: FirestoreService
-  ) { }
+  ) {}
 
   getActivitiesToApprove(): Observable<Activity[]> {
-    return this._dbService.colWithId$<Activity>('activities', ref => ref.where('status', '==', 'Pendente'))
-      .pipe(
-        leftJoinDocument(this._afs, 'user', 'users')
-      );
+    return this._dbService
+      .colWithId$<Activity>('activities', (ref) =>
+        ref.where('status', '==', 'Pendente')
+      )
+      .pipe(leftJoinDocument(this._afs, 'user', 'users'));
   }
 
   getActivitiesStudent(uid: string, page: number, sort: string, size: number) {
-    return this._dbService.colWithId$<Activity>('activities', ref => ref
-      .where('user', '==', uid)
-      // .endAt(4)
-      .orderBy(sort, 'asc')
-      // .startAt('asd')
-      .limit(size)
+    return this._dbService.colWithId$<Activity>('activities', (ref) =>
+      ref
+        .where('user', '==', uid)
+        // .endAt(4)
+        .orderBy(sort, 'asc')
+        // .startAt('asd')
+        .limit(size)
     );
   }
 
@@ -42,7 +47,6 @@ export class ActivityService {
     // this._afs.collection('activities').get().toPromise().then(snap => {
     //   console.log(snap.size);
     // });
-
     // this._afs.collection('activities').get().then(function (querySnapshot) {
     //   querySnapshot.forEach(function (doc) {
     //     // doc.data() is never undefined for query doc snapshots
@@ -56,10 +60,12 @@ export class ActivityService {
   }
 
   getActivityById(uid: string): Observable<Activity> {
-    return this._dbService.docWithId$<Activity>(`activities/${uid}`).pipe(
-      documentJoin(this._afs, { user: 'users' }),
-      documentJoin(this._afs, { controller: 'users' })
-    );
+    return this._dbService
+      .docWithId$<Activity>(`activities/${uid}`)
+      .pipe(
+        documentJoin(this._afs, { user: 'users' }),
+        documentJoin(this._afs, { controller: 'users' })
+      );
   }
 
   create(content: Activity, attachments) {
@@ -80,7 +86,7 @@ export class ActivityService {
     try {
       return this.getActivityDocument(data.uid).update(data);
     } catch (error) {
-      return this._errorService.handleErrorByCode(error.code)
+      return this._errorService.handleErrorByCode(error.code);
     }
   }
 
@@ -88,7 +94,7 @@ export class ActivityService {
     try {
       return this.getActivityDocument(id).delete();
     } catch (error) {
-      return this._errorService.handleErrorByCode(error.code)
+      return this._errorService.handleErrorByCode(error.code);
     }
   }
 }
