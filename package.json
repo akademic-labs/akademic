@@ -2,11 +2,30 @@
   "name": "atividades-complementares",
   "version": "0.0.2",
   "scripts": {
-    "ng": "ng",
+    "ng": "nx",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "nx": "nx",
+    "affected:apps": "nx affected:apps",
+    "affected:libs": "nx affected:libs",
+    "affected:build": "nx affected:build",
+    "affected:e2e": "nx affected:e2e",
+    "affected:test": "nx affected:test",
+    "affected:lint": "nx affected:lint",
+    "affected:graph": "nx affected:graph",
+    "affected": "nx affected",
+    "format": "nx format:write",
+    "format:write": "nx format:write",
+    "format:check": "nx format:check",
+    "update": "ng update @nrwl/workspace",
+    "update:check": "ng update",
+    "lint": "nx workspace-lint && ng lint",
+    "graph": "nx graph",
+    "workspace-schematic": "nx workspace-schematic",
+    "help": "nx help",
+    "postinstall": "node ./decorate-angular-cli.js"
   },
   "private": true,
   "dependencies": {
@@ -32,7 +51,8 @@
     "rxfire": "6.0.3",
     "rxjs": "6.6.0",
     "tslib": "2.2.0",
-    "zone.js": "0.11.4"
+    "zone.js": "0.11.4",
+    "@nrwl/angular": "13.8.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "12.1.0",
@@ -47,6 +67,8 @@
     "karma-coverage": "2.0.3",
     "karma-jasmine": "4.0.0",
     "karma-jasmine-html-reporter": "1.5.0",
-    "typescript": "4.3.2"
+    "typescript": "4.3.2",
+    "@nrwl/workspace": "13.8.4",
+    "prettier": "^2.5.1"
   }
 }

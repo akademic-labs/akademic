@@ -1,7 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
   "projects": {
     "atividades-complementares": {
       "projectType": "application",
@@ -14,37 +13,37 @@
           "strict": true
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "apps/atividades-complementares",
+      "sourceRoot": "apps/atividades-complementares/src",
       "prefix": "aka",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/atividades-complementares",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "outputPath": "dist/apps/atividades-complementares",
+            "index": "apps/atividades-complementares/src/index.html",
+            "main": "apps/atividades-complementares/src/main.ts",
+            "polyfills": "apps/atividades-complementares/src/polyfills.ts",
+            "tsConfig": "apps/atividades-complementares/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/atividades-complementares/src/favicon.ico",
+              "apps/atividades-complementares/src/assets"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.scss",
+              "apps/atividades-complementares/src/styles.scss",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/nova/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "src/assets/css/custom-primeng.css"
+              "apps/atividades-complementares/src/assets/css/custom-primeng.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/bootstrap-notify/bootstrap-notify.min.js",
               "node_modules/chart.js/dist/chart.min.js",
-              "src/assets/js/palette.js"
+              "apps/atividades-complementares/src/assets/js/palette.js"
             ]
           },
           "configurations": {
@@ -63,8 +62,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/atividades-complementares/src/environments/environment.ts",
+                  "with": "apps/atividades-complementares/src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -101,17 +100,17 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
+            "main": "apps/atividades-complementares/src/test.ts",
+            "polyfills": "apps/atividades-complementares/src/polyfills.ts",
+            "tsConfig": "apps/atividades-complementares/tsconfig.spec.json",
+            "karmaConfig": "apps/atividades-complementares/karma.conf.js",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/atividades-complementares/src/favicon.ico",
+              "apps/atividades-complementares/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "apps/atividades-complementares/src/styles.scss"
             ],
             "scripts": []
           }
@@ -122,6 +121,5 @@
         }
       }
     }
-  },
-  "defaultProject": "atividades-complementares"
+  }
 }
