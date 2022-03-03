@@ -109,9 +109,7 @@
               "apps/atividades-complementares/src/favicon.ico",
               "apps/atividades-complementares/src/assets"
             ],
-            "styles": [
-              "apps/atividades-complementares/src/styles.scss"
-            ],
+            "styles": ["apps/atividades-complementares/src/styles.scss"],
             "scripts": []
           }
         },
@@ -120,6 +118,36 @@
           "options": {}
         }
       }
+    },
+    "atividades-complementares-e2e": {
+      "root": "apps/atividades-complementares-e2e",
+      "sourceRoot": "apps/atividades-complementares-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/atividades-complementares-e2e/cypress.json",
+            "devServerTarget": "atividades-complementares:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "atividades-complementares:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": [
+              "apps/atividades-complementares-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["atividades-complementares"]
     }
   }
 }
