@@ -97,25 +97,17 @@
             "browserTarget": "atividades-complementares:build"
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "apps/atividades-complementares/src/test.ts",
-            "polyfills": "apps/atividades-complementares/src/polyfills.ts",
-            "tsConfig": "apps/atividades-complementares/tsconfig.spec.json",
-            "karmaConfig": "apps/atividades-complementares/karma.conf.js",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/atividades-complementares/src/favicon.ico",
-              "apps/atividades-complementares/src/assets"
-            ],
-            "styles": ["apps/atividades-complementares/src/styles.scss"],
-            "scripts": []
-          }
-        },
         "deploy": {
           "builder": "@angular/fire:deploy",
           "options": {}
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/atividades-complementares"],
+          "options": {
+            "jestConfig": "apps/atividades-complementares/jest.config.js",
+            "passWithNoTests": true
+          }
         }
       }
     },
