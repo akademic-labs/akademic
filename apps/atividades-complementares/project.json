@@ -1,14 +1,5 @@
 {
   "projectType": "application",
-  "generators": {
-    "@schematics/angular:component": {
-      "style": "scss",
-      "prefix": "aka"
-    },
-    "@schematics/angular:application": {
-      "strict": true
-    }
-  },
   "root": "apps/atividades-complementares",
   "sourceRoot": "apps/atividades-complementares/src",
   "prefix": "aka",
@@ -104,6 +95,16 @@
         "jestConfig": "apps/atividades-complementares/jest.config.js",
         "passWithNoTests": true
       }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/atividades-complementares/src/**/*.ts",
+          "apps/atividades-complementares/src/**/*.html"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
     }
   }
 }
