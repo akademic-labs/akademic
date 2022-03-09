@@ -1,0 +1,28 @@
+{
+  "root": "apps/atividades-complementares-e2e",
+  "sourceRoot": "apps/atividades-complementares-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/atividades-complementares-e2e/cypress.json",
+        "devServerTarget": "atividades-complementares:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "atividades-complementares:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/atividades-complementares-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["atividades-complementares"]
+}
