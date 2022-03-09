@@ -1,4 +1,4 @@
 export interface Cols {
-    field: string;
-    header: string;
+  field: string;
+  header: string;
 }

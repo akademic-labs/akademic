@@ -1,14 +1,14 @@
 .card {
-    width: 400px;
-    border-radius: 0;
+  width: 400px;
+  border-radius: 0;
 }
 
 .sign-content {
-    padding: 30px;
+  padding: 30px;
 }
 
 .card-header {
-    margin: -40px 15px 0;
-    padding: 15px;
-    background: linear-gradient(60deg, #6175DE, #758CE0);
+  margin: -40px 15px 0;
+  padding: 15px;
+  background: linear-gradient(60deg, #6175de, #758ce0);
 }

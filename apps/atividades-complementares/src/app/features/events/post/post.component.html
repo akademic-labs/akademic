@@ -3,21 +3,41 @@
     <div class="row">
       <div class="col-lg-12">
         <h4 class="title">
-          {{post.title}}
+          {{ post.title }}
         </h4>
         <div class="post-text">
           <p>
-            {{post.description}}
+            {{ post.description }}
           </p>
         </div>
         <div class="post-taglist flex">
           <div class="flex show">
-            <a class="post-tag pointer" pTooltip="Data Inicio e Fim" tooltipPosition="bottom">
-              {{post.initialDate | date: 'dd/MM/yyyy'}} - {{post.finalDate | date: 'dd/MM/yyyy' }}
+            <a
+              class="post-tag pointer"
+              pTooltip="Data Inicio e Fim"
+              tooltipPosition="bottom"
+            >
+              {{ post.initialDate | date: 'dd/MM/yyyy' }} -
+              {{ post.finalDate | date: 'dd/MM/yyyy' }}
             </a>
-            <a class="post-tag pointer" pTooltip="Local" tooltipPosition="bottom">{{post.local}}</a>
-            <a class="post-tag pointer" pTooltip="Cidade" tooltipPosition="bottom">{{post.city.nome}}</a>
-            <a class="post-tag pointer" pTooltip="Estado" tooltipPosition="bottom">{{post.state.nome}}</a>
+            <a
+              class="post-tag pointer"
+              pTooltip="Local"
+              tooltipPosition="bottom"
+              >{{ post.local }}</a
+            >
+            <a
+              class="post-tag pointer"
+              pTooltip="Cidade"
+              tooltipPosition="bottom"
+              >{{ post.city.nome }}</a
+            >
+            <a
+              class="post-tag pointer"
+              pTooltip="Estado"
+              tooltipPosition="bottom"
+              >{{ post.state.nome }}</a
+            >
           </div>
         </div>
       </div>
@@ -26,25 +46,37 @@
           <div class="post-signature owner grid--cell">
             <div class="user-info">
               <div class="user-action-time">
-                Criado em <span>{{post.createdAt.toDate() | date: 'dd/MM/yyyy'}}</span>
+                Criado em
+                <span>{{ post.createdAt.toDate() | date: 'dd/MM/yyyy' }}</span>
               </div>
               <div class="user-avatar">
                 <a href="#">
                   <div class="avatar-wrapper">
-                    <img [src]="post.owner.photoURL ? post.owner.photoURL : '../../../../assets/img/default-avatar.png'"
-                      [alt]="post.owner.displayName" width="32" height="32">
+                    <img
+                      [src]="
+                        post.owner.photoURL
+                          ? post.owner.photoURL
+                          : '../../../../assets/img/default-avatar.png'
+                      "
+                      [alt]="post.owner.displayName"
+                      width="32"
+                      height="32"
+                    />
                   </div>
                 </a>
               </div>
               <div class="user-details">
-                <a>{{post.owner.displayName}}</a>
+                <a>{{ post.owner.displayName }}</a>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="col-lg-12">
-        <aka-comments [comments]="post.comments" [postUid]="post.uid"></aka-comments>
+        <aka-comments
+          [comments]="post.comments"
+          [postUid]="post.uid"
+        ></aka-comments>
       </div>
     </div>
   </div>

@@ -4,9 +4,8 @@ body p-dropdown.ng-dirty.ng-touched.ng-valid .ui-dropdown,
 body p-dropdown.ng-pristine.ng-valid .ui-dropdown,
 body p-spinner.ng-touched.ng-valid .ui-spinner-input,
 body p-autocomplete.ng-pristine.ng-valid .ui-autocomplete-input {
-    border: var(--border-valid);
+  border: var(--border-valid);
 }
-
 
 /* Border Invalid */
 body .ui-inputtext.ng-touched.ng-invalid,
@@ -16,227 +15,255 @@ body p-dropdown.ng-dirty.ng-invalid .ui-dropdown,
 body p-spinner.ng-touched.ng-invalid .ui-spinner-input,
 body p-spinner.ng-dirty.ng-invalid .ui-spinner-input,
 body p-autocomplete.ng-dirty.ng-invalid .ui-autocomplete-input {
-    border: var(--border-invalid);
+  border: var(--border-invalid);
 }
-
 
 /* Focused - Border Valid */
 body .ui-inputtext:focus,
 body .ui-dropdown:not(.ui-state-disabled).ui-state-focus,
 body p-spinner .ui-spinner-input:enabled:focus:not(.ui-state-error) {
-    outline: 0;
-    border: var(--border-valid);
-    -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.25);
-    -moz-box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.637);
-    box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.25);
+  outline: 0;
+  border: var(--border-valid);
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.25);
+  -moz-box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.637);
+  box-shadow: 0 0 0 0.2rem rgba(0, 172, 166, 0.25);
 }
-
 
 /* Focused - Border Invalid */
 body .ui-inputtext.ng-touched.ng-invalid:focus,
 body .ui-inputtext.ng-dirty.ng-invalid:hover,
 body .ui-inputtext.ng-dirty.ng-invalid:active,
-body p-dropdown.ng-touched.ng-invalid .ui-dropdown:not(.ui-state-disabled).ui-state-focus,
-body p-dropdown.ng-touched.ng-dirty .ui-dropdown:not(.ui-state-disabled).ui-state-hover,
-body p-dropdown.ng-touched.ng-dirty .ui-dropdown:not(.ui-state-disabled).ui-state-active,
-body p-spinner.ng-touched.ng-invalid .ui-spinner-input:enabled:focus:not(.ui-state-error),
-body p-spinner.ng-dirty.ng-invalid .ui-spinner-input:enabled:focus:not(.ui-state-error) {
-    outline: 0;
-    border: var(--border-invalid);
-    -webkit-box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
-    -moz-box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
-    box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
+body
+  p-dropdown.ng-touched.ng-invalid
+  .ui-dropdown:not(.ui-state-disabled).ui-state-focus,
+body
+  p-dropdown.ng-touched.ng-dirty
+  .ui-dropdown:not(.ui-state-disabled).ui-state-hover,
+body
+  p-dropdown.ng-touched.ng-dirty
+  .ui-dropdown:not(.ui-state-disabled).ui-state-active,
+body
+  p-spinner.ng-touched.ng-invalid
+  .ui-spinner-input:enabled:focus:not(.ui-state-error),
+body
+  p-spinner.ng-dirty.ng-invalid
+  .ui-spinner-input:enabled:focus:not(.ui-state-error) {
+  outline: 0;
+  border: var(--border-invalid);
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
+  -moz-box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.25);
 }
 
-
 /* Icon Valid */
-body p-dropdown.ng-touched.ng-valid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
-body p-dropdown.ng-dirty.ng-valid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
+body
+  p-dropdown.ng-touched.ng-valid
+  .ui-dropdown:not(.ui-state-disabled)
+  .ui-dropdown-trigger
+  .pi-caret-down,
+body
+  p-dropdown.ng-dirty.ng-valid
+  .ui-dropdown:not(.ui-state-disabled)
+  .ui-dropdown-trigger
+  .pi-caret-down,
 body p-dropdown.ng-touched.ng-valid .ui-dropdown .ui-dropdown-clear-icon,
 body p-dropdown.ng-dirty.ng-valid .ui-dropdown .ui-dropdown-clear-icon,
 body p-spinner.ng-touched.ng-valid .ui-spinner-button.ui-button,
 body p-spinner.ng-dirty.ng-valid .ui-spinner-button.ui-button {
-    color: var(--color-valid);
+  color: var(--color-valid);
 }
-
 
 /* Icon Invalid */
-body p-dropdown.ng-touched.ng-invalid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
-body p-dropdown.ng-dirty.ng-invalid .ui-dropdown:not(.ui-state-disabled) .ui-dropdown-trigger .pi-caret-down,
+body
+  p-dropdown.ng-touched.ng-invalid
+  .ui-dropdown:not(.ui-state-disabled)
+  .ui-dropdown-trigger
+  .pi-caret-down,
+body
+  p-dropdown.ng-dirty.ng-invalid
+  .ui-dropdown:not(.ui-state-disabled)
+  .ui-dropdown-trigger
+  .pi-caret-down,
 body p-spinner.ng-touched.ng-invalid .ui-spinner-button.ui-button,
 body p-spinner.ng-dirty.ng-invalid .ui-spinner-button.ui-button {
-    color: var(--color-invalid);
+  color: var(--color-invalid);
 }
-
 
 /* Dropdown */
 body form .ui-dropdown,
 body form .ui-inputtext {
-    width: 100% !important;
-    border: 1px solid #e3e3e3;
-    color: var(--color-label);
-    height: 35px;
+  width: 100% !important;
+  border: 1px solid #e3e3e3;
+  color: var(--color-label);
+  height: 35px;
 }
 
 body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item {
-    color: var(--color-label);
+  color: var(--color-label);
 }
 
 body .ui-dropdown .ui-dropdown-label {
-    text-transform: inherit;
-    height: 29px;
-    text-indent: 5px;
+  text-transform: inherit;
+  height: 29px;
+  text-indent: 5px;
 }
 
 body .ui-dropdown .ui-dropdown-label {
-    padding-right: 32px;
-    text-overflow: ellipsis;
+  padding-right: 32px;
+  text-overflow: ellipsis;
 }
 
 body .ui-dropdown .ui-dropdown-trigger .ui-dropdown-trigger-icon:before {
-    content: "\e906";
+  content: '\e906';
 }
 
 body .ui-dropdown .ui-dropdown-trigger .ui-dropdown-trigger-icon {
-    font-size: 15px;
-    margin: -5px 0px 0px -12px;
+  font-size: 15px;
+  margin: -5px 0px 0px -12px;
 }
 
 body .ui-dropdown .ui-dropdown-clear-icon {
-    margin: -5px 5px 0px 0px;
+  margin: -5px 5px 0px 0px;
 }
 
 body .ui-dropdown-panel .ui-dropdown-items {
-    padding: 5px 5px 5px 10px;
+  padding: 5px 5px 5px 10px;
 }
 
-body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight {
-    color: #ffffff;
-    background: var(--akademic-color);
-    margin-right: 5px;
-    border-radius: 4px;
+body
+  .ui-dropdown-panel
+  .ui-dropdown-items
+  .ui-dropdown-item.ui-state-highlight {
+  color: #ffffff;
+  background: var(--akademic-color);
+  margin-right: 5px;
+  border-radius: 4px;
 }
 
 body .ui-dropdown .ui-dropdown-panel {
-    border-radius: 4px;
+  border-radius: 4px;
 }
 
 body .ui-inputtext:enabled:focus:not(.ui-state-error) {
-    border-color: var(--akademic-color);
+  border-color: var(--akademic-color);
 }
 
 body .ui-dropdown-panel .ui-dropdown-filter-container .ui-dropdown-filter-icon,
 body .ui-picklist .ui-picklist-filter-container .ui-picklist-filter-icon {
-    top: 50%;
-    margin-top: -.5em;
-    right: 1.357em;
-    color: var(--akademic-color);
+  top: 50%;
+  margin-top: -0.5em;
+  right: 1.357em;
+  color: var(--akademic-color);
 }
 
 body .ui-dropdown-panel .ui-dropdown-filter-container .ui-dropdown-filter {
-    text-indent: 3px;
-    margin: 5px 0px 5px 0px;
-    border-radius: 4px;
+  text-indent: 3px;
+  margin: 5px 0px 5px 0px;
+  border-radius: 4px;
 }
 
 body .ui-dropdown.ui-state-disabled .ui-dropdown-trigger,
 body .ui-dropdown.ui-state-disabled .ui-dropdown-label,
 body .ui-widget:disabled {
-    background-color: #ededed;
-    color: #000000;
-    margin: 0;
-    height: 32px;
+  background-color: #ededed;
+  color: #000000;
+  margin: 0;
+  height: 32px;
 }
 
-
 /* Table */
-body .ui-table .ui-table-tbody>tr {
-    border: solid 1px #c8c8c8;
+body .ui-table .ui-table-tbody > tr {
+  border: solid 1px #c8c8c8;
 }
 
 body .ui-table {
-    font-size: calc(13px + var(--font-size-control));
-    margin: -14px 0px 7px 0px;
+  font-size: calc(13px + var(--font-size-control));
+  margin: -14px 0px 7px 0px;
 }
 
 body .ui-table table {
-    table-layout: auto;
+  table-layout: auto;
 }
 
 body .ui-table .ui-sortable-column.ui-state-highlight,
 body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
-    background: var(--akademic-gradient);
-    border-radius: 4px;
+  background: var(--akademic-gradient);
+  border-radius: 4px;
 }
 
-body .ui-table.ui-table-hoverable-rows .ui-table-tbody>tr:not(.ui-state-highlight):not(.ui-contextmenu-selected):hover {
-    background-color: #F7F7F8;
+body
+  .ui-table.ui-table-hoverable-rows
+  .ui-table-tbody
+  > tr:not(.ui-state-highlight):not(.ui-contextmenu-selected):hover {
+  background-color: #f7f7f8;
 }
 
-body .ui-table .ui-table-thead>tr>th,
-body .ui-table .ui-table-tfoot>tr>td {
-    background-color: #ffffff;
-    color: #2d353c;
-    border: 1px solid #dbe1e6;
-    text-transform: uppercase;
+body .ui-table .ui-table-thead > tr > th,
+body .ui-table .ui-table-tfoot > tr > td {
+  background-color: #ffffff;
+  color: #2d353c;
+  border: 1px solid #dbe1e6;
+  text-transform: uppercase;
 }
 
 body .ui-table .ui-sortable-column:not(.ui-state-highlight):hover {
-    background-color: #f7f7f9;
-    color: #1d1e1f;
+  background-color: #f7f7f9;
+  color: #1d1e1f;
 }
 
-body .ui-table .ui-table-tbody>tr {
-    background: #ffffff;
-    border: 1px solid #dbe1e6;
+body .ui-table .ui-table-tbody > tr {
+  background: #ffffff;
+  border: 1px solid #dbe1e6;
 }
 
-body .ui-table .ui-table-tbody>tr>td {
-    background: inherit;
-    border: 1px solid #dbe1e6;
-    border-right: 1px solid #dbe1e6 !important;
+body .ui-table .ui-table-tbody > tr > td {
+  background: inherit;
+  border: 1px solid #dbe1e6;
+  border-right: 1px solid #dbe1e6 !important;
 }
 
-body .ui-table .ui-table-tbody>tr:nth-child(even).ui-contextmenu-selected,
-body .ui-table .ui-table-tbody>tr:nth-child(even).ui-state-highlight,
-body .ui-table .ui-table-tbody>tr.ui-state-highlight {
-    background-color: var(--akademic-color);
-    color: #ffffff;
+body .ui-table .ui-table-tbody > tr:nth-child(even).ui-contextmenu-selected,
+body .ui-table .ui-table-tbody > tr:nth-child(even).ui-state-highlight,
+body .ui-table .ui-table-tbody > tr.ui-state-highlight {
+  background-color: var(--akademic-color);
+  color: #ffffff;
 }
 
-body .ui-table.ui-table-hoverable-rows .ui-table-tbody>tr:not(.ui-state-highlight):hover {
-    cursor: pointer;
-    color: #ffffff;
-    background-color: var(--akademic-color);
+body
+  .ui-table.ui-table-hoverable-rows
+  .ui-table-tbody
+  > tr:not(.ui-state-highlight):hover {
+  cursor: pointer;
+  color: #ffffff;
+  background-color: var(--akademic-color);
 }
 
 body .ui-table .ui-table-caption {
-    background-color: #f5f8f9;
-    border: 1px solid #dbe1e6;
-    border-bottom: none;
-    height: 50px;
-    padding: 0px;
+  background-color: #f5f8f9;
+  border: 1px solid #dbe1e6;
+  border-bottom: none;
+  height: 50px;
+  padding: 0px;
 }
 
 body .ui-table .ui-table-summary {
-    background-color: #f5f8f9;
-    border: 1px solid #dbe1e6;
-    border-top: none;
-    padding-top: 10px;
+  background-color: #f5f8f9;
+  border: 1px solid #dbe1e6;
+  border-top: none;
+  padding-top: 10px;
 }
 
 body .ui-table.ui-table-responsive .ui-paginator-bottom {
-    border-top: 0;
+  border-top: 0;
 }
-
 
 /* Paginator */
 
 body .ui-paginator {
-    background-color: #F7F7F8;
-    border: 1px solid #eaeaea;
-    border-bottom: none;
-    padding-top: 10px;
+  background-color: #f7f7f8;
+  border: 1px solid #eaeaea;
+  border-bottom: none;
+  padding-top: 10px;
 }
 
 body .ui-paginator .ui-paginator-pages .ui-paginator-page,
@@ -244,88 +271,85 @@ body .ui-paginator .ui-paginator-first,
 body .ui-paginator .ui-paginator-prev,
 body .ui-paginator .ui-paginator-next,
 body .ui-paginator .ui-paginator-last {
-    border-radius: 4px;
+  border-radius: 4px;
 }
 
 /* Fileupload */
 body .ui-fileupload .ui-fileupload-buttonbar {
-    background-color: white;
-    border: none;
+  background-color: white;
+  border: none;
 }
 
 body .ui-fileupload .ui-fileupload-buttonbar {
-    background-color: white;
-    padding: 0.571em 1em;
-    border: none;
-    color: #333333;
-    border-bottom: 0 none;
-    text-align: center;
+  background-color: white;
+  padding: 0.571em 1em;
+  border: none;
+  color: #333333;
+  border-bottom: 0 none;
+  text-align: center;
 }
 
 body .ui-fileupload .ui-fileupload-content {
-    background-color: #ffffff;
-    padding: 0.571em 1em;
-    border: 1px solid #c8c8c8;
-    color: #333333;
-    margin-bottom: 7px;
+  background-color: #ffffff;
+  padding: 0.571em 1em;
+  border: 1px solid #c8c8c8;
+  color: #333333;
+  margin-bottom: 7px;
 }
 
-body .ui-fileupload-row>div {
-    display: inline-block;
+body .ui-fileupload-row > div {
+  display: inline-block;
 }
-
 
 /* Button */
 body .ui-button {
-    margin: 0;
-    color: #ffffff;
-    background-color: #23CCEF;
-    border: 1px solid #23CCEF;
-    font-size: 14px;
-    transition: background-color 0.2s;
+  margin: 0;
+  color: #ffffff;
+  background-color: #23ccef;
+  border: 1px solid #23ccef;
+  font-size: 14px;
+  transition: background-color 0.2s;
 }
-
 
 /* Toast */
 body .ui-toast .ui-toast-message.ui-toast-message-warn {
-    background-color: white;
-    border-radius: 6px;
+  background-color: white;
+  border-radius: 6px;
 }
 
 body p-toast i {
-    font-size: 3em !important;
+  font-size: 3em !important;
 }
 
 body p-toast p {
-    word-wrap: break-word;
-    width: 250px;
+  word-wrap: break-word;
+  width: 250px;
 }
 
 body .ui-toast .ui-toast-message {
-    max-width: 280px;
-    background: #ffffff;
-    border-radius: 4px;
+  max-width: 280px;
+  background: #ffffff;
+  border-radius: 4px;
 }
-
 
 /* Input filter table */
 body .input-filter {
-    position: relative;
-    font-weight: normal;
-    float: right;
-    padding: 7px;
+  position: relative;
+  font-weight: normal;
+  float: right;
+  padding: 7px;
 }
 
 body .input-filter input {
-    text-indent: 20px;
-    height: 33px;
+  text-indent: 20px;
+  height: 33px;
 }
 
 body .input-filter i {
-    position: absolute;
-    color: #9B9B9B;
-    top: 18px;
-    left: 16px;
+  position: absolute;
+  color: #9b9b9b;
+  top: 18px;
+  left: 16px;
 }
 
 /* Border akademic in components */
@@ -333,28 +357,31 @@ body form input:hover,
 body select:hover,
 body textarea:hover,
 body .ui-dropdown:hover {
-    border-color: var(--akademic-color) !important;
+  border-color: var(--akademic-color) !important;
 }
 
 /* Autocomplete */
-body .ui-autocomplete-panel .ui-autocomplete-items .ui-autocomplete-list-item.ui-state-highlight,
+body
+  .ui-autocomplete-panel
+  .ui-autocomplete-items
+  .ui-autocomplete-list-item.ui-state-highlight,
 body .ui-picklist .ui-picklist-list .ui-picklist-item.ui-state-highlight {
-    background-color: var(--akademic-color);
-    margin: 5px;
-    border-radius: 4px;
+  background-color: var(--akademic-color);
+  margin: 5px;
+  border-radius: 4px;
 }
 
 body .ui-autocomplete .ui-autocomplete-input {
-    height: 35px;
-    text-indent: 5px;
+  height: 35px;
+  text-indent: 5px;
 }
 
 body .ui-autocomplete {
-    width: 100% !important;
+  width: 100% !important;
 }
 
 /* Picklist */
 body .ui-picklist-buttons-cell button {
-    background-color: var(--primary-500);
-    border: none;
+  background-color: var(--primary-500);
+  border: none;
 }

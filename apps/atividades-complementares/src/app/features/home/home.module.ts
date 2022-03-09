@@ -8,15 +8,12 @@ import { ControllerViewComponent } from './controller-view/controller-view.compo
 import { InstitutionViewComponent } from './institution-view/institution-view.component';
 
 @NgModule({
-  imports: [
-    HomeRoutingModule,
-    SharedModule
-  ],
+  imports: [HomeRoutingModule, SharedModule],
   declarations: [
     HomeComponent,
     StudentViewComponent,
     ControllerViewComponent,
-    InstitutionViewComponent
-  ]
+    InstitutionViewComponent,
+  ],
 })
-export class HomeModule { }
+export class HomeModule {}

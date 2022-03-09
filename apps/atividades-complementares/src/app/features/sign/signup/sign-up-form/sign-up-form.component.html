@@ -3,10 +3,25 @@
     <div class="col-lg-12">
       <div class="form-group">
         <label for="email">E-mail</label>
-        <input autofocus type="email" class="form-control" formControlName="email" id="email" placeholder="Ex. email@email.com">
+        <input
+          autofocus
+          type="email"
+          class="form-control"
+          formControlName="email"
+          id="email"
+          placeholder="Ex. email@email.com"
+        />
       </div>
-      <aka-message-control-error [control]="signUpForm.get('email')" error="required" msg="E-mail é obrigatório."></aka-message-control-error>
-      <aka-message-control-error [control]="signUpForm.get('email')" error="email" msg="E-mail inválido."></aka-message-control-error>
+      <aka-message-control-error
+        [control]="signUpForm.get('email')"
+        error="required"
+        msg="E-mail é obrigatório."
+      ></aka-message-control-error>
+      <aka-message-control-error
+        [control]="signUpForm.get('email')"
+        error="email"
+        msg="E-mail inválido."
+      ></aka-message-control-error>
     </div>
   </div>
 
@@ -14,10 +29,23 @@
     <div class="col-lg-12">
       <div class="form-group">
         <label for="displayName">Nome completo</label>
-        <input type="text" class="form-control" formControlName="displayName" id="displayName">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="displayName"
+          id="displayName"
+        />
       </div>
-      <aka-message-control-error [control]="signUpForm.get('displayName')" error="required" msg="Nome completo é obrigatório."></aka-message-control-error>
-      <aka-message-control-error [control]="signUpForm.get('displayName')" error="pattern" msg="Nome completo deve conter apenas letras."></aka-message-control-error>
+      <aka-message-control-error
+        [control]="signUpForm.get('displayName')"
+        error="required"
+        msg="Nome completo é obrigatório."
+      ></aka-message-control-error>
+      <aka-message-control-error
+        [control]="signUpForm.get('displayName')"
+        error="pattern"
+        msg="Nome completo deve conter apenas letras."
+      ></aka-message-control-error>
     </div>
   </div>
 
@@ -25,12 +53,33 @@
     <div class="col-lg-12">
       <div class="form-group">
         <label for="password">Senha</label>
-        <input type="password" class="form-control" id="password" formControlName="password">
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          formControlName="password"
+        />
       </div>
-      <aka-message-control-error [control]="signUpForm.get('password')" error="required" msg="Senha é obrigatória."></aka-message-control-error>
-      <aka-message-control-error [control]="signUpForm.get('password')" error="pattern" msg="Senha deve conter uma letra maiúscula e um número."></aka-message-control-error>
-      <aka-message-control-error [control]="signUpForm.get('password')" error="minLength" msg="Senha deve conter no mínimo 8 caracteres."></aka-message-control-error>
-      <aka-message-control-error [control]="signUpForm.get('password')" error="maxLength" msg="Senha deve conter no máximo 25 caracteres."></aka-message-control-error>
+      <aka-message-control-error
+        [control]="signUpForm.get('password')"
+        error="required"
+        msg="Senha é obrigatória."
+      ></aka-message-control-error>
+      <aka-message-control-error
+        [control]="signUpForm.get('password')"
+        error="pattern"
+        msg="Senha deve conter uma letra maiúscula e um número."
+      ></aka-message-control-error>
+      <aka-message-control-error
+        [control]="signUpForm.get('password')"
+        error="minLength"
+        msg="Senha deve conter no mínimo 8 caracteres."
+      ></aka-message-control-error>
+      <aka-message-control-error
+        [control]="signUpForm.get('password')"
+        error="maxLength"
+        msg="Senha deve conter no máximo 25 caracteres."
+      ></aka-message-control-error>
     </div>
   </div>
 
@@ -38,10 +87,23 @@
     <div class="col-lg-12">
       <div class="form-group">
         <label for="confirm">Repetir a Senha</label>
-        <input type="password" class="form-control" id="confirm" formControlName="confirmPassword">
+        <input
+          type="password"
+          class="form-control"
+          id="confirm"
+          formControlName="confirmPassword"
+        />
       </div>
-      <aka-message-control-error [control]="signUpForm.get('confirmPassword')" error="matchPassword" msg="Senhas não coincidem."></aka-message-control-error>
-      <aka-message-control-error [control]="signUpForm.get('confirmPassword')" error="required" msg="Repetir a senha é obrigatório."></aka-message-control-error>
+      <aka-message-control-error
+        [control]="signUpForm.get('confirmPassword')"
+        error="matchPassword"
+        msg="Senhas não coincidem."
+      ></aka-message-control-error>
+      <aka-message-control-error
+        [control]="signUpForm.get('confirmPassword')"
+        error="required"
+        msg="Repetir a senha é obrigatório."
+      ></aka-message-control-error>
     </div>
   </div>
 
@@ -49,20 +111,46 @@
     <div class="col-lg-12">
       <div class="form-group">
         <label for="course">Curso</label>
-        <p-dropdown formControlName="course" placeholder="Selecione" emptyFilterMessage="Nenhum resultado." [options]="courses$ | async"
-          optionLabel="name" optionValue="uid" [showClear]="true" filter="true"></p-dropdown>
+        <p-dropdown
+          formControlName="course"
+          placeholder="Selecione"
+          emptyFilterMessage="Nenhum resultado."
+          [options]="courses$ | async"
+          optionLabel="name"
+          optionValue="uid"
+          [showClear]="true"
+          filter="true"
+        ></p-dropdown>
       </div>
-      <aka-message-control-error [control]="signUpForm.get('course')" error="required" msg="Curso é obrigatório."></aka-message-control-error>
+      <aka-message-control-error
+        [control]="signUpForm.get('course')"
+        error="required"
+        msg="Curso é obrigatório."
+      ></aka-message-control-error>
     </div>
   </div>
 
   <div class="clearfix">
-    <label *ngIf="hasAccountLink" type="button" class="text-primary pointer pull-left" [routerLink]="['/']">Já tem uma
-      conta?</label>
-    <button type="submit" class="btn btn-action pull-right" [disabled]="!signUpForm.valid">Criar conta</button>
+    <label
+      *ngIf="hasAccountLink"
+      type="button"
+      class="text-primary pointer pull-left"
+      [routerLink]="['/']"
+      >Já tem uma conta?</label
+    >
+    <button
+      type="submit"
+      class="btn btn-action pull-right"
+      [disabled]="!signUpForm.valid"
+    >
+      Criar conta
+    </button>
   </div>
 
   <div class="text-center" *ngIf="loading">
-    <img src="../../../../../assets/img/eclipse-loading.svg" alt="Login loading">
+    <img
+      src="../../../../../assets/img/eclipse-loading.svg"
+      alt="Login loading"
+    />
   </div>
 </form>

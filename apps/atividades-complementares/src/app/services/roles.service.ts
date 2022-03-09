@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RolesService {
-
   constructor() {}
 
   // determines if user has matching role
   public checkAuthorization(user: User, allowedRoles: string[]): boolean {
-    if (!user) { return false; }
+    if (!user) {
+      return false;
+    }
 
     for (const role of allowedRoles) {
       if (user.roles[role]) {
@@ -40,5 +41,4 @@ export class RolesService {
     const allowed = ['administrator'];
     return this.checkAuthorization(user, allowed);
   }
-
 }

@@ -6,6 +6,6 @@ export const environment = {
     databaseURL: 'https://akademic-labs.firebaseio.com',
     projectId: 'akademic-labs',
     storageBucket: 'akademic-labs.appspot.com',
-    messagingSenderId: '227080039490'
+    messagingSenderId: '227080039490',
   },
 };

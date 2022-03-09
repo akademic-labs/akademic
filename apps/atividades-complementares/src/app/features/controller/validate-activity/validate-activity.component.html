@@ -1,123 +1,210 @@
 <div class="row">
-    <div class="col-md-12">
-        <div class="card border-top">
-            <div class="header">
-                <div class="title">
-                    <i class="fa fa-check-circle-o"></i>Validação de Atividade
-                </div>
-                <hr>
-            </div>
-            <div class="content">
-                <!-- <pre>
+  <div class="col-md-12">
+    <div class="card border-top">
+      <div class="header">
+        <div class="title">
+          <i class="fa fa-check-circle-o"></i>Validação de Atividade
+        </div>
+        <hr />
+      </div>
+      <div class="content">
+        <!-- <pre>
                     attachmentsView: {{ attachmentsView | json }}
                 </pre> -->
-                <form [formGroup]="form">
-                    <div class="uppercase" style="color: #9A9A9A;text-align: center;font-size: 16px;">
-                        {{activity?.activityType?.description}}
-                    </div>
-                    <div style="font-size: 50px;text-align: center;">
-                        {{activity?.hoursDuration}}
-                        <span style="font-size: 25px;text-align: center;">horas</span>
-                    </div>
-                    <div class="uppercase" style="color: #9A9A9A;text-align: center;">
-                        {{activity?.local}}
-                    </div>
-                    <hr>
-                    <span class="icon-report">
-                        <i class="fa fa-clock-o"></i>
-                        {{ activity?.initialDate | date: 'dd/MM/yyyy'}} - {{ activity?.finalDate | date: 'dd/MM/yyyy' }}
-                    </span>
-                    <hr>
-                    <span class="icon-report">
-                        <i class="fa fa-calendar"></i>Semestre: {{ activity?.semester }} | </span>
-                    <span>
-                        Ano: {{ activity?.schoolYear }}
-                    </span>
-                    <hr>
-                    <span class="icon-report">
-                        <i class="fa fa-home"></i>{{ activity?.city?.nome }} / {{ activity?.state?.sigla }}
-                    </span>
-                    <hr>
-                    <div>Descrição: {{ activity?.description }}</div>
-                    <hr>
-                    <div>Observação: {{ activity?.observation }}</div>
-                    <hr>
-                    <div>Anexos:</div>
-                    <div class="show-attach">
-                        <img *ngIf="loading" class="loading" src="assets/img/loading.gif">
-                        <div *ngIf="activity?.attachments">
-                            <div *ngIf="!activity.attachments?.length" class="nothing-attach">
-                                Nenhum arquivo anexado.
-                            </div>
-                        </div>
-                        <div *ngFor="let attach of attachmentsView;" class=" card card-attach" (click)="showAttach(attach)"
-                            data-toggle="modal" data-target="#attachModal">
-                            <img [class]="attach.class" [src]="attach.src" pTooltip="Clique aqui para abrir o anexo."
-                                tooltipPosition="bottom" />
-                            <div style="margin-top: 25px;">
-                                <label class="label-attach">{{ attach.name }}<br>{{ attach.size | fileSize }}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="author">
-                        <label>Solicitante</label>
-                        <div>
-                            <img [src]="activity?.user?.photoURL ? activity?.user.photoURL : 'assets/img/default-avatar.png'"
-                                alt="Foto do Aluno" />
-                            <h5>
-                                {{ activity?.user?.displayName }}
-                                <br />
-                                <small>
-                                    {{ activity?.user?.email }}
-                                </small>
-                            </h5>
-                        </div>
-                        <hr>
-                    </div>
-                    <div class="row" *ngIf="isFeedback">
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label for="observation">Feedback</label>
-                                <textarea #inputFeedback rows="3" class="form-control" formControlName="feedback"
-                                    placeholder="Coloque aqui seu feedback sobre o motivo da reprovação desta atividade.."></textarea>
-                            </div>
-                            <aka-message-control-error [control]="form.get('feedback')" error="required" msg="Feedback é obrigatório."></aka-message-control-error>
-                            <aka-message-control-error [control]="form.get('feedback')" error="maxlength" msg="Feedback não pode ser maior que 500 caracteres."></aka-message-control-error>
-                        </div>
-                    </div>
-                    <div class="clearfix">
-                        <button *ngIf="!isFeedback" type="button" class="btn btn-action pull-right" (click)="toConfirm(true)">Aprovar</button>
-                        <button *ngIf="!isFeedback" type="button" class="btn btn-secondary pull-right mr-2" (click)="toConfirm(false)">Reprovar</button>
-                        <button *ngIf="isFeedback" type="button" class="btn btn-action pull-right" (click)="onDisapprove()"
-                            [disabled]="form.invalid">Enviar</button>
-                    </div>
-                </form>
+        <form [formGroup]="form">
+          <div
+            class="uppercase"
+            style="color: #9a9a9a; text-align: center; font-size: 16px"
+          >
+            {{ activity?.activityType?.description }}
+          </div>
+          <div style="font-size: 50px; text-align: center">
+            {{ activity?.hoursDuration }}
+            <span style="font-size: 25px; text-align: center">horas</span>
+          </div>
+          <div class="uppercase" style="color: #9a9a9a; text-align: center">
+            {{ activity?.local }}
+          </div>
+          <hr />
+          <span class="icon-report">
+            <i class="fa fa-clock-o"></i>
+            {{ activity?.initialDate | date: 'dd/MM/yyyy' }} -
+            {{ activity?.finalDate | date: 'dd/MM/yyyy' }}
+          </span>
+          <hr />
+          <span class="icon-report">
+            <i class="fa fa-calendar"></i>Semestre: {{ activity?.semester }} |
+          </span>
+          <span> Ano: {{ activity?.schoolYear }} </span>
+          <hr />
+          <span class="icon-report">
+            <i class="fa fa-home"></i>{{ activity?.city?.nome }} /
+            {{ activity?.state?.sigla }}
+          </span>
+          <hr />
+          <div>Descrição: {{ activity?.description }}</div>
+          <hr />
+          <div>Observação: {{ activity?.observation }}</div>
+          <hr />
+          <div>Anexos:</div>
+          <div class="show-attach">
+            <img *ngIf="loading" class="loading" src="assets/img/loading.gif" />
+            <div *ngIf="activity?.attachments">
+              <div *ngIf="!activity.attachments?.length" class="nothing-attach">
+                Nenhum arquivo anexado.
+              </div>
             </div>
-        </div>
+            <div
+              *ngFor="let attach of attachmentsView"
+              class="card card-attach"
+              (click)="showAttach(attach)"
+              data-toggle="modal"
+              data-target="#attachModal"
+            >
+              <img
+                [class]="attach.class"
+                [src]="attach.src"
+                pTooltip="Clique aqui para abrir o anexo."
+                tooltipPosition="bottom"
+              />
+              <div style="margin-top: 25px">
+                <label class="label-attach"
+                  >{{ attach.name }}<br />{{ attach.size | fileSize }}</label
+                >
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="author">
+            <label>Solicitante</label>
+            <div>
+              <img
+                [src]="
+                  activity?.user?.photoURL
+                    ? activity?.user.photoURL
+                    : 'assets/img/default-avatar.png'
+                "
+                alt="Foto do Aluno"
+              />
+              <h5>
+                {{ activity?.user?.displayName }}
+                <br />
+                <small>
+                  {{ activity?.user?.email }}
+                </small>
+              </h5>
+            </div>
+            <hr />
+          </div>
+          <div class="row" *ngIf="isFeedback">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label for="observation">Feedback</label>
+                <textarea
+                  #inputFeedback
+                  rows="3"
+                  class="form-control"
+                  formControlName="feedback"
+                  placeholder="Coloque aqui seu feedback sobre o motivo da reprovação desta atividade.."
+                ></textarea>
+              </div>
+              <aka-message-control-error
+                [control]="form.get('feedback')"
+                error="required"
+                msg="Feedback é obrigatório."
+              ></aka-message-control-error>
+              <aka-message-control-error
+                [control]="form.get('feedback')"
+                error="maxlength"
+                msg="Feedback não pode ser maior que 500 caracteres."
+              ></aka-message-control-error>
+            </div>
+          </div>
+          <div class="clearfix">
+            <button
+              *ngIf="!isFeedback"
+              type="button"
+              class="btn btn-action pull-right"
+              (click)="toConfirm(true)"
+            >
+              Aprovar
+            </button>
+            <button
+              *ngIf="!isFeedback"
+              type="button"
+              class="btn btn-secondary pull-right mr-2"
+              (click)="toConfirm(false)"
+            >
+              Reprovar
+            </button>
+            <button
+              *ngIf="isFeedback"
+              type="button"
+              class="btn btn-action pull-right"
+              (click)="onDisapprove()"
+              [disabled]="form.invalid"
+            >
+              Enviar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
 
 <aka-confirmation key="confKey" (onAccept)="onAccept()"></aka-confirmation>
 
-<div *ngIf="attachView" [ngSwitch]="attachView?.type" class="modal fade" id="attachModal" role="dialog">
-    <h5 class="title-dialog">{{ attachView?.name }}</h5>
-    <a class="btn-close-modal" data-dismiss="modal" pTooltip="Fechar Anexo" tooltipPosition="left">
-        <i class="icon-close-modal fa fa-close"></i>
-    </a>
-    <!-- <a [hidden]="!attachView?.createdAt" class="btn-download-modal" pTooltip="Efetuar Download" tooltipPosition="bottom"
+<div
+  *ngIf="attachView"
+  [ngSwitch]="attachView?.type"
+  class="modal fade"
+  id="attachModal"
+  role="dialog"
+>
+  <h5 class="title-dialog">{{ attachView?.name }}</h5>
+  <a
+    class="btn-close-modal"
+    data-dismiss="modal"
+    pTooltip="Fechar Anexo"
+    tooltipPosition="left"
+  >
+    <i class="icon-close-modal fa fa-close"></i>
+  </a>
+  <!-- <a [hidden]="!attachView?.createdAt" class="btn-download-modal" pTooltip="Efetuar Download" tooltipPosition="bottom"
         [download]="attachView?.name" [href]="attachView?.path" target="_blank">
         <i class="icon-close-modal fa fa-cloud-download"></i>
     </a> -->
-    <iframe *ngSwitchCase="'application/pdf'" class="pdf-dialog" [src]="attachView?.path | safe: 'resourceUrl'"></iframe>
-    <video *ngSwitchCase="'video/mp4'" class="video-dialog" autoplay controls>
-        <source [src]="attachView?.path | safe: 'resourceUrl'" type="video/mp4">
-    </video>
-    <audio *ngSwitchCase="'audio/mp3'" class="audio-dialog" preload="auto" controls="controls" autoplay="autoplay">
-        <source [src]="attachView?.path">
-    </audio>
-    <audio *ngSwitchCase="'audio/x-m4a'" class="audio-dialog" preload="auto" controls="controls" autoplay="autoplay">
-        <source [src]="attachView?.path">
-    </audio>
-    <img *ngSwitchDefault class="img-attach" class="img-dialog" [src]="attachView?.path" />
+  <iframe
+    *ngSwitchCase="'application/pdf'"
+    class="pdf-dialog"
+    [src]="attachView?.path | safe: 'resourceUrl'"
+  ></iframe>
+  <video *ngSwitchCase="'video/mp4'" class="video-dialog" autoplay controls>
+    <source [src]="attachView?.path | safe: 'resourceUrl'" type="video/mp4" />
+  </video>
+  <audio
+    *ngSwitchCase="'audio/mp3'"
+    class="audio-dialog"
+    preload="auto"
+    controls="controls"
+    autoplay="autoplay"
+  >
+    <source [src]="attachView?.path" />
+  </audio>
+  <audio
+    *ngSwitchCase="'audio/x-m4a'"
+    class="audio-dialog"
+    preload="auto"
+    controls="controls"
+    autoplay="autoplay"
+  >
+    <source [src]="attachView?.path" />
+  </audio>
+  <img
+    *ngSwitchDefault
+    class="img-attach"
+    class="img-dialog"
+    [src]="attachView?.path"
+  />
 </div>

@@ -1,1288 +1,1289 @@
-[{
-        "descricao": "ADMINISTRAÇÃO"
-    },
-    {
-        "descricao": "ADMINISTRAÇÃO"
-    },
-    {
-        "descricao": "ADMINISTRAÇÃO HOSPITALAR"
-    },
-    {
-        "descricao": "ADMINISTRAÇÃO PÚBLICA"
-    },
-    {
-        "descricao": "AGRONOMIA"
-    },
-    {
-        "descricao": "ARQUITETURA E URBANISMO"
-    },
-    {
-        "descricao": "ARTES VISUAIS"
-    },
-    {
-        "descricao": "BIBLIOTECONOMIA"
-    },
-    {
-        "descricao": "BIOMEDICINA"
-    },
-    {
-        "descricao": "BIOTECNOLOGIA"
-    },
-    {
-        "descricao": "CIÊNCIA DA COMPUTAÇÃO"
-    },
-    {
-        "descricao": "CIÊNCIA POLÍTICA"
-    },
-    {
-        "descricao": "CIÊNCIAS AERONÁUTICAS"
-    },
-    {
-        "descricao": "CIÊNCIAS AMBIENTAIS"
-    },
-    {
-        "descricao": "CIÊNCIAS ATUARIAIS"
-    },
-    {
-        "descricao": "CIÊNCIAS BIOLÓGICAS"
-    },
-    {
-        "descricao": "CIÊNCIAS CONTÁBEIS"
-    },
-    {
-        "descricao": "CIÊNCIAS DA COMPUTAÇÃO"
-    },
-    {
-        "descricao": "CIÊNCIAS ECONÔMICAS"
-    },
-    {
-        "descricao": "CIÊNCIAS SOCIAIS"
-    },
-    {
-        "descricao": "COMÉRCIO EXTERIOR"
-    },
-    {
-        "descricao": "COMUNICAÇÃO SOCIAL"
-    },
-    {
-        "descricao": "COMUNICAÇÃO SOCIAL - JORNALISMO"
-    },
-    {
-        "descricao": "COMUNICAÇÃO SOCIAL - PRODUÇÃO EDITORIAL E MULTIMÍDIA"
-    },
-    {
-        "descricao": "COMUNICAÇÃO SOCIAL - PUBLICIDADE E PROPAGANDA"
-    },
-    {
-        "descricao": "COMUNICAÇÃO SOCIAL - RADIALISMO (RÁDIO E TV)"
-    },
-    {
-        "descricao": "COMUNICAÇÃO SOCIAL - RELAÇÕES PÚBLICAS"
-    },
-    {
-        "descricao": "DESENHO INDUSTRIAL"
-    },
-    {
-        "descricao": "DESIGN"
-    },
-    {
-        "descricao": "DESIGN DE MODA"
-    },
-    {
-        "descricao": "DESIGN DE PRODUTO"
-    },
-    {
-        "descricao": "DESIGN GRÁFICO"
-    },
-    {
-        "descricao": "DIREITO"
-    },
-    {
-        "descricao": "EDUCAÇÃO FÍSICA"
-    },
-    {
-        "descricao": "ENFERMAGEM"
-    },
-    {
-        "descricao": "ENGENHARIA"
-    },
-    {
-        "descricao": "ENGENHARIA AEROESPACIAL"
-    },
-    {
-        "descricao": "ENGENHARIA AGRONÔMICA"
-    },
-    {
-        "descricao": "ENGENHARIA AMBIENTAL"
-    },
-    {
-        "descricao": "ENGENHARIA AMBIENTAL E SANITÁRIA"
-    },
-    {
-        "descricao": "ENGENHARIA AUTOMOTIVA"
-    },
-    {
-        "descricao": "ENGENHARIA BIOMÉDICA"
-    },
-    {
-        "descricao": "ENGENHARIA CIVIL"
-    },
-    {
-        "descricao": "ENGENHARIA DA COMPUTAÇÃO"
-    },
-    {
-        "descricao": "ENGENHARIA DE ALIMENTOS"
-    },
-    {
-        "descricao": "ENGENHARIA DE BIOPROCESSOS E BIOTECNOLOGIA"
-    },
-    {
-        "descricao": "ENGENHARIA DE COMPUTAÇÃO"
-    },
-    {
-        "descricao": "ENGENHARIA DE CONTROLE E AUTOMAÇÃO"
-    },
-    {
-        "descricao": "ENGENHARIA DE ENERGIAS"
-    },
-    {
-        "descricao": "ENGENHARIA DE MATERIAIS E NANOTECNOLOGIA"
-    },
-    {
-        "descricao": "ENGENHARIA DE PRODUÇÃO"
-    },
-    {
-        "descricao": "ENGENHARIA DE SOFTWARE"
-    },
-    {
-        "descricao": "ENGENHARIA DE TELECOMUNICAÇÕES"
-    },
-    {
-        "descricao": "ENGENHARIA ELÉTRICA"
-    },
-    {
-        "descricao": "ENGENHARIA ELETRÔNICA"
-    },
-    {
-        "descricao": "ENGENHARIA FLORESTAL"
-    },
-    {
-        "descricao": "ENGENHARIA INDUSTRIAL MADEIREIRA"
-    },
-    {
-        "descricao": "ENGENHARIA MECÂNICA"
-    },
-    {
-        "descricao": "ENGENHARIA MECATRÔNICA"
-    },
-    {
-        "descricao": "ENGENHARIA QUÍMICA"
-    },
-    {
-        "descricao": "FARMÁCIA"
-    },
-    {
-        "descricao": "FARMÁCIA E BIOQUÍMICA"
-    },
-    {
-        "descricao": "FILOSOFIA"
-    },
-    {
-        "descricao": "FISIOTERAPIA"
-    },
-    {
-        "descricao": "FONOAUDIOLOGIA"
-    },
-    {
-        "descricao": "HISTÓRIA"
-    },
-    {
-        "descricao": "INTERDISCIPLINAR EM CIÊNCIAS E HUMANIDADES - BI/LI"
-    },
-    {
-        "descricao": "JORNALISMO"
-    },
-    {
-        "descricao": "LETRAS - PORTUGUÊS E ESPANHOL"
-    },
-    {
-        "descricao": "MARKETING"
-    },
-    {
-        "descricao": "MARKETING E PROPAGANDA"
-    },
-    {
-        "descricao": "MEDICINA"
-    },
-    {
-        "descricao": "MEDICINA VETERINÁRIA"
-    },
-    {
-        "descricao": "MODA"
-    },
-    {
-        "descricao": "NEGÓCIOS INTERNACIONAIS"
-    },
-    {
-        "descricao": "NUTRIÇÃO"
-    },
-    {
-        "descricao": "ODONTOLOGIA"
-    },
-    {
-        "descricao": "PSICOLOGIA"
-    },
-    {
-        "descricao": "PSICOPEDAGOGIA"
-    },
-    {
-        "descricao": "PUBLICIDADE E PROPAGANDA"
-    },
-    {
-        "descricao": "QUÍMICA"
-    },
-    {
-        "descricao": "QUÍMICA INDUSTRIAL"
-    },
-    {
-        "descricao": "RÁDIO"
-    },
-    {
-        "descricao": "RELAÇÕES INTERNACIONAIS"
-    },
-    {
-        "descricao": "RELAÇÕES PÚBLICAS"
-    },
-    {
-        "descricao": "SECRETARIADO EXECUTIVO"
-    },
-    {
-        "descricao": "SECRETARIADO EXECUTIVO TRILÍNGUE"
-    },
-    {
-        "descricao": "SERVIÇO SOCIAL"
-    },
-    {
-        "descricao": "SISTEMA DE INFORMAÇÃO"
-    },
-    {
-        "descricao": "SISTEMAS DE INFORMAÇÃO"
-    },
-    {
-        "descricao": "TEATRO"
-    },
-    {
-        "descricao": "TEOLOGIA"
-    },
-    {
-        "descricao": "TERAPIA OCUPACIONAL"
-    },
-    {
-        "descricao": "TURISMO"
-    },
-    {
-        "descricao": "TURISMO E HOTELARIA"
-    },
-    {
-        "descricao": "ZOOTECNIA"
-    },
-    {
-        "descricao": "ACUPUNTURA"
-    },
-    {
-        "descricao": "ADMINISTRAÇÃO DE RECURSOS HUMANOS"
-    },
-    {
-        "descricao": "AGENTE DE OPERAÇÕES TURÍSTICAS"
-    },
-    {
-        "descricao": "AGRIMENSURA"
-    },
-    {
-        "descricao": "AGROECOLOGIA"
-    },
-    {
-        "descricao": "AGROINDÚSTRIA"
-    },
-    {
-        "descricao": "AGRONEGÓCIO"
-    },
-    {
-        "descricao": "ALIMENTOS"
-    },
-    {
-        "descricao": "ANÁLISE DE SISTEMAS"
-    },
-    {
-        "descricao": "ANÁLISE E DESENVOLVIMENTO DE SISTEMAS"
-    },
-    {
-        "descricao": "ANÁLISE ESTATÍSTICA"
-    },
-    {
-        "descricao": "ANÁLISE GERENCIAL"
-    },
-    {
-        "descricao": "APICULTURA E MELIPONICULTURA"
-    },
-    {
-        "descricao": "AQÜICULTURA"
-    },
-    {
-        "descricao": "ARBITRAGEM"
-    },
-    {
-        "descricao": "ARQUEOLOGIA"
-    },
-    {
-        "descricao": "ARTE"
-    },
-    {
-        "descricao": "ARTE: HISTÓRIA"
-    },
-    {
-        "descricao": "ARTES"
-    },
-    {
-        "descricao": "ARTES CÊNICAS"
-    },
-    {
-        "descricao": "ARTES E MÍDIAS DIGITAIS"
-    },
-    {
-        "descricao": "ARTES VISUAIS"
-    },
-    {
-        "descricao": "ARTES VISUAIS - PROGRAMA SEGUNDA LICENCIATURA"
-    },
-    {
-        "descricao": "ATENDIMENTO EM HOME CARE"
-    },
-    {
-        "descricao": "AUDIOVISUAL"
-    },
-    {
-        "descricao": "AUTOMAÇÃO DE DISPOSITIVOS ELETROFLUÍDICOS"
-    },
-    {
-        "descricao": "AUTOMAÇÃO INDUSTRIAL"
-    },
-    {
-        "descricao": "AVALIAÇÃO NUTRICIONAL"
-    },
-    {
-        "descricao": "AVIAÇÃO CIVIL"
-    },
-    {
-        "descricao": "BANCO DE DADOS"
-    },
-    {
-        "descricao": "BIOENERGIA"
-    },
-    {
-        "descricao": "BIOLOGIA"
-    },
-    {
-        "descricao": "CANTO"
-    },
-    {
-        "descricao": "CIÊNCIA DA RELIGIÃO"
-    },
-    {
-        "descricao": "CIÊNCIA ECONÔMICA"
-    },
-    {
-        "descricao": "CIÊNCIAS"
-    },
-    {
-        "descricao": "CIÊNCIAS: BIOLOGIA"
-    },
-    {
-        "descricao": "CIÊNCIAS DA RELIGIÃO"
-    },
-    {
-        "descricao": "CIÊNCIAS HUMANAS"
-    },
-    {
-        "descricao": "CIÊNCIAS POLÍTICAS"
-    },
-    {
-        "descricao": "CINEMA"
-    },
-    {
-        "descricao": "CINEMA E ANIMAÇÃO"
-    },
-    {
-        "descricao": "CINEMA E AUDIOVISUAL"
-    },
-    {
-        "descricao": "COMÉRCIO EXTERIOR E NEGÓCIOS INTERNACIONAIS"
-    },
-    {
-        "descricao": "COMÉRCIO INTERNACIONAL"
-    },
-    {
-        "descricao": "COMPUTAÇÃO"
-    },
-    {
-        "descricao": "COMPUTAÇÃO GRÁFICA"
-    },
-    {
-        "descricao": "COMUNICAÇÃO DAS ARTES DO CORPO"
-    },
-    {
-        "descricao": "COMUNICAÇÃO DIGITAL"
-    },
-    {
-        "descricao": "COMUNICAÇÃO EM COMPUTAÇÃO GRÁFICA"
-    },
-    {
-        "descricao": "COMUNICAÇÃO EM CRIAÇÃO E DESENVOLVIMENTO DE WEB SITES E DESIGN"
-    },
-    {
-        "descricao": "COMUNICAÇÃO E MULTIMEIOS"
-    },
-    {
-        "descricao": "COMUNICAÇÃO INSTITUCIONAL"
-    },
-    {
-        "descricao": "COMUNICAÇÃO SOCIAL - CINEMA"
-    },
-    {
-        "descricao": "COMUNICAÇÃO SOCIAL - CINEMA E AUDIOVISUAL"
-    },
-    {
-        "descricao": "COMUNICAÇÃO SOCIAL COM HABILITAÇÃO EM PUBLICIDADE E PROPAGANDA"
-    },
-    {
-        "descricao": "COMUNICAÇÃO SOCIAL - COMUNICAÇÃO MERCADOLÓGICA"
-    },
-    {
-        "descricao": "COMUNICAÇÃO SOCIAL - EDITORAÇÃO"
-    },
-    {
-        "descricao": "COMUNICAÇÃO SOCIAL - PRODUÇÃO EDITORIAL"
-    },
-    {
-        "descricao": "COMUNICAÇÃO SOCIAL - RADIO E TELEVISÃO"
-    },
-    {
-        "descricao": "COMUNICAÇÃO SOCIAL - RÁDIO"
-    },
-    {
-        "descricao": "CONSTRUÇÃO CIVIL"
-    },
-    {
-        "descricao": "CONSTRUÇÃO DE EDIFÍCIOS"
-    },
-    {
-        "descricao": "CONTROLADORIA"
-    },
-    {
-        "descricao": "CONTROLE DE OBRAS"
-    },
-    {
-        "descricao": "CONTROLE DE QUALIDADE"
-    },
-    {
-        "descricao": "COSMÉTICOS"
-    },
-    {
-        "descricao": "COZINHA CONTEMPORÂNEA"
-    },
-    {
-        "descricao": "DANÇA"
-    },
-    {
-        "descricao": "DECORAÇÃO & DESIGN"
-    },
-    {
-        "descricao": "DEFESA CIBERNÉTICA"
-    },
-    {
-        "descricao": "DESENHO ARQUITETÔNICO"
-    },
-    {
-        "descricao": "DESENHO DE ANIMAÇÃO"
-    },
-    {
-        "descricao": "DESENVOLVIMENTO DE SISTEMAS"
-    },
-    {
-        "descricao": "DESENVOLVIMENTO PARA INTERNET"
-    },
-    {
-        "descricao": "DESIGN DE ANIMAÇÃO"
-    },
-    {
-        "descricao": "DESIGN DE GAMES"
-    },
-    {
-        "descricao": "DESIGN DE INTERIORES"
-    },
-    {
-        "descricao": "DESIGN DE MODA - ESTILISMO"
-    },
-    {
-        "descricao": "DESIGN DE MODA - MODELAGEM"
-    },
-    {
-        "descricao": "DESIGN DIGITAL"
-    },
-    {
-        "descricao": "DESIGN EDUCACIONAL"
-    },
-    {
-        "descricao": "DESIGN PUBLICITÁRIO"
-    },
-    {
-        "descricao": "EDUCAÇÃO ARTÍSTICA"
-    },
-    {
-        "descricao": "EDUCAÇÃO ARTÍSTICA - ARTES PLÁSTICAS"
-    },
-    {
-        "descricao": "EDUCAÇÃO ARTÍSTICA - MÚSICA"
-    },
-    {
-        "descricao": "EDUCAÇÃO ESPECIAL"
-    },
-    {
-        "descricao": "EDUCAÇÃO FÍSICA - ÊNFASE EM EDUCAÇÃO FÍSICA E SAÚDE"
-    },
-    {
-        "descricao": "EDUCADOR SOCIAL"
-    },
-    {
-        "descricao": "ELETRÔNICA INDUSTRIAL"
-    },
-    {
-        "descricao": "ELETROTÉCNICA INDUSTRIAL"
-    },
-    {
-        "descricao": "EMBELEZAMENTO E IMAGEM PESSOAL"
-    },
-    {
-        "descricao": "EMPREENDEDORISMO"
-    },
-    {
-        "descricao": "ENFERMAGEM E OBSTETRÍCIA"
-    },
-    {
-        "descricao": "ENGENHARIA AERONÁUTICA"
-    },
-    {
-        "descricao": "ENGENHARIA AERONÁUTICA E ESPAÇO"
-    },
-    {
-        "descricao": "ENGENHARIA AMBIENTAL E ENERGIAS RENOVÁVEIS"
-    },
-    {
-        "descricao": "ENGENHARIA CARTOGRÁFICA E DE AGRIMENSURA"
-    },
-    {
-        "descricao": "ENGENHARIA DA MOBILIDADE"
-    },
-    {
-        "descricao": "ENGENHARIA DE AGRIMENSURA"
-    },
-    {
-        "descricao": "ENGENHARIA DE AUTOMAÇÃO E CONTROLE"
-    },
-    {
-        "descricao": "ENGENHARIA DE AUTOMAÇÃO E SISTEMAS"
-    },
-    {
-        "descricao": "ENGENHARIA DE BIOPROCESSOS"
-    },
-    {
-        "descricao": "ENGENHARIA DE COMUNICAÇÕES"
-    },
-    {
-        "descricao": "ENGENHARIA DE ENERGIA"
-    },
-    {
-        "descricao": "ENGENHARIA DE ENERGIAS RENOVÁVEIS E AMBIENTE"
-    },
-    {
-        "descricao": "ENGENHARIA DE INOVAÇÃO"
-    },
-    {
-        "descricao": "ENGENHARIA DE MATERIAIS"
-    },
-    {
-        "descricao": "ENGENHARIA DE PETRÓLEO"
-    },
-    {
-        "descricao": "ENGENHARIA DE PETRÓLEO E GÁS"
-    },
-    {
-        "descricao": "ENGENHARIA DE PRODUÇÃO MECÂNICA"
-    },
-    {
-        "descricao": "ENGENHARIA DE SEGURANÇA NO TRABALHO"
-    },
-    {
-        "descricao": "ENGENHARIA DE TRANSPORTES"
-    },
-    {
-        "descricao": "ENGENHARIA ELÉTRICA E ELETRÔNICA"
-    },
-    {
-        "descricao": "ENGENHARIA INDUSTRIAL MECÂNICA"
-    },
-    {
-        "descricao": "ENGENHARIA METALÚRGICA"
-    },
-    {
-        "descricao": "ENGENHARIA TÊXTIL"
-    },
-    {
-        "descricao": "ESTATÍSTICA"
-    },
-    {
-        "descricao": "ESTÉTICA"
-    },
-    {
-        "descricao": "ESTÉTICA E COSMÉTICA"
-    },
-    {
-        "descricao": "ESTÉTICA E COSMETOLOGIA"
-    },
-    {
-        "descricao": "ESTÉTICA E IMAGEM PESSOAL"
-    },
-    {
-        "descricao": "ESTUDOS SOCIAIS"
-    },
-    {
-        "descricao": "EVENTOS"
-    },
-    {
-        "descricao": "EVENTOS E RECREAÇÃO"
-    },
-    {
-        "descricao": "FABRICAÇÃO MECÂNICA"
-    },
-    {
-        "descricao": "FILOSOFIA - PROGRAMA SEGUNDA LICENCIATURA"
-    },
-    {
-        "descricao": "FÍSICA"
-    },
-    {
-        "descricao": "FÍSICA MÉDICA"
-    },
-    {
-        "descricao": "FORMAÇÃO DE DOCENTES PARA A EDUCAÇÃO BÁSICA"
-    },
-    {
-        "descricao": "FORMAÇÃO PEDAGÓGICA PARA GRADUADOS"
-    },
-    {
-        "descricao": "FORMAÇÃO PEDAGÓGICA PARA PORTADORES DE ENSINO SUPERIOR"
-    },
-    {
-        "descricao": "FOTOGRAFIA"
-    },
-    {
-        "descricao": "FUTEBOL"
-    },
-    {
-        "descricao": "GASTRONOMIA"
-    },
-    {
-        "descricao": "GEOGRAFIA"
-    },
-    {
-        "descricao": "GEOGRAFIA - PROGRAMA SEGUNDA LICENCIATURA"
-    },
-    {
-        "descricao": "GERONTOLOGIA"
-    },
-    {
-        "descricao": "GESTÃO AMBIENTAL"
-    },
-    {
-        "descricao": "GESTÃO BANCÁRIA"
-    },
-    {
-        "descricao": "GESTÃO COMERCIAL"
-    },
-    {
-        "descricao": "GESTÃO DA INFORMAÇÃO"
-    },
-    {
-        "descricao": "GESTÃO DA PRODUÇÃO E OPERAÇÕES INDUSTRIAIS"
-    },
-    {
-        "descricao": "GESTÃO DA PRODUÇÃO INDUSTRIAL"
-    },
-    {
-        "descricao": "GESTÃO DA QUALIDADE"
-    },
-    {
-        "descricao": "GESTÃO DAS ORGANIZAÇÕES DO TERCEIRO SETOR"
-    },
-    {
-        "descricao": "GESTÃO DA TECNOLOGIA DA INFORMAÇÃO"
-    },
-    {
-        "descricao": "GESTÃO DE AGRONEGÓCIOS"
-    },
-    {
-        "descricao": "GESTÃO DE AMBIENTES INTERNET E REDES DE COMPUTADORES"
-    },
-    {
-        "descricao": "GESTÃO DE CALL CENTER"
-    },
-    {
-        "descricao": "GESTÃO DE COMÉRCIO EXTERIOR"
-    },
-    {
-        "descricao": "GESTÃO DE COOPERATIVAS"
-    },
-    {
-        "descricao": "GESTÃO DE EQUINOCULTURA"
-    },
-    {
-        "descricao": "GESTÃO DE LOJAS E PONTOS DE VENDAS"
-    },
-    {
-        "descricao": "GESTÃO DE MARKETING"
-    },
-    {
-        "descricao": "GESTÃO DE NEGÓCIOS SECURITÁRIOS"
-    },
-    {
-        "descricao": "GESTÃO DE PESSOAS"
-    },
-    {
-        "descricao": "GESTÃO DE PRODUÇÃO INDUSTRIAL"
-    },
-    {
-        "descricao": "GESTÃO DE QUALIDADE EM METROLOGIA"
-    },
-    {
-        "descricao": "GESTÃO DE RECURSOS HUMANOS"
-    },
-    {
-        "descricao": "GESTÃO DE SAÚDE PÚBLICA"
-    },
-    {
-        "descricao": "GESTÃO DE SEGURANÇA PRIVADA"
-    },
-    {
-        "descricao": "GESTÃO DE SEGURANÇA PÚBLICA"
-    },
-    {
-        "descricao": "GESTÃO DE SEGURANÇA PÚBLICA (EXPERIMENTAL)"
-    },
-    {
-        "descricao": "GESTÃO DE SEGUROS"
-    },
-    {
-        "descricao": "GESTÃO DE SEGUROS E PREVIDÊNCIA"
-    },
-    {
-        "descricao": "GESTÃO DE SERVIÇOS E COMÉRCIO"
-    },
-    {
-        "descricao": "GESTÃO DE SERVIÇOS JURÍDICOS E NOTARIAIS"
-    },
-    {
-        "descricao": "GESTÃO DE SERVIÇOS JURÍDICOS"
-    },
-    {
-        "descricao": "GESTÃO DESPORTIVA E DE LAZER"
-    },
-    {
-        "descricao": "GESTÃO DE TELECOMUNICAÇÕES"
-    },
-    {
-        "descricao": "GESTÃO DE TURISMO"
-    },
-    {
-        "descricao": "GESTÃO DO AGRONEGÓCIO"
-    },
-    {
-        "descricao": "GESTÃO EDUCACIONAL DE ENTIDADES DE APOIO À CRIANÇA E AO ADOLESCENTE"
-    },
-    {
-        "descricao": "GESTÃO E EMPREENDEDORISMO"
-    },
-    {
-        "descricao": "GESTÃO EM LOGÍSTICA"
-    },
-    {
-        "descricao": "GESTÃO EM PEQUENAS E MÉDIAS EMPRESAS"
-    },
-    {
-        "descricao": "GESTÃO EMPRESARIAL"
-    },
-    {
-        "descricao": "GESTÃO EMPRESARIAL EM SERVIÇOS DE SAÚDE"
-    },
-    {
-        "descricao": "GESTÃO EM SAÚDE AMBIENTAL"
-    },
-    {
-        "descricao": "GESTÃO FINANCEIRA"
-    },
-    {
-        "descricao": "GESTÃO FINANCEIRA E CONTROLADORIA EMPRESARIAL"
-    },
-    {
-        "descricao": "GESTÃO HOSPITALAR"
-    },
-    {
-        "descricao": "GESTÃO HOTELEIRA"
-    },
-    {
-        "descricao": "GESTÃO JURÍDICA"
-    },
-    {
-        "descricao": "GESTÃO LEGISLATIVA"
-    },
-    {
-        "descricao": "GESTÃO PORTUÁRIA"
-    },
-    {
-        "descricao": "GESTÃO PÚBLICA"
-    },
-    {
-        "descricao": "HISTÓRIA - PROGRAMA SEGUNDA LICENCIATURA"
-    },
-    {
-        "descricao": "HORTICULTURA"
-    },
-    {
-        "descricao": "HOTELARIA"
-    },
-    {
-        "descricao": "HOTELARIA HOSPITALAR"
-    },
-    {
-        "descricao": "INFORMÁTICA"
-    },
-    {
-        "descricao": "INTERDISCIPLINAR EM CIÊNCIAS DO TRABALHO"
-    },
-    {
-        "descricao": "INTERNET DAS COISAS"
-    },
-    {
-        "descricao": "INVESTIGAÇÃO FORENSE E PERÍCIA CRIMINAL"
-    },
-    {
-        "descricao": "INVESTIGAÇÃO PROFISSIONAL"
-    },
-    {
-        "descricao": "JOGOS DIGITAIS"
-    },
-    {
-        "descricao": "LETRAS"
-    },
-    {
-        "descricao": "LETRAS - ESPANHOL"
-    },
-    {
-        "descricao": "LETRAS - INGLÊS"
-    },
-    {
-        "descricao": "LETRAS - INGLÊS - TRADUÇÃO E INTERPRETAÇÃO"
-    },
-    {
-        "descricao": "LETRAS - LIBRAS"
-    },
-    {
-        "descricao": "LETRAS - LÍNGUA INGLESA"
-    },
-    {
-        "descricao": "LETRAS - LÍNGUA PORTUGUESA"
-    },
-    {
-        "descricao": "LETRAS - LÍNGUA PORTUGUESA E LIBRAS"
-    },
-    {
-        "descricao": "LETRAS - LÍNGUA PORTUGUESA E LITERATURAS DE LÍNGUA PORTUGUESA"
-    },
-    {
-        "descricao": "LETRAS - LÍNGUA PORTUGUESA"
-    },
-    {
-        "descricao": "LETRAS - LÍNGUA PORTUGUESA"
-    },
-    {
-        "descricao": "LETRAS - PORTUGUÊS"
-    },
-    {
-        "descricao": "LETRAS - PORTUGUÊS E INGLÊS"
-    },
-    {
-        "descricao": "LETRAS PORTUGUÊS E INGLÊS"
-    },
-    {
-        "descricao": "LETRAS - PORTUGUÊS E INGLÊS E RESPECTIVAS LITERATURAS"
-    },
-    {
-        "descricao": "LETRAS - TRADUÇÃO INGLÊS E PORTUGUÊS"
-    },
-    {
-        "descricao": "LETRAS - TRADUTOR"
-    },
-    {
-        "descricao": "LETRAS - TRADUTOR E INTÉRPRETE"
-    },
-    {
-        "descricao": "LINGUAGENS E CÓDIGOS"
-    },
-    {
-        "descricao": "LOGÍSTICA"
-    },
-    {
-        "descricao": "MANUTENÇÃO DE AERONAVES"
-    },
-    {
-        "descricao": "MANUTENÇÃO DE SISTEMAS ELETROMECÂNICOS"
-    },
-    {
-        "descricao": "MANUTENÇÃO INDUSTRIAL"
-    },
-    {
-        "descricao": "MARKETING DIGITAL"
-    },
-    {
-        "descricao": "MATEMÁTICA"
-    },
-    {
-        "descricao": "MATEMÁTICA - PROGRAMA SEGUNDA LICENCIATURA"
-    },
-    {
-        "descricao": "MECÂNICA DE PRECISÃO"
-    },
-    {
-        "descricao": "MECATRÔNICA INDUSTRIAL"
-    },
-    {
-        "descricao": "MEDIAÇÃO"
-    },
-    {
-        "descricao": "MÍDIAS DIGITAIS"
-    },
-    {
-        "descricao": "MÍDIAS SOCIAIS"
-    },
-    {
-        "descricao": "MÍDIAS SOCIAIS DIGITAIS"
-    },
-    {
-        "descricao": "MUSEOLOGIA"
-    },
-    {
-        "descricao": "MÚSICA"
-    },
-    {
-        "descricao": "MÚSICA - CANTO"
-    },
-    {
-        "descricao": "MÚSICA - COMPOSIÇÃO"
-    },
-    {
-        "descricao": "MÚSICA - COMPOSIÇÃO E REGÊNCIA"
-    },
-    {
-        "descricao": "MÚSICA - INSTRUMENTO"
-    },
-    {
-        "descricao": "MÚSICA - MÚSICA POPULAR BRASILEIRA"
-    },
-    {
-        "descricao": "MÚSICA - REGÊNCIA"
-    },
-    {
-        "descricao": "MUSICOTERAPIA"
-    },
-    {
-        "descricao": "NATUROLOGIA"
-    },
-    {
-        "descricao": "NECESSIDADES ESPECIAIS"
-    },
-    {
-        "descricao": "NEGÓCIOS DA MODA"
-    },
-    {
-        "descricao": "NEGÓCIOS IMOBILIÁRIOS"
-    },
-    {
-        "descricao": "NORMAL SUPERIOR"
-    },
-    {
-        "descricao": "ÓPTICA E OPTOMETRIA"
-    },
-    {
-        "descricao": "PAPEL E CELULOSE"
-    },
-    {
-        "descricao": "PEDAGOGIA"
-    },
-    {
-        "descricao": "PESQUISA EM COMPORTAMENTO PSICOSSOCIAL"
-    },
-    {
-        "descricao": "PETRÓLEO E GÁS"
-    },
-    {
-        "descricao": "PILOTAGEM PROFISSIONAL DE AERONAVES"
-    },
-    {
-        "descricao": "PLANEJAMENTO ESTRATÉGICO EMPRESARIAL"
-    },
-    {
-        "descricao": "PODOLOGIA"
-    },
-    {
-        "descricao": "POLÍMEROS"
-    },
-    {
-        "descricao": "PROCESSAMENTO DE DADOS"
-    },
-    {
-        "descricao": "PROCESSOS AMBIENTAIS"
-    },
-    {
-        "descricao": "PROCESSOS DE MANIPULAÇÃO EM FARMÁCIA"
-    },
-    {
-        "descricao": "PROCESSOS ESCOLARES"
-    },
-    {
-        "descricao": "PROCESSOS GERENCIAIS"
-    },
-    {
-        "descricao": "PROCESSOS METALÚRGICOS"
-    },
-    {
-        "descricao": "PROCESSOS QUÍMICOS"
-    },
-    {
-        "descricao": "PRODUÇÃO AUDIOVISUAL"
-    },
-    {
-        "descricao": "PRODUÇÃO CÊNICA"
-    },
-    {
-        "descricao": "PRODUÇÃO CULTURAL"
-    },
-    {
-        "descricao": "PRODUÇÃO DE VESTUÁRIO"
-    },
-    {
-        "descricao": "PRODUÇÃO FONOGRÁFICA"
-    },
-    {
-        "descricao": "PRODUÇÃO GRÁFICA"
-    },
-    {
-        "descricao": "PRODUÇÃO JOALHEIRA"
-    },
-    {
-        "descricao": "PRODUÇÃO MULTIMÍDIA"
-    },
-    {
-        "descricao": "PRODUÇÃO PUBLICITÁRIA"
-    },
-    {
-        "descricao": "PRODUÇÃO SUCROALCOOLEIRA"
-    },
-    {
-        "descricao": "PROGRAMAÇÃO DE SISTEMAS"
-    },
-    {
-        "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO DE DOCENTE"
-    },
-    {
-        "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES"
-    },
-    {
-        "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - BIOLOGIA"
-    },
-    {
-        "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - FILOSOFIA"
-    },
-    {
-        "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - FÍSICA"
-    },
-    {
-        "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - GEOGRAFIA"
-    },
-    {
-        "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - HISTÓRIA"
-    },
-    {
-        "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - MATEMÁTICA"
-    },
-    {
-        "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - PORTUGUÊS"
-    },
-    {
-        "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - QUÍMICA"
-    },
-    {
-        "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA EM LETRAS - LÍNGUA PORTUGUÊSA"
-    },
-    {
-        "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA PARA AS DISCIPLINAS DO CURRÍCULO DO ENSINO FUNDAMENTAL"
-    },
-    {
-        "descricao": "PROJETO EM WEB DESIGN"
-    },
-    {
-        "descricao": "PROJETOS MECÂNICOS"
-    },
-    {
-        "descricao": "PROPAGANDA E MARKETING"
-    },
-    {
-        "descricao": "PSICOLOGIA - FORMAÇÃO DE PSICÓLOGO"
-    },
-    {
-        "descricao": "QUALIDADE"
-    },
-    {
-        "descricao": "QUÍMICA - PROGRAMA SEGUNDA LICENCIATURA"
-    },
-    {
-        "descricao": "QUÍMICA TECNOLÓGICA"
-    },
-    {
-        "descricao": "QUIROPRAXIA"
-    },
-    {
-        "descricao": "RADIALISMO"
-    },
-    {
-        "descricao": "RADIOLOGIA"
-    },
-    {
-        "descricao": "REDES DE COMPUTADORES"
-    },
-    {
-        "descricao": "REPRESENTAÇÃO COMERCIAL"
-    },
-    {
-        "descricao": "REVISÃO DE TEXTO"
-    },
-    {
-        "descricao": "SANEAMENTO AMBIENTAL"
-    },
-    {
-        "descricao": "SECRETARIADO"
-    },
-    {
-        "descricao": "SECRETARIADO EXECUTIVO BILINGUE - PORTUGUÊS/INGLÊS"
-    },
-    {
-        "descricao": "SEGUNDA LICENCIATURA EM PEDAGOGIA"
-    },
-    {
-        "descricao": "SEGUNDA LICENCIATURA EM PEDAGOGIA PARA PROFESSORES EM EXERCÍCIO NA EDUCAÇÃO BÁSICA PÚBLICA"
-    },
-    {
-        "descricao": "SEGURANÇA DA INFORMAÇÃO"
-    },
-    {
-        "descricao": "SEGURANÇA NO TRABALHO"
-    },
-    {
-        "descricao": "SEGURANÇA NO TRÂNSITO"
-    },
-    {
-        "descricao": "SEGURANÇA PRIVADA"
-    },
-    {
-        "descricao": "SEGURANÇA PÚBLICA"
-    },
-    {
-        "descricao": "SERVIÇOS JURÍDICOS"
-    },
-    {
-        "descricao": "SERVIÇOS JURÍDICOS"
-    },
-    {
-        "descricao": "SERVIÇOS JURÍDICOS E NOTARIAIS"
-    },
-    {
-        "descricao": "SERVIÇOS NOTARIAIS E JURÍDICOS"
-    },
-    {
-        "descricao": "SERVIÇOS PENAIS"
-    },
-    {
-        "descricao": "SISTEMAS AUTOMOTIVOS"
-    },
-    {
-        "descricao": "SISTEMAS BIOMÉDICOS"
-    },
-    {
-        "descricao": "SISTEMAS DE AUTOMAÇÃO INDUSTRIAL"
-    },
-    {
-        "descricao": "SISTEMAS DE SEGURANÇA PÚBLICA"
-    },
-    {
-        "descricao": "SISTEMAS DE TELECOMUNICAÇÕES"
-    },
-    {
-        "descricao": "SISTEMAS ELÉTRICOS"
-    },
-    {
-        "descricao": "SISTEMAS ELETROELETRÔNICOS"
-    },
-    {
-        "descricao": "SISTEMAS ELETROMECÂNICOS DE ENERGIA"
-    },
-    {
-        "descricao": "SISTEMAS PARA INTERNET"
-    },
-    {
-        "descricao": "SOCIOLOGIA"
-    },
-    {
-        "descricao": "SOCIOLOGIA E POLÍTICA"
-    },
-    {
-        "descricao": "SOCIOLOGIA - PROGRAMA SEGUNDA LICENCIATURA"
-    },
-    {
-        "descricao": "SUPERVISÃO DE OBRAS"
-    },
-    {
-        "descricao": "TECNOLOGIA DA INFORMAÇÃO"
-    },
-    {
-        "descricao": "TELEMÁTICA"
-    },
-    {
-        "descricao": "TEOLOGIA: DOUTRINA CATÓLICA"
-    },
-    {
-        "descricao": "TRADUÇÃO E INTERPRETAÇÃO"
-    },
-    {
-        "descricao": "TRADUTOR E INTÉRPRETE"
-    },
-    {
-        "descricao": "TRANSPORTE AÉREO"
-    },
-    {
-        "descricao": "TRANSPORTE TERRESTRE"
-    },
-    {
-        "descricao": "TRATAMENTO DE RESÍDUOS"
-    },
-    {
-        "descricao": "VISAGISMO E TERAPIAS CAPILARES"
-    }
+[
+  {
+    "descricao": "ADMINISTRAÇÃO"
+  },
+  {
+    "descricao": "ADMINISTRAÇÃO"
+  },
+  {
+    "descricao": "ADMINISTRAÇÃO HOSPITALAR"
+  },
+  {
+    "descricao": "ADMINISTRAÇÃO PÚBLICA"
+  },
+  {
+    "descricao": "AGRONOMIA"
+  },
+  {
+    "descricao": "ARQUITETURA E URBANISMO"
+  },
+  {
+    "descricao": "ARTES VISUAIS"
+  },
+  {
+    "descricao": "BIBLIOTECONOMIA"
+  },
+  {
+    "descricao": "BIOMEDICINA"
+  },
+  {
+    "descricao": "BIOTECNOLOGIA"
+  },
+  {
+    "descricao": "CIÊNCIA DA COMPUTAÇÃO"
+  },
+  {
+    "descricao": "CIÊNCIA POLÍTICA"
+  },
+  {
+    "descricao": "CIÊNCIAS AERONÁUTICAS"
+  },
+  {
+    "descricao": "CIÊNCIAS AMBIENTAIS"
+  },
+  {
+    "descricao": "CIÊNCIAS ATUARIAIS"
+  },
+  {
+    "descricao": "CIÊNCIAS BIOLÓGICAS"
+  },
+  {
+    "descricao": "CIÊNCIAS CONTÁBEIS"
+  },
+  {
+    "descricao": "CIÊNCIAS DA COMPUTAÇÃO"
+  },
+  {
+    "descricao": "CIÊNCIAS ECONÔMICAS"
+  },
+  {
+    "descricao": "CIÊNCIAS SOCIAIS"
+  },
+  {
+    "descricao": "COMÉRCIO EXTERIOR"
+  },
+  {
+    "descricao": "COMUNICAÇÃO SOCIAL"
+  },
+  {
+    "descricao": "COMUNICAÇÃO SOCIAL - JORNALISMO"
+  },
+  {
+    "descricao": "COMUNICAÇÃO SOCIAL - PRODUÇÃO EDITORIAL E MULTIMÍDIA"
+  },
+  {
+    "descricao": "COMUNICAÇÃO SOCIAL - PUBLICIDADE E PROPAGANDA"
+  },
+  {
+    "descricao": "COMUNICAÇÃO SOCIAL - RADIALISMO (RÁDIO E TV)"
+  },
+  {
+    "descricao": "COMUNICAÇÃO SOCIAL - RELAÇÕES PÚBLICAS"
+  },
+  {
+    "descricao": "DESENHO INDUSTRIAL"
+  },
+  {
+    "descricao": "DESIGN"
+  },
+  {
+    "descricao": "DESIGN DE MODA"
+  },
+  {
+    "descricao": "DESIGN DE PRODUTO"
+  },
+  {
+    "descricao": "DESIGN GRÁFICO"
+  },
+  {
+    "descricao": "DIREITO"
+  },
+  {
+    "descricao": "EDUCAÇÃO FÍSICA"
+  },
+  {
+    "descricao": "ENFERMAGEM"
+  },
+  {
+    "descricao": "ENGENHARIA"
+  },
+  {
+    "descricao": "ENGENHARIA AEROESPACIAL"
+  },
+  {
+    "descricao": "ENGENHARIA AGRONÔMICA"
+  },
+  {
+    "descricao": "ENGENHARIA AMBIENTAL"
+  },
+  {
+    "descricao": "ENGENHARIA AMBIENTAL E SANITÁRIA"
+  },
+  {
+    "descricao": "ENGENHARIA AUTOMOTIVA"
+  },
+  {
+    "descricao": "ENGENHARIA BIOMÉDICA"
+  },
+  {
+    "descricao": "ENGENHARIA CIVIL"
+  },
+  {
+    "descricao": "ENGENHARIA DA COMPUTAÇÃO"
+  },
+  {
+    "descricao": "ENGENHARIA DE ALIMENTOS"
+  },
+  {
+    "descricao": "ENGENHARIA DE BIOPROCESSOS E BIOTECNOLOGIA"
+  },
+  {
+    "descricao": "ENGENHARIA DE COMPUTAÇÃO"
+  },
+  {
+    "descricao": "ENGENHARIA DE CONTROLE E AUTOMAÇÃO"
+  },
+  {
+    "descricao": "ENGENHARIA DE ENERGIAS"
+  },
+  {
+    "descricao": "ENGENHARIA DE MATERIAIS E NANOTECNOLOGIA"
+  },
+  {
+    "descricao": "ENGENHARIA DE PRODUÇÃO"
+  },
+  {
+    "descricao": "ENGENHARIA DE SOFTWARE"
+  },
+  {
+    "descricao": "ENGENHARIA DE TELECOMUNICAÇÕES"
+  },
+  {
+    "descricao": "ENGENHARIA ELÉTRICA"
+  },
+  {
+    "descricao": "ENGENHARIA ELETRÔNICA"
+  },
+  {
+    "descricao": "ENGENHARIA FLORESTAL"
+  },
+  {
+    "descricao": "ENGENHARIA INDUSTRIAL MADEIREIRA"
+  },
+  {
+    "descricao": "ENGENHARIA MECÂNICA"
+  },
+  {
+    "descricao": "ENGENHARIA MECATRÔNICA"
+  },
+  {
+    "descricao": "ENGENHARIA QUÍMICA"
+  },
+  {
+    "descricao": "FARMÁCIA"
+  },
+  {
+    "descricao": "FARMÁCIA E BIOQUÍMICA"
+  },
+  {
+    "descricao": "FILOSOFIA"
+  },
+  {
+    "descricao": "FISIOTERAPIA"
+  },
+  {
+    "descricao": "FONOAUDIOLOGIA"
+  },
+  {
+    "descricao": "HISTÓRIA"
+  },
+  {
+    "descricao": "INTERDISCIPLINAR EM CIÊNCIAS E HUMANIDADES - BI/LI"
+  },
+  {
+    "descricao": "JORNALISMO"
+  },
+  {
+    "descricao": "LETRAS - PORTUGUÊS E ESPANHOL"
+  },
+  {
+    "descricao": "MARKETING"
+  },
+  {
+    "descricao": "MARKETING E PROPAGANDA"
+  },
+  {
+    "descricao": "MEDICINA"
+  },
+  {
+    "descricao": "MEDICINA VETERINÁRIA"
+  },
+  {
+    "descricao": "MODA"
+  },
+  {
+    "descricao": "NEGÓCIOS INTERNACIONAIS"
+  },
+  {
+    "descricao": "NUTRIÇÃO"
+  },
+  {
+    "descricao": "ODONTOLOGIA"
+  },
+  {
+    "descricao": "PSICOLOGIA"
+  },
+  {
+    "descricao": "PSICOPEDAGOGIA"
+  },
+  {
+    "descricao": "PUBLICIDADE E PROPAGANDA"
+  },
+  {
+    "descricao": "QUÍMICA"
+  },
+  {
+    "descricao": "QUÍMICA INDUSTRIAL"
+  },
+  {
+    "descricao": "RÁDIO"
+  },
+  {
+    "descricao": "RELAÇÕES INTERNACIONAIS"
+  },
+  {
+    "descricao": "RELAÇÕES PÚBLICAS"
+  },
+  {
+    "descricao": "SECRETARIADO EXECUTIVO"
+  },
+  {
+    "descricao": "SECRETARIADO EXECUTIVO TRILÍNGUE"
+  },
+  {
+    "descricao": "SERVIÇO SOCIAL"
+  },
+  {
+    "descricao": "SISTEMA DE INFORMAÇÃO"
+  },
+  {
+    "descricao": "SISTEMAS DE INFORMAÇÃO"
+  },
+  {
+    "descricao": "TEATRO"
+  },
+  {
+    "descricao": "TEOLOGIA"
+  },
+  {
+    "descricao": "TERAPIA OCUPACIONAL"
+  },
+  {
+    "descricao": "TURISMO"
+  },
+  {
+    "descricao": "TURISMO E HOTELARIA"
+  },
+  {
+    "descricao": "ZOOTECNIA"
+  },
+  {
+    "descricao": "ACUPUNTURA"
+  },
+  {
+    "descricao": "ADMINISTRAÇÃO DE RECURSOS HUMANOS"
+  },
+  {
+    "descricao": "AGENTE DE OPERAÇÕES TURÍSTICAS"
+  },
+  {
+    "descricao": "AGRIMENSURA"
+  },
+  {
+    "descricao": "AGROECOLOGIA"
+  },
+  {
+    "descricao": "AGROINDÚSTRIA"
+  },
+  {
+    "descricao": "AGRONEGÓCIO"
+  },
+  {
+    "descricao": "ALIMENTOS"
+  },
+  {
+    "descricao": "ANÁLISE DE SISTEMAS"
+  },
+  {
+    "descricao": "ANÁLISE E DESENVOLVIMENTO DE SISTEMAS"
+  },
+  {
+    "descricao": "ANÁLISE ESTATÍSTICA"
+  },
+  {
+    "descricao": "ANÁLISE GERENCIAL"
+  },
+  {
+    "descricao": "APICULTURA E MELIPONICULTURA"
+  },
+  {
+    "descricao": "AQÜICULTURA"
+  },
+  {
+    "descricao": "ARBITRAGEM"
+  },
+  {
+    "descricao": "ARQUEOLOGIA"
+  },
+  {
+    "descricao": "ARTE"
+  },
+  {
+    "descricao": "ARTE: HISTÓRIA"
+  },
+  {
+    "descricao": "ARTES"
+  },
+  {
+    "descricao": "ARTES CÊNICAS"
+  },
+  {
+    "descricao": "ARTES E MÍDIAS DIGITAIS"
+  },
+  {
+    "descricao": "ARTES VISUAIS"
+  },
+  {
+    "descricao": "ARTES VISUAIS - PROGRAMA SEGUNDA LICENCIATURA"
+  },
+  {
+    "descricao": "ATENDIMENTO EM HOME CARE"
+  },
+  {
+    "descricao": "AUDIOVISUAL"
+  },
+  {
+    "descricao": "AUTOMAÇÃO DE DISPOSITIVOS ELETROFLUÍDICOS"
+  },
+  {
+    "descricao": "AUTOMAÇÃO INDUSTRIAL"
+  },
+  {
+    "descricao": "AVALIAÇÃO NUTRICIONAL"
+  },
+  {
+    "descricao": "AVIAÇÃO CIVIL"
+  },
+  {
+    "descricao": "BANCO DE DADOS"
+  },
+  {
+    "descricao": "BIOENERGIA"
+  },
+  {
+    "descricao": "BIOLOGIA"
+  },
+  {
+    "descricao": "CANTO"
+  },
+  {
+    "descricao": "CIÊNCIA DA RELIGIÃO"
+  },
+  {
+    "descricao": "CIÊNCIA ECONÔMICA"
+  },
+  {
+    "descricao": "CIÊNCIAS"
+  },
+  {
+    "descricao": "CIÊNCIAS: BIOLOGIA"
+  },
+  {
+    "descricao": "CIÊNCIAS DA RELIGIÃO"
+  },
+  {
+    "descricao": "CIÊNCIAS HUMANAS"
+  },
+  {
+    "descricao": "CIÊNCIAS POLÍTICAS"
+  },
+  {
+    "descricao": "CINEMA"
+  },
+  {
+    "descricao": "CINEMA E ANIMAÇÃO"
+  },
+  {
+    "descricao": "CINEMA E AUDIOVISUAL"
+  },
+  {
+    "descricao": "COMÉRCIO EXTERIOR E NEGÓCIOS INTERNACIONAIS"
+  },
+  {
+    "descricao": "COMÉRCIO INTERNACIONAL"
+  },
+  {
+    "descricao": "COMPUTAÇÃO"
+  },
+  {
+    "descricao": "COMPUTAÇÃO GRÁFICA"
+  },
+  {
+    "descricao": "COMUNICAÇÃO DAS ARTES DO CORPO"
+  },
+  {
+    "descricao": "COMUNICAÇÃO DIGITAL"
+  },
+  {
+    "descricao": "COMUNICAÇÃO EM COMPUTAÇÃO GRÁFICA"
+  },
+  {
+    "descricao": "COMUNICAÇÃO EM CRIAÇÃO E DESENVOLVIMENTO DE WEB SITES E DESIGN"
+  },
+  {
+    "descricao": "COMUNICAÇÃO E MULTIMEIOS"
+  },
+  {
+    "descricao": "COMUNICAÇÃO INSTITUCIONAL"
+  },
+  {
+    "descricao": "COMUNICAÇÃO SOCIAL - CINEMA"
+  },
+  {
+    "descricao": "COMUNICAÇÃO SOCIAL - CINEMA E AUDIOVISUAL"
+  },
+  {
+    "descricao": "COMUNICAÇÃO SOCIAL COM HABILITAÇÃO EM PUBLICIDADE E PROPAGANDA"
+  },
+  {
+    "descricao": "COMUNICAÇÃO SOCIAL - COMUNICAÇÃO MERCADOLÓGICA"
+  },
+  {
+    "descricao": "COMUNICAÇÃO SOCIAL - EDITORAÇÃO"
+  },
+  {
+    "descricao": "COMUNICAÇÃO SOCIAL - PRODUÇÃO EDITORIAL"
+  },
+  {
+    "descricao": "COMUNICAÇÃO SOCIAL - RADIO E TELEVISÃO"
+  },
+  {
+    "descricao": "COMUNICAÇÃO SOCIAL - RÁDIO"
+  },
+  {
+    "descricao": "CONSTRUÇÃO CIVIL"
+  },
+  {
+    "descricao": "CONSTRUÇÃO DE EDIFÍCIOS"
+  },
+  {
+    "descricao": "CONTROLADORIA"
+  },
+  {
+    "descricao": "CONTROLE DE OBRAS"
+  },
+  {
+    "descricao": "CONTROLE DE QUALIDADE"
+  },
+  {
+    "descricao": "COSMÉTICOS"
+  },
+  {
+    "descricao": "COZINHA CONTEMPORÂNEA"
+  },
+  {
+    "descricao": "DANÇA"
+  },
+  {
+    "descricao": "DECORAÇÃO & DESIGN"
+  },
+  {
+    "descricao": "DEFESA CIBERNÉTICA"
+  },
+  {
+    "descricao": "DESENHO ARQUITETÔNICO"
+  },
+  {
+    "descricao": "DESENHO DE ANIMAÇÃO"
+  },
+  {
+    "descricao": "DESENVOLVIMENTO DE SISTEMAS"
+  },
+  {
+    "descricao": "DESENVOLVIMENTO PARA INTERNET"
+  },
+  {
+    "descricao": "DESIGN DE ANIMAÇÃO"
+  },
+  {
+    "descricao": "DESIGN DE GAMES"
+  },
+  {
+    "descricao": "DESIGN DE INTERIORES"
+  },
+  {
+    "descricao": "DESIGN DE MODA - ESTILISMO"
+  },
+  {
+    "descricao": "DESIGN DE MODA - MODELAGEM"
+  },
+  {
+    "descricao": "DESIGN DIGITAL"
+  },
+  {
+    "descricao": "DESIGN EDUCACIONAL"
+  },
+  {
+    "descricao": "DESIGN PUBLICITÁRIO"
+  },
+  {
+    "descricao": "EDUCAÇÃO ARTÍSTICA"
+  },
+  {
+    "descricao": "EDUCAÇÃO ARTÍSTICA - ARTES PLÁSTICAS"
+  },
+  {
+    "descricao": "EDUCAÇÃO ARTÍSTICA - MÚSICA"
+  },
+  {
+    "descricao": "EDUCAÇÃO ESPECIAL"
+  },
+  {
+    "descricao": "EDUCAÇÃO FÍSICA - ÊNFASE EM EDUCAÇÃO FÍSICA E SAÚDE"
+  },
+  {
+    "descricao": "EDUCADOR SOCIAL"
+  },
+  {
+    "descricao": "ELETRÔNICA INDUSTRIAL"
+  },
+  {
+    "descricao": "ELETROTÉCNICA INDUSTRIAL"
+  },
+  {
+    "descricao": "EMBELEZAMENTO E IMAGEM PESSOAL"
+  },
+  {
+    "descricao": "EMPREENDEDORISMO"
+  },
+  {
+    "descricao": "ENFERMAGEM E OBSTETRÍCIA"
+  },
+  {
+    "descricao": "ENGENHARIA AERONÁUTICA"
+  },
+  {
+    "descricao": "ENGENHARIA AERONÁUTICA E ESPAÇO"
+  },
+  {
+    "descricao": "ENGENHARIA AMBIENTAL E ENERGIAS RENOVÁVEIS"
+  },
+  {
+    "descricao": "ENGENHARIA CARTOGRÁFICA E DE AGRIMENSURA"
+  },
+  {
+    "descricao": "ENGENHARIA DA MOBILIDADE"
+  },
+  {
+    "descricao": "ENGENHARIA DE AGRIMENSURA"
+  },
+  {
+    "descricao": "ENGENHARIA DE AUTOMAÇÃO E CONTROLE"
+  },
+  {
+    "descricao": "ENGENHARIA DE AUTOMAÇÃO E SISTEMAS"
+  },
+  {
+    "descricao": "ENGENHARIA DE BIOPROCESSOS"
+  },
+  {
+    "descricao": "ENGENHARIA DE COMUNICAÇÕES"
+  },
+  {
+    "descricao": "ENGENHARIA DE ENERGIA"
+  },
+  {
+    "descricao": "ENGENHARIA DE ENERGIAS RENOVÁVEIS E AMBIENTE"
+  },
+  {
+    "descricao": "ENGENHARIA DE INOVAÇÃO"
+  },
+  {
+    "descricao": "ENGENHARIA DE MATERIAIS"
+  },
+  {
+    "descricao": "ENGENHARIA DE PETRÓLEO"
+  },
+  {
+    "descricao": "ENGENHARIA DE PETRÓLEO E GÁS"
+  },
+  {
+    "descricao": "ENGENHARIA DE PRODUÇÃO MECÂNICA"
+  },
+  {
+    "descricao": "ENGENHARIA DE SEGURANÇA NO TRABALHO"
+  },
+  {
+    "descricao": "ENGENHARIA DE TRANSPORTES"
+  },
+  {
+    "descricao": "ENGENHARIA ELÉTRICA E ELETRÔNICA"
+  },
+  {
+    "descricao": "ENGENHARIA INDUSTRIAL MECÂNICA"
+  },
+  {
+    "descricao": "ENGENHARIA METALÚRGICA"
+  },
+  {
+    "descricao": "ENGENHARIA TÊXTIL"
+  },
+  {
+    "descricao": "ESTATÍSTICA"
+  },
+  {
+    "descricao": "ESTÉTICA"
+  },
+  {
+    "descricao": "ESTÉTICA E COSMÉTICA"
+  },
+  {
+    "descricao": "ESTÉTICA E COSMETOLOGIA"
+  },
+  {
+    "descricao": "ESTÉTICA E IMAGEM PESSOAL"
+  },
+  {
+    "descricao": "ESTUDOS SOCIAIS"
+  },
+  {
+    "descricao": "EVENTOS"
+  },
+  {
+    "descricao": "EVENTOS E RECREAÇÃO"
+  },
+  {
+    "descricao": "FABRICAÇÃO MECÂNICA"
+  },
+  {
+    "descricao": "FILOSOFIA - PROGRAMA SEGUNDA LICENCIATURA"
+  },
+  {
+    "descricao": "FÍSICA"
+  },
+  {
+    "descricao": "FÍSICA MÉDICA"
+  },
+  {
+    "descricao": "FORMAÇÃO DE DOCENTES PARA A EDUCAÇÃO BÁSICA"
+  },
+  {
+    "descricao": "FORMAÇÃO PEDAGÓGICA PARA GRADUADOS"
+  },
+  {
+    "descricao": "FORMAÇÃO PEDAGÓGICA PARA PORTADORES DE ENSINO SUPERIOR"
+  },
+  {
+    "descricao": "FOTOGRAFIA"
+  },
+  {
+    "descricao": "FUTEBOL"
+  },
+  {
+    "descricao": "GASTRONOMIA"
+  },
+  {
+    "descricao": "GEOGRAFIA"
+  },
+  {
+    "descricao": "GEOGRAFIA - PROGRAMA SEGUNDA LICENCIATURA"
+  },
+  {
+    "descricao": "GERONTOLOGIA"
+  },
+  {
+    "descricao": "GESTÃO AMBIENTAL"
+  },
+  {
+    "descricao": "GESTÃO BANCÁRIA"
+  },
+  {
+    "descricao": "GESTÃO COMERCIAL"
+  },
+  {
+    "descricao": "GESTÃO DA INFORMAÇÃO"
+  },
+  {
+    "descricao": "GESTÃO DA PRODUÇÃO E OPERAÇÕES INDUSTRIAIS"
+  },
+  {
+    "descricao": "GESTÃO DA PRODUÇÃO INDUSTRIAL"
+  },
+  {
+    "descricao": "GESTÃO DA QUALIDADE"
+  },
+  {
+    "descricao": "GESTÃO DAS ORGANIZAÇÕES DO TERCEIRO SETOR"
+  },
+  {
+    "descricao": "GESTÃO DA TECNOLOGIA DA INFORMAÇÃO"
+  },
+  {
+    "descricao": "GESTÃO DE AGRONEGÓCIOS"
+  },
+  {
+    "descricao": "GESTÃO DE AMBIENTES INTERNET E REDES DE COMPUTADORES"
+  },
+  {
+    "descricao": "GESTÃO DE CALL CENTER"
+  },
+  {
+    "descricao": "GESTÃO DE COMÉRCIO EXTERIOR"
+  },
+  {
+    "descricao": "GESTÃO DE COOPERATIVAS"
+  },
+  {
+    "descricao": "GESTÃO DE EQUINOCULTURA"
+  },
+  {
+    "descricao": "GESTÃO DE LOJAS E PONTOS DE VENDAS"
+  },
+  {
+    "descricao": "GESTÃO DE MARKETING"
+  },
+  {
+    "descricao": "GESTÃO DE NEGÓCIOS SECURITÁRIOS"
+  },
+  {
+    "descricao": "GESTÃO DE PESSOAS"
+  },
+  {
+    "descricao": "GESTÃO DE PRODUÇÃO INDUSTRIAL"
+  },
+  {
+    "descricao": "GESTÃO DE QUALIDADE EM METROLOGIA"
+  },
+  {
+    "descricao": "GESTÃO DE RECURSOS HUMANOS"
+  },
+  {
+    "descricao": "GESTÃO DE SAÚDE PÚBLICA"
+  },
+  {
+    "descricao": "GESTÃO DE SEGURANÇA PRIVADA"
+  },
+  {
+    "descricao": "GESTÃO DE SEGURANÇA PÚBLICA"
+  },
+  {
+    "descricao": "GESTÃO DE SEGURANÇA PÚBLICA (EXPERIMENTAL)"
+  },
+  {
+    "descricao": "GESTÃO DE SEGUROS"
+  },
+  {
+    "descricao": "GESTÃO DE SEGUROS E PREVIDÊNCIA"
+  },
+  {
+    "descricao": "GESTÃO DE SERVIÇOS E COMÉRCIO"
+  },
+  {
+    "descricao": "GESTÃO DE SERVIÇOS JURÍDICOS E NOTARIAIS"
+  },
+  {
+    "descricao": "GESTÃO DE SERVIÇOS JURÍDICOS"
+  },
+  {
+    "descricao": "GESTÃO DESPORTIVA E DE LAZER"
+  },
+  {
+    "descricao": "GESTÃO DE TELECOMUNICAÇÕES"
+  },
+  {
+    "descricao": "GESTÃO DE TURISMO"
+  },
+  {
+    "descricao": "GESTÃO DO AGRONEGÓCIO"
+  },
+  {
+    "descricao": "GESTÃO EDUCACIONAL DE ENTIDADES DE APOIO À CRIANÇA E AO ADOLESCENTE"
+  },
+  {
+    "descricao": "GESTÃO E EMPREENDEDORISMO"
+  },
+  {
+    "descricao": "GESTÃO EM LOGÍSTICA"
+  },
+  {
+    "descricao": "GESTÃO EM PEQUENAS E MÉDIAS EMPRESAS"
+  },
+  {
+    "descricao": "GESTÃO EMPRESARIAL"
+  },
+  {
+    "descricao": "GESTÃO EMPRESARIAL EM SERVIÇOS DE SAÚDE"
+  },
+  {
+    "descricao": "GESTÃO EM SAÚDE AMBIENTAL"
+  },
+  {
+    "descricao": "GESTÃO FINANCEIRA"
+  },
+  {
+    "descricao": "GESTÃO FINANCEIRA E CONTROLADORIA EMPRESARIAL"
+  },
+  {
+    "descricao": "GESTÃO HOSPITALAR"
+  },
+  {
+    "descricao": "GESTÃO HOTELEIRA"
+  },
+  {
+    "descricao": "GESTÃO JURÍDICA"
+  },
+  {
+    "descricao": "GESTÃO LEGISLATIVA"
+  },
+  {
+    "descricao": "GESTÃO PORTUÁRIA"
+  },
+  {
+    "descricao": "GESTÃO PÚBLICA"
+  },
+  {
+    "descricao": "HISTÓRIA - PROGRAMA SEGUNDA LICENCIATURA"
+  },
+  {
+    "descricao": "HORTICULTURA"
+  },
+  {
+    "descricao": "HOTELARIA"
+  },
+  {
+    "descricao": "HOTELARIA HOSPITALAR"
+  },
+  {
+    "descricao": "INFORMÁTICA"
+  },
+  {
+    "descricao": "INTERDISCIPLINAR EM CIÊNCIAS DO TRABALHO"
+  },
+  {
+    "descricao": "INTERNET DAS COISAS"
+  },
+  {
+    "descricao": "INVESTIGAÇÃO FORENSE E PERÍCIA CRIMINAL"
+  },
+  {
+    "descricao": "INVESTIGAÇÃO PROFISSIONAL"
+  },
+  {
+    "descricao": "JOGOS DIGITAIS"
+  },
+  {
+    "descricao": "LETRAS"
+  },
+  {
+    "descricao": "LETRAS - ESPANHOL"
+  },
+  {
+    "descricao": "LETRAS - INGLÊS"
+  },
+  {
+    "descricao": "LETRAS - INGLÊS - TRADUÇÃO E INTERPRETAÇÃO"
+  },
+  {
+    "descricao": "LETRAS - LIBRAS"
+  },
+  {
+    "descricao": "LETRAS - LÍNGUA INGLESA"
+  },
+  {
+    "descricao": "LETRAS - LÍNGUA PORTUGUESA"
+  },
+  {
+    "descricao": "LETRAS - LÍNGUA PORTUGUESA E LIBRAS"
+  },
+  {
+    "descricao": "LETRAS - LÍNGUA PORTUGUESA E LITERATURAS DE LÍNGUA PORTUGUESA"
+  },
+  {
+    "descricao": "LETRAS - LÍNGUA PORTUGUESA"
+  },
+  {
+    "descricao": "LETRAS - LÍNGUA PORTUGUESA"
+  },
+  {
+    "descricao": "LETRAS - PORTUGUÊS"
+  },
+  {
+    "descricao": "LETRAS - PORTUGUÊS E INGLÊS"
+  },
+  {
+    "descricao": "LETRAS PORTUGUÊS E INGLÊS"
+  },
+  {
+    "descricao": "LETRAS - PORTUGUÊS E INGLÊS E RESPECTIVAS LITERATURAS"
+  },
+  {
+    "descricao": "LETRAS - TRADUÇÃO INGLÊS E PORTUGUÊS"
+  },
+  {
+    "descricao": "LETRAS - TRADUTOR"
+  },
+  {
+    "descricao": "LETRAS - TRADUTOR E INTÉRPRETE"
+  },
+  {
+    "descricao": "LINGUAGENS E CÓDIGOS"
+  },
+  {
+    "descricao": "LOGÍSTICA"
+  },
+  {
+    "descricao": "MANUTENÇÃO DE AERONAVES"
+  },
+  {
+    "descricao": "MANUTENÇÃO DE SISTEMAS ELETROMECÂNICOS"
+  },
+  {
+    "descricao": "MANUTENÇÃO INDUSTRIAL"
+  },
+  {
+    "descricao": "MARKETING DIGITAL"
+  },
+  {
+    "descricao": "MATEMÁTICA"
+  },
+  {
+    "descricao": "MATEMÁTICA - PROGRAMA SEGUNDA LICENCIATURA"
+  },
+  {
+    "descricao": "MECÂNICA DE PRECISÃO"
+  },
+  {
+    "descricao": "MECATRÔNICA INDUSTRIAL"
+  },
+  {
+    "descricao": "MEDIAÇÃO"
+  },
+  {
+    "descricao": "MÍDIAS DIGITAIS"
+  },
+  {
+    "descricao": "MÍDIAS SOCIAIS"
+  },
+  {
+    "descricao": "MÍDIAS SOCIAIS DIGITAIS"
+  },
+  {
+    "descricao": "MUSEOLOGIA"
+  },
+  {
+    "descricao": "MÚSICA"
+  },
+  {
+    "descricao": "MÚSICA - CANTO"
+  },
+  {
+    "descricao": "MÚSICA - COMPOSIÇÃO"
+  },
+  {
+    "descricao": "MÚSICA - COMPOSIÇÃO E REGÊNCIA"
+  },
+  {
+    "descricao": "MÚSICA - INSTRUMENTO"
+  },
+  {
+    "descricao": "MÚSICA - MÚSICA POPULAR BRASILEIRA"
+  },
+  {
+    "descricao": "MÚSICA - REGÊNCIA"
+  },
+  {
+    "descricao": "MUSICOTERAPIA"
+  },
+  {
+    "descricao": "NATUROLOGIA"
+  },
+  {
+    "descricao": "NECESSIDADES ESPECIAIS"
+  },
+  {
+    "descricao": "NEGÓCIOS DA MODA"
+  },
+  {
+    "descricao": "NEGÓCIOS IMOBILIÁRIOS"
+  },
+  {
+    "descricao": "NORMAL SUPERIOR"
+  },
+  {
+    "descricao": "ÓPTICA E OPTOMETRIA"
+  },
+  {
+    "descricao": "PAPEL E CELULOSE"
+  },
+  {
+    "descricao": "PEDAGOGIA"
+  },
+  {
+    "descricao": "PESQUISA EM COMPORTAMENTO PSICOSSOCIAL"
+  },
+  {
+    "descricao": "PETRÓLEO E GÁS"
+  },
+  {
+    "descricao": "PILOTAGEM PROFISSIONAL DE AERONAVES"
+  },
+  {
+    "descricao": "PLANEJAMENTO ESTRATÉGICO EMPRESARIAL"
+  },
+  {
+    "descricao": "PODOLOGIA"
+  },
+  {
+    "descricao": "POLÍMEROS"
+  },
+  {
+    "descricao": "PROCESSAMENTO DE DADOS"
+  },
+  {
+    "descricao": "PROCESSOS AMBIENTAIS"
+  },
+  {
+    "descricao": "PROCESSOS DE MANIPULAÇÃO EM FARMÁCIA"
+  },
+  {
+    "descricao": "PROCESSOS ESCOLARES"
+  },
+  {
+    "descricao": "PROCESSOS GERENCIAIS"
+  },
+  {
+    "descricao": "PROCESSOS METALÚRGICOS"
+  },
+  {
+    "descricao": "PROCESSOS QUÍMICOS"
+  },
+  {
+    "descricao": "PRODUÇÃO AUDIOVISUAL"
+  },
+  {
+    "descricao": "PRODUÇÃO CÊNICA"
+  },
+  {
+    "descricao": "PRODUÇÃO CULTURAL"
+  },
+  {
+    "descricao": "PRODUÇÃO DE VESTUÁRIO"
+  },
+  {
+    "descricao": "PRODUÇÃO FONOGRÁFICA"
+  },
+  {
+    "descricao": "PRODUÇÃO GRÁFICA"
+  },
+  {
+    "descricao": "PRODUÇÃO JOALHEIRA"
+  },
+  {
+    "descricao": "PRODUÇÃO MULTIMÍDIA"
+  },
+  {
+    "descricao": "PRODUÇÃO PUBLICITÁRIA"
+  },
+  {
+    "descricao": "PRODUÇÃO SUCROALCOOLEIRA"
+  },
+  {
+    "descricao": "PROGRAMAÇÃO DE SISTEMAS"
+  },
+  {
+    "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO DE DOCENTE"
+  },
+  {
+    "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES"
+  },
+  {
+    "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - BIOLOGIA"
+  },
+  {
+    "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - FILOSOFIA"
+  },
+  {
+    "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - FÍSICA"
+  },
+  {
+    "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - GEOGRAFIA"
+  },
+  {
+    "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - HISTÓRIA"
+  },
+  {
+    "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - MATEMÁTICA"
+  },
+  {
+    "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - PORTUGUÊS"
+  },
+  {
+    "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES - QUÍMICA"
+  },
+  {
+    "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA EM LETRAS - LÍNGUA PORTUGUÊSA"
+  },
+  {
+    "descricao": "PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA PARA AS DISCIPLINAS DO CURRÍCULO DO ENSINO FUNDAMENTAL"
+  },
+  {
+    "descricao": "PROJETO EM WEB DESIGN"
+  },
+  {
+    "descricao": "PROJETOS MECÂNICOS"
+  },
+  {
+    "descricao": "PROPAGANDA E MARKETING"
+  },
+  {
+    "descricao": "PSICOLOGIA - FORMAÇÃO DE PSICÓLOGO"
+  },
+  {
+    "descricao": "QUALIDADE"
+  },
+  {
+    "descricao": "QUÍMICA - PROGRAMA SEGUNDA LICENCIATURA"
+  },
+  {
+    "descricao": "QUÍMICA TECNOLÓGICA"
+  },
+  {
+    "descricao": "QUIROPRAXIA"
+  },
+  {
+    "descricao": "RADIALISMO"
+  },
+  {
+    "descricao": "RADIOLOGIA"
+  },
+  {
+    "descricao": "REDES DE COMPUTADORES"
+  },
+  {
+    "descricao": "REPRESENTAÇÃO COMERCIAL"
+  },
+  {
+    "descricao": "REVISÃO DE TEXTO"
+  },
+  {
+    "descricao": "SANEAMENTO AMBIENTAL"
+  },
+  {
+    "descricao": "SECRETARIADO"
+  },
+  {
+    "descricao": "SECRETARIADO EXECUTIVO BILINGUE - PORTUGUÊS/INGLÊS"
+  },
+  {
+    "descricao": "SEGUNDA LICENCIATURA EM PEDAGOGIA"
+  },
+  {
+    "descricao": "SEGUNDA LICENCIATURA EM PEDAGOGIA PARA PROFESSORES EM EXERCÍCIO NA EDUCAÇÃO BÁSICA PÚBLICA"
+  },
+  {
+    "descricao": "SEGURANÇA DA INFORMAÇÃO"
+  },
+  {
+    "descricao": "SEGURANÇA NO TRABALHO"
+  },
+  {
+    "descricao": "SEGURANÇA NO TRÂNSITO"
+  },
+  {
+    "descricao": "SEGURANÇA PRIVADA"
+  },
+  {
+    "descricao": "SEGURANÇA PÚBLICA"
+  },
+  {
+    "descricao": "SERVIÇOS JURÍDICOS"
+  },
+  {
+    "descricao": "SERVIÇOS JURÍDICOS"
+  },
+  {
+    "descricao": "SERVIÇOS JURÍDICOS E NOTARIAIS"
+  },
+  {
+    "descricao": "SERVIÇOS NOTARIAIS E JURÍDICOS"
+  },
+  {
+    "descricao": "SERVIÇOS PENAIS"
+  },
+  {
+    "descricao": "SISTEMAS AUTOMOTIVOS"
+  },
+  {
+    "descricao": "SISTEMAS BIOMÉDICOS"
+  },
+  {
+    "descricao": "SISTEMAS DE AUTOMAÇÃO INDUSTRIAL"
+  },
+  {
+    "descricao": "SISTEMAS DE SEGURANÇA PÚBLICA"
+  },
+  {
+    "descricao": "SISTEMAS DE TELECOMUNICAÇÕES"
+  },
+  {
+    "descricao": "SISTEMAS ELÉTRICOS"
+  },
+  {
+    "descricao": "SISTEMAS ELETROELETRÔNICOS"
+  },
+  {
+    "descricao": "SISTEMAS ELETROMECÂNICOS DE ENERGIA"
+  },
+  {
+    "descricao": "SISTEMAS PARA INTERNET"
+  },
+  {
+    "descricao": "SOCIOLOGIA"
+  },
+  {
+    "descricao": "SOCIOLOGIA E POLÍTICA"
+  },
+  {
+    "descricao": "SOCIOLOGIA - PROGRAMA SEGUNDA LICENCIATURA"
+  },
+  {
+    "descricao": "SUPERVISÃO DE OBRAS"
+  },
+  {
+    "descricao": "TECNOLOGIA DA INFORMAÇÃO"
+  },
+  {
+    "descricao": "TELEMÁTICA"
+  },
+  {
+    "descricao": "TEOLOGIA: DOUTRINA CATÓLICA"
+  },
+  {
+    "descricao": "TRADUÇÃO E INTERPRETAÇÃO"
+  },
+  {
+    "descricao": "TRADUTOR E INTÉRPRETE"
+  },
+  {
+    "descricao": "TRANSPORTE AÉREO"
+  },
+  {
+    "descricao": "TRANSPORTE TERRESTRE"
+  },
+  {
+    "descricao": "TRATAMENTO DE RESÍDUOS"
+  },
+  {
+    "descricao": "VISAGISMO E TERAPIAS CAPILARES"
+  }
 ]

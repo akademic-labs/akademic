@@ -8,15 +8,12 @@ import { RulesComponent } from './rules/rules.component';
 import { ValidateActivityComponent } from './validate-activity/validate-activity.component';
 
 @NgModule({
-  imports: [
-    ControllerRoutingModule,
-    SharedModule
-  ],
+  imports: [ControllerRoutingModule, SharedModule],
   declarations: [
     ValidateActivityComponent,
     ActivityTypeComponent,
-    RulesComponent
+    RulesComponent,
   ],
-  providers: [ ActivityResolve ]
+  providers: [ActivityResolve],
 })
-export class ControllerModule { }
+export class ControllerModule {}

@@ -5,15 +5,8 @@ import { ToastModule } from 'primeng/toast';
 import { CanDeactivateComponent } from './can-deactivate.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ToastModule
-  ],
-  declarations: [
-    CanDeactivateComponent
-  ],
-  exports: [
-    CanDeactivateComponent
-  ]
+  imports: [CommonModule, ToastModule],
+  declarations: [CanDeactivateComponent],
+  exports: [CanDeactivateComponent],
 })
-export class CanDeactivateModule { }
+export class CanDeactivateModule {}

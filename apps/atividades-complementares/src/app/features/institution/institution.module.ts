@@ -7,14 +7,7 @@ import { CoursesComponent } from './courses/courses.component';
 import { InstitutionRoutingModule } from './institution-routing.module';
 
 @NgModule({
-  imports: [
-    InstitutionRoutingModule,
-    SharedModule,
-    SignModule
-  ],
-  declarations: [
-    ControllersComponent,
-    CoursesComponent
-  ]
+  imports: [InstitutionRoutingModule, SharedModule, SignModule],
+  declarations: [ControllersComponent, CoursesComponent],
 })
-export class InstitutionModule { }
+export class InstitutionModule {}

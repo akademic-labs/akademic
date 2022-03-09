@@ -11,6 +11,6 @@ export const environment = {
     databaseURL: 'https://akademic-dev.firebaseio.com',
     projectId: 'akademic-dev',
     storageBucket: 'akademic-dev.appspot.com',
-    messagingSenderId: '468465698043'
+    messagingSenderId: '468465698043',
   },
 };

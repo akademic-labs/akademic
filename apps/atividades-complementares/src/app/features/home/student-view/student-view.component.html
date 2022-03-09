@@ -1,10 +1,23 @@
-<div *ngIf="activityCategoryChartData; else firstActivity" class="col-xs-12 col-md-6">
-  <aka-chart-card title="Atividades" subtitle="Atividades por categoria" chartType="pie" [chartData]="activityCategoryChartData">
+<div
+  *ngIf="activityCategoryChartData; else firstActivity"
+  class="col-xs-12 col-md-6"
+>
+  <aka-chart-card
+    title="Atividades"
+    subtitle="Atividades por categoria"
+    chartType="pie"
+    [chartData]="activityCategoryChartData"
+  >
   </aka-chart-card>
 </div>
 
 <div *ngIf="activityCategoryChartData" class="col-xs-12 col-md-6">
-  <aka-chart-card title="Atividades" subtitle="Atividades por status" chartType="doughnut" [chartData]="activityStatusChartData">
+  <aka-chart-card
+    title="Atividades"
+    subtitle="Atividades por status"
+    chartType="doughnut"
+    [chartData]="activityStatusChartData"
+  >
   </aka-chart-card>
 </div>
 
@@ -13,15 +26,26 @@
     <div class="card border-top">
       <div class="header text-center">
         <h4 class="title">Atividades</h4>
-        <hr>
+        <hr />
       </div>
-      <div class="text-center" style="display: block;">
-        <span class="none-activity" style="font-size: 20px;">Olá, {{ user.displayName}}</span>
-        <span class="none-activity">Você ainda não possui nenhuma atividade cadastrada</span>
-        <span class="none-activity">Clique no botão abaixo para cadastrar sua primeira atividade</span>
+      <div class="text-center" style="display: block">
+        <span class="none-activity" style="font-size: 20px"
+          >Olá, {{ user.displayName }}</span
+        >
+        <span class="none-activity"
+          >Você ainda não possui nenhuma atividade cadastrada</span
+        >
+        <span class="none-activity"
+          >Clique no botão abaixo para cadastrar sua primeira atividade</span
+        >
         <div class="row text-center">
           <div class="mt-5 mb-5">
-            <button class="btn btn-action" [routerLink]="['/student/input-activity']">Nova Atividade</button>
+            <button
+              class="btn btn-action"
+              [routerLink]="['/student/input-activity']"
+            >
+              Nova Atividade
+            </button>
           </div>
         </div>
       </div>
@@ -35,37 +59,78 @@
       <div class="header text-center">
         <h4 class="title">Minhas atividades</h4>
         <p class="category">Atividades já realizadas</p>
-        <hr>
+        <hr />
       </div>
       <div class="content">
-        <p-table [value]="activitiesStudent" selectionMode="single" #dt [globalFilterFields]="['description','hoursDuration','activityType.description', 'status','createdAt']"
-          [paginator]="true" [rows]="5" [responsive]="true" [rowsPerPageOptions]="[5,10,20,50]" [resizableColumns]="true"
-          [reorderableColumns]="true">
+        <p-table
+          [value]="activitiesStudent"
+          selectionMode="single"
+          #dt
+          [globalFilterFields]="[
+            'description',
+            'hoursDuration',
+            'activityType.description',
+            'status',
+            'createdAt'
+          ]"
+          [paginator]="true"
+          [rows]="5"
+          [responsive]="true"
+          [rowsPerPageOptions]="[5, 10, 20, 50]"
+          [resizableColumns]="true"
+          [reorderableColumns]="true"
+        >
           <ng-template pTemplate="caption">
             <div class="input-filter">
               <i class="fa fa-search"></i>
-              <input type="text" class="form-control" placeholder="Pesquisar" (input)="dt.filterGlobal($event.target.value, 'contains')">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pesquisar"
+                (input)="dt.filterGlobal($event.target.value, 'contains')"
+              />
             </div>
           </ng-template>
           <ng-template pTemplate="header">
             <tr>
-              <th [pSortableColumn]="'description'" pResizableColumn pReorderableColumn>
+              <th
+                [pSortableColumn]="'description'"
+                pResizableColumn
+                pReorderableColumn
+              >
                 Atividade
                 <p-sortIcon></p-sortIcon>
               </th>
-              <th [pSortableColumn]="'hoursDuration'" pResizableColumn pReorderableColumn>
+              <th
+                [pSortableColumn]="'hoursDuration'"
+                pResizableColumn
+                pReorderableColumn
+              >
                 Duração
                 <p-sortIcon></p-sortIcon>
               </th>
-              <th [pSortableColumn]="'activityType.description'" pResizableColumn pReorderableColumn>
+              <th
+                [pSortableColumn]="'activityType.description'"
+                pResizableColumn
+                pReorderableColumn
+              >
                 Tipo
                 <p-sortIcon></p-sortIcon>
               </th>
-              <th [pSortableColumn]="'activity.createdAt'" pResizableColumn pReorderableColumn>
+              <th
+                [pSortableColumn]="'activity.createdAt'"
+                pResizableColumn
+                pReorderableColumn
+              >
                 Cadastro
                 <p-sortIcon></p-sortIcon>
               </th>
-              <th [pSortableColumn]="'status'" pResizableColumn pReorderableColumn>Status
+              <th
+                [pSortableColumn]="'status'"
+                pResizableColumn
+                pReorderableColumn
+              >
+                Status
                 <p-sortIcon></p-sortIcon>
               </th>
               <th></th>
@@ -75,31 +140,41 @@
             <tr>
               <td>
                 <span class="ui-column-title">Atividade:</span>
-                {{activity.description}}
+                {{ activity.description }}
               </td>
               <td>
                 <span class="ui-column-title">Duração:</span>
-                {{activity.hoursDuration}}
+                {{ activity.hoursDuration }}
               </td>
               <td>
                 <span class="ui-column-title">Tipo:</span>
-                {{activity.activityType?.description}}
+                {{ activity.activityType?.description }}
               </td>
               <td>
                 <span class="ui-column-title">Cadastro:</span>
-                {{ activity.createdAt?.toDate() | date:'dd/MM/yyyy HH:mm' }}
+                {{ activity.createdAt?.toDate() | date: 'dd/MM/yyyy HH:mm' }}
               </td>
               <td>
                 <span class="ui-column-title">Status:</span>
-                {{activity.status}}
+                {{ activity.status }}
               </td>
               <td class="td-actions">
                 <span class="ui-column-title">Ações:</span>
-                <button type="button" class="btn text-info" [routerLink]="['/student/input-activity/' + activity.uid]"
-                  pTooltip="Editar" tooltipPosition="bottom">
+                <button
+                  type="button"
+                  class="btn text-info"
+                  [routerLink]="['/student/input-activity/' + activity.uid]"
+                  pTooltip="Editar"
+                  tooltipPosition="bottom"
+                >
                   <i class="fa fa-edit"></i>
                 </button>
-                <button type="button" class="btn text-danger" (click)="confirm(activity)" [disabled]="activity.status !== 'Pendente'">
+                <button
+                  type="button"
+                  class="btn text-danger"
+                  (click)="confirm(activity)"
+                  [disabled]="activity.status !== 'Pendente'"
+                >
                   <i class="fa fa-times"></i>
                 </button>
               </td>
@@ -110,9 +185,7 @@
           </ng-template>
           <ng-template pTemplate="emptymessage" let-columns>
             <tr>
-              <td colspan="6">
-                Nenhuma atividade encontrada.
-              </td>
+              <td colspan="6">Nenhuma atividade encontrada.</td>
             </tr>
           </ng-template>
         </p-table>
@@ -121,4 +194,7 @@
   </div>
 </div>
 
-<aka-confirmation key="confirmation" (onAccept)="deleteActivity()"></aka-confirmation>
+<aka-confirmation
+  key="confirmation"
+  (onAccept)="deleteActivity()"
+></aka-confirmation>

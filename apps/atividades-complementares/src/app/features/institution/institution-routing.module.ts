@@ -6,15 +6,16 @@ import { CoursesComponent } from './courses/courses.component';
 
 const routes: Routes = [
   {
-    path: '', children: [
+    path: '',
+    children: [
       { path: 'courses', component: CoursesComponent },
-      { path: 'controllers', component: ControllersComponent }
-    ]
-  }
+      { path: 'controllers', component: ControllersComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class InstitutionRoutingModule { }
+export class InstitutionRoutingModule {}

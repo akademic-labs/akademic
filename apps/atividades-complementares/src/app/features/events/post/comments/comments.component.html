@@ -3,14 +3,16 @@
     <li class="comment">
       <div class="comment-text">
         <div class="comment-body show">
-          <span class="comment-copy">{{comment.description}}</span>
+          <span class="comment-copy">{{ comment.description }}</span>
           <a class="comment-user">
-            {{comment.user.displayName}}
+            {{ comment.user.displayName }}
           </a>
-          <br>
+          <br />
           <span class="comment-date">
             <a class="comment-link">
-              <span>{{comment.createdAt.toDate() | date: 'dd/MM/yyyy hh:mm a'}}</span>
+              <span>{{
+                comment.createdAt.toDate() | date: 'dd/MM/yyyy hh:mm a'
+              }}</span>
             </a>
           </span>
         </div>
@@ -21,11 +23,23 @@
 <div class="row">
   <div class="form-group">
     <div class="col-lg-9">
-      <textarea rows="2" class="form-control" placeholder="Aqui você pode colocar seus comentários." [(ngModel)]="newComment"
-        required></textarea>
+      <textarea
+        rows="2"
+        class="form-control"
+        placeholder="Aqui você pode colocar seus comentários."
+        [(ngModel)]="newComment"
+        required
+      ></textarea>
     </div>
   </div>
   <div class="col-lg-3">
-    <button type="submit" class="btn btn-action" (click)="addComment()" [disabled]="!newComment">Comentar</button>
+    <button
+      type="submit"
+      class="btn btn-action"
+      (click)="addComment()"
+      [disabled]="!newComment"
+    >
+      Comentar
+    </button>
   </div>
 </div>

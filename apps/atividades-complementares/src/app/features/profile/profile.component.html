@@ -1,154 +1,265 @@
 <div *ngIf="user$ | async as user">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card border-top">
-                <div class="header">
-                    <h4 class="title"><i class="fa fa fa-user-circle-o"></i>Meu Perfil</h4>
-                </div>
-                <div class="content">
-                    <!-- <aka-form-debug [form]="form"></aka-form-debug> -->
-                    <div class="card card-user">
-                        <div class="image background-sign">
-                        </div>
-                        <div class="content">
-                            <div class="author">
-                                <a href="#">
-                                    <img class="avatar border-gray" [src]="user.photoURL ? user.photoURL : '../../../assets/img/default-avatar.png'"
-                                        alt="Foto do perfil" style="max-width: 150px; max-height: 150px;" />
-                                    <h4 class="title label-overflow">{{user.displayName}}</h4>
-                                </a>
-                            </div>
-                            <div class="label-overflow">
-                                <h4>
-                                    {{ user.roles.student ? 'Estudante' : user.roles.controller ? 'Controlador' :
-                                    user.roles.institution ? 'Instituição' : 'Administrador' }}
-                                </h4>
-                                <h5>{{user.email}}</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <form [formGroup]="form" (submit)="onSubmit()">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Matrícula</label>
-                                    <input type="text" class="form-control" formControlName="registration">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Nome completo</label>
-                                    <input type="text" class="form-control" formControlName="displayName">
-                                </div>
-                                <aka-message-control-error [control]="form.get('displayName')" error="required" msg="Nome completo é obrigatório."></aka-message-control-error>
-                            </div>
-                            <div class="col-md-3" *ngIf="user.roles.student || user.roles.controller">
-                                <div class="form-group">
-                                    <label>Data de nascimento</label>
-                                    <input type="date" class="form-control" formControlName="birthday" [max]="today"
-                                        (input)="validatorDate('birthday', $event.target.value)">
-                                </div>
-                                <aka-message-control-error [control]="form.get('birthday')" error="dateGreaterToday"
-                                    msg="Data é maior que data atual."></aka-message-control-error>
-                            </div>
-                        </div>
-                        <div formGroupName="address">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>CEP</label>
-                                        <input type="text" maxlength="10" class="form-control" formControlName="zipCode"
-                                            (keyup)="cepMask($event.target.value)" (blur)="queryCEP()">
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label>Endereço</label>
-                                        <input type="text" class="form-control" formControlName="street">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Número</label>
-                                        <input type="number" class="form-control" formControlName="number">
-                                    </div>
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label>Complemento</label>
-                                        <input type="text" class="form-control" formControlName="complement">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Bairro</label>
-                                        <input type="text" class="form-control" formControlName="neighborhood">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Estado</label>
-                                        <input type="text" class="form-control" formControlName="state">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Cidade</label>
-                                        <input type="text" class="form-control" formControlName="city">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>País</label>
-                                        <input type="text" class="form-control" formControlName="country">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" *ngIf="user.roles.student">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Vincular Instituição</label>
-                                    <p-autoComplete formControlName="institution" [suggestions]="institutions$ | async"
-                                        (completeMethod)="getInstitutions($event)" field="instituicao" (onSelect)="getCourses()"
-                                        [placeholder]="form.get('address.state').value ? 'Digite a instituição..' : 'Digite o cep primeiro..'"
-                                        [minLength]="1" maxlength="30" emptyMessage="Nenhum resultado."></p-autoComplete>
-                                </div>
-                                <aka-message-control-error [control]="form.get('institution')" error="invalid" msg="Instituição inválida."></aka-message-control-error>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Vincular Curso</label>
-                                    <p-dropdown #dropdownCourses formControlName="course" [options]="courses$ | async"
-                                        optionLabel="name" [placeholder]="form.get('institution').value?.id ? 'Selecione o curso..' : 'Selecione uma instituição..'"
-                                        filter="true" [showClear]="true" emptyFilterMessage="Nenhum resultado."></p-dropdown>
-                                </div>
-                                <aka-message-control-error [control]="form.get('course')" error="invalid" msg="Curso é obrigatório."></aka-message-control-error>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Sobre</label>
-                                    <textarea rows="4" class="form-control" placeholder="Aqui você pode colocar sua descrição"
-                                        formControlName="about"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-4 right">
-                                <button type="submit" class="btn btn-action btn-block" [disabled]="disabledSave && form.invalid">
-                                    Atualizar Perfil
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card border-top">
+        <div class="header">
+          <h4 class="title">
+            <i class="fa fa fa-user-circle-o"></i>Meu Perfil
+          </h4>
         </div>
+        <div class="content">
+          <!-- <aka-form-debug [form]="form"></aka-form-debug> -->
+          <div class="card card-user">
+            <div class="image background-sign"></div>
+            <div class="content">
+              <div class="author">
+                <a href="#">
+                  <img
+                    class="avatar border-gray"
+                    [src]="
+                      user.photoURL
+                        ? user.photoURL
+                        : '../../../assets/img/default-avatar.png'
+                    "
+                    alt="Foto do perfil"
+                    style="max-width: 150px; max-height: 150px"
+                  />
+                  <h4 class="title label-overflow">{{ user.displayName }}</h4>
+                </a>
+              </div>
+              <div class="label-overflow">
+                <h4>
+                  {{
+                    user.roles.student
+                      ? 'Estudante'
+                      : user.roles.controller
+                      ? 'Controlador'
+                      : user.roles.institution
+                      ? 'Instituição'
+                      : 'Administrador'
+                  }}
+                </h4>
+                <h5>{{ user.email }}</h5>
+              </div>
+            </div>
+          </div>
+          <form [formGroup]="form" (submit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Matrícula</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="registration"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Nome completo</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="displayName"
+                  />
+                </div>
+                <aka-message-control-error
+                  [control]="form.get('displayName')"
+                  error="required"
+                  msg="Nome completo é obrigatório."
+                ></aka-message-control-error>
+              </div>
+              <div
+                class="col-md-3"
+                *ngIf="user.roles.student || user.roles.controller"
+              >
+                <div class="form-group">
+                  <label>Data de nascimento</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    formControlName="birthday"
+                    [max]="today"
+                    (input)="validatorDate('birthday', $event.target.value)"
+                  />
+                </div>
+                <aka-message-control-error
+                  [control]="form.get('birthday')"
+                  error="dateGreaterToday"
+                  msg="Data é maior que data atual."
+                ></aka-message-control-error>
+              </div>
+            </div>
+            <div formGroupName="address">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>CEP</label>
+                    <input
+                      type="text"
+                      maxlength="10"
+                      class="form-control"
+                      formControlName="zipCode"
+                      (keyup)="cepMask($event.target.value)"
+                      (blur)="queryCEP()"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label>Endereço</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="street"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Número</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      formControlName="number"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label>Complemento</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="complement"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Bairro</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="neighborhood"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Estado</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="state"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Cidade</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="city"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>País</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="country"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="user.roles.student">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Vincular Instituição</label>
+                  <p-autoComplete
+                    formControlName="institution"
+                    [suggestions]="institutions$ | async"
+                    (completeMethod)="getInstitutions($event)"
+                    field="instituicao"
+                    (onSelect)="getCourses()"
+                    [placeholder]="
+                      form.get('address.state').value
+                        ? 'Digite a instituição..'
+                        : 'Digite o cep primeiro..'
+                    "
+                    [minLength]="1"
+                    maxlength="30"
+                    emptyMessage="Nenhum resultado."
+                  ></p-autoComplete>
+                </div>
+                <aka-message-control-error
+                  [control]="form.get('institution')"
+                  error="invalid"
+                  msg="Instituição inválida."
+                ></aka-message-control-error>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Vincular Curso</label>
+                  <p-dropdown
+                    #dropdownCourses
+                    formControlName="course"
+                    [options]="courses$ | async"
+                    optionLabel="name"
+                    [placeholder]="
+                      form.get('institution').value?.id
+                        ? 'Selecione o curso..'
+                        : 'Selecione uma instituição..'
+                    "
+                    filter="true"
+                    [showClear]="true"
+                    emptyFilterMessage="Nenhum resultado."
+                  ></p-dropdown>
+                </div>
+                <aka-message-control-error
+                  [control]="form.get('course')"
+                  error="invalid"
+                  msg="Curso é obrigatório."
+                ></aka-message-control-error>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Sobre</label>
+                  <textarea
+                    rows="4"
+                    class="form-control"
+                    placeholder="Aqui você pode colocar sua descrição"
+                    formControlName="about"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-md-4 right">
+                <button
+                  type="submit"
+                  class="btn btn-action btn-block"
+                  [disabled]="disabledSave && form.invalid"
+                >
+                  Atualizar Perfil
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

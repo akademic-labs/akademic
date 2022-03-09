@@ -5,12 +5,7 @@ import { InputActivityComponent } from './input-activity/input-activity.componen
 import { StudentRoutingModule } from './student-routing.module';
 
 @NgModule({
-  imports: [
-    StudentRoutingModule,
-    SharedModule
-  ],
-  declarations: [
-    InputActivityComponent
-  ]
+  imports: [StudentRoutingModule, SharedModule],
+  declarations: [InputActivityComponent],
 })
-export class StudentModule { }
+export class StudentModule {}

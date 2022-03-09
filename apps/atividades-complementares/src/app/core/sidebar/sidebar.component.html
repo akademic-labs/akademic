@@ -1,34 +1,48 @@
 <div class="sidebar" data-color="purple" data-image="">
-    <div class="sidebar-background" style="background-image: url(../../../assets/img/sidebar.jpg)"></div>
-    <div class="sidebar-wrapper">
-        <div class="logo">
-            <a [routerLink]="['/dashboard']">
-                <img src="../../../assets/img/akademic-name-white.png" width="180px">
-            </a>
-        </div>
-        <ul class="nav responsive-nav">
-            <li class="user" *ngIf="_auth.user$ | async as user">
-                <div class="photo">
-                    <img [src]="user.photoURL ? user.photoURL : '../../../assets/img/default-avatar.png'" width="34px">
-                </div>
-                <a>
-                    <span>
-                        {{user.displayName}}
-                    </span>
-                </a>
-            </li>
-            <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
-                <a [routerLink]="[menuItem.path]" (click)="sidebarClose()">
-                    <i class="{{menuItem.icon}}"></i>
-                    <p>{{menuItem.title}}</p>
-                </a>
-            </li>
-            <li class="active-pro">
-                <a (click)="logOut()" class="pointer">
-                    <i class="fa fa-unlock"></i>
-                    <p>Log Out</p>
-                </a>
-            </li>
-        </ul>
+  <div
+    class="sidebar-background"
+    style="background-image: url(../../../assets/img/sidebar.jpg)"
+  ></div>
+  <div class="sidebar-wrapper">
+    <div class="logo">
+      <a [routerLink]="['/dashboard']">
+        <img src="../../../assets/img/akademic-name-white.png" width="180px" />
+      </a>
     </div>
+    <ul class="nav responsive-nav">
+      <li class="user" *ngIf="_auth.user$ | async as user">
+        <div class="photo">
+          <img
+            [src]="
+              user.photoURL
+                ? user.photoURL
+                : '../../../assets/img/default-avatar.png'
+            "
+            width="34px"
+          />
+        </div>
+        <a>
+          <span>
+            {{ user.displayName }}
+          </span>
+        </a>
+      </li>
+      <li
+        routerLinkActive="active"
+        *ngFor="let menuItem of menuItems"
+        class="{{ menuItem.class }}"
+      >
+        <a [routerLink]="[menuItem.path]" (click)="sidebarClose()">
+          <i class="{{ menuItem.icon }}"></i>
+          <p>{{ menuItem.title }}</p>
+        </a>
+      </li>
+      <li class="active-pro">
+        <a (click)="logOut()" class="pointer">
+          <i class="fa fa-unlock"></i>
+          <p>Log Out</p>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>

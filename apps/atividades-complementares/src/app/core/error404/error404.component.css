@@ -1,16 +1,15 @@
 .page-404 {
-    position: relative;
-    width: 350px;
-    height: 200px;
-    margin: 100px auto;
-    text-align: center;
-  }
-  
-  .text-404 {
-    font-size: 138px;
-    color: #555;
-    text-align: center;
-    line-height: 200px;
-    position: relative;
-  }
-  
+  position: relative;
+  width: 350px;
+  height: 200px;
+  margin: 100px auto;
+  text-align: center;
+}
+
+.text-404 {
+  font-size: 138px;
+  color: #555;
+  text-align: center;
+  line-height: 200px;
+  position: relative;
+}

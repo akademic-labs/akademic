@@ -1,4 +1,10 @@
 <div class="row">
-    <aka-student-view *ngIf="_rolesService.isStudent(user)" [user]="user"></aka-student-view>
-    <aka-controller-view *ngIf="_rolesService.isController(user)" [user]="user"></aka-controller-view>
+  <aka-student-view
+    *ngIf="_rolesService.isStudent(user)"
+    [user]="user"
+  ></aka-student-view>
+  <aka-controller-view
+    *ngIf="_rolesService.isController(user)"
+    [user]="user"
+  ></aka-controller-view>
 </div>

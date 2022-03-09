@@ -5,16 +5,8 @@ import { FileSizePipe } from './file-size.pipe';
 import { SafePipe } from './safe.pipe';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: [
-    SafePipe,
-    FileSizePipe
-  ],
-  exports: [
-    SafePipe,
-    FileSizePipe
-  ]
+  imports: [CommonModule],
+  declarations: [SafePipe, FileSizePipe],
+  exports: [SafePipe, FileSizePipe],
 })
-export class PipesModule { }
+export class PipesModule {}

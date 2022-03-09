@@ -20,46 +20,43 @@ import { MessageControlErrorComponent } from './message-control-error/message-co
 import { UploadsModule } from './uploads-page/uploads.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        // PrimeNG
-        ToastModule,
-        TooltipModule,
-        TableModule,
-        DropdownModule,
-        ConfirmDialogModule,
-        AutoCompleteModule,
-        // Pipes
-        PipesModule,
-        // Directives
-        DirectivesModule
-    ],
-    declarations: [
-        MessageControlErrorComponent,
-        FormDebugComponent
-    ],
-    exports: [
-        CommonModule,
-        ReactiveFormsModule,
-        // Components
-        ConfirmationModule,
-        MessageControlErrorComponent,
-        FormDebugComponent,
-        ChartCardModule,
-        UploadsModule,
-        CanDeactivateModule,
-        // PrimeNG
-        ToastModule,
-        TooltipModule,
-        TableModule,
-        DropdownModule,
-        PickListModule,
-        AutoCompleteModule,
-        // Pipes
-        PipesModule,
-        // Directives
-        DirectivesModule
-    ],
-    providers: [ConfirmationService]
+  imports: [
+    CommonModule,
+    // PrimeNG
+    ToastModule,
+    TooltipModule,
+    TableModule,
+    DropdownModule,
+    ConfirmDialogModule,
+    AutoCompleteModule,
+    // Pipes
+    PipesModule,
+    // Directives
+    DirectivesModule,
+  ],
+  declarations: [MessageControlErrorComponent, FormDebugComponent],
+  exports: [
+    CommonModule,
+    ReactiveFormsModule,
+    // Components
+    ConfirmationModule,
+    MessageControlErrorComponent,
+    FormDebugComponent,
+    ChartCardModule,
+    UploadsModule,
+    CanDeactivateModule,
+    // PrimeNG
+    ToastModule,
+    TooltipModule,
+    TableModule,
+    DropdownModule,
+    PickListModule,
+    AutoCompleteModule,
+    // Pipes
+    PipesModule,
+    // Directives
+    DirectivesModule,
+  ],
+  providers: [ConfirmationService],
 })
-export class SharedModule { }
+export class SharedModule {}

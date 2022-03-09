@@ -1,5 +1,5 @@
-import { ActivityType } from "./activity-type.interface";
-import { Course } from "./course.interface";
+import { ActivityType } from './activity-type.interface';
+import { Course } from './course.interface';
 
 export interface Rules {
   // collection

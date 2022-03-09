@@ -1,5 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { AutoComplete } from 'primeng/autocomplete';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -16,10 +21,9 @@ import { ValidatorService } from './../../../services/validator.service';
 @Component({
   selector: 'aka-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.css'],
 })
 export class FormComponent implements OnInit {
-
   form: FormGroup;
   states$: Observable<States[]>;
   cities$: Observable<Cities[]>;
@@ -35,7 +39,7 @@ export class FormComponent implements OnInit {
     private _notify: NotifyService,
     private _utilsService: UtilsService,
     private _validatorService: ValidatorService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.buildForm();
@@ -55,12 +59,14 @@ export class FormComponent implements OnInit {
       city: new FormControl({ value: '', disabled: true }, Validators.required),
       createdAt: new Date(),
       updatedAt: new Date(),
-      votes: [0]
+      votes: [0],
     });
-    setTimeout(() => { this.inputTitle.nativeElement.focus(); }, 100);
+    setTimeout(() => {
+      this.inputTitle.nativeElement.focus();
+    }, 100);
   }
 
-  async onSubmit({ value, valid }: { value: Post, valid: boolean }) {
+  async onSubmit({ value, valid }: { value: Post; valid: boolean }) {
     if (valid) {
       const user = await this._auth.user$.pipe(take(1)).toPromise();
       value.owner = user.uid;
@@ -78,7 +84,9 @@ export class FormComponent implements OnInit {
     const state = this.form.get('state').value;
     if (state) {
       this.form.get('city').enable();
-      setTimeout(() => { this.inputCity.inputEL.nativeElement.focus(); }, 100);
+      setTimeout(() => {
+        this.inputCity.inputEL.nativeElement.focus();
+      }, 100);
       if (event) {
         this.cities$ = this._utilsService.getCities(state.id, event.query);
       }
@@ -105,5 +113,4 @@ export class FormComponent implements OnInit {
       }
     }
   }
-
 }

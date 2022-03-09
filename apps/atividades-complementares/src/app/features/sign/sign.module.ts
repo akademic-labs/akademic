@@ -8,11 +8,13 @@ import { SignUpComponent } from './signup/sign-up.component';
 import { SignUpFormComponent } from './signup/sign-up-form/sign-up-form.component';
 
 @NgModule({
-  imports: [
-    RouterModule,
-    SharedModule
+  imports: [RouterModule, SharedModule],
+  declarations: [
+    SignComponent,
+    SignInComponent,
+    SignUpComponent,
+    SignUpFormComponent,
   ],
-  declarations: [SignComponent, SignInComponent, SignUpComponent, SignUpFormComponent],
-  exports: [SignUpFormComponent]
+  exports: [SignUpFormComponent],
 })
-export class SignModule { }
+export class SignModule {}

@@ -7,10 +7,9 @@ interface MessagesIndex {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ErrorService {
-
   params = {
     'user-not-found': 'Não há nenhum usuário com os valores fornecidos.',
     'wrong-password': 'A senha está incorreta',
@@ -26,18 +25,21 @@ export class ErrorService {
     'unauthorized-domain': 'Sua rede está bloqueando a solicitação',
     'cancelled-popup-request': 'Você cancelou a solicitação',
     'auth/email-already-in-use': 'Esse endereço de e-mail já está em uso',
-    'object-not-found': 'Arquivo não encontrado'
+    'object-not-found': 'Arquivo não encontrado',
     /* Add here the others IDs and the corresponding messages */
   } as MessagesIndex;
 
-  constructor(private _notify: NotifyService) { }
+  constructor(private _notify: NotifyService) {}
 
   public handleErrorByCode(code: string) {
     code = code.split('/')[1];
     if (this.params[code]) {
       return this._notify.update('danger', this.params[code]);
     } else {
-      return this._notify.update('danger', `Ocorreu algum erro desconhecido! <br> Código erro: ${code}`);
+      return this._notify.update(
+        'danger',
+        `Ocorreu algum erro desconhecido! <br> Código erro: ${code}`
+      );
     }
   }
 

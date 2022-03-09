@@ -8,16 +8,21 @@ import { ValidateActivityComponent } from './validate-activity/validate-activity
 
 const routes: Routes = [
   {
-    path: '', children: [
+    path: '',
+    children: [
       { path: 'activity-types', component: ActivityTypeComponent },
-      { path: 'validate-activity/:id', component: ValidateActivityComponent, resolve: { activity: ActivityResolve } },
-      { path: 'rules', component: RulesComponent }
-    ]
-  }
+      {
+        path: 'validate-activity/:id',
+        component: ValidateActivityComponent,
+        resolve: { activity: ActivityResolve },
+      },
+      { path: 'rules', component: RulesComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ControllerRoutingModule { }
+export class ControllerRoutingModule {}

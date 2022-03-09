@@ -3,10 +3,8 @@ import { CommonModule } from '@angular/common';
 import { DropZoneDirective } from './drop-zone.directive';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   declarations: [DropZoneDirective],
-  exports: [DropZoneDirective]
+  exports: [DropZoneDirective],
 })
-export class DirectivesModule { }
+export class DirectivesModule {}

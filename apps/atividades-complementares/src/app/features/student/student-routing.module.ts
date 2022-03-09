@@ -6,15 +6,24 @@ import { InputActivityComponent } from './input-activity/input-activity.componen
 
 const routes: Routes = [
   {
-    path: '', children: [
-      { path: 'input-activity', component: InputActivityComponent, canDeactivate: [CanDeactivateGuard] },
-      { path: 'input-activity/:id', component: InputActivityComponent, canDeactivate: [CanDeactivateGuard] }
-    ]
-  }
+    path: '',
+    children: [
+      {
+        path: 'input-activity',
+        component: InputActivityComponent,
+        canDeactivate: [CanDeactivateGuard],
+      },
+      {
+        path: 'input-activity/:id',
+        component: InputActivityComponent,
+        canDeactivate: [CanDeactivateGuard],
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class StudentRoutingModule { }
+export class StudentRoutingModule {}

@@ -1,14 +1,14 @@
 <div class="card border-top">
   <div class="header">
-    <div class="title">
-      <i class="fa fa-comments"></i> Eventos
-    </div>
-    <hr>
+    <div class="title"><i class="fa fa-comments"></i> Eventos</div>
+    <hr />
   </div>
-  <img *ngIf="loading" class="loading" src="assets/img/loading.gif">
+  <img *ngIf="loading" class="loading" src="assets/img/loading.gif" />
   <div *ngIf="!loading" class="content">
     <div class="clearfix mb-5">
-      <button class="btn btn-action pull-right" [routerLink]="['./create']">Faça uma postagem</button>
+      <button class="btn btn-action pull-right" [routerLink]="['./create']">
+        Faça uma postagem
+      </button>
     </div>
     <ng-container *ngFor="let post of posts">
       <aka-post [post]="post"></aka-post>

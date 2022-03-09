@@ -9,19 +9,23 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'aka-sign-up',
-  templateUrl: './sign-up.component.html'
+  templateUrl: './sign-up.component.html',
 })
 export class SignUpComponent implements OnInit {
   courses$: Observable<Course[]>;
   loading = false;
 
-  constructor(public _auth: AuthService, private _coursesService: CourseService, private _router: Router) { }
+  constructor(
+    public _auth: AuthService,
+    private _coursesService: CourseService,
+    private _router: Router
+  ) {}
 
   ngOnInit() {
     this.courses$ = this._coursesService.get();
   }
 
-  onSubmit({ value, valid }: { value: User, valid: boolean }) {
+  onSubmit({ value, valid }: { value: User; valid: boolean }) {
     if (valid) {
       this.loading = true;
       const dataUser: User = {
@@ -32,14 +36,15 @@ export class SignUpComponent implements OnInit {
         status: 'A',
         roles: { student: true },
         createdAt: new Date(),
-        course: value.course
+        course: value.course,
       };
-      this._auth.createUserWithEmailAndPassword(dataUser, value.password)
+      this._auth
+        .createUserWithEmailAndPassword(dataUser, value.password)
         .then(() => {
           this._router.navigate(['/dashboard']);
           this.loading = false;
         })
-        .catch(() => this.loading = false);
+        .catch(() => (this.loading = false));
     }
   }
 }

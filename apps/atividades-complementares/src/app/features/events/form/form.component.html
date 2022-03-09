@@ -4,79 +4,182 @@
       <div class="title">
         <i class="fa fa-comments"></i> Criar Publicação de Evento
       </div>
-      <hr>
+      <hr />
     </div>
     <div class="content">
       <div class="clearfix mb-5">
-        <button class="btn btn-action" [routerLink]="['/events']">Eventos</button>
+        <button class="btn btn-action" [routerLink]="['/events']">
+          Eventos
+        </button>
       </div>
       <!-- <aka-form-debug [form]="form"></aka-form-debug> -->
       <div class="row">
         <div class="col-xs-12 col-md-6">
           <div class="form-group">
             <label for="activityType">Título</label>
-            <input #inputTitle type="text" class="form-control" formControlName="title" placeholder="Informe um título o evento...">
+            <input
+              #inputTitle
+              type="text"
+              class="form-control"
+              formControlName="title"
+              placeholder="Informe um título o evento..."
+            />
           </div>
-          <aka-message-control-error [control]="form.get('title')" error="required" msg="Título é obrigatório."></aka-message-control-error>
+          <aka-message-control-error
+            [control]="form.get('title')"
+            error="required"
+            msg="Título é obrigatório."
+          ></aka-message-control-error>
         </div>
         <div class="col-xs-12 col-md-3">
           <div class="form-group">
             <label for="initialDate">Data Inicial</label>
-            <input type="date" class="form-control" formControlName="initialDate" [min]="today" (input)="validatorDate('initialDate', $event.target.value)">
+            <input
+              type="date"
+              class="form-control"
+              formControlName="initialDate"
+              [min]="today"
+              (input)="validatorDate('initialDate', $event.target.value)"
+            />
           </div>
-          <aka-message-control-error [control]="form.get('initialDate')" error="required" msg="Data inicial é obrigatório."></aka-message-control-error>
-          <aka-message-control-error [control]="form.get('initialDate')" error="dateSmallerToday" msg="Data inicial menor que data atual."></aka-message-control-error>
-          <aka-message-control-error [control]="form.get('initialDate')" error="dateGreaterFinal" msg="Data inicial é maior que data final."></aka-message-control-error>
+          <aka-message-control-error
+            [control]="form.get('initialDate')"
+            error="required"
+            msg="Data inicial é obrigatório."
+          ></aka-message-control-error>
+          <aka-message-control-error
+            [control]="form.get('initialDate')"
+            error="dateSmallerToday"
+            msg="Data inicial menor que data atual."
+          ></aka-message-control-error>
+          <aka-message-control-error
+            [control]="form.get('initialDate')"
+            error="dateGreaterFinal"
+            msg="Data inicial é maior que data final."
+          ></aka-message-control-error>
         </div>
         <div class="col-xs-12 col-md-3">
           <div class="form-group">
             <label for="finalDate">Data Final</label>
-            <input type="date" class="form-control" formControlName="finalDate" [min]="today" (input)="validatorDate('finalDate', $event.target.value)">
+            <input
+              type="date"
+              class="form-control"
+              formControlName="finalDate"
+              [min]="today"
+              (input)="validatorDate('finalDate', $event.target.value)"
+            />
           </div>
-          <aka-message-control-error [control]="form.get('finalDate')" error="required" msg="Data final é obrigatório."></aka-message-control-error>
-          <aka-message-control-error [control]="form.get('finalDate')" error="dateSmallerToday" msg="Data final menor que data atual."></aka-message-control-error>
-          <aka-message-control-error [control]="form.get('finalDate')" error="dateGreaterInitial" msg="Data final é menor que data inicial."></aka-message-control-error>
+          <aka-message-control-error
+            [control]="form.get('finalDate')"
+            error="required"
+            msg="Data final é obrigatório."
+          ></aka-message-control-error>
+          <aka-message-control-error
+            [control]="form.get('finalDate')"
+            error="dateSmallerToday"
+            msg="Data final menor que data atual."
+          ></aka-message-control-error>
+          <aka-message-control-error
+            [control]="form.get('finalDate')"
+            error="dateGreaterInitial"
+            msg="Data final é menor que data inicial."
+          ></aka-message-control-error>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12 col-md-6">
           <div class="form-group">
             <label for="local">Local</label>
-            <input type="text" class="form-control" formControlName="local" placeholder="Informe o local..." maxlength="50">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="local"
+              placeholder="Informe o local..."
+              maxlength="50"
+            />
           </div>
-          <aka-message-control-error [control]="form.get('local')" error="required" msg="Local é obrigatório."></aka-message-control-error>
-          <aka-message-control-error [control]="form.get('local')" error="maxlength" msg="Local não pode ser maior que 50 caracteres."></aka-message-control-error>
+          <aka-message-control-error
+            [control]="form.get('local')"
+            error="required"
+            msg="Local é obrigatório."
+          ></aka-message-control-error>
+          <aka-message-control-error
+            [control]="form.get('local')"
+            error="maxlength"
+            msg="Local não pode ser maior que 50 caracteres."
+          ></aka-message-control-error>
         </div>
         <div class="col-xs-12 col-md-3">
           <div class="form-group">
             <label for="state">Estado</label>
-            <p-dropdown formControlName="state" [options]="states$ | async" optionLabel="nome" (onChange)="getCities()"
-              placeholder="Selecione" filter="true" [showClear]="true" emptyFilterMessage="Nenhum resultado."></p-dropdown>
+            <p-dropdown
+              formControlName="state"
+              [options]="states$ | async"
+              optionLabel="nome"
+              (onChange)="getCities()"
+              placeholder="Selecione"
+              filter="true"
+              [showClear]="true"
+              emptyFilterMessage="Nenhum resultado."
+            ></p-dropdown>
           </div>
-          <aka-message-control-error [control]="form.get('state')" error="required" msg="Estado é obrigatório."></aka-message-control-error>
+          <aka-message-control-error
+            [control]="form.get('state')"
+            error="required"
+            msg="Estado é obrigatório."
+          ></aka-message-control-error>
         </div>
         <div class="col-xs-12 col-md-3">
           <div class="form-group">
             <label for="city">Cidade</label>
-            <p-autoComplete #inputCity formControlName="city" [suggestions]="cities$ | async" (completeMethod)="getCities($event)"
-              field="nome" [placeholder]="form.get('state').value ? 'Digite a cidade..' : 'Selecione o estado..'"
-              [minLength]="1" maxlength="30" emptyMessage="Nenhum resultado."></p-autoComplete>
+            <p-autoComplete
+              #inputCity
+              formControlName="city"
+              [suggestions]="cities$ | async"
+              (completeMethod)="getCities($event)"
+              field="nome"
+              [placeholder]="
+                form.get('state').value
+                  ? 'Digite a cidade..'
+                  : 'Selecione o estado..'
+              "
+              [minLength]="1"
+              maxlength="30"
+              emptyMessage="Nenhum resultado."
+            ></p-autoComplete>
           </div>
-          <aka-message-control-error [control]="form.get('city')" error="required" msg="Cidade é obrigatório."></aka-message-control-error>
+          <aka-message-control-error
+            [control]="form.get('city')"
+            error="required"
+            msg="Cidade é obrigatório."
+          ></aka-message-control-error>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
             <label for="hoursDuration">Descrição do Evento</label>
-            <textarea rows="3" class="form-control" placeholder="Aqui você pode colocar sua descrição" formControlName="description"></textarea>
+            <textarea
+              rows="3"
+              class="form-control"
+              placeholder="Aqui você pode colocar sua descrição"
+              formControlName="description"
+            ></textarea>
           </div>
-          <aka-message-control-error [control]="form.get('description')" error="required" msg="Descrição é obrigatório."></aka-message-control-error>
+          <aka-message-control-error
+            [control]="form.get('description')"
+            error="required"
+            msg="Descrição é obrigatório."
+          ></aka-message-control-error>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12 col-md-3 right">
-          <button type="submit" class="btn btn-action btn-block" [disabled]="(disabledSave && form.invalid)">
+          <button
+            type="submit"
+            class="btn btn-action btn-block"
+            [disabled]="disabledSave && form.invalid"
+          >
             Criar
           </button>
         </div>

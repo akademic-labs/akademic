@@ -5,11 +5,8 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmationComponent } from './confirmation.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ToastModule
-  ],
+  imports: [CommonModule, ToastModule],
   declarations: [ConfirmationComponent],
-  exports: [ConfirmationComponent]
+  exports: [ConfirmationComponent],
 })
-export class ConfirmationModule { }
+export class ConfirmationModule {}

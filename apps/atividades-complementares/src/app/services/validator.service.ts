@@ -4,20 +4,22 @@ import { FormGroup } from '@angular/forms';
 import { NotifyService } from './notify.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ValidatorService {
-
-  constructor(private _notify: NotifyService) { }
+  constructor(private _notify: NotifyService) {}
 
   markAllFieldsAsDirty(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach(field => {
+    Object.keys(formGroup.controls).forEach((field) => {
       const control = formGroup.get(field);
       control.markAsDirty();
       if (control instanceof FormGroup) {
         this.markAllFieldsAsDirty(control);
       }
     });
-    this._notify.update('danger', 'Verificar campos obrigatórios e/ou inválidos!');
+    this._notify.update(
+      'danger',
+      'Verificar campos obrigatórios e/ou inválidos!'
+    );
   }
 }

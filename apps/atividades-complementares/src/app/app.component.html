@@ -1,10 +1,10 @@
 <div class="wrapper" id="main">
-    <aka-sidebar *ngIf="user"></aka-sidebar>
-    <div class="{{ user ? 'main-panel' : '' }}">
-        <aka-navbar *ngIf="user"></aka-navbar>
-        <div class="{{ user ? 'main-content' : '' }}">
-            <router-outlet></router-outlet>
-        </div>
-        <aka-footer *ngIf="user"></aka-footer>
+  <aka-sidebar *ngIf="user"></aka-sidebar>
+  <div class="{{ user ? 'main-panel' : '' }}">
+    <aka-navbar *ngIf="user"></aka-navbar>
+    <div class="{{ user ? 'main-content' : '' }}">
+      <router-outlet></router-outlet>
     </div>
+    <aka-footer *ngIf="user"></aka-footer>
+  </div>
 </div>

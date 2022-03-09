@@ -8,16 +8,14 @@ import { empty } from 'rxjs';
 
 @Injectable()
 export class ActivityResolve implements Resolve<Activity> {
-
-  constructor(private _activityService: ActivityService) { }
+  constructor(private _activityService: ActivityService) {}
 
   resolve(route: ActivatedRouteSnapshot) {
-    return this._activityService.getActivityById(route.paramMap.get('id'))
-      .pipe(
-        take(1),
-        catchError(() => {
-          return empty();
-        })
-      );
+    return this._activityService.getActivityById(route.paramMap.get('id')).pipe(
+      take(1),
+      catchError(() => {
+        return empty();
+      })
+    );
   }
 }

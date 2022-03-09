@@ -6,13 +6,7 @@ import { CoursesComponent } from './courses/courses.component';
 import { InstitutionsComponent } from './institutions/institutions.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    AdminRoutingModule
-  ],
-  declarations: [
-    InstitutionsComponent,
-    CoursesComponent
-  ]
+  imports: [SharedModule, AdminRoutingModule],
+  declarations: [InstitutionsComponent, CoursesComponent],
 })
-export class AdminModule { }
+export class AdminModule {}

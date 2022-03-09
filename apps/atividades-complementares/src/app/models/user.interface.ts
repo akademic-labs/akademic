@@ -6,7 +6,7 @@ export interface Roles {
   controller?: boolean;
   institution?: boolean;
   administrator?: boolean;
-};
+}
 
 export interface User {
   uid: string;

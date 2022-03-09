@@ -2,7 +2,8 @@
   padding: 10px;
 }
 
-.form-control, .form-control:focus {
+.form-control,
+.form-control:focus {
   float: none;
   font-size: 15px;
   border-width: 0px 0px 1px 0px;
@@ -34,9 +35,9 @@
 
 .hr-section::before,
 .hr-section::after {
-  content: "";
+  content: '';
   flex-grow: 1;
-  background: #9A9A9A;
+  background: #9a9a9a;
   height: 1px;
   font-size: 0px;
   line-height: 0px;

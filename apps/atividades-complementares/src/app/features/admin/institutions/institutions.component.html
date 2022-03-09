@@ -2,10 +2,8 @@
   <div class="col-md-12">
     <div class="card border-top">
       <div class="header">
-        <div class="title">
-          <i class="fa fa-university"></i> {{ title }}
-        </div>
-        <hr>
+        <div class="title"><i class="fa fa-university"></i> {{ title }}</div>
+        <hr />
       </div>
       <div class="content">
         <form [formGroup]="institutionForm" (ngSubmit)="save()">
@@ -13,30 +11,60 @@
             <div class="col-xs-12 col-sm-12 col-md-6">
               <div class="form-group">
                 <label for="name">Nome</label>
-                <input type="text" class="form-control" formControlName="name" #inputFocus>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                  #inputFocus
+                />
               </div>
-              <aka-message-control-error [control]="institutionForm.get('name')" error="required" msg="Nome é obrigatório."></aka-message-control-error>
+              <aka-message-control-error
+                [control]="institutionForm.get('name')"
+                error="required"
+                msg="Nome é obrigatório."
+              ></aka-message-control-error>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-2 label-block">
               <label></label>
-              <button [disabled]="institutionForm.invalid" type="submit" class="btn btn-action left">{{ button }}</button>
+              <button
+                [disabled]="institutionForm.invalid"
+                type="submit"
+                class="btn btn-action left"
+              >
+                {{ button }}
+              </button>
             </div>
           </div>
         </form>
       </div>
       <div class="content">
-        <p-table #dt [value]="institutions$ | async" selectionMode="single" [paginator]="true" [rows]="5" [responsive]="true"
-          [rowsPerPageOptions]="[5,10,20,50]" [resizableColumns]="true" [reorderableColumns]="true" [columns]="cols">
+        <p-table
+          #dt
+          [value]="institutions$ | async"
+          selectionMode="single"
+          [paginator]="true"
+          [rows]="5"
+          [responsive]="true"
+          [rowsPerPageOptions]="[5, 10, 20, 50]"
+          [resizableColumns]="true"
+          [reorderableColumns]="true"
+          [columns]="cols"
+        >
           <ng-template pTemplate="caption">
             <div class="input-filter">
               <i class="fa fa-search"></i>
-              <input type="text" class="form-control" placeholder="Filtrar" (input)="dt.filterGlobal($event.target.value, 'contains')">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Filtrar"
+                (input)="dt.filterGlobal($event.target.value, 'contains')"
+              />
             </div>
           </ng-template>
           <ng-template pTemplate="header" let-columns>
             <tr>
               <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-                {{col.header}}
+                {{ col.header }}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
             </tr>
@@ -45,15 +73,25 @@
             <tr [pSelectableRow]="rowData">
               <td *ngFor="let col of columns" [ngSwitch]="col.field">
                 <div *ngSwitchCase="'actions'">
-                  <a pTooltip="Editar" tooltipPosition="bottom" (click)="edit(rowData)" class="btn">
+                  <a
+                    pTooltip="Editar"
+                    tooltipPosition="bottom"
+                    (click)="edit(rowData)"
+                    class="btn"
+                  >
                     <i class="fa fa-edit"></i>
                   </a>
-                  <a pTooltip="Excluir" tooltipPosition="bottom" (click)="confirm(rowData)" class="btn text-danger">
+                  <a
+                    pTooltip="Excluir"
+                    tooltipPosition="bottom"
+                    (click)="confirm(rowData)"
+                    class="btn text-danger"
+                  >
                     <i class="fa fa-times"></i>
                   </a>
                 </div>
                 <div *ngSwitchDefault>
-                  {{rowData[col.field]}}
+                  {{ rowData[col.field] }}
                 </div>
               </td>
             </tr>
@@ -64,9 +102,7 @@
           </ng-template>
           <ng-template pTemplate="emptymessage" let-columns>
             <tr>
-              <td colspan="5">
-                Nenhum registro encontrado.
-              </td>
+              <td colspan="5">Nenhum registro encontrado.</td>
             </tr>
           </ng-template>
         </p-table>
@@ -75,4 +111,7 @@
   </div>
 </div>
 
-<aka-confirmation key="confirmationKey" (onAccept)="remove()"></aka-confirmation>
+<aka-confirmation
+  key="confirmationKey"
+  (onAccept)="remove()"
+></aka-confirmation>
