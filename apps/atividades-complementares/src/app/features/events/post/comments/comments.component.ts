@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { EventService } from '../../../../services/events.service';
@@ -10,7 +10,7 @@ import { AuthService } from './../../../../services/auth.service';
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.css'],
 })
-export class CommentsComponent implements OnInit {
+export class CommentsComponent {
   @Input() comments: Comment[];
   @Input() postUid: string;
   newComment: string;
@@ -19,8 +19,6 @@ export class CommentsComponent implements OnInit {
     private _eventService: EventService,
     private _authService: AuthService
   ) {}
-
-  ngOnInit() {}
 
   async addComment() {
     const user = await this._authService.user$.pipe(take(1)).toPromise();

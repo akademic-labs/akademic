@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -26,12 +26,8 @@ import { FormControl } from '@angular/forms';
     `,
   ],
 })
-export class MessageControlErrorComponent implements OnInit {
+export class MessageControlErrorComponent {
   @Input() error: string;
   @Input() msg: string;
   @Input() control: FormControl;
-
-  constructor() {}
-
-  ngOnInit() {}
 }

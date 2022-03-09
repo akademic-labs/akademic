@@ -1,21 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CanDeactivateInterface } from '../../guards/can-deactivate.guard';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Subject } from 'rxjs';
-import { FormGroup } from '@angular/forms';
+
+import { CanDeactivateInterface } from '../../guards/can-deactivate.guard';
 
 @Component({
   selector: 'aka-can-deactivate',
   templateUrl: './can-deactivate.component.html',
 })
-export class CanDeactivateComponent implements OnInit, CanDeactivateInterface {
+export class CanDeactivateComponent implements CanDeactivateInterface {
   wasChanged: Subject<boolean> = new Subject<boolean>();
   withoutChanged: boolean;
   @Input() form: FormGroup;
 
   constructor(private _messageService: MessageService) {}
-
-  ngOnInit() {}
 
   check() {
     this.form.dirty

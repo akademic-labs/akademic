@@ -65,18 +65,14 @@ export class ValidateActivityComponent implements OnInit {
                             (resMetaData) => {
                               let src;
                               let classCss;
-                              const image = true
-                                ? attachments.type.split('/')[0] === 'image'
-                                : false;
-                              const pdf = true
-                                ? attachments.type.split('/')[1] === 'pdf'
-                                : false;
-                              const video = true
-                                ? attachments.type.split('/')[0] === 'video'
-                                : false;
-                              const audio = true
-                                ? attachments.type.split('/')[0] === 'audio'
-                                : false;
+                              const image =
+                                attachments.type.split('/')[0] === 'image';
+                              const pdf =
+                                attachments.type.split('/')[1] === 'pdf';
+                              const video =
+                                attachments.type.split('/')[0] === 'video';
+                              const audio =
+                                attachments.type.split('/')[0] === 'audio';
                               if (image) {
                                 src = resDonwloadURL;
                                 classCss = 'img-attach';

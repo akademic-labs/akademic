@@ -23,7 +23,7 @@ export class RulesComponent implements OnInit {
   ruleForm: FormGroup;
   rule: Rules;
   rules$: Observable<Rules[]>;
-  courses$: Observable<{}>;
+  courses$: Observable<Record<string, unknown>>;
   activityTypes$: Observable<ActivityType[]>;
   @ViewChild('inputFocus')
   focusIn: ElementRef;

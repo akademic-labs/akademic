@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { User } from '../../../models/user.interface';
 
@@ -7,10 +7,6 @@ import { User } from '../../../models/user.interface';
   templateUrl: './institution-view.component.html',
   styleUrls: ['./institution-view.component.css'],
 })
-export class InstitutionViewComponent implements OnInit {
+export class InstitutionViewComponent {
   @Input() user: User;
-
-  constructor() {}
-
-  ngOnInit() {}
 }

@@ -1,13 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'aka-form-debug',
   templateUrl: './form-debug.component.html',
 })
-export class FormDebugComponent implements OnInit {
+export class FormDebugComponent {
   @Input() form;
-
-  constructor() {}
-
-  ngOnInit() {}
 }

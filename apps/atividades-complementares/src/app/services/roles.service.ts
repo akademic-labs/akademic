@@ -5,8 +5,6 @@ import { User } from '../models/user.interface';
   providedIn: 'root',
 })
 export class RolesService {
-  constructor() {}
-
   // determines if user has matching role
   public checkAuthorization(user: User, allowedRoles: string[]): boolean {
     if (!user) {

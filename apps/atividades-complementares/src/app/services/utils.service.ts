@@ -45,12 +45,11 @@ export class UtilsService {
   preparateDataChart(array, keyLabels, keyData) {
     const labels = [],
       data = [];
-    let result;
     for (let index = 0; index < array.length; index++) {
       labels.push(array[index][keyLabels]);
       data.push(array[index][keyData]);
     }
-    result = { labels: labels, data: data };
+    const result = { labels: labels, data: data };
     return result;
   }
 }

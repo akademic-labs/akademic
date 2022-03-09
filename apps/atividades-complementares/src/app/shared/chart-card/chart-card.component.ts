@@ -1,16 +1,11 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'aka-chart-card',
   templateUrl: './chart-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChartCardComponent implements OnInit {
+export class ChartCardComponent {
   @Input() title: string;
 
   @Input() subtitle: string;
@@ -18,8 +13,4 @@ export class ChartCardComponent implements OnInit {
   @Input() chartType: 'pie' | 'doughnut' | 'line' | 'bar';
 
   @Input() chartData: any;
-
-  constructor() {}
-
-  ngOnInit() {}
 }

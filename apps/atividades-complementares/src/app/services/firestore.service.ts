@@ -185,6 +185,7 @@ export class FirestoreService {
   batch(updates: any, type: string) {
     const batch = firebase.firestore().batch();
     for (const key in updates) {
+      // eslint-disable-next-line no-prototype-builtins
       if (updates.hasOwnProperty(key)) {
         const path = key;
         const data = updates[key];

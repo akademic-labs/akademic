@@ -79,18 +79,14 @@ export class UploadsPageComponent implements OnInit {
                           (resMetaData) => {
                             let src;
                             let classCss;
-                            const image = true
-                              ? attachments.type.split('/')[0] === 'image'
-                              : false;
-                            const pdf = true
-                              ? attachments.type.split('/')[1] === 'pdf'
-                              : false;
-                            const video = true
-                              ? attachments.type.split('/')[0] === 'video'
-                              : false;
-                            const audio = true
-                              ? attachments.type.split('/')[0] === 'audio'
-                              : false;
+                            const image =
+                              attachments.type.split('/')[0] === 'image';
+                            const pdf =
+                              attachments.type.split('/')[1] === 'pdf';
+                            const video =
+                              attachments.type.split('/')[0] === 'video';
+                            const audio =
+                              attachments.type.split('/')[0] === 'audio';
                             if (image) {
                               src = resDonwloadURL;
                               classCss = 'img-attach';
@@ -188,10 +184,10 @@ export class UploadsPageComponent implements OnInit {
         },
       };
       // Validation if file is image, pdf or video, otherwise display message format not supported
-      const image = true ? file.type.split('/')[0] === 'image' : false;
-      const pdf = true ? file.type.split('/')[1] === 'pdf' : false;
-      const video = true ? file.type.split('/')[0] === 'video' : false;
-      const audio = true ? file.type.split('/')[0] === 'audio' : false;
+      const image = file.type.split('/')[0] === 'image';
+      const pdf = file.type.split('/')[1] === 'pdf';
+      const video = file.type.split('/')[0] === 'video';
+      const audio = file.type.split('/')[0] === 'audio';
 
       if (image || pdf || video || audio) {
         if (file.size < 1024 * 1024 * this.maxfileSize) {
@@ -240,10 +236,10 @@ export class UploadsPageComponent implements OnInit {
   }
 
   renderAttach(file, downloadURL, size) {
-    const image = true ? file.type.split('/')[0] === 'image' : false;
-    const pdf = true ? file.type.split('/')[1] === 'pdf' : false;
-    const video = true ? file.type.split('/')[0] === 'video' : false;
-    const audio = true ? file.type.split('/')[0] === 'audio' : false;
+    const image = file.type.split('/')[0] === 'image';
+    const pdf = file.type.split('/')[1] === 'pdf';
+    const video = file.type.split('/')[0] === 'video';
+    const audio = file.type.split('/')[0] === 'audio';
 
     if (image) {
       const reader = new FileReader();

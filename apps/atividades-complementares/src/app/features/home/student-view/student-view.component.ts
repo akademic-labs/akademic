@@ -10,7 +10,8 @@ import { ActivityService } from './../../../services/activity.service';
 import { UtilsService } from './../../../services/utils.service';
 import { groupBy } from './../../../utils/utils';
 
-declare var palette: any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare let palette: any;
 
 @Component({
   selector: 'aka-student-view',

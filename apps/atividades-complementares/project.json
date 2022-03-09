@@ -13,6 +13,7 @@
         "polyfills": "apps/atividades-complementares/src/polyfills.ts",
         "tsConfig": "apps/atividades-complementares/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
+        "statsJson": true,
         "assets": [
           "apps/atividades-complementares/src/favicon.ico",
           "apps/atividades-complementares/src/assets"
@@ -38,8 +39,7 @@
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumWarning": "500kb"
             },
             {
               "type": "anyComponentStyle",
@@ -105,6 +105,12 @@
         ]
       },
       "outputs": ["{options.outputFile}"]
+    },
+    "bundle-analyzer": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "npx webpack-bundle-analyzer dist/apps/atividades-complementares/stats.json -m static -r dist/workspace/bundle-analyzer/atividades-complementares/index.html -t 'Atividades Complementares Webpack Bundle Analyzer' -s gzip -O"
+      }
     }
   }
 }

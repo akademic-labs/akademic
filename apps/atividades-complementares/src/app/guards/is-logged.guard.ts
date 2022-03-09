@@ -29,7 +29,7 @@ export class IsLoggedGuard implements CanActivate {
     return this._auth.user$.pipe(
       take(1),
       map((user) => {
-        if (!!user) {
+        if (user) {
           this.router.navigate(['./dashboard']);
           return false;
         }
