@@ -72,7 +72,7 @@
     "@typescript-eslint/eslint-plugin": "4.31.2",
     "@typescript-eslint/parser": "4.31.2",
     "eslint": "7.22.0",
-    "eslint-config-prettier": "6.0.0",
+    "eslint-config-prettier": "8.5.0",
     "eslint-plugin-cypress": "2.10.3",
     "firebase-tools": "8.0.0 || 9.0.0",
     "jasmine-core": "3.7.0",
