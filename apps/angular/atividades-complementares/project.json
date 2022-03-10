@@ -1,37 +1,37 @@
 {
   "projectType": "application",
-  "root": "apps/atividades-complementares",
-  "sourceRoot": "apps/atividades-complementares/src",
+  "root": "apps/angular/atividades-complementares",
+  "sourceRoot": "apps/angular/atividades-complementares/src",
   "prefix": "aka",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "options": {
-        "outputPath": "dist/apps/atividades-complementares",
-        "index": "apps/atividades-complementares/src/index.html",
-        "main": "apps/atividades-complementares/src/main.ts",
-        "polyfills": "apps/atividades-complementares/src/polyfills.ts",
-        "tsConfig": "apps/atividades-complementares/tsconfig.app.json",
+        "outputPath": "dist/apps/angular/atividades-complementares",
+        "index": "apps/angular/atividades-complementares/src/index.html",
+        "main": "apps/angular/atividades-complementares/src/main.ts",
+        "polyfills": "apps/angular/atividades-complementares/src/polyfills.ts",
+        "tsConfig": "apps/angular/atividades-complementares/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "statsJson": true,
         "assets": [
-          "apps/atividades-complementares/src/favicon.ico",
-          "apps/atividades-complementares/src/assets"
+          "apps/angular/atividades-complementares/src/favicon.ico",
+          "apps/angular/atividades-complementares/src/assets"
         ],
         "styles": [
           "node_modules/bootstrap/dist/css/bootstrap.min.css",
-          "apps/atividades-complementares/src/styles.scss",
+          "apps/angular/atividades-complementares/src/styles.scss",
           "node_modules/primeicons/primeicons.css",
           "node_modules/primeng/resources/themes/nova/theme.css",
           "node_modules/primeng/resources/primeng.min.css",
-          "apps/atividades-complementares/src/assets/css/custom-primeng.css"
+          "apps/angular/atividades-complementares/src/assets/css/custom-primeng.css"
         ],
         "scripts": [
           "node_modules/jquery/dist/jquery.min.js",
           "node_modules/bootstrap/dist/js/bootstrap.min.js",
           "node_modules/bootstrap-notify/bootstrap-notify.min.js",
           "node_modules/chart.js/dist/chart.min.js",
-          "apps/atividades-complementares/src/assets/js/palette.js"
+          "apps/angular/atividades-complementares/src/assets/js/palette.js"
         ]
       },
       "configurations": {
@@ -49,8 +49,8 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/atividades-complementares/src/environments/environment.ts",
-              "with": "apps/atividades-complementares/src/environments/environment.prod.ts"
+              "replace": "apps/angular/atividades-complementares/src/environments/environment.ts",
+              "with": "apps/angular/atividades-complementares/src/environments/environment.prod.ts"
             }
           ],
           "outputHashing": "all"
@@ -90,9 +90,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/atividades-complementares"],
+      "outputs": ["coverage/apps/angular/atividades-complementares"],
       "options": {
-        "jestConfig": "apps/atividades-complementares/jest.config.js",
+        "jestConfig": "apps/angular/atividades-complementares/jest.config.js",
         "passWithNoTests": true
       }
     },
@@ -100,8 +100,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "apps/atividades-complementares/src/**/*.ts",
-          "apps/atividades-complementares/src/**/*.html"
+          "apps/angular/atividades-complementares/src/**/*.ts",
+          "apps/angular/atividades-complementares/src/**/*.html"
         ]
       },
       "outputs": ["{options.outputFile}"]
@@ -109,7 +109,7 @@
     "bundle-analyzer": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "npx webpack-bundle-analyzer dist/apps/atividades-complementares/stats.json -m static -r dist/workspace/bundle-analyzer/atividades-complementares/index.html -t 'Atividades Complementares Webpack Bundle Analyzer' -s gzip -O"
+        "command": "npx webpack-bundle-analyzer dist/apps/angular/atividades-complementares/stats.json -m static -r dist/workspace/bundle-analyzer/atividades-complementares/index.html -t 'Atividades Complementares Webpack Bundle Analyzer' -s gzip -O"
       }
     }
   }

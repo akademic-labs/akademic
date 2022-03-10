@@ -1,7 +1,7 @@
 {
   "version": 2,
   "projects": {
-    "atividades-complementares": "apps/atividades-complementares",
-    "atividades-complementares-e2e": "apps/atividades-complementares-e2e"
+    "atividades-complementares": "apps/angular/atividades-complementares",
+    "atividades-complementares-e2e": "apps/angular/atividades-complementares-e2e"
   }
 }
