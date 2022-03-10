@@ -25,7 +25,6 @@
       "prefix": "aka"
     },
     "@nrwl/angular:library": {
-      "style": "scss",
       "linter": "eslint",
       "unitTestRunner": "jest",
       "strict": true,
