@@ -65,7 +65,7 @@
                   />
                 </div>
                 <aka-message-control-error
-                  [control]="form.get('displayName')"
+                  [control]="formControl('displayName')"
                   error="required"
                   msg="Nome completo é obrigatório."
                 ></aka-message-control-error>
@@ -81,11 +81,11 @@
                     class="form-control"
                     formControlName="birthday"
                     [max]="today"
-                    (input)="validatorDate('birthday', $event.target.value)"
+                    (input)="validatorDate('birthday', $event)"
                   />
                 </div>
                 <aka-message-control-error
-                  [control]="form.get('birthday')"
+                  [control]="formControl('birthday')"
                   error="dateGreaterToday"
                   msg="Data é maior que data atual."
                 ></aka-message-control-error>
@@ -101,7 +101,7 @@
                       maxlength="10"
                       class="form-control"
                       formControlName="zipCode"
-                      (keyup)="cepMask($event.target.value)"
+                      (keyup)="cepMask($event)"
                       (blur)="queryCEP()"
                     />
                   </div>
@@ -193,17 +193,17 @@
                     field="instituicao"
                     (onSelect)="getCourses()"
                     [placeholder]="
-                      form.get('address.state').value
+                      formControl('address.state').value
                         ? 'Digite a instituição..'
                         : 'Digite o cep primeiro..'
                     "
                     [minLength]="1"
-                    maxlength="30"
+                    [maxlength]="30"
                     emptyMessage="Nenhum resultado."
                   ></p-autoComplete>
                 </div>
                 <aka-message-control-error
-                  [control]="form.get('institution')"
+                  [control]="formControl('institution')"
                   error="invalid"
                   msg="Instituição inválida."
                 ></aka-message-control-error>
@@ -217,17 +217,17 @@
                     [options]="courses$ | async"
                     optionLabel="name"
                     [placeholder]="
-                      form.get('institution').value?.id
+                      formControl('institution').value?.id
                         ? 'Selecione o curso..'
                         : 'Selecione uma instituição..'
                     "
-                    filter="true"
+                    [filter]="true"
                     [showClear]="true"
                     emptyFilterMessage="Nenhum resultado."
                   ></p-dropdown>
                 </div>
                 <aka-message-control-error
-                  [control]="form.get('course')"
+                  [control]="formControl('course')"
                   error="invalid"
                   msg="Curso é obrigatório."
                 ></aka-message-control-error>

@@ -65,7 +65,9 @@
             <div class="col-xs-12">
               <div class="form-group">
                 <label>Anexos</label>
-                <aka-uploads-page (saveEvent)="save()"></aka-uploads-page>
+                <aka-uploads-page
+                  (saveEvent)="save(activityForm)"
+                ></aka-uploads-page>
               </div>
             </div>
           </div>
@@ -93,7 +95,7 @@
                 />
               </div>
               <aka-message-control-error
-                [control]="activityForm.get('description')"
+                [control]="description"
                 error="required"
                 msg="Descrição é obrigatório."
               ></aka-message-control-error>
@@ -116,7 +118,7 @@
                 </select>
               </div>
               <aka-message-control-error
-                [control]="activityForm.get('activityType')"
+                [control]="activityType"
                 error="required"
                 msg="Tipo de atividade é obrigatório."
               ></aka-message-control-error>
@@ -135,7 +137,7 @@
                 />
               </div>
               <aka-message-control-error
-                [control]="activityForm.get('hoursDuration')"
+                [control]="hoursDuration"
                 error="required"
                 msg="Carga horária é obrigatório."
               ></aka-message-control-error>
@@ -156,7 +158,7 @@
                 </select>
               </div>
               <aka-message-control-error
-                [control]="activityForm.get('schoolYear')"
+                [control]="schoolYear"
                 error="required"
                 msg="Período letivo é obrigatório."
               ></aka-message-control-error>
@@ -175,7 +177,7 @@
                 </select>
               </div>
               <aka-message-control-error
-                [control]="activityForm.get('semester')"
+                [control]="semester"
                 error="required"
                 msg="Semestre é obrigatório."
               ></aka-message-control-error>
@@ -188,21 +190,21 @@
                   class="form-control"
                   formControlName="initialDate"
                   [max]="today"
-                  (input)="validatorDate('initialDate', $event.target.value)"
+                  (input)="validatorDate('initialDate', $event)"
                 />
               </div>
               <aka-message-control-error
-                [control]="activityForm.get('initialDate')"
+                [control]="initialDate"
                 error="required"
                 msg="Data inicial é obrigatório."
               ></aka-message-control-error>
               <aka-message-control-error
-                [control]="activityForm.get('initialDate')"
+                [control]="initialDate"
                 error="dateGreaterToday"
                 msg="Data inicial maior que data atual."
               ></aka-message-control-error>
               <aka-message-control-error
-                [control]="activityForm.get('initialDate')"
+                [control]="initialDate"
                 error="dateGreaterFinal"
                 msg="Data inicial é maior que data final."
               ></aka-message-control-error>
@@ -215,21 +217,21 @@
                   class="form-control"
                   formControlName="finalDate"
                   [max]="today"
-                  (input)="validatorDate('finalDate', $event.target.value)"
+                  (input)="validatorDate('finalDate', $event)"
                 />
               </div>
               <aka-message-control-error
-                [control]="activityForm.get('finalDate')"
+                [control]="finalDate"
                 error="required"
                 msg="Data final é obrigatório."
               ></aka-message-control-error>
               <aka-message-control-error
-                [control]="activityForm.get('finalDate')"
+                [control]="finalDate"
                 error="dateGreaterToday"
                 msg="Data final maior que data atual."
               ></aka-message-control-error>
               <aka-message-control-error
-                [control]="activityForm.get('finalDate')"
+                [control]="finalDate"
                 error="dateGreaterInitial"
                 msg="Data final é menor que data inicial."
               ></aka-message-control-error>
@@ -247,7 +249,7 @@
                 />
               </div>
               <aka-message-control-error
-                [control]="activityForm.get('local')"
+                [control]="local"
                 error="required"
                 msg="Local é obrigatório."
               ></aka-message-control-error>
@@ -261,13 +263,13 @@
                   optionLabel="nome"
                   (onChange)="getCities()"
                   placeholder="Selecione"
-                  filter="true"
+                  [filter]="true"
                   [showClear]="true"
                   emptyFilterMessage="Nenhum resultado."
                 ></p-dropdown>
               </div>
               <aka-message-control-error
-                [control]="activityForm.get('state')"
+                [control]="state"
                 error="required"
                 msg="Estado é obrigatório."
               ></aka-message-control-error>
@@ -287,17 +289,17 @@
                       : 'Selecione o estado..'
                   "
                   [minLength]="1"
-                  maxlength="30"
+                  [maxlength]="30"
                   emptyMessage="Nenhum resultado."
                 ></p-autoComplete>
               </div>
               <aka-message-control-error
-                [control]="activityForm.get('city')"
+                [control]="city"
                 error="required"
                 msg="Cidade é obrigatório."
               ></aka-message-control-error>
               <aka-message-control-error
-                [control]="activityForm.get('city')"
+                [control]="city"
                 error="invalid"
                 msg="Cidade inválida."
               ></aka-message-control-error>
@@ -315,7 +317,7 @@
                 ></textarea>
               </div>
               <aka-message-control-error
-                [control]="activityForm.get('observation')"
+                [control]="observation"
                 error="maxlength"
                 msg="Observação no máximo 500 caracteres."
               ></aka-message-control-error>

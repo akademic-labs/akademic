@@ -1,5 +1,10 @@
 ﻿import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { MessageService } from 'primeng/api';
@@ -140,6 +145,10 @@ export class ValidateActivityComponent implements OnInit {
         Validators.compose([Validators.required, Validators.maxLength(500)]),
       ],
     });
+  }
+
+  get feedback() {
+    return this.form.get('feedback') as FormControl;
   }
 
   showAttach(attach) {

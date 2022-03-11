@@ -66,6 +66,10 @@ export class FormComponent implements OnInit {
     }, 100);
   }
 
+  formControl(control: string) {
+    return this.form.get(control) as FormControl;
+  }
+
   async onSubmit({ value, valid }: { value: Post; valid: boolean }) {
     if (valid) {
       const user = await this._auth.user$.pipe(take(1)).toPromise();
@@ -98,7 +102,9 @@ export class FormComponent implements OnInit {
     }
   }
 
-  validatorDate(input, date) {
+  validatorDate(input, event: Event) {
+    const date = (event.target as HTMLInputElement).value;
+
     if (date < this.today) {
       this.form.get(input).setErrors({ dateSmallerToday: true });
     }

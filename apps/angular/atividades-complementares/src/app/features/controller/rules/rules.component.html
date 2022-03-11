@@ -25,7 +25,7 @@
                 />
               </div>
               <aka-message-control-error
-                [control]="ruleForm.get('name')"
+                [control]="formControl('name')"
                 error="required"
                 msg="Nome é obrigatório."
               ></aka-message-control-error>
@@ -51,7 +51,7 @@
                 </select>
               </div>
               <aka-message-control-error
-                [control]="ruleForm.get('course')"
+                [control]="formControl('course')"
                 error="required"
                 msg="Curso é obrigatório."
               ></aka-message-control-error>
@@ -68,7 +68,7 @@
                 />
               </div>
               <aka-message-control-error
-                [control]="ruleForm.get('hours')"
+                [control]="formControl('hours')"
                 error="required"
                 msg="Carga horária é obrigatório."
               ></aka-message-control-error>
@@ -94,7 +94,7 @@
                 </select>
               </div>
               <aka-message-control-error
-                [control]="ruleForm.get('activityType')"
+                [control]="formControl('activityType')"
                 error="required"
                 msg="Tipo de atividade é obrigatório."
               ></aka-message-control-error>
@@ -120,8 +120,8 @@
             <tbody>
               <tr *ngFor="let rule of rules$ | async">
                 <td>
-                  {{ rule.name }} | {{ rule.course.description }} |
-                  {{ rule.hours }} | {{ rule.activityType.description }}
+                  {{ rule.name }} | {{ rule.hours }} |
+                  {{ rule.activityType.description }}
                 </td>
                 <td class="td-actions text-right">
                   <a class="btn" (click)="edit(rule)">

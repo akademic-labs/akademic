@@ -159,9 +159,13 @@ export class UploadsPageComponent implements OnInit {
     });
   }
 
-  startUpload(event: Event) {
-    const target = event.target as HTMLInputElement;
-    const files = target.files as FileList;
+  startUpload(filesEventOrList: Event | FileList) {
+    let files = filesEventOrList as FileList;
+
+    if (filesEventOrList instanceof Event) {
+      const target = filesEventOrList.target as HTMLInputElement;
+      files = target.files as FileList;
+    }
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];

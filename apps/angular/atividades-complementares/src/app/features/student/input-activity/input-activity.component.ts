@@ -106,7 +106,7 @@ export class InputActivityComponent
   }
 
   reload() {
-    window.location.reload(true);
+    window.location.reload();
   }
 
   buildForm() {
@@ -127,6 +127,50 @@ export class InputActivityComponent
       status: ['Pendente'],
       feedback: new FormControl({ value: null, disabled: true }),
     });
+  }
+
+  get description() {
+    return this.activityForm.get('description') as FormControl;
+  }
+
+  get activityType() {
+    return this.activityForm.get('activityType') as FormControl;
+  }
+
+  get hoursDuration() {
+    return this.activityForm.get('hoursDuration') as FormControl;
+  }
+
+  get schoolYear() {
+    return this.activityForm.get('schoolYear') as FormControl;
+  }
+
+  get semester() {
+    return this.activityForm.get('semester') as FormControl;
+  }
+
+  get initialDate() {
+    return this.activityForm.get('initialDate') as FormControl;
+  }
+
+  get finalDate() {
+    return this.activityForm.get('finalDate') as FormControl;
+  }
+
+  get local() {
+    return this.activityForm.get('local') as FormControl;
+  }
+
+  get state() {
+    return this.activityForm.get('state') as FormControl;
+  }
+
+  get city() {
+    return this.activityForm.get('city') as FormControl;
+  }
+
+  get observation() {
+    return this.activityForm.get('observation') as FormControl;
   }
 
   getCities(event?) {
@@ -196,7 +240,9 @@ export class InputActivityComponent
       : activityType === activityType2;
   }
 
-  validatorDate(input, date) {
+  validatorDate(input, dateEvent: Event) {
+    const date = (dateEvent.target as HTMLInputElement).value;
+
     if (date > this.today) {
       this.activityForm.get(input).setErrors({ dateGreaterToday: true });
     }

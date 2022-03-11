@@ -62,6 +62,10 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  formControl(control: string) {
+    return this.form.get(control) as FormControl;
+  }
+
   buildForm() {
     this.form = this._fb.group({
       uid: [null],
@@ -116,7 +120,8 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  cepMask(cep) {
+  cepMask(event: Event) {
+    const cep = (event.target as HTMLInputElement).value;
     this.form.get('address.zipCode').setValue(maskCEP(cep));
   }
 
@@ -240,7 +245,8 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  validatorDate(input, date) {
+  validatorDate(input, event: Event) {
+    const date = (event.target as HTMLInputElement).value;
     date > this.today
       ? this.form.get(input).setErrors({ dateGreaterToday: true })
       : this.form.get(input).setErrors(null);

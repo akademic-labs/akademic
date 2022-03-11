@@ -19,7 +19,7 @@
                 />
               </div>
               <aka-message-control-error
-                [control]="institutionForm.get('name')"
+                [control]="name"
                 error="required"
                 msg="Nome é obrigatório."
               ></aka-message-control-error>
@@ -57,7 +57,7 @@
                 type="text"
                 class="form-control"
                 placeholder="Filtrar"
-                (input)="dt.filterGlobal($event.target.value, 'contains')"
+                (input)="dt.filterGlobal($event.target, 'contains')"
               />
             </div>
           </ng-template>

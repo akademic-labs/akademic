@@ -13,12 +13,12 @@
         />
       </div>
       <aka-message-control-error
-        [control]="signUpForm.get('email')"
+        [control]="formControl('email')"
         error="required"
         msg="E-mail é obrigatório."
       ></aka-message-control-error>
       <aka-message-control-error
-        [control]="signUpForm.get('email')"
+        [control]="formControl('email')"
         error="email"
         msg="E-mail inválido."
       ></aka-message-control-error>
@@ -37,12 +37,12 @@
         />
       </div>
       <aka-message-control-error
-        [control]="signUpForm.get('displayName')"
+        [control]="formControl('displayName')"
         error="required"
         msg="Nome completo é obrigatório."
       ></aka-message-control-error>
       <aka-message-control-error
-        [control]="signUpForm.get('displayName')"
+        [control]="formControl('displayName')"
         error="pattern"
         msg="Nome completo deve conter apenas letras."
       ></aka-message-control-error>
@@ -61,22 +61,22 @@
         />
       </div>
       <aka-message-control-error
-        [control]="signUpForm.get('password')"
+        [control]="formControl('password')"
         error="required"
         msg="Senha é obrigatória."
       ></aka-message-control-error>
       <aka-message-control-error
-        [control]="signUpForm.get('password')"
+        [control]="formControl('password')"
         error="pattern"
         msg="Senha deve conter uma letra maiúscula e um número."
       ></aka-message-control-error>
       <aka-message-control-error
-        [control]="signUpForm.get('password')"
+        [control]="formControl('password')"
         error="minLength"
         msg="Senha deve conter no mínimo 8 caracteres."
       ></aka-message-control-error>
       <aka-message-control-error
-        [control]="signUpForm.get('password')"
+        [control]="formControl('password')"
         error="maxLength"
         msg="Senha deve conter no máximo 25 caracteres."
       ></aka-message-control-error>
@@ -95,12 +95,12 @@
         />
       </div>
       <aka-message-control-error
-        [control]="signUpForm.get('confirmPassword')"
+        [control]="formControl('confirmPassword')"
         error="matchPassword"
         msg="Senhas não coincidem."
       ></aka-message-control-error>
       <aka-message-control-error
-        [control]="signUpForm.get('confirmPassword')"
+        [control]="formControl('confirmPassword')"
         error="required"
         msg="Repetir a senha é obrigatório."
       ></aka-message-control-error>
@@ -119,11 +119,11 @@
           optionLabel="name"
           optionValue="uid"
           [showClear]="true"
-          filter="true"
+          [filter]="true"
         ></p-dropdown>
       </div>
       <aka-message-control-error
-        [control]="signUpForm.get('course')"
+        [control]="formControl('course')"
         error="required"
         msg="Curso é obrigatório."
       ></aka-message-control-error>

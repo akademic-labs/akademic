@@ -23,7 +23,7 @@ export class RulesComponent implements OnInit {
   ruleForm: FormGroup;
   rule: Rules;
   rules$: Observable<Rules[]>;
-  courses$: Observable<Record<string, unknown>>;
+  courses$: Observable<Record<string, unknown>[]>;
   activityTypes$: Observable<ActivityType[]>;
   @ViewChild('inputFocus')
   focusIn: ElementRef;
@@ -51,6 +51,10 @@ export class RulesComponent implements OnInit {
       course: [null, Validators.required],
       activityType: [null, Validators.required],
     });
+  }
+
+  formControl(control: string) {
+    return this.ruleForm.get(control) as FormControl;
   }
 
   save() {

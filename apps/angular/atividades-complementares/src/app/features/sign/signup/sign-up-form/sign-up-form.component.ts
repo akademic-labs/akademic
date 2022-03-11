@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
+  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -29,6 +30,10 @@ export class SignUpFormComponent implements OnInit {
   onSubmit(parentForm: FormGroup) {
     this.submitted.next(parentForm);
     this.signUpForm.reset();
+  }
+
+  formControl(control: string) {
+    return this.signUpForm.get(control) as FormControl;
   }
 
   buildForm() {

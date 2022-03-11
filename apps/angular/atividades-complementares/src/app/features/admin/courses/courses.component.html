@@ -21,7 +21,7 @@
                 />
               </div>
               <aka-message-control-error
-                [control]="courseForm.get('name')"
+                [control]="name"
                 error="required"
                 msg="Descrição é obrigatório."
               ></aka-message-control-error>
@@ -55,7 +55,7 @@
                 type="text"
                 class="form-control"
                 placeholder="Filtrar"
-                (input)="dt.filterGlobal($event.target.value, 'contains')"
+                (input)="dt.filterGlobal($event.target, 'contains')"
               />
             </div>
           </ng-template>

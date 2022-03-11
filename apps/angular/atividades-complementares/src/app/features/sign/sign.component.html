@@ -1,4 +1,4 @@
-<div *ngIf="(_auth.user$ | async) === false" class="center-div background-sign">
+<div *ngIf="(_auth.user$ | async) === null" class="center-div background-sign">
   <div class="card">
     <div class="card-header text-center">
       <span class="card-title">

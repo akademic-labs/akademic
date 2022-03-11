@@ -35,6 +35,10 @@ export class ActivityTypeComponent implements OnInit {
     this.focusIn.nativeElement.focus();
   }
 
+  get description() {
+    return this.activityTypeForm.get('description') as FormControl;
+  }
+
   buildForm() {
     this.activityTypeForm = this._activityTypeFormBuilder.group({
       uid: new FormControl({ value: null, disabled: true }),

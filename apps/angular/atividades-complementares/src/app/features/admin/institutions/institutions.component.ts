@@ -52,6 +52,10 @@ export class InstitutionsComponent implements OnInit {
     });
   }
 
+  get name() {
+    return this.institutionForm.get('name') as FormControl;
+  }
+
   save() {
     if (!this.institutionForm.get('uid').value) {
       this._institutionService.post(this.institutionForm.value);

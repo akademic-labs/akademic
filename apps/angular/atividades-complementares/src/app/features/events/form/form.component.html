@@ -26,7 +26,7 @@
             />
           </div>
           <aka-message-control-error
-            [control]="form.get('title')"
+            [control]="formControl('title')"
             error="required"
             msg="Título é obrigatório."
           ></aka-message-control-error>
@@ -39,21 +39,21 @@
               class="form-control"
               formControlName="initialDate"
               [min]="today"
-              (input)="validatorDate('initialDate', $event.target.value)"
+              (input)="validatorDate('initialDate', $event)"
             />
           </div>
           <aka-message-control-error
-            [control]="form.get('initialDate')"
+            [control]="formControl('initialDate')"
             error="required"
             msg="Data inicial é obrigatório."
           ></aka-message-control-error>
           <aka-message-control-error
-            [control]="form.get('initialDate')"
+            [control]="formControl('initialDate')"
             error="dateSmallerToday"
             msg="Data inicial menor que data atual."
           ></aka-message-control-error>
           <aka-message-control-error
-            [control]="form.get('initialDate')"
+            [control]="formControl('initialDate')"
             error="dateGreaterFinal"
             msg="Data inicial é maior que data final."
           ></aka-message-control-error>
@@ -66,21 +66,21 @@
               class="form-control"
               formControlName="finalDate"
               [min]="today"
-              (input)="validatorDate('finalDate', $event.target.value)"
+              (input)="validatorDate('finalDate', $event)"
             />
           </div>
           <aka-message-control-error
-            [control]="form.get('finalDate')"
+            [control]="formControl('finalDate')"
             error="required"
             msg="Data final é obrigatório."
           ></aka-message-control-error>
           <aka-message-control-error
-            [control]="form.get('finalDate')"
+            [control]="formControl('finalDate')"
             error="dateSmallerToday"
             msg="Data final menor que data atual."
           ></aka-message-control-error>
           <aka-message-control-error
-            [control]="form.get('finalDate')"
+            [control]="formControl('finalDate')"
             error="dateGreaterInitial"
             msg="Data final é menor que data inicial."
           ></aka-message-control-error>
@@ -99,12 +99,12 @@
             />
           </div>
           <aka-message-control-error
-            [control]="form.get('local')"
+            [control]="formControl('local')"
             error="required"
             msg="Local é obrigatório."
           ></aka-message-control-error>
           <aka-message-control-error
-            [control]="form.get('local')"
+            [control]="formControl('local')"
             error="maxlength"
             msg="Local não pode ser maior que 50 caracteres."
           ></aka-message-control-error>
@@ -118,13 +118,13 @@
               optionLabel="nome"
               (onChange)="getCities()"
               placeholder="Selecione"
-              filter="true"
+              [filter]="true"
               [showClear]="true"
               emptyFilterMessage="Nenhum resultado."
             ></p-dropdown>
           </div>
           <aka-message-control-error
-            [control]="form.get('state')"
+            [control]="formControl('state')"
             error="required"
             msg="Estado é obrigatório."
           ></aka-message-control-error>
@@ -139,17 +139,17 @@
               (completeMethod)="getCities($event)"
               field="nome"
               [placeholder]="
-                form.get('state').value
+                formControl('state').value
                   ? 'Digite a cidade..'
                   : 'Selecione o estado..'
               "
               [minLength]="1"
-              maxlength="30"
+              [maxlength]="30"
               emptyMessage="Nenhum resultado."
             ></p-autoComplete>
           </div>
           <aka-message-control-error
-            [control]="form.get('city')"
+            [control]="formControl('city')"
             error="required"
             msg="Cidade é obrigatório."
           ></aka-message-control-error>
@@ -167,7 +167,7 @@
             ></textarea>
           </div>
           <aka-message-control-error
-            [control]="form.get('description')"
+            [control]="formControl('description')"
             error="required"
             msg="Descrição é obrigatório."
           ></aka-message-control-error>

@@ -48,6 +48,10 @@ export class CoursesComponent implements OnInit {
     });
   }
 
+  get name() {
+    return this.courseForm.get('name') as FormControl;
+  }
+
   save() {
     if (this.courseForm.get('uid').value) {
       this._courseService.put(this.course.uid, this.courseForm.value);

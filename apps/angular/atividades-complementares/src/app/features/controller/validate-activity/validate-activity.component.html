@@ -69,7 +69,9 @@
               />
               <div style="margin-top: 25px">
                 <label class="label-attach"
-                  >{{ attach.name }}<br />{{ attach.size | fileSize }}</label
+                  >{{ attach.name }}<br />{{
+                    attach.size | fileSize: false
+                  }}</label
                 >
               </div>
             </div>
@@ -109,12 +111,12 @@
                 ></textarea>
               </div>
               <aka-message-control-error
-                [control]="form.get('feedback')"
+                [control]="feedback"
                 error="required"
                 msg="Feedback é obrigatório."
               ></aka-message-control-error>
               <aka-message-control-error
-                [control]="form.get('feedback')"
+                [control]="feedback"
                 error="maxlength"
                 msg="Feedback não pode ser maior que 500 caracteres."
               ></aka-message-control-error>
